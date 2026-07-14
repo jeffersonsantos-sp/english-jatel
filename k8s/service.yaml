@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: english-jatel
+  namespace: english-jatel
+spec:
+  # ClusterIP: acesse com `kubectl -n english-jatel port-forward svc/english-jatel 8080:80`
+  # (use 8080 ou outra porta livre; 8000 pode ja estar em uso no host).
+  # Para expor no cluster, troque para LoadBalancer (nuvem) ou NodePort.
+  type: ClusterIP
+  selector:
+    app: english-jatel
+  ports:
+    - port: 80
+      targetPort: 8000
+      protocol: TCP
+      name: http
