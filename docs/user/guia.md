@@ -1,7 +1,8 @@
 # Guia do Usuário — English Flow
 
-Aplicativo web para treinar inglês nas 4 habilidades (**Listen, Speak, Write, Read**)
-com correção automática e conversação por IA.
+Aplicativo web para treinar inglês nas habilidades **Listen, Speak, Write, Read** e
+**Conversar**, mais **Grammar** (gramática por nível CEFR) e **MemHack** (memorização com
+repetição espaçada), com correção automática e conversação por IA.
 
 ## Acesso
 
@@ -47,6 +48,22 @@ com correção automática e conversação por IA.
 1. Clique **🤖 IA fala primeiro** para a IA iniciar, ou digite/envie sua mensagem.
 2. Pode falar com **🎤 Gravar**; a IA transcreve, responde e fala de volta.
 3. O histórico da conversa fica na tela.
+
+### Grammar (gramática por nível CEFR)
+1. Escolha o **Nível CEFR** (A1, A2, B1, B2, C1, C2) no seletor da aba.
+2. Clique **📘 Carregar tópico** para ver um tópico: título, **estrutura** (fórmula), explicação e exemplos.
+3. Cada exemplo tem 🔊 para ouvir a frase em inglês (TTS do navegador como fallback).
+4. **⏭ Próximo** troca o tópico (sem repetir até esgotar o nível).
+
+### MemHack (memorização com repetição espaçada)
+1. Escolha a **Categoria** (Rotina, Trabalho, Escola, Família, Diversão, Esportes).
+2. A frase em inglês aparece; clique **🔊 Ouvir frase** para treinar o ouvido e **👁 Tradução** para conferir.
+3. Após treinar, classifique com **✅ Fácil**, **🟡 Médio** ou **🔴 Difícil**:
+   - **Fácil** → sobe de "box" (revisa em intervalo maior: até 7 dias).
+   - **Médio** → mantém o intervalo atual.
+   - **Difícil** → desce de "box" (revisa em intervalo curto: 1–10 min).
+4. O progresso de cada usuário é salvo; a próxima frase exibida é sempre a **vencida** (SRS estilo Leitner).
+5. Quando tudo estiver em dia, a tela avisa para voltar mais tarde.
 
 ## Modo demo vs. com IA
 

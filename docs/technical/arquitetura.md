@@ -58,14 +58,41 @@ então a API tem prioridade sobre os arquivos estáticos. `GET /` retorna `front
 | POST | `/api/tts` | `{text, voice?}` | `{audio_b64, format:"mp3"}` |
 | POST | `/api/stt` | multipart (áudio) | `{transcript}` (Whisper, opcional) |
 | POST | `/api/converse` | `{level, persona, history, message}` | `{reply}` |
+| GET | `/api/grammar-levels` | — | níveis CEFR (A1–C2) |
+| POST | `/api/grammar` | `{level}` | tópico de gramática (topic, structure, explanation, examples) |
+| GET | `/api/memhack/categories` | — | categorias do MemHack |
+| POST | `/api/memhack/next` | `{category}` | próxima frase vencida (SRS) |
+| POST | `/api/memhack/review` | `{category, phrase_id, difficulty}` | registra dificuldade e devolve próxima |
+| POST | `/api/auth/register` | `{username, password}` | cria usuário (**admin**) |
+| GET | `/api/auth/users` | — | lista usuários (**admin**) |
+| POST | `/api/admin/reload-grammar` | — | recarrega `grammar.json` (**admin**) |
 
-## Banco de frases
+## Conteúdo orientado a dados
 
-Em `engine.py`: dicionários `LISTEN` e `READ`, chaveados por
-`nível -> categoria -> lista`. `get_content` mantém uma **fila embaralhada**
-por `(nível, módulo, categoria)` e retira um item por vez; ao esvaziar, reembaralha
-(garante treino sem repetição imediata). `CATEGORIES` alimenta o seletor da UI.
-Para adicionar conteúdo, edite esses dicionários.
+- **Listen/Read**: dicionários `LISTEN` e `READ` em `engine.py`, chaveados por
+  `nível -> categoria -> lista`. `get_content` mantém uma **fila embaralhada** por
+  `(nível, módulo, categoria)` (sem repetição até esgotar). `CATEGORIES` alimenta a UI.
+- **Grammar**: `backend/grammar.json` — `{"levels": [...], "grammar": {<nível>: [{topic, structure, explanation, examples}]}}`.
+  Carregado em `GRAMMAR_FILE` no startup (fallback ao embutido). `reload_grammar()` + endpoint
+  `POST /api/admin/reload-grammar` recarregam em runtime sem rebuild.
+- **MemHack**: `backend/memhack.json` — `{"categories": [...], "phrases": {<categoria>: [{id, en, pt}]}}`.
+  Progresso de repetição espaçada por usuário em `DATA_DIR/memhack_progress.json`.
+
+## MemHack — repetição espaçada (SRS)
+
+Estilo Leitner: cada frase tem um "box" 1–5 com intervalos crescentes
+(1min → 10min → 1h → 1d → 7d). `get_memhack_next(user, category)` devolve a próxima frase
+**vencida** (ou nova). `review_memhack(user, category, phrase_id, difficulty)` ajusta o box:
+`facil` sobe, `medio` mantém, `dificil` desce; `due = now + intervalo(box)`. O progresso é
+persistido por usuário (multi-tenant).
+
+## Autenticação e autorização
+
+- Middleware `auth_guard` em `main.py` protege `/` e `/api/*` (exceto rotas públicas), exigindo
+  cookie de sessão HMAC (`verify_token`). Redireciona `/` → `/login` quando não autenticado.
+- `_require_admin` (register/users/reload-grammar) exige usuário == `ADMIN_USER` (403 p/ comum).
+- Qualquer usuário autenticado troca a própria senha (`/api/auth/change-password`).
+- `me` retorna `{user, is_admin}` para o frontend ocultar a UI de gerência de usuários.
 
 ## Frontend
 
