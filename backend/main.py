@@ -190,6 +190,20 @@ def categories():
     return {"categories": engine.CATEGORIES}
 
 
+@app.get("/api/grammar-levels")
+def grammar_levels():
+    return {"levels": engine.GRAMMAR_LEVELS}
+
+
+class GrammarReq(BaseModel):
+    level: str = "A1"
+
+
+@app.post("/api/grammar")
+def grammar(req: GrammarReq):
+    return engine.get_grammar(req.level)
+
+
 @app.post("/api/content")
 def content(req: ContentReq):
     return engine.get_content(req.level, req.module, req.category)
