@@ -347,6 +347,99 @@ $("grammar-load").addEventListener("click", loadGrammar);
 $("grammar-next").addEventListener("click", loadGrammar);
 $("grammar-level").addEventListener("change", loadGrammar);
 
+/* ---------- MemHack (SRS) ---------- */
+(async () => {
+  try {
+    const data = await api("/api/memhack/categories");
+    const sel = $("memhack-category");
+    sel.innerHTML = "";
+    data.categories.forEach((c) => {
+      const o = document.createElement("option");
+      o.value = c.id;
+      o.textContent = c.label;
+      sel.appendChild(o);
+    });
+    memhackLoadNext();
+  } catch (e) {
+    console.warn("memhack/categories indisponivel:", e.message);
+  }
+})();
+
+let memhackCurrent = null;
+
+async function memhackLoadNext() {
+  const category = $("memhack-category").value;
+  $("memhack-msg").textContent = "";
+  $("memhack-pt").classList.add("hidden");
+  $("memhack-pt").textContent = "";
+  try {
+    const data = await api("/api/memhack/next", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ category }),
+    });
+    memhackCurrent = data.done ? null : data.phrase;
+    if (data.done) {
+      $("memhack-progress").textContent = "";
+      $("memhack-phrase").textContent = data.message || "Concluído por enquanto.";
+      $("memhack-pt").textContent = "";
+      document.querySelectorAll(".memhack-rating button").forEach((b) => (b.disabled = true));
+      return;
+    }
+    document.querySelectorAll(".memhack-rating button").forEach((b) => (b.disabled = false));
+    $("memhack-phrase").textContent = data.phrase.en;
+    $("memhack-pt").textContent = data.phrase.pt;
+    const studied = data.studied || 0;
+    const total = data.total || 0;
+    $("memhack-progress").textContent = `Progresso: ${studied}/${total} frases em treino`;
+  } catch (e) {
+    showError($("memhack-msg"), e.message);
+  }
+}
+
+$("memhack-category").addEventListener("change", memhackLoadNext);
+$("memhack-play").addEventListener("click", () => {
+  if (memhackCurrent) playTts(memhackCurrent.en);
+});
+$("memhack-reveal").addEventListener("click", () => {
+  $("memhack-pt").classList.toggle("hidden");
+});
+
+document.querySelectorAll(".memhack-rating button").forEach((btn) => {
+  btn.addEventListener("click", async () => {
+    if (!memhackCurrent) return;
+    const category = $("memhack-category").value;
+    try {
+      const data = await api("/api/memhack/review", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          category,
+          phrase_id: memhackCurrent.id,
+          difficulty: btn.dataset.diff,
+        }),
+      });
+      memhackCurrent = data.done ? null : data.phrase;
+      if (data.done) {
+        $("memhack-progress").textContent = "";
+        $("memhack-phrase").textContent = data.message || "Concluído por enquanto.";
+        $("memhack-pt").textContent = "";
+        document.querySelectorAll(".memhack-rating button").forEach((b) => (b.disabled = true));
+        $("memhack-msg").textContent = "⏱️ Revisão agendada. Volte mais tarde!";
+        return;
+      }
+      $("memhack-pt").classList.add("hidden");
+      $("memhack-phrase").textContent = data.phrase.en;
+      $("memhack-pt").textContent = data.phrase.pt;
+      const studied = data.studied || 0;
+      const total = data.total || 0;
+      $("memhack-progress").textContent = `Progresso: ${studied}/${total} frases em treino`;
+    } catch (e) {
+      showError($("memhack-msg"), e.message);
+    }
+  });
+});
+
 /* ---------- Converse ---------- */
 function addMsg(role, text) {
   const div = document.createElement("div");

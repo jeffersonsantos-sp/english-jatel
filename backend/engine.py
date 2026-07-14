@@ -964,7 +964,112 @@ def get_grammar(level: str) -> dict:
     }
 
 
-def heuristic_correct(text: str) -> str:
+# --- MemHack: memorizacao com repeticao espacada (SRS estilo Leitner) ---
+# Frases em backend/memhack.json (compartilhado). O progresso de cada usuario
+# (box + proxima revisao) fica em DATA_DIR/memhack_progress.json.
+MEMHACK_FILE = os.getenv("MEMHACK_FILE", os.path.join(os.path.dirname(__file__), "memhack.json"))
+MEMHACK_PROGRESS_FILE = pathlib.Path(os.getenv("MEMHACK_PROGRESS", os.path.join(DATA_DIR, "memhack_progress.json")))
+
+# Intervalos (segundos) por box: 1min, 10min, 1h, 1 dia, 7 dias.
+MEMHACK_BOX_INTERVALS = {1: 60, 2: 600, 3: 3600, 4: 86400, 5: 604800}
+MEMHACK_MAX_BOX = 5
+MEMHACK_NEW_BOX = 1
+
+_MEMHACK_CACHE = None
+
+
+def _load_memhack():
+    global _MEMHACK_CACHE
+    if _MEMHACK_CACHE is not None:
+        return _MEMHACK_CACHE
+    try:
+        with open(MEMHACK_FILE, encoding="utf-8") as f:
+            _MEMHACK_CACHE = json.load(f)
+    except Exception as e:
+        print(f"[memhack] falha ao ler {MEMHACK_FILE}: {e}")
+        _MEMHACK_CACHE = {"categories": [], "labels": {}, "phrases": {}}
+    return _MEMHACK_CACHE
+
+
+def _load_memhack_progress() -> dict:
+    if MEMHACK_PROGRESS_FILE.exists():
+        try:
+            return json.loads(MEMHACK_PROGRESS_FILE.read_text())
+        except Exception:
+            return {}
+    return {}
+
+
+def _save_memhack_progress(data: dict) -> None:
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    MEMHACK_PROGRESS_FILE.write_text(json.dumps(data, indent=2))
+
+
+def get_memhack_categories() -> list:
+    d = _load_memhack()
+    labels = d.get("labels", {})
+    return [{"id": c, "label": labels.get(c, c)} for c in d.get("categories", [])]
+
+
+def _memhack_phrase(category: str, pid: str):
+    for p in _load_memhack().get("phrases", {}).get(category, []):
+        if p.get("id") == pid:
+            return p
+    return None
+
+
+def get_memhack_next(user: str, category: str) -> dict:
+    d = _load_memhack()
+    phrases = d.get("phrases", {}).get(category, [])
+    if not phrases:
+        return {"done": True, "message": "Sem frases nesta categoria."}
+    progress = _load_memhack_progress().get(user, {}).get(category, {})
+    now = time.time()
+    # Candidatos: vencidos (due <= now) ou ainda nao iniciados.
+    candidates = [p for p in phrases if progress.get(p["id"], {}).get("due", 0) <= now]
+    if not candidates:
+        soonest = min(
+            (progress[p["id"]]["due"] for p in phrases if p["id"] in progress),
+            default=now,
+        )
+        return {
+            "done": True,
+            "message": "Tudo em dia! Proxima revisao agendada.",
+            "next_due": soonest,
+            "total": len(phrases),
+            "studied": len(progress),
+        }
+    candidates.sort(
+        key=lambda p: (
+            progress.get(p["id"], {}).get("due", 0),
+            -progress.get(p["id"], {}).get("box", 0),
+        )
+    )
+    phrase = candidates[0]
+    return {
+        "done": False,
+        "phrase": phrase,
+        "total": len(phrases),
+        "studied": len(progress),
+    }
+
+
+def review_memhack(user: str, category: str, phrase_id: str, difficulty: str) -> dict:
+    if difficulty not in ("facil", "medio", "dificil"):
+        return {"error": "dificuldade invalida (use facil/medio/dificil)"}
+    if not _memhack_phrase(category, phrase_id):
+        return {"error": "frase nao encontrada"}
+    progress_all = _load_memhack_progress()
+    cat_prog = progress_all.setdefault(user, {}).setdefault(category, {})
+    box = cat_prog.get(phrase_id, {}).get("box", MEMHACK_NEW_BOX)
+    if difficulty == "facil":
+        box = min(MEMHACK_MAX_BOX, box + 1)
+    elif difficulty == "dificil":
+        box = max(1, box - 1)
+    interval = MEMHACK_BOX_INTERVALS.get(box, MEMHACK_BOX_INTERVALS[MEMHACK_MAX_BOX])
+    cat_prog[phrase_id] = {"box": box, "due": time.time() + interval}
+    _save_memhack_progress(progress_all)
+    return get_memhack_next(user, category)
     fixes = []
     t = text
     m = re.match(r"\b(he|she|it)\s+([a-z]+)\b", t, re.I)
