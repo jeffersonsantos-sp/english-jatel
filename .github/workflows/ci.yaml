@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  backend-test:
+    name: Backend health check
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install minimal deps
+        run: pip install --no-cache-dir fastapi uvicorn python-multipart python-dotenv
+      - name: Health check (FastAPI TestClient)
+        run: python -c "from fastapi.testclient import TestClient; import main; c=TestClient(main.app); assert c.get('/api/health').status_code == 200; print(c.get('/api/health').json())"
+
+  frontend-test:
+    name: Frontend syntax check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Syntax check
+        run: node --check frontend/app.js

@@ -1,45 +1,19 @@
-name: CI/CD
+name: CD
 
+# Só roda depois que o workflow "CI" concluir com sucesso em main/master.
 on:
-  push:
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
     branches: [main, master]
-  pull_request:
 
 permissions:
   contents: read
 
 jobs:
-  backend-test:
-    name: Backend health check
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: backend
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-      - name: Install minimal deps
-        run: pip install --no-cache-dir fastapi uvicorn python-multipart python-dotenv
-      - name: Health check (FastAPI TestClient)
-        run: python -c "from fastapi.testclient import TestClient; import main; c=TestClient(main.app); assert c.get('/api/health').status_code == 200; print(c.get('/api/health').json())"
-
-  frontend-test:
-    name: Frontend syntax check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-      - name: Syntax check
-        run: node --check frontend/app.js
-
   build-and-push:
-    name: Build & push image (CD -> Docker Hub)
-    needs: [backend-test, frontend-test]
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+    name: Build & push image (Docker Hub)
+    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -62,8 +36,8 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      # Injeta a chave (GitHub Variable) em runtime — NÃO embute na imagem.
-      - name: Smoke test (LLM key via variable, runtime only)
+      # Injeta a chave (GitHub Secret) em runtime — NÃO embute na imagem.
+      - name: Smoke test (LLM key via secret, runtime only)
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/english-jatel:latest
