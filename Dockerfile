@@ -21,6 +21,7 @@ COPY frontend/ ./frontend/
 
 # Run as non-root
 RUN useradd --create-home --uid 10001 appuser && \
+    mkdir -p /app/data && \
     chown -R appuser:appuser /app
 USER appuser
 

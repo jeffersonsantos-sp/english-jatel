@@ -25,6 +25,14 @@
   </div>
 
   <script>
+    // Se já estiver autenticado, vai direto para o app
+    (async () => {
+      try {
+        const r = await fetch("/api/auth/me");
+        if (r.ok) window.location.href = "/";
+      } catch (_) {}
+    })();
+
     document.getElementById("login-form").addEventListener("submit", async (e) => {
       e.preventDefault();
       const user = document.getElementById("login-user").value;
@@ -37,7 +45,7 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ user, password }),
         });
-        if (r.ok) { location.reload(); }
+        if (r.ok) { window.location.href = "/"; }
         else { err.textContent = "Usuário ou senha inválidos"; }
       } catch {
         err.textContent = "Erro ao conectar";
