@@ -1,0 +1,5 @@
+openai>=1.0.0
+pyttsx3>=2.90
+whisper>=1.1.10; python_version < "3.12"
+sounddevice>=0.4.6; python_version < "3.12"
+scipy>=1.10
