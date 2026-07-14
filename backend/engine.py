@@ -11,6 +11,11 @@ import re
 import asyncio
 import tempfile
 import pathlib
+import hmac
+import hashlib
+import base64
+import json
+import time
 
 from dotenv import load_dotenv
 
@@ -27,6 +32,39 @@ if OPENROUTER_API_KEY and "openrouter" not in BASE_URL:
 OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
 EDGE_VOICE = os.getenv("EDGE_TTS_VOICE", "en-US-JennyNeural")
 IS_OPENROUTER = "openrouter" in BASE_URL
+
+# --- Autenticação (admin) ---
+ADMIN_USER = os.getenv("ADMIN_USER", "admin")
+ADMIN_PASS = os.getenv("ADMIN_PASS", "mudar123")
+SESSION_SECRET = os.getenv("SESSION_SECRET", "change-me-in-prod")
+
+
+def _b64(b: bytes) -> str:
+    # remove padding '=' (causes Starlette to quote the cookie value)
+    return base64.urlsafe_b64encode(b).decode().rstrip("=")
+
+
+def _b64d(s: str) -> bytes:
+    return base64.urlsafe_b64decode(s + "=" * (-len(s) % 4))
+
+
+def make_token(user: str) -> str:
+    payload = _b64(json.dumps({"u": user, "exp": int(time.time()) + 604800}).encode())
+    sig = _b64(hmac.new(SESSION_SECRET.encode(), payload.encode(), hashlib.sha256).digest())
+    return f"{payload}.{sig}"
+
+
+def verify_token(token: str) -> bool:
+    try:
+        payload_b64, sig_b64 = token.split(".")
+        payload = _b64d(payload_b64)
+        sig = _b64d(sig_b64)
+        expected = hmac.new(SESSION_SECRET.encode(), payload_b64.encode(), hashlib.sha256).digest()
+        if not hmac.compare_digest(sig, expected):
+            return False
+        return json.loads(payload).get("exp", 0) > int(time.time())
+    except Exception:
+        return False
 
 LEVELS = ["iniciante", "intermediario", "avancado"]
 
