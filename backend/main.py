@@ -113,9 +113,11 @@ def logout(response: Response):
 
 @app.get("/api/auth/me")
 def me(request: Request):
-    if engine.verify_token(request.cookies.get("session", "")):
-        return {"user": engine.ADMIN_USER}
-    raise HTTPException(status_code=401, detail="nao autenticado")
+    token = request.cookies.get("session", "")
+    if not engine.verify_token(token):
+        raise HTTPException(status_code=401, detail="nao autenticado")
+    user = engine.username_from_token(token)
+    return {"user": user, "is_admin": user == engine.ADMIN_USER}
 
 
 @app.post("/api/auth/change-password")
@@ -136,10 +138,19 @@ def change_password(req: ChangePassReq, request: Request, response: Response):
     return {"ok": True}
 
 
+def _require_admin(request: Request) -> str:
+    token = request.cookies.get("session", "")
+    if not engine.verify_token(token):
+        raise HTTPException(status_code=401, detail="nao autenticado")
+    user = engine.username_from_token(token)
+    if user != engine.ADMIN_USER:
+        raise HTTPException(status_code=403, detail="apenas admin")
+    return user
+
+
 @app.post("/api/auth/register")
 def register(req: NewUserReq, request: Request):
-    if not engine.verify_token(request.cookies.get("session", "")):
-        raise HTTPException(status_code=401, detail="nao autenticado")
+    _require_admin(request)
     if not req.username or len(req.username) < 2:
         raise HTTPException(status_code=400, detail="usuario muito curto (min 2)")
     try:
@@ -151,8 +162,7 @@ def register(req: NewUserReq, request: Request):
 
 @app.get("/api/auth/users")
 def users_list(request: Request):
-    if not engine.verify_token(request.cookies.get("session", "")):
-        raise HTTPException(status_code=401, detail="nao autenticado")
+    _require_admin(request)
     return {"users": engine.list_users()}
 
 

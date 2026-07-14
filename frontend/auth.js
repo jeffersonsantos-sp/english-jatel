@@ -8,7 +8,11 @@
     try {
       const r = await fetch("/api/auth/me");
       if (r.ok) {
+        const d = await r.json().catch(() => ({}));
         overlay.style.display = "none";
+        if (!d.is_admin) {
+          document.getElementById("users-btn")?.style.setProperty("display", "none");
+        }
         return;
       }
     } catch (_) {}
