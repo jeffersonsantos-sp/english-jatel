@@ -61,3 +61,15 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/english-jatel:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      # Injeta a chave (GitHub Variable) em runtime — NÃO embute na imagem.
+      - name: Smoke test (LLM key via variable, runtime only)
+        env:
+          OPENROUTER_API_KEY: ${{ vars.OPENROUTER_API_KEY }}
+          IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/english-jatel:latest
+        run: |
+          docker pull "$IMAGE"
+          docker run -d --name smoke -e OPENROUTER_API_KEY="$OPENROUTER_API_KEY" -p 8000:8000 "$IMAGE"
+          for i in $(seq 1 20); do curl -sf http://localhost:8000/api/health && break; sleep 2; done
+          echo "Health:"; curl -s http://localhost:8000/api/health; echo
+          docker rm -f smoke
