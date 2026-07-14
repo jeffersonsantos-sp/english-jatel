@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: english-jatel-config
+  namespace: english-jatel
+data:
+  ADMIN_USER: "admin"
+  EDGE_TTS_VOICE: "en-US-GuyNeural"
+  DATA_DIR: "/app/data"
+  # Tag da imagem no Docker Hub. Use uma tag versionada (reprodutivel) em vez de :latest.
+  IMAGE: "updateinformatica/english-jatel:v1.4.0"
