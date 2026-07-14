@@ -861,6 +861,46 @@ GRAMMAR = {
     ],
 }
 
+# --- Grammar orientado a dados (arquivo externo) ---
+# Conteudo carregado de GRAMMAR_FILE (padrao: grammar.json ao lado deste modulo).
+# O dicionario GRAMMAR embutido acima e usado apenas como fallback caso o
+# arquivo nao exista ou seja invalido. Edite grammar.json para adicionar
+# topicos/exemplos sem mexer no codigo; use o endpoint /api/admin/reload-grammar
+# (admin) para recarregar em tempo de execucao.
+GRAMMAR_FILE = os.getenv("GRAMMAR_FILE", os.path.join(os.path.dirname(__file__), "grammar.json"))
+
+
+def load_grammar_data():
+    global GRAMMAR, GRAMMAR_LEVELS
+    if not os.path.exists(GRAMMAR_FILE):
+        return
+    try:
+        with open(GRAMMAR_FILE, encoding="utf-8") as f:
+            data = json.load(f)
+    except Exception as e:
+        print(f"[grammar] falha ao ler {GRAMMAR_FILE}: {e}; usando conteudo embutido")
+        return
+    grammar = data.get("grammar")
+    levels = data.get("levels")
+    if not isinstance(grammar, dict) or not grammar:
+        print(f"[grammar] {GRAMMAR_FILE} sem 'grammar' valido; usando embutido")
+        return
+    if not levels:
+        levels = [lv for lv in GRAMMAR_LEVELS if lv in grammar] + [lv for lv in grammar if lv not in GRAMMAR_LEVELS]
+    GRAMMAR = {lv: grammar[lv] for lv in levels if lv in grammar}
+    GRAMMAR_LEVELS = levels
+    print(f"[grammar] carregado de {GRAMMAR_FILE}: {len(levels)} niveis")
+
+
+def reload_grammar():
+    load_grammar_data()
+    for k in list(_CONTENT_QUEUES):
+        if isinstance(k, tuple) and k and k[0] == "grammar":
+            _CONTENT_QUEUES.pop(k, None)
+
+
+load_grammar_data()
+
 import random
 
 _CONTENT_QUEUES = {}
