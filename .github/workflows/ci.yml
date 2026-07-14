@@ -7,7 +7,6 @@ on:
 
 permissions:
   contents: read
-  packages: write
 
 jobs:
   backend-test:
@@ -38,32 +37,27 @@ jobs:
         run: node --check frontend/app.js
 
   build-and-push:
-    name: Build & push image (CD -> GHCR)
+    name: Build & push image (CD -> Docker Hub)
     needs: [backend-test, frontend-test]
     if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
     steps:
       - uses: actions/checkout@v4
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      - name: Log in to GitHub Container Registry
+      - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Lowercase image name
-        id: meta
-        run: echo "image=ghcr.io/${GITHUB_REPOSITORY,,}:latest" >> "$GITHUB_OUTPUT"
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ steps.meta.outputs.image }}
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/english-jatel:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/english-jatel:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
