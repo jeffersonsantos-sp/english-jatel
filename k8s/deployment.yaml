@@ -30,8 +30,9 @@ spec:
           envFrom:
             - configMapRef:
                 name: english-jatel-config
-            - secretRef:
-                name: english-jatel-secrets
+          # ADMIN_PASS/SESSION_SECRET usam defaults do app; OPENROUTER_API_KEY
+          # e demais secrets devem ser injetados em runtime (ex.: pipeline ou
+          # `kubectl set env`). Veja observacao no service.yaml / cd.yaml.
           volumeMounts:
             - name: data
               mountPath: /app/data
