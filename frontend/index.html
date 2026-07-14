@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>English JATEL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">🌊</div>
+        <h1>English JATEL</h1>
+        <span class="tag">Aprenda ouvindo, falando &amp; conversando</span>
+      </div>
+
+      <div class="controls">
+        <label>Nível:
+          <div class="field">
+            <select id="level">
+              <option value="iniciante">Iniciante</option>
+              <option value="intermediario">Intermediário</option>
+              <option value="avancado">Avançado</option>
+            </select>
+          </div>
+        </label>
+        <label>Voz da IA:
+          <div class="field">
+            <select id="voice"><option value="">Carregando...</option></select>
+          </div>
+        </label>
+        <label>Categoria:
+          <div class="field">
+            <select id="category">
+              <option value="all">Todas</option>
+              <option value="rotina">Rotina</option>
+              <option value="trabalho">Trabalho</option>
+              <option value="viagem">Viagem</option>
+            </select>
+          </div>
+        </label>
+        <label>Persona (conversa):
+          <div class="field">
+            <select id="persona">
+              <option value="cafe">Café</option>
+              <option value="entrevistador">Entrevistador</option>
+              <option value="negocios">Negócios</option>
+            </select>
+          </div>
+        </label>
+        <span id="status" class="status" title="Status da conexão">●</span>
+      </div>
+
+      <nav class="tabs">
+        <button class="tab active" data-tab="listen">Listen</button>
+        <button class="tab" data-tab="speak">Speak</button>
+        <button class="tab" data-tab="write">Write</button>
+        <button class="tab" data-tab="read">Read</button>
+        <button class="tab" data-tab="converse">Conversar</button>
+      </nav>
+    </header>
+
+    <main>
+      <section id="listen" class="panel active card">
+        <h2>Listen</h2>
+        <p class="subtitle">Escute a frase, faça o ditado e confira depois.</p>
+        <div class="btn-group">
+          <button id="listen-play" class="btn">🔊 Ouvir frase</button>
+          <button id="listen-repeat" class="btn ghost" disabled>🔁 Repetir</button>
+          <button id="listen-next" class="btn ghost">⏭ Próxima</button>
+        </div>
+        <div id="listen-sentence" class="sentence hidden"></div>
+        <label class="field-label" for="listen-answer">Ditado (o que você ouviu):</label>
+        <input id="listen-answer" type="text" placeholder="Digite a frase ouvida" />
+        <div class="btn-group">
+          <button id="listen-check" class="btn">Verificar</button>
+        </div>
+        <div id="listen-result" class="result"></div>
+      </section>
+
+      <section id="speak" class="panel card">
+        <h2>Speak</h2>
+        <p class="subtitle">Responda em voz alta (gravação) ou digite — e ouça a correção.</p>
+        <p class="hint">Responda em inglês: <em>“Tell me about your last weekend.”</em></p>
+        <div class="btn-group">
+          <button id="speak-rec" class="btn">🎤 Gravar</button>
+          <button id="speak-stop" class="btn ghost" disabled>⏹ Parar</button>
+        </div>
+        <div id="speak-transcript" class="result"></div>
+        <div class="btn-group">
+          <button id="speak-play-transcript" class="btn ghost" disabled>🔊 Ouvir transcrição</button>
+        </div>
+        <div id="speak-correction" class="result"></div>
+        <div class="btn-group">
+          <button id="speak-play-correction" class="btn ghost" disabled>🔊 Ouvir correção</button>
+        </div>
+
+        <hr class="divider" />
+        <label class="field-label" for="speak-text">Ou digite sua resposta para corrigir:</label>
+        <textarea id="speak-text" rows="4" placeholder="Escreva em inglês..."></textarea>
+        <div class="btn-group">
+          <button id="speak-correct-text" class="btn">Corrigir texto</button>
+        </div>
+      </section>
+
+      <section id="write" class="panel card">
+        <h2>Write</h2>
+        <p class="subtitle">Escreva um parágrafo e receba uma correção detalhada.</p>
+        <label class="field-label" for="write-text">Seu texto:</label>
+        <textarea id="write-text" rows="6" placeholder="Escreva um parágrafo em inglês..."></textarea>
+        <div class="btn-group">
+          <button id="write-check" class="btn">Corrigir</button>
+        </div>
+        <div id="write-result" class="result"></div>
+      </section>
+
+      <section id="read" class="panel card">
+        <h2>Read</h2>
+        <p class="subtitle">Leia o texto, consulte o glossário e responda à pergunta.</p>
+        <div class="btn-group">
+          <button id="read-load" class="btn">📄 Carregar texto</button>
+          <button id="read-next" class="btn ghost">⏭ Próximo</button>
+        </div>
+        <div id="read-text" class="sentence"></div>
+        <div id="read-glossary" class="glossary"></div>
+        <label class="field-label" for="read-answer">Pergunta de compreensão (em inglês):</label>
+        <input id="read-answer" type="text" placeholder="Sua resposta" />
+        <div class="btn-group">
+          <button id="read-check" class="btn">Corrigir</button>
+        </div>
+        <div id="read-result" class="result"></div>
+      </section>
+
+      <section id="converse" class="panel card">
+        <h2>Conversar com a IA</h2>
+        <p class="subtitle">Bate-papo em inglês com a persona escolhida.</p>
+        <div id="chat" class="chat"></div>
+        <div class="converse-controls">
+          <button id="conv-ai-start" class="btn ghost">🤖 IA fala primeiro</button>
+          <button id="conv-rec" class="btn">🎤 Gravar</button>
+          <button id="conv-stop" class="btn ghost" disabled>⏹ Parar</button>
+          <input id="conv-text" type="text" placeholder="Ou digite sua mensagem..." />
+          <button id="conv-send" class="btn">Enviar</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      Copyright © 2026 Jefferson Santos
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
