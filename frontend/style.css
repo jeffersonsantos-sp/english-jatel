@@ -305,6 +305,18 @@ main { margin-top: 24px; }
   color: var(--accent-2);
 }
 
+.grammar-structure {
+  display: inline-block;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 0.86rem;
+  color: var(--accent);
+  background: rgba(45, 212, 255, 0.1);
+  border: 1px solid rgba(45, 212, 255, 0.3);
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 12px;
+}
+
 .grammar-explanation {
   background: rgba(56, 189, 248, 0.07);
   border-left: 3px solid var(--accent-2);

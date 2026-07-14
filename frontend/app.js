@@ -321,6 +321,7 @@ async function loadGrammar() {
       body: JSON.stringify({ level: $("grammar-level").value }),
     });
     $("grammar-topic").textContent = data.topic || "";
+    $("grammar-structure").textContent = data.structure || "";
     $("grammar-explanation").textContent = data.explanation || "";
     const list = $("grammar-examples");
     list.innerHTML = "";
