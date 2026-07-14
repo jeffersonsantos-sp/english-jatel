@@ -38,6 +38,15 @@ ADMIN_USER = os.getenv("ADMIN_USER", "admin")
 ADMIN_PASS = os.getenv("ADMIN_PASS", "mudar123")
 SESSION_SECRET = os.getenv("SESSION_SECRET", "change-me-in-prod")
 
+# Senha "viva" (pode ser alterada em runtime via /api/auth/change-password).
+# Volta ao valor de ADMIN_PASS quando o container reinicia.
+current_admin_pass = ADMIN_PASS
+
+
+def set_admin_password(new_pass: str) -> None:
+    global current_admin_pass
+    current_admin_pass = new_pass
+
 
 def _b64(b: bytes) -> str:
     # remove padding '=' (causes Starlette to quote the cookie value)
