@@ -291,6 +291,61 @@ $("read-check").addEventListener("click", async () => {
   }
 });
 
+/* ---------- Grammar (CEFR) ---------- */
+(async () => {
+  try {
+    const data = await api("/api/grammar-levels");
+    const sel = $("grammar-level");
+    sel.innerHTML = "";
+    data.levels.forEach((lv) => {
+      const o = document.createElement("option");
+      o.value = lv;
+      o.textContent = lv;
+      sel.appendChild(o);
+    });
+  } catch (e) {
+    console.warn("grammar-levels indisponivel:", e.message);
+  }
+})();
+
+function grammarEnglishPart(example) {
+  return example.split(" — ")[0].trim();
+}
+
+async function loadGrammar() {
+  $("grammar-result").textContent = "";
+  try {
+    const data = await api("/api/grammar", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ level: $("grammar-level").value }),
+    });
+    $("grammar-topic").textContent = data.topic || "";
+    $("grammar-explanation").textContent = data.explanation || "";
+    const list = $("grammar-examples");
+    list.innerHTML = "";
+    (data.examples || []).forEach((ex) => {
+      const li = document.createElement("li");
+      const span = document.createElement("span");
+      span.textContent = ex;
+      const btn = document.createElement("button");
+      btn.className = "btn ghost grammar-play";
+      btn.textContent = "🔊";
+      btn.title = "Ouvir frase em inglês";
+      btn.addEventListener("click", () => playTts(grammarEnglishPart(ex)));
+      li.appendChild(span);
+      li.appendChild(btn);
+      list.appendChild(li);
+    });
+  } catch (e) {
+    showError($("grammar-result"), e.message);
+  }
+}
+
+$("grammar-load").addEventListener("click", loadGrammar);
+$("grammar-next").addEventListener("click", loadGrammar);
+$("grammar-level").addEventListener("change", loadGrammar);
+
 /* ---------- Converse ---------- */
 function addMsg(role, text) {
   const div = document.createElement("div");

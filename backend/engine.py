@@ -336,6 +336,295 @@ PERSONAS = {
     "negocios": "colega de negocios",
 }
 
+# --- Grammar: conteúdo por nível CEFR (A1..C2) ---
+# Cada tópico: titulo, explicacao (pt-BR), exemplos (ingles — traducao).
+GRAMMAR_LEVELS = ["A1", "A2", "B1", "B2", "C1", "C2"]
+
+GRAMMAR = {
+    "A1": [
+        {
+            "topic": "Verbo to be (ser / estar)",
+            "explanation": "Usamos am (eu), is (ele/ela/isto), are (você/nós/eles) para identidade, idade, profissão e estado. Na negativa, acrescenta-se not (isn't / aren't).",
+            "examples": [
+                "I am a student. — Eu sou estudante.",
+                "She is from Brazil. — Ela é do Brasil.",
+                "They are not at home. — Eles não estão em casa.",
+            ],
+        },
+        {
+            "topic": "Pronomes pessoais",
+            "explanation": "I (eu), you (você), he (ele), she (ela), it (isto), we (nós), they (eles/elas). O pronome define a forma do verbo.",
+            "examples": [
+                "He speaks English. — Ele fala inglês.",
+                "We live in São Paulo. — Nós moramos em São Paulo.",
+                "It is a book. — Isto é um livro.",
+            ],
+        },
+        {
+            "topic": "Artigos a / an / the",
+            "explanation": "a antes de consoante, an antes de vogal (a dog, an apple). the define algo já conhecido. Sem artigo para plural geral (I like cats).",
+            "examples": [
+                "I have a cat. — Eu tenho um gato.",
+                "She ate an orange. — Ela comeu uma laranja.",
+                "The book is on the table. — O livro está sobre a mesa.",
+            ],
+        },
+        {
+            "topic": "Plural de substantivos",
+            "explanation": "Geralmente + s (cat -> cats). Terminando em s, x, ch, sh ou o consonante: + es. Muitos irregulares (child -> children).",
+            "examples": [
+                "one dog, two dogs. — um cão, dois cães.",
+                "one box, three boxes. — uma caixa, três caixas.",
+                "one man, many men. — um homem, muitos homens.",
+            ],
+        },
+        {
+            "topic": "Present Simple (afirmativo)",
+            "explanation": "Fatos e rotinas. He/She/It leva -s no verbo (works, goes). Outras pessoas usam o verbo na base.",
+            "examples": [
+                "I work every day. — Eu trabalho todo dia.",
+                "He goes to school. — Ele vai à escola.",
+                "We like coffee. — Nós gostamos de café.",
+            ],
+        },
+    ],
+    "A2": [
+        {
+            "topic": "Present Simple (negativo e interrogativo)",
+            "explanation": "Usa-se o auxiliar do/does. Negativo: don't/doesn't + verbo base. Interrogativo: Do/Does + sujeito + verbo base.",
+            "examples": [
+                "I don't like tea. — Eu não gosto de chá.",
+                "Does she speak French? — Ela fala francês?",
+                "They don't live here. — Eles não moram aqui.",
+            ],
+        },
+        {
+            "topic": "Past Simple",
+            "explanation": "Ações concluídas no passado. Regulares: + ed (played). Irregulares comuns: go->went, eat->ate, see->saw. Negativo/interrogativo com did.",
+            "examples": [
+                "I visited my grandmother. — Eu visitei minha avó.",
+                "He went to the market. — Ele foi ao mercado.",
+                "We didn't watch TV. — Nós não assistimos TV.",
+            ],
+        },
+        {
+            "topic": "Preposições de tempo in / on / at",
+            "explanation": "in + meses/anos (in July, in 2020). on + dias (on Monday, on Sunday). at + horas (at 7 o'clock, at night).",
+            "examples": [
+                "The party is in December. — A festa é em dezembro.",
+                "We meet on Friday. — Nós nos encontramos na sexta.",
+                "The bus leaves at nine. — O ônibus sai às nove.",
+            ],
+        },
+        {
+            "topic": "There is / There are",
+            "explanation": "Para dizer que algo existe. there is (singular), there are (plural). Na negativa: isn't / aren't.",
+            "examples": [
+                "There is a park near my house. — Há um parque perto de casa.",
+                "There are two cats. — Há dois gatos.",
+                "There isn't any milk. — Não há leite nenhum.",
+            ],
+        },
+        {
+            "topic": "Can / Can't (habilidade)",
+            "explanation": "can + verbo base indica capacidade ou permissão. Negativo: can't. Interrogativo: Can + sujeito + verbo base.",
+            "examples": [
+                "I can swim. — Eu sei nadar.",
+                "She can't drive. — Ela não sabe dirigir.",
+                "Can you help me? — Você pode me ajudar?",
+            ],
+        },
+    ],
+    "B1": [
+        {
+            "topic": "Present Continuous",
+            "explanation": "am/is/are + verbo-ing para ações no momento ou temporárias. Often com now / at the moment.",
+            "examples": [
+                "I am reading a book now. — Estou lendo um livro agora.",
+                "She is working today. — Ela está trabalhando hoje.",
+                "They are not sleeping. — Eles não estão dormindo.",
+            ],
+        },
+        {
+            "topic": "Past Continuous",
+            "explanation": "was/were + verbo-ing para ação em progresso no passado, muitas vezes interrompida por outra (when).",
+            "examples": [
+                "I was taking a shower when you called. — Eu tomava banho quando você ligou.",
+                "They were playing football. — Eles estavam jogando futebol.",
+                "She was studying all night. — Ela estava estudando a noite toda.",
+            ],
+        },
+        {
+            "topic": "Present Perfect",
+            "explanation": "have/has + particípio para experiências, mudanças recentes e algo que começou no passado e continua. have been / has gone.",
+            "examples": [
+                "I have been to London. — Eu estive em Londres (já fui).",
+                "She has finished her homework. — Ela terminou a lição.",
+                "We have lived here for years. — Moramos aqui há anos.",
+            ],
+        },
+        {
+            "topic": "Futuro: will / going to",
+            "explanation": "will para decisões no momento e previsões. going to para planos e intenções já decididas ou sinais no presente.",
+            "examples": [
+                "I will help you. — Eu vou te ajudar (agora decidi).",
+                "Look at the sky! It's going to rain. — Olhe o céu! Vai chover.",
+                "We are going to travel in July. — Vamos viajar em julho.",
+            ],
+        },
+        {
+            "topic": "First Conditional",
+            "explanation": "if + Present Simple, will + base. Para resultados prováveis no futuro.",
+            "examples": [
+                "If it rains, we will stay home. — Se chover, ficaremos em casa.",
+                "If you study, you will pass. — Se você estudar, passará.",
+                "If he calls, I will tell him. — Se ele ligar, eu direi a ele.",
+            ],
+        },
+    ],
+    "B2": [
+        {
+            "topic": "Present Perfect Continuous",
+            "explanation": "have/has been + verbo-ing para ação que começou no passado e continua ou tem resultado visível agora.",
+            "examples": [
+                "I have been waiting for an hour. — Estou esperando há uma hora.",
+                "She has been working all day. — Ela está trabalhando o dia todo.",
+                "It has been raining since morning. — Chove desde de manhã.",
+            ],
+        },
+        {
+            "topic": "Second Conditional",
+            "explanation": "if + Past Simple, would + base. Para situações hipotéticas ou irreais no presente/futuro.",
+            "examples": [
+                "If I won the lottery, I would travel. — Se eu ganhasse na loteria, viajaria.",
+                "If she knew, she would tell us. — Se ela soubesse, nos diria.",
+                "What would you do? — O que você faria?",
+            ],
+        },
+        {
+            "topic": "Voz passiva",
+            "explanation": "be + particípio. O foco vai para a ação/objeto. Active: They built the house -> Passive: The house was built.",
+            "examples": [
+                "The letter was written by Tom. — A carta foi escrita pelo Tom.",
+                "English is spoken worldwide. — O inglês é falado no mundo todo.",
+                "The cake has been eaten. — O bolo foi comido.",
+            ],
+        },
+        {
+            "topic": "Reported Speech (introdução)",
+            "explanation": "Repete o que foi dito com mudança de tempo (say/tell + que). present -> past, will -> would, am/is -> was.",
+            "examples": [
+                "He said he was tired. — Ele disse que estava cansado.",
+                "She told me she would come. — Ela me disse que viria.",
+                "They said they liked it. — Eles disseram que gostaram.",
+            ],
+        },
+        {
+            "topic": "Modais de dedução",
+            "explanation": "must (certeza afirmativa), can't (certeza negativa), could/might (possibilidade).",
+            "examples": [
+                "He must be at home. — Ele deve estar em casa.",
+                "That can't be true. — Isso não pode ser verdade.",
+                "She might be busy. — Ela pode estar ocupada.",
+            ],
+        },
+    ],
+    "C1": [
+        {
+            "topic": "Third Conditional",
+            "explanation": "if + Past Perfect, would have + particípio. Situações hipotéticas sobre o passado (não mudáveis).",
+            "examples": [
+                "If I had studied, I would have passed. — Se eu tivesse estudado, teria passado.",
+                "If she had left earlier, she wouldn't have missed it. — Se tivesse saído cedo, não teria perdido.",
+                "We would have helped if we had known. — Teríamos ajudado se soubéssemos.",
+            ],
+        },
+        {
+            "topic": "Inversão após negativos",
+            "explanation": "Advérbios negativos no início (never, hardly, seldom, not only) exigem inversão sujeito-verbo (auxiliar antes do sujeito).",
+            "examples": [
+                "Never have I seen such a thing. — Nunca vi tal coisa.",
+                "Seldom does he complain. — Raramente ele reclama.",
+                "Not only did she win, but she broke the record. — Ela não só venceu, como quebrou o recorde.",
+            ],
+        },
+        {
+            "topic": "Wish / If only",
+            "explanation": "Desejos sobre presente (Past Simple) ou passado (Past Perfect). I wish I were / I wish I had done.",
+            "examples": [
+                "I wish I spoke French. — Quem me dera falar francês.",
+                "I wish I had studied more. — Queria ter estudado mais.",
+                "If only we knew! — Se ao menos soubéssemos!",
+            ],
+        },
+        {
+            "topic": "Passiva com modais e perífrasis",
+            "explanation": "modal + be + particípio (must be done); ou have something done (something is done for you).",
+            "examples": [
+                "The work must be finished today. — O trabalho deve ser terminado hoje.",
+                "He had his car repaired. — Ele mandou consertar o carro.",
+                "The report is being written. — O relatório está sendo escrito.",
+            ],
+        },
+        {
+            "topic": "Colocações avançadas",
+            "explanation": "Palavras que combinam naturalmente (make a decision, take action, raise a question, pay attention).",
+            "examples": [
+                "We made a decision. — Nós tomamos uma decisão.",
+                "Please pay attention. — Por favor, preste atenção.",
+                "They raised an interesting point. — Eles levantaram um ponto interessante.",
+            ],
+        },
+    ],
+    "C2": [
+        {
+            "topic": "Cleft sentences (ênfase)",
+            "explanation": "It was/were + foco + that/who para dar ênfase a um elemento da frase. It was John who called.",
+            "examples": [
+                "It was the manager who approved it. — Foi o gerente quem aprovou.",
+                "It is grammar that we are studying. — É gramática que estamos estudando.",
+                "It wasn't me that said that. — Não fui eu que disse isso.",
+            ],
+        },
+        {
+            "topic": "Discurso indireto complexo",
+            "explanation": "Mudança de tempos e deicticos em relatos longos; cuidado com would/could e expressões de tempo (here->there, now->then).",
+            "examples": [
+                "He said he had been there the week before. — Ele disse que estivera lá na semana anterior.",
+                "She explained that she would leave the next day. — Ela explicou que partiria no dia seguinte.",
+                "They claimed they had never met him. — Eles alegaram nunca tê-lo conhecido.",
+            ],
+        },
+        {
+            "topic": "Conectivos discursivos sofisticados",
+            "explanation": "Nevertheless, furthermore, thereby, albeit, notwithstanding, on the grounds that — para Coesão em texto formal.",
+            "examples": [
+                "He was tired; nevertheless, he continued. — Ele estava cansado; todavia, continuou.",
+                "She left, thereby ending the dispute. — Ela saiu, terminando assim a disputa.",
+                "Albeit small, the team was effective. — Embora pequena, a equipe foi eficaz.",
+            ],
+        },
+        {
+            "topic": "Preposições idiomáticas",
+            "explanation": "Combinações fixas (in charge of, by means of, on behalf of, with regard to, at risk of).",
+            "examples": [
+                "She is in charge of the project. — Ela está a cargo do projeto.",
+                "On behalf of the team, thank you. — Em nome da equipe, obrigado.",
+                "With regard to your request... — Com relação ao seu pedido...",
+            ],
+        },
+        {
+            "topic": "Registro e nuances de tom",
+            "explanation": "Escolha entre formal/informal e construtores compactos para precisão (I would appreciate it if / I was wondering if).",
+            "examples": [
+                "I would appreciate your feedback. — Agradeceria seu retorno (formal).",
+                "I was wondering if you could help. — Gostaria de saber se poderia ajudar.",
+                "Needless to say, we agree. — Escusado será dizer que concordamos.",
+            ],
+        },
+    ],
+}
+
 import random
 
 _CONTENT_QUEUES = {}
@@ -368,6 +657,34 @@ def get_content(level: str, module: str, category: str = "all") -> dict:
         item = _next_item(level, "read", category)
         return {"text": item["text"], "glossary": item["glossary"]}
     return {"text": _next_item(level, "listen", category)}
+
+
+def normalize_cefr(level: str) -> str:
+    return level if level in GRAMMAR_LEVELS else "A1"
+
+
+def _next_grammar(level: str):
+    topics = GRAMMAR.get(normalize_cefr(level), [])
+    key = ("grammar", normalize_cefr(level))
+    q = _CONTENT_QUEUES.get(key)
+    if not q:
+        q = topics[:]
+        random.shuffle(q)
+        _CONTENT_QUEUES[key] = q
+    if not q:
+        return None
+    return q.pop(0)
+
+
+def get_grammar(level: str) -> dict:
+    topic = _next_grammar(level)
+    if not topic:
+        return {"topic": "", "explanation": "", "examples": []}
+    return {
+        "topic": topic["topic"],
+        "explanation": topic["explanation"],
+        "examples": topic["examples"][:],
+    }
 
 
 def heuristic_correct(text: str) -> str:

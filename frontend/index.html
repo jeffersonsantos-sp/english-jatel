@@ -77,8 +77,9 @@
         <button class="tab" data-tab="speak">Speak</button>
         <button class="tab" data-tab="write">Write</button>
         <button class="tab" data-tab="read">Read</button>
-        <button class="tab" data-tab="converse">Conversar</button>
-      </nav>
+          <button class="tab" data-tab="converse">Conversar</button>
+          <button class="tab" data-tab="grammar">Grammar</button>
+        </nav>
     </header>
 
     <main>
@@ -163,6 +164,23 @@
           <input id="conv-text" type="text" placeholder="Ou digite sua mensagem..." />
           <button id="conv-send" class="btn">Enviar</button>
         </div>
+      </section>
+
+      <section id="grammar" class="panel card">
+        <h2>Grammar</h2>
+        <p class="subtitle">Aprenda gramática inglesa por nível (Quadro Europeu CEFR).</p>
+        <label class="field-label" for="grammar-level">Nível CEFR:</label>
+        <div class="field">
+          <select id="grammar-level"></select>
+        </div>
+        <div class="btn-group">
+          <button id="grammar-load" class="btn">📘 Carregar tópico</button>
+          <button id="grammar-next" class="btn ghost">⏭ Próximo</button>
+        </div>
+        <h3 id="grammar-topic" class="grammar-topic"></h3>
+        <div id="grammar-explanation" class="grammar-explanation"></div>
+        <ul id="grammar-examples" class="grammar-examples"></ul>
+        <div id="grammar-result" class="result"></div>
       </section>
     </main>
 
