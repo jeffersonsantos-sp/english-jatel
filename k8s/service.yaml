@@ -7,6 +7,11 @@ spec:
   # ClusterIP: acesse com `kubectl -n english-jatel port-forward svc/english-jatel 8080:80`
   # (use 8080 ou outra porta livre; 8000 pode ja estar em uso no host).
   # Para expor no cluster, troque para LoadBalancer (nuvem) ou NodePort.
+  #
+  # Sem Segredo: o app usa ADMIN_PASS/SESSION_SECRET padrao e roda em modo demo
+  # (sem LLM). Para habilitar correcao/conversa, injete a key no pod, ex.:
+  #   kubectl -n english-jatel set env deploy/english-jatel OPENROUTER_API_KEY=<sua_key>
+  # ou crie um Secret e adicione um secretRef no container (ver historico).
   type: ClusterIP
   selector:
     app: english-jatel
