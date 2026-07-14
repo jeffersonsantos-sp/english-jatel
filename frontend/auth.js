@@ -43,5 +43,50 @@
     });
   }
 
+  // --- Troca de senha (modal) ---
+  const cpModal = document.getElementById("change-pass-modal");
+  const cpForm = document.getElementById("change-pass-form");
+  const cpErr = document.getElementById("change-pass-error");
+  const cpOk = document.getElementById("change-pass-ok");
+  document.getElementById("change-pass-btn")?.addEventListener("click", () => {
+    cpErr.textContent = "";
+    cpOk.textContent = "";
+    cpForm.reset();
+    cpModal.style.display = "flex";
+  });
+  document.getElementById("cp-cancel")?.addEventListener("click", () => {
+    cpModal.style.display = "none";
+  });
+  if (cpForm) {
+    cpForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      cpErr.textContent = "";
+      cpOk.textContent = "";
+      const current_password = document.getElementById("cp-current").value;
+      const new_password = document.getElementById("cp-new").value;
+      const confirm = document.getElementById("cp-confirm").value;
+      if (new_password !== confirm) {
+        cpErr.textContent = "As senhas não conferem";
+        return;
+      }
+      try {
+        const r = await fetch("/api/auth/change-password", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ current_password, new_password }),
+        });
+        if (r.ok) {
+          cpOk.textContent = "Senha alterada com sucesso!";
+          setTimeout(() => (cpModal.style.display = "none"), 1200);
+        } else {
+          const d = await r.json().catch(() => ({}));
+          cpErr.textContent = d.detail || "Erro ao trocar senha";
+        }
+      } catch {
+        cpErr.textContent = "Erro ao conectar";
+      }
+    });
+  }
+
   await checkAuth();
 })();

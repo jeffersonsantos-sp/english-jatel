@@ -64,6 +64,11 @@ class LoginReq(BaseModel):
     password: str
 
 
+class ChangePassReq(BaseModel):
+    current_password: str
+    new_password: str
+
+
 # ---- Auth guard: protege "/" e "/api/*" (exceto rotas públicas) ----
 PUBLIC_API = {"/api/auth/login", "/api/auth/logout", "/api/auth/me", "/api/health"}
 
@@ -86,7 +91,7 @@ async def auth_guard(request: Request, call_next):
 
 @app.post("/api/auth/login")
 def login(req: LoginReq, response: Response):
-    if req.user == engine.ADMIN_USER and hmac.compare_digest(req.password, engine.ADMIN_PASS):
+    if req.user == engine.ADMIN_USER and hmac.compare_digest(req.password, engine.current_admin_pass):
         token = engine.make_token(req.user)
         response.set_cookie(
             "session", token, httponly=True, samesite="lax", path="/", max_age=604800
@@ -106,6 +111,23 @@ def me(request: Request):
     if engine.verify_token(request.cookies.get("session", "")):
         return {"user": engine.ADMIN_USER}
     raise HTTPException(status_code=401, detail="nao autenticado")
+
+
+@app.post("/api/auth/change-password")
+def change_password(req: ChangePassReq, request: Request, response: Response):
+    if not engine.verify_token(request.cookies.get("session", "")):
+        raise HTTPException(status_code=401, detail="nao autenticado")
+    if not hmac.compare_digest(req.current_password, engine.current_admin_pass):
+        raise HTTPException(status_code=400, detail="senha atual incorreta")
+    if len(req.new_password) < 4:
+        raise HTTPException(status_code=400, detail="nova senha muito curta (min 4)")
+    engine.set_admin_password(req.new_password)
+    # re-emite o cookie para manter a sessao valida
+    token = engine.make_token(engine.ADMIN_USER)
+    response.set_cookie(
+        "session", token, httponly=True, samesite="lax", path="/", max_age=604800
+    )
+    return {"ok": True}
 
 
 @app.get("/api/health")

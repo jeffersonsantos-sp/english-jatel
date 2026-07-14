@@ -68,6 +68,7 @@
         </label>
         <span id="status" class="status" title="Status da conexão">●</span>
         <button id="logout-btn" class="btn ghost" title="Sair">Sair</button>
+        <button id="change-pass-btn" class="btn ghost" title="Trocar senha">⚙️ Senha</button>
       </div>
 
       <nav class="tabs">
@@ -167,6 +168,22 @@
     <footer class="footer">
       Copyright © 2026 Jefferson Santos
     </footer>
+  </div>
+
+  <div id="change-pass-modal" class="login-overlay" style="display:none;">
+    <form id="change-pass-form" class="login-card">
+      <h1>Trocar senha</h1>
+      <label class="field-label" for="cp-current">Senha atual</label>
+      <input id="cp-current" type="password" autocomplete="current-password" placeholder="••••••••" />
+      <label class="field-label" for="cp-new">Nova senha</label>
+      <input id="cp-new" type="password" autocomplete="new-password" placeholder="mín. 4 caracteres" />
+      <label class="field-label" for="cp-confirm">Confirmar nova senha</label>
+      <input id="cp-confirm" type="password" autocomplete="new-password" placeholder="repita a nova senha" />
+      <button id="cp-save" class="btn" type="submit">Salvar</button>
+      <button id="cp-cancel" class="btn ghost" type="button">Cancelar</button>
+      <div id="change-pass-error" class="login-error"></div>
+      <div id="change-pass-ok" class="login-error" style="color:var(--ok)"></div>
+    </form>
   </div>
 
   <script src="auth.js"></script>
