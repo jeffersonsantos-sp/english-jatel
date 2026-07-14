@@ -79,6 +79,7 @@
         <button class="tab" data-tab="read">Read</button>
           <button class="tab" data-tab="converse">Conversar</button>
           <button class="tab" data-tab="grammar">Grammar</button>
+          <button class="tab" data-tab="memhack">MemHack</button>
         </nav>
     </header>
 
@@ -182,6 +183,30 @@
         <div id="grammar-explanation" class="grammar-explanation"></div>
         <ul id="grammar-examples" class="grammar-examples"></ul>
         <div id="grammar-result" class="result"></div>
+      </section>
+
+      <section id="memhack" class="panel card">
+        <h2>MemHack</h2>
+        <p class="subtitle">Memorize frases com repetição espaçada. Ouça, treine e classifique a dificuldade.</p>
+        <label class="field-label" for="memhack-category">Categoria:</label>
+        <div class="field">
+          <select id="memhack-category"></select>
+        </div>
+        <div id="memhack-card" class="memhack-card">
+          <div id="memhack-progress" class="memhack-progress"></div>
+          <div id="memhack-phrase" class="memhack-phrase"></div>
+          <div class="btn-group">
+            <button id="memhack-play" class="btn">🔊 Ouvir frase</button>
+            <button id="memhack-reveal" class="btn ghost">👁 Tradução</button>
+          </div>
+          <div id="memhack-pt" class="memhack-pt hidden"></div>
+          <div class="btn-group memhack-rating">
+            <button class="btn memhack-easy" data-diff="facil">✅ Fácil</button>
+            <button class="btn memhack-medium" data-diff="medio">🟡 Médio</button>
+            <button class="btn memhack-hard" data-diff="dificil">🔴 Difícil</button>
+          </div>
+          <div id="memhack-msg" class="result"></div>
+        </div>
       </section>
     </main>
 

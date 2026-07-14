@@ -355,6 +355,45 @@ main { margin-top: 24px; }
   font-size: 0.9rem;
 }
 
+.memhack-card {
+  margin-top: 8px;
+}
+
+.memhack-progress {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-bottom: 12px;
+}
+
+.memhack-phrase {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  padding: 16px 18px;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: var(--radius-sm);
+  margin-bottom: 14px;
+}
+
+.memhack-pt {
+  font-size: 1rem;
+  color: var(--accent-2);
+  margin: -6px 0 14px;
+  padding-left: 4px;
+}
+
+.memhack-rating {
+  margin-top: 4px;
+}
+
+.memhack-easy { border-color: rgba(52, 211, 153, 0.5); }
+.memhack-medium { border-color: rgba(250, 204, 21, 0.5); }
+.memhack-hard { border-color: rgba(251, 113, 133, 0.5); }
+
+.memhack-easy:hover { background: rgba(52, 211, 153, 0.15); }
+.memhack-medium:hover { background: rgba(250, 204, 21, 0.15); }
+.memhack-hard:hover { background: rgba(251, 113, 133, 0.15); }
+
 .hint {
   color: var(--muted);
   font-size: 0.92rem;

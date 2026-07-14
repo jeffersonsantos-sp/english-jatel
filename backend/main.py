@@ -148,6 +148,13 @@ def _require_admin(request: Request) -> str:
     return user
 
 
+def _require_user(request: Request) -> str:
+    token = request.cookies.get("session", "")
+    if not engine.verify_token(token):
+        raise HTTPException(status_code=401, detail="nao autenticado")
+    return engine.username_from_token(token)
+
+
 @app.post("/api/auth/register")
 def register(req: NewUserReq, request: Request):
     _require_admin(request)
@@ -210,6 +217,37 @@ def reload_grammar(request: Request):
     engine.reload_grammar()
     counts = {lv: len(engine.GRAMMAR.get(lv, [])) for lv in engine.GRAMMAR_LEVELS}
     return {"ok": True, "levels": engine.GRAMMAR_LEVELS, "counts": counts, "source": engine.GRAMMAR_FILE}
+
+
+# ---- MemHack (memorizacao com repeticao espacada) ----
+class MemHackNextReq(BaseModel):
+    category: str
+
+
+@app.get("/api/memhack/categories")
+def memhack_categories():
+    return {"categories": engine.get_memhack_categories()}
+
+
+@app.post("/api/memhack/next")
+def memhack_next(req: MemHackNextReq, request: Request):
+    user = _require_user(request)
+    return engine.get_memhack_next(user, req.category)
+
+
+class MemHackReviewReq(BaseModel):
+    category: str
+    phrase_id: str
+    difficulty: str
+
+
+@app.post("/api/memhack/review")
+def memhack_review(req: MemHackReviewReq, request: Request):
+    user = _require_user(request)
+    result = engine.review_memhack(user, req.category, req.phrase_id, req.difficulty)
+    if "error" in result:
+        raise HTTPException(status_code=400, detail=result["error"])
+    return result
 
 
 @app.post("/api/content")
