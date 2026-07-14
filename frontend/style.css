@@ -388,6 +388,65 @@ label.field-label {
 
 .hidden { display: none; }
 
+/* ---------- Login ---------- */
+.login-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background:
+    radial-gradient(1000px 600px at 20% 0%, rgba(124, 92, 255, 0.25), transparent 60%),
+    radial-gradient(900px 500px at 100% 100%, rgba(45, 212, 255, 0.18), transparent 55%),
+    linear-gradient(180deg, var(--bg-1), var(--bg-0));
+  backdrop-filter: blur(8px);
+}
+.login-card {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(16px);
+}
+.login-card .logo {
+  align-self: center;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  background: var(--grad);
+  box-shadow: 0 8px 24px -6px rgba(124, 92, 255, 0.6);
+  font-size: 26px;
+  margin-bottom: 4px;
+}
+.login-card h1 {
+  margin: 0;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 800;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.login-card .subtitle {
+  margin: 0 0 8px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.login-card .btn { justify-content: center; width: 100%; }
+.login-error { color: var(--err); font-size: 0.85rem; min-height: 1.1em; text-align: center; }
+
 /* ---------- Responsivo ---------- */
 @media (max-width: 640px) {
   .brand .tag { margin-left: 0; width: 100%; text-align: center; }

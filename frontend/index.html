@@ -10,6 +10,20 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div id="login-overlay" class="login-overlay">
+    <form id="login-form" class="login-card">
+      <div class="logo">🌊</div>
+      <h1>English JATEL</h1>
+      <p class="subtitle">Acesso restrito — faça login para continuar</p>
+      <label class="field-label" for="login-user">Usuário</label>
+      <input id="login-user" type="text" autocomplete="username" placeholder="admin" />
+      <label class="field-label" for="login-pass">Senha</label>
+      <input id="login-pass" type="password" autocomplete="current-password" placeholder="••••••••" />
+      <button id="login-btn" class="btn" type="submit">Entrar</button>
+      <div id="login-error" class="login-error"></div>
+    </form>
+  </div>
+
   <div class="app">
     <header class="topbar">
       <div class="brand">
@@ -53,6 +67,7 @@
           </div>
         </label>
         <span id="status" class="status" title="Status da conexão">●</span>
+        <button id="logout-btn" class="btn ghost" title="Sair">Sair</button>
       </div>
 
       <nav class="tabs">
@@ -154,6 +169,7 @@
     </footer>
   </div>
 
+  <script src="auth.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

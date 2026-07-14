@@ -12,14 +12,15 @@ Endpoints:
   POST /api/converse     {level, persona, history, message} -> {reply}
 """
 
-from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi import FastAPI, UploadFile, File, HTTPException, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from typing import List, Dict, Any
 import base64
 import os
+import hmac
 
 import engine
 
@@ -56,6 +57,55 @@ class ConverseReq(BaseModel):
     persona: str = "cafe"
     history: List[Dict[str, str]] = []
     message: str = ""
+
+
+class LoginReq(BaseModel):
+    user: str
+    password: str
+
+
+# ---- Auth guard: protege "/" e "/api/*" (exceto rotas públicas) ----
+PUBLIC_API = {"/api/auth/login", "/api/auth/logout", "/api/auth/me", "/api/health"}
+
+
+@app.middleware("http")
+async def auth_guard(request: Request, call_next):
+    path = request.url.path
+    if path in PUBLIC_API or path in ("/login", "/login.html"):
+        return await call_next(request)
+    is_api = path.startswith("/api/")
+    is_root = path == "/"
+    if not (is_api or is_root):  # assets estáticos (css/js/img) são públicos
+        return await call_next(request)
+    if engine.verify_token(request.cookies.get("session", "")):
+        return await call_next(request)
+    if is_api:
+        return JSONResponse(status_code=401, content={"detail": "nao autenticado"})
+    return RedirectResponse("/login", status_code=307)
+
+
+@app.post("/api/auth/login")
+def login(req: LoginReq, response: Response):
+    if req.user == engine.ADMIN_USER and hmac.compare_digest(req.password, engine.ADMIN_PASS):
+        token = engine.make_token(req.user)
+        response.set_cookie(
+            "session", token, httponly=True, samesite="lax", path="/", max_age=604800
+        )
+        return {"ok": True}
+    raise HTTPException(status_code=401, detail="usuario ou senha invalidos")
+
+
+@app.post("/api/auth/logout")
+def logout(response: Response):
+    response.delete_cookie("session")
+    return {"ok": True}
+
+
+@app.get("/api/auth/me")
+def me(request: Request):
+    if engine.verify_token(request.cookies.get("session", "")):
+        return {"user": engine.ADMIN_USER}
+    raise HTTPException(status_code=401, detail="nao autenticado")
 
 
 @app.get("/api/health")
@@ -126,6 +176,11 @@ def converse(req: ConverseReq):
 @app.get("/")
 def index():
     return FileResponse(os.path.join(FRONTEND_DIR, "index.html"))
+
+
+@app.get("/login")
+def login_page():
+    return FileResponse(os.path.join(FRONTEND_DIR, "login.html"))
 
 
 app.mount("/", StaticFiles(directory=FRONTEND_DIR, html=True), name="static")
