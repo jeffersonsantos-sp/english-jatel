@@ -69,6 +69,7 @@
         <span id="status" class="status" title="Status da conexão">●</span>
         <button id="logout-btn" class="btn ghost" title="Sair">Sair</button>
         <button id="change-pass-btn" class="btn ghost" title="Trocar senha">⚙️ Senha</button>
+        <button id="users-btn" class="btn ghost" title="Gerenciar usuários">👥 Usuários</button>
       </div>
 
       <nav class="tabs">
@@ -183,6 +184,25 @@
       <button id="cp-cancel" class="btn ghost" type="button">Cancelar</button>
       <div id="change-pass-error" class="login-error"></div>
       <div id="change-pass-ok" class="login-error" style="color:var(--ok)"></div>
+    </form>
+  </div>
+
+  <div id="users-modal" class="login-overlay" style="display:none;">
+    <form id="users-form" class="login-card">
+      <h1>Gerenciar usuários</h1>
+      <label class="field-label" for="u-username">Novo usuário</label>
+      <input id="u-username" type="text" placeholder="nome de usuário" />
+      <label class="field-label" for="u-password">Senha</label>
+      <input id="u-password" type="password" placeholder="mín. 4 caracteres" />
+      <label class="field-label" for="u-confirm">Confirmar senha</label>
+      <input id="u-confirm" type="password" placeholder="repita a senha" />
+      <button id="u-add" class="btn" type="submit">Criar usuário</button>
+      <div id="users-error" class="login-error"></div>
+      <div id="users-ok" class="login-error" style="color:var(--ok)"></div>
+      <hr class="divider" />
+      <label class="field-label">Usuários existentes</label>
+      <ul id="users-list" class="users-list"></ul>
+      <button id="users-cancel" class="btn ghost" type="button">Fechar</button>
     </form>
   </div>
 

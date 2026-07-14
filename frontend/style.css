@@ -447,6 +447,9 @@ label.field-label {
 .login-card .btn { justify-content: center; width: 100%; }
 .login-error { color: var(--err); font-size: 0.85rem; min-height: 1.1em; text-align: center; }
 
+.users-list { list-style: none; padding: 0; margin: 6px 0 12px; color: var(--text); font-size: 0.9rem; }
+.users-list li { padding: 6px 10px; background: rgba(7, 11, 24, 0.5); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 6px; }
+
 /* ---------- Responsivo ---------- */
 @media (max-width: 640px) {
   .brand .tag { margin-left: 0; width: 100%; text-align: center; }

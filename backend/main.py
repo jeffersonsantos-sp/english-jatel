@@ -69,6 +69,11 @@ class ChangePassReq(BaseModel):
     new_password: str
 
 
+class NewUserReq(BaseModel):
+    username: str
+    password: str
+
+
 # ---- Auth guard: protege "/" e "/api/*" (exceto rotas públicas) ----
 PUBLIC_API = {"/api/auth/login", "/api/auth/logout", "/api/auth/me", "/api/health"}
 
@@ -91,7 +96,7 @@ async def auth_guard(request: Request, call_next):
 
 @app.post("/api/auth/login")
 def login(req: LoginReq, response: Response):
-    if req.user == engine.ADMIN_USER and hmac.compare_digest(req.password, engine.current_admin_pass):
+    if engine.verify_user(req.user, req.password):
         token = engine.make_token(req.user)
         response.set_cookie(
             "session", token, httponly=True, samesite="lax", path="/", max_age=604800
@@ -115,19 +120,40 @@ def me(request: Request):
 
 @app.post("/api/auth/change-password")
 def change_password(req: ChangePassReq, request: Request, response: Response):
-    if not engine.verify_token(request.cookies.get("session", "")):
+    token = request.cookies.get("session", "")
+    if not engine.verify_token(token):
         raise HTTPException(status_code=401, detail="nao autenticado")
-    if not hmac.compare_digest(req.current_password, engine.current_admin_pass):
+    user = engine.username_from_token(token)
+    if not user or not engine.verify_user(user, req.current_password):
         raise HTTPException(status_code=400, detail="senha atual incorreta")
     if len(req.new_password) < 4:
         raise HTTPException(status_code=400, detail="nova senha muito curta (min 4)")
-    engine.set_admin_password(req.new_password)
-    # re-emite o cookie para manter a sessao valida
-    token = engine.make_token(engine.ADMIN_USER)
+    engine.set_user_password(user, req.new_password)
+    new_token = engine.make_token(user)
     response.set_cookie(
-        "session", token, httponly=True, samesite="lax", path="/", max_age=604800
+        "session", new_token, httponly=True, samesite="lax", path="/", max_age=604800
     )
     return {"ok": True}
+
+
+@app.post("/api/auth/register")
+def register(req: NewUserReq, request: Request):
+    if not engine.verify_token(request.cookies.get("session", "")):
+        raise HTTPException(status_code=401, detail="nao autenticado")
+    if not req.username or len(req.username) < 2:
+        raise HTTPException(status_code=400, detail="usuario muito curto (min 2)")
+    try:
+        engine.add_user(req.username, req.password)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    return {"ok": True}
+
+
+@app.get("/api/auth/users")
+def users_list(request: Request):
+    if not engine.verify_token(request.cookies.get("session", "")):
+        raise HTTPException(status_code=401, detail="nao autenticado")
+    return {"users": engine.list_users()}
 
 
 @app.get("/api/health")

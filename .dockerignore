@@ -21,4 +21,5 @@ docker-compose.yaml
 **/.env
 .claude/
 node_modules/
-l
+backend/data/
+data/

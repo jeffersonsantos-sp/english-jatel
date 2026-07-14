@@ -33,19 +33,88 @@ OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
 EDGE_VOICE = os.getenv("EDGE_TTS_VOICE", "en-US-JennyNeural")
 IS_OPENROUTER = "openrouter" in BASE_URL
 
-# --- Autenticação (admin) ---
+# --- Autenticação (multi-usuário, persistido em arquivo) ---
 ADMIN_USER = os.getenv("ADMIN_USER", "admin")
 ADMIN_PASS = os.getenv("ADMIN_PASS", "mudar123")
 SESSION_SECRET = os.getenv("SESSION_SECRET", "change-me-in-prod")
 
-# Senha "viva" (pode ser alterada em runtime via /api/auth/change-password).
-# Volta ao valor de ADMIN_PASS quando o container reinicia.
-current_admin_pass = ADMIN_PASS
+import pathlib
+DATA_DIR = pathlib.Path(os.getenv("DATA_DIR", os.path.join(os.path.dirname(__file__), "data")))
+USERS_FILE = DATA_DIR / "users.json"
+_USERS_CACHE = None
 
 
-def set_admin_password(new_pass: str) -> None:
-    global current_admin_pass
-    current_admin_pass = new_pass
+def _hash_password(password: str, salt: bytes = None) -> tuple:
+    if salt is None:
+        salt = os.urandom(16)
+    dk = hashlib.pbkdf2_hmac("sha256", password.encode(), salt, 100_000)
+    return salt.hex(), dk.hex()
+
+
+def _load_users() -> dict:
+    global _USERS_CACHE
+    if _USERS_CACHE is not None:
+        return _USERS_CACHE
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    if USERS_FILE.exists():
+        try:
+            _USERS_CACHE = json.loads(USERS_FILE.read_text())
+        except Exception:
+            _USERS_CACHE = {}
+    if not _USERS_CACHE:
+        salt, h = _hash_password(ADMIN_PASS)
+        _USERS_CACHE = {ADMIN_USER: {"salt": salt, "hash": h}}
+        _save_users(_USERS_CACHE)
+    return _USERS_CACHE
+
+
+def _save_users(users: dict) -> None:
+    global _USERS_CACHE
+    _USERS_CACHE = users
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    USERS_FILE.write_text(json.dumps(users, indent=2))
+
+
+def verify_user(username: str, password: str) -> bool:
+    users = _load_users()
+    u = users.get(username)
+    if not u:
+        return False
+    salt = bytes.fromhex(u["salt"])
+    dk = hashlib.pbkdf2_hmac("sha256", password.encode(), salt, 100_000)
+    return hmac.compare_digest(dk.hex(), u["hash"])
+
+
+def add_user(username: str, password: str) -> None:
+    users = _load_users()
+    if username in users:
+        raise ValueError("usuário já existe")
+    if len(password) < 4:
+        raise ValueError("senha muito curta (mín. 4)")
+    salt, h = _hash_password(password)
+    users[username] = {"salt": salt, "hash": h}
+    _save_users(users)
+
+
+def set_user_password(username: str, password: str) -> None:
+    users = _load_users()
+    if username not in users:
+        raise ValueError("usuário não existe")
+    salt, h = _hash_password(password)
+    users[username] = {"salt": salt, "hash": h}
+    _save_users(users)
+
+
+def list_users() -> list:
+    return sorted(_load_users().keys())
+
+
+def username_from_token(token: str):
+    try:
+        payload_b64, _ = token.split(".")
+        return json.loads(_b64d(payload_b64)).get("u")
+    except Exception:
+        return None
 
 
 def _b64(b: bytes) -> str:
