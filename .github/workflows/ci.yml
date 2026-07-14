@@ -65,7 +65,7 @@ jobs:
       # Injeta a chave (GitHub Variable) em runtime — NÃO embute na imagem.
       - name: Smoke test (LLM key via variable, runtime only)
         env:
-          OPENROUTER_API_KEY: ${{ vars.OPENROUTER_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/english-jatel:latest
         run: |
           docker pull "$IMAGE"
