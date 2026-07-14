@@ -204,6 +204,14 @@ def grammar(req: GrammarReq):
     return engine.get_grammar(req.level)
 
 
+@app.post("/api/admin/reload-grammar")
+def reload_grammar(request: Request):
+    _require_admin(request)
+    engine.reload_grammar()
+    counts = {lv: len(engine.GRAMMAR.get(lv, [])) for lv in engine.GRAMMAR_LEVELS}
+    return {"ok": True, "levels": engine.GRAMMAR_LEVELS, "counts": counts, "source": engine.GRAMMAR_FILE}
+
+
 @app.post("/api/content")
 def content(req: ContentReq):
     return engine.get_content(req.level, req.module, req.category)
