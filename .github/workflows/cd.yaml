@@ -1,11 +1,10 @@
 name: CD
 
-# Só roda depois que o workflow "CI" concluir com sucesso em main/master.
+# Dispara ao push de uma tag de versão (ex.: v1.0.0) — release versionado.
 on:
-  workflow_run:
-    workflows: ["CI"]
-    types: [completed]
-    branches: [main, master]
+  push:
+    tags:
+      - 'v*'
 
 permissions:
   contents: read
@@ -13,7 +12,6 @@ permissions:
 jobs:
   build-and-push:
     name: Build & push image (Docker Hub)
-    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -32,7 +30,7 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/english-jatel:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/english-jatel:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/english-jatel:${{ github.ref_name }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -47,3 +45,24 @@ jobs:
           for i in $(seq 1 20); do curl -sf http://localhost:8000/api/health && break; sleep 2; done
           echo "Health:"; curl -s http://localhost:8000/api/health; echo
           docker rm -f smoke
+
+  deploy:
+    name: Deploy to VPS (SSH)
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/english-jatel:latest
+            docker stop english-jatel || true
+            docker rm english-jatel || true
+            docker run -d --name english-jatel --restart unless-stopped \
+              -p 8000:8000 \
+              -e OPENROUTER_API_KEY=${{ secrets.OPENROUTER_API_KEY }} \
+              -e EDGE_TTS_VOICE=en-US-GuyNeural \
+              ${{ secrets.DOCKERHUB_USERNAME }}/english-jatel:latest
