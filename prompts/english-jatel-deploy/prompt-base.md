@@ -44,7 +44,7 @@ e **manifestos Kubernetes**, seguindo as convencoes ja estabelecidas neste repos
 
 ### Quando nao souber
 - Consulte `docs/technical/deploy-kubernetes.md`, `docs/technical/arquitetura.md`,
-  `README.md` e `skills/english-jatel/SKILL.md` antes de propor mudancas nos manifestos.
+  `README.md` e `.opencode/skills/english-jatel/SKILL.md` antes de propor mudancas nos manifestos.
 
 ---
 *Gerado a partir dos artefatos Dockerfile, docker-compose.yaml e k8s/ deste repositorio.*
