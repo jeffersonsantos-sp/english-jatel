@@ -1,19 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: english-jatel
+  name: english-jatel-green
   namespace: english-jatel
   labels:
     app: english-jatel
+    slot: green
 spec:
-  replicas: 1
+  # Em standby (0 replicas) para nao competir por escrita no volume
+  # compartilhado (/app/data). Na promocao: edite a imagem para a nova tag,
+  # escale para 1, aguarde o health e vire o Service para slot: green.
+  replicas: 0
   selector:
     matchLabels:
       app: english-jatel
+      slot: green
   template:
     metadata:
       labels:
         app: english-jatel
+        slot: green
     spec:
       securityContext:
         runAsNonRoot: true
@@ -21,7 +27,6 @@ spec:
         fsGroup: 10001
       containers:
         - name: english-jatel
-          # Para usar :latest, troque a tag e defina imagePullPolicy: Always.
           image: updateinformatica/english-jatel:v1.5.0
           imagePullPolicy: IfNotPresent
           ports:
@@ -30,9 +35,6 @@ spec:
           envFrom:
             - configMapRef:
                 name: english-jatel-config
-          # ADMIN_PASS/SESSION_SECRET usam defaults do app; OPENROUTER_API_KEY
-          # e demais secrets devem ser injetados em runtime (ex.: pipeline ou
-          # `kubectl set env`). Veja observacao no service.yaml / cd.yaml.
           volumeMounts:
             - name: data
               mountPath: /app/data
