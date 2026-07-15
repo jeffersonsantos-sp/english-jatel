@@ -12,3 +12,8 @@ node_modules/
 Thumbs.db
 data/
 backend/data/
+
+# Pastas derivativas (cópias de trabalho): PHP (hospedagem) e APP (mobile).
+# Mantidas fora do repo para evitar duplicar o codebase e divergir da raiz.
+APP/
+PHP/
