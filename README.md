@@ -157,7 +157,9 @@ docker run -d -p 8000:8000 \
 
 ## Documentação
 
+- [Deploy no Render (PaaS)](docs/technical/deploy-render.md)
 - [Deploy no Kubernetes](docs/technical/deploy-kubernetes.md)
+- [Blue/Green no Kubernetes](docs/technical/blue-green.md)
 - [Processo e versionamento por tags](docs/technical/processo-e-versionamento.md)
 - [Guia do usuário](docs/user/guia.md)
 - [Documentação técnica](docs/technical/arquitetura.md)
