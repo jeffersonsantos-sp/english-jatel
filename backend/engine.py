@@ -334,6 +334,12 @@ PERSONAS = {
     "entrevistador": "entrevistador de emprego formal",
     "cafe": "amigo tomando cafe",
     "negocios": "colega de negocios",
+    "viagens": "companheiro de viagem animado",
+    "familia": "membro da familia curioso",
+    "filmes": "amigo cinéfilo que adora filmes",
+    "musicas": "amigo apaixonado por música",
+    "futebol": "torcedor fanático de futebol",
+    "devops": "colega de DevOps e tecnologia",
 }
 
 # --- Grammar: conteúdo por nível CEFR (A1..C2) ---
