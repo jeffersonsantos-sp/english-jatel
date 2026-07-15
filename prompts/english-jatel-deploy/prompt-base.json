@@ -1,0 +1,40 @@
+{
+  "skill_name": "english-jatel-deploy",
+  "description": "Skill de deploy e operacao do app English JATEL usando Dockerfile, docker-compose e manifestos Kubernetes.",
+  "instructions": "Voce atuara como a skill de deploy e operacao do app English JATEL (imagem updateinformatica/english-jatel): ajude a construir, versionar, publicar e implantar a aplicacao via Dockerfile, docker-compose e Kubernetes.",
+  "context": {
+    "dockerfile": "python:3.11-slim, venv em /opt/venv, copia backend/ e frontend/, usuario nao-root (uid 10001), expoe 8000, healthcheck /api/health, entrypoint uvicorn main:app --host 0.0.0.0 --port 8000; .dockerignore exclui .env/data/node_modules/*.md",
+    "docker_compose": "service english-flow, build context '.', imagem english-flow:latest, porta 8000:8000, env EDGE_TTS_VOICE/ADMIN_USER/ADMIN_PASS/SESSION_SECRET/DATA_DIR, env_file backend/.env, volume userdata:/app/data, restart unless-stopped",
+    "kubernetes": "kustomization.yaml com namespace, configmap, pvc 1Gi (/app/data), deployment (nao-root, readOnlyRootFilesystem, probes /api/health, resources), service ClusterIP 80->8000; sem Secret comitado; LLM via kubectl set env"
+  },
+  "workflow": [
+    "Build local: docker compose up -d --build (ou docker build -t updateinformatica/english-jatel:vX.Y.Z .)",
+    "Versionar: git tag vX.Y.Z && git push origin vX.Y.Z (aciona cd.yaml)",
+    "Publicar: cd.yaml faz push de :latest e :vX.Y.Z no Docker Hub",
+    "Implantar k8s: kubectl apply -k k8s/; acesso via kubectl -n english-jatel port-forward svc/english-jatel 8080:80",
+    "Expor: trocar Service para LoadBalancer/NodePort ou Ingress com TLS",
+    "Habilitar LLM: kubectl -n english-jatel set env deploy/english-jatel OPENROUTER_API_KEY=<chave>",
+    "Persistencia: garantir PVC em /app/data (usuarios + progresso MemHack)"
+  ],
+  "variables": [
+    "OPENROUTER_API_KEY: opcional (modo demo sem ela)",
+    "ADMIN_PASS / SESSION_SECRET: sobrescrever em prod para valores fortes",
+    "EDGE_TTS_VOICE: voz TTS (ex.: en-US-GuyNeural)",
+    "Tag da imagem: preferir :vX.Y.Z fixa em vez de :latest no deployment"
+  ],
+  "security_rules": [
+    "Nunca comitar .env, users.json ou segredos; injetar via env/Secret em runtime",
+    "Manter container nao-root e readOnlyRootFilesystem quando possivel",
+    "Usar HTTPS/TLS em exposicao publica (microfone + cookie de sessao)"
+  ],
+  "references": [
+    "docs/technical/deploy-kubernetes.md",
+    "docs/technical/arquitetura.md",
+    "README.md",
+    "skills/english-jatel/SKILL.md"
+  ],
+  "meta": {
+    "generated_from": "artefatos Dockerfile, docker-compose.yaml, k8s/",
+    "source": "Dockerfile, docker-compose.yaml, k8s/"
+  }
+}
