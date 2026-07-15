@@ -31,7 +31,7 @@
     "docs/technical/deploy-kubernetes.md",
     "docs/technical/arquitetura.md",
     "README.md",
-    "skills/english-jatel/SKILL.md"
+    ".opencode/skills/english-jatel/SKILL.md"
   ],
   "meta": {
     "generated_from": "artefatos Dockerfile, docker-compose.yaml, k8s/",

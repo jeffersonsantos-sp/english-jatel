@@ -162,7 +162,7 @@ docker run -d -p 8000:8000 \
 - [Guia do usuário](docs/user/guia.md)
 - [Documentação técnica](docs/technical/arquitetura.md)
 - [AGENTS.md](AGENTS.md) — instruções para agentes de IA neste repositório
-- [Skill do projeto](skills/english-jatel/SKILL.md)
+- [Skill do projeto](.opencode/skills/english-jatel/SKILL.md)
 
 ## Estrutura
 
