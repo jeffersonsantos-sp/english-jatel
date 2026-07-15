@@ -1,0 +1,46 @@
+{
+  "skill_name": "english-jatel-render",
+  "description": "Skill de deploy e operacao do app English JATEL no Render (Web Service em container a partir do GitHub), com ajustes para o free tier.",
+  "instructions": "Voce atuara como a skill de deploy e operacao no Render do app English JATEL (imagem updateinformatica/english-jatel): ajude a publicar e operar a aplicacao como Web Service Docker a partir do repo GitHub, respeitando os ajustes de free tier ja feitos.",
+  "context": {
+    "service": "Web Service (Docker), builda o Dockerfile da raiz, serve /api/* + frontend num unico servico",
+    "repo": "jeffersonsantos-sp/english-jatel, branch main, auto-deploy no push",
+    "port": "Render injeta $PORT; Dockerfile roda uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}",
+    "health_check": "/api/health (status/llm/provider)",
+    "voice": "gravacao (Conversar/Speak) usa Web Speech API do navegador (window.SpeechRecognition); Whisper nao roda no free tier; fallback /api/stt; requer HTTPS e Chrome/Edge",
+    "keepalive": ".github/workflows/keepalive.yaml pinga /api/health a cada 10 min via secret RENDER_URL"
+  },
+  "workflow": [
+    "Criar servico: New + -> Web Service -> repo english-jatel, branch main, Runtime Docker, Instance Free, Health Check Path /api/health",
+    "Configurar env: OPENROUTER_API_KEY, ADMIN_PASS, SESSION_SECRET, EDGE_TTS_VOICE (opcional); salvar dispara redeploy",
+    "Deploy: automatico no push em main (Render rebuilda a imagem)",
+    "Ativar keepalive: cadastrar secret RENDER_URL no GitHub Actions",
+    "Validar: curl /api/health deve mostrar llm:true, provider:openrouter; testar /api/converse apos login"
+  ],
+  "variables": [
+    "OPENROUTER_API_KEY: sem ela o app roda em modo demo (llm:false, provider:demo)",
+    "ADMIN_PASS / SESSION_SECRET: sobrescrever defaults em producao",
+    "EDGE_TTS_VOICE: voz TTS (ex.: en-US-GuyNeural)",
+    "RENDER_URL (GitHub secret): URL publica para o keepalive"
+  ],
+  "free_tier_limits": [
+    "Disco efemero: /app/data nao persiste; users.json/memhack_progress.json resetam a cada reinicio/deploy",
+    "Persistir dados: Render Starter (disco), Postgres externo (Supabase/Neon), Kubernetes (PVC) ou Oracle Always Free",
+    "Cold start apos 15 min de inatividade (mitigado pelo keepalive)",
+    "~750 h/mes de execucao no free"
+  ],
+  "security_rules": [
+    "Nunca comitar .env, users.json ou segredos; usar Environment do Render / GitHub secrets",
+    "Usar HTTPS (padrao no Render) - necessario para microfone e cookie de sessao"
+  ],
+  "references": [
+    "docs/technical/deploy-render.md",
+    "docs/technical/deploy-kubernetes.md",
+    "README.md",
+    ".opencode/skills/english-jatel-render/SKILL.md"
+  ],
+  "meta": {
+    "generated_from": "integracao Render (Dockerfile com $PORT, Web Speech API, keepalive)",
+    "source": "Dockerfile, frontend/app.js, .github/workflows/keepalive.yaml"
+  }
+}
