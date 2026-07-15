@@ -8,13 +8,19 @@ spec:
   # (use 8080 ou outra porta livre; 8000 pode ja estar em uso no host).
   # Para expor no cluster, troque para LoadBalancer (nuvem) ou NodePort.
   #
+  # Blue/Green: o Service roteia para o slot ATIVO (slot: blue). Para promover
+  # a nova versao (green), apos o green estar Ready, vire o seletor:
+  #   kubectl -n english-jatel patch svc english-jatel -p '{"spec":{"selector":{"app":"english-jatel","slot":"green"}}}'
+  # Rollback: patch de volta para slot: blue. Veja docs/technical/deploy-kubernetes.md.
+  #
   # Sem Segredo: o app usa ADMIN_PASS/SESSION_SECRET padrao e roda em modo demo
   # (sem LLM). Para habilitar correcao/conversa, injete a key no pod, ex.:
-  #   kubectl -n english-jatel set env deploy/english-jatel OPENROUTER_API_KEY=<sua_key>
-  # ou crie um Secret e adicione um secretRef no container (ver historico).
+  #   kubectl -n english-jatel set env deploy/english-jatel-blue OPENROUTER_API_KEY=<sua_key>
+  # (ou no slot ativo). Ou crie um Secret e adicione um secretRef no container.
   type: ClusterIP
   selector:
     app: english-jatel
+    slot: blue
   ports:
     - port: 80
       targetPort: 8000

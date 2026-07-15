@@ -10,8 +10,9 @@ Validados com `kubectl apply --dry-run=client`.
 | `k8s/namespace.yaml` | namespace `english-jatel` |
 | `k8s/configmap.yaml` | config não-sensível: `ADMIN_USER`, `EDGE_TTS_VOICE`, `DATA_DIR`, imagem |
 | `k8s/pvc.yaml` | `PersistentVolumeClaim` de 1Gi montado em `/app/data` (usuários + progresso MemHack) |
-| `k8s/deployment.yaml` | Deployment (não-root uid 10001, `readOnlyRootFilesystem`, probes `/api/health`, recursos) |
-| `k8s/service.yaml` | Service `ClusterIP` na porta 80 → 8000 |
+| `k8s/deployment-blue.yaml` | Deployment do slot **ativo** (`slot: blue`, 1 réplica) |
+| `k8s/deployment-green.yaml` | Deployment do slot **standby** (`slot: green`, 0 réplicas) |
+| `k8s/service.yaml` | Service `ClusterIP` na porta 80 → 8000, seleciona pelo `slot` ativo |
 | `k8s/kustomization.yaml` | aplica todos de uma vez (`kubectl apply -k k8s/`) |
 
 ## Aplicar
@@ -24,8 +25,45 @@ Acompanhe:
 
 ```bash
 kubectl -n english-jatel get pods
-kubectl -n english-jatel logs deploy/english-jatel
+kubectl -n english-jatel logs deploy/english-jatel-blue
 ```
+
+## Blue/Green (deploy sem downtime e rollback instantâneo)
+
+Dois Deployments compartilham o rótulo `app: english-jatel`, diferenciados por
+`slot: blue` (ativo) e `slot: green` (standby, 0 réplicas). O Service roteia para
+o slot indicado em `spec.selector.slot` (começa em `blue`).
+
+### Promover uma nova versão (green)
+```bash
+# 1. Aponte o green para a nova imagem e suba 1 réplica
+kubectl -n english-jatel set image deploy/english-jatel-green \
+  english-jatel=updateinformatica/english-jatel:v1.6.0
+kubectl -n english-jatel scale deploy/english-jatel-green --replicas=1
+
+# 2. Aguarde o green ficar Ready/saudavel
+kubectl -n english-jatel rollout status deploy/english-jatel-green
+
+# 3. Vire o Service para o green (trafego 100% para a nova versao)
+kubectl -n english-jatel patch svc english-jatel \
+  -p '{"spec":{"selector":{"app":"english-jatel","slot":"green"}}}'
+
+# 4. (opcional) encoste o blue para evitar escritas simultaneas no volume
+kubectl -n english-jatel scale deploy/english-jatel-blue --replicas=0
+```
+
+### Rollback (voltar para o blue)
+```bash
+kubectl -n english-jatel patch svc english-jatel \
+  -p '{"spec":{"selector":{"app":"english-jatel","slot":"blue"}}}'
+kubectl -n english-jatel scale deploy/english-jatel-blue --replicas=1
+kubectl -n english-jatel scale deploy/english-jatel-green --replicas=0
+```
+
+> **Volume compartilhado**: ambos os slots montam o mesmo PVC (`/app/data`).
+> Durante a sobreposição (antes de escalar o blue para 0) ambos podem escrever
+> `users.json`/`memhack_progress.json`; para tráfego baixo é aceitável. Em
+> produção de maior risco, prefira manter apenas um slot ativo por vez.
 
 ## Acesso
 
