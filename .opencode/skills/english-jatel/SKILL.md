@@ -120,11 +120,18 @@ git push origin v1.4.0      # aciona cd.yaml -> build + push Docker Hub
 - Mantenha `main` verde; corte tags so para releases. Rollback: `docker run ... :vX.Y.Z`.
 
 ## Deploy no Kubernetes (ver docs/technical/deploy-kubernetes.md)
-- Manifestos em `k8s/` (namespace, configmap, pvc 1Gi, deployment nao-root +
-  readOnlyRootFilesystem + probes, service ClusterIP). Validados com dry-run.
+- Manifestos em `k8s/` (namespace, configmap, pvc 1Gi, dois Deployments blue/green
+  nao-root + readOnlyRootFilesystem + probes, service ClusterIP por seletor de slot).
+  Validados com dry-run.
+- **Blue/Green**: `deployment-blue.yaml` (slot ativo) + `deployment-green.yaml`
+  (slot standby, 0 replicas). O Service roteia pelo `slot` ativo; promover = sobe o
+  green, aguarda health e `patch` no seletor; rollback = patch de volta. Veja
+  [`docs/technical/blue-green.md`](blue-green.md).
 - App usa defaults de `ADMIN_PASS`/`SESSION_SECRET` (sem Secret comitado).
-- Para LLM na implantacao: `kubectl -n english-jatel set env deploy/english-jatel OPENROUTER_API_KEY=<key>`.
+- Para LLM na implantacao: `kubectl -n english-jatel set env deploy/english-jatel-blue OPENROUTER_API_KEY=<key>` (ou no slot ativo).
 - Exposicao: port-forward, ou trocar Service para LoadBalancer/NodePort/Ingress.
+- Cuidado: ambos os slots montam o mesmo PVC (`/app/data`); mantenha um slot ativo
+  por vez para evitar dupla escrita em `users.json`/`memhack_progress.json`.
 
 ## Como estender
 - **Grammar**: edite `backend/grammar.json` e chame `POST /api/admin/reload-grammar`.
