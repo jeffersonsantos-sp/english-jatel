@@ -8,4 +8,4 @@ data:
   EDGE_TTS_VOICE: "en-US-GuyNeural"
   DATA_DIR: "/app/data"
   # Tag da imagem no Docker Hub. Use uma tag versionada (reprodutivel) em vez de :latest.
-  IMAGE: "updateinformatica/english-jatel:v1.4.0"
+  IMAGE: "updateinformatica/english-jatel:v1.5.0"
