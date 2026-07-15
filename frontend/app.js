@@ -173,8 +173,22 @@ async function startRec(onStop) {
   mediaRecorder.onstop = () => {
     const blob = new Blob(chunks, { type: mediaRecorder.mimeType });
     blob.arrayBuffer().then((buf) => onStop(new Uint8Array(buf), blob.type));
+    // Libera o microfone.
+    if (mediaRecorder.stream) mediaRecorder.stream.getTracks().forEach((t) => t.stop());
   };
   mediaRecorder.start();
+}
+
+// Reconhecimento de voz do navegador (Web Speech API). Roda no cliente, sem
+// depender do backend/Whisper — ideal para hospedagem com pouca RAM.
+function getSpeechRecognition() {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) return null;
+  const r = new SR();
+  r.lang = "en-US";
+  r.interimResults = false;
+  r.maxAlternatives = 1;
+  return r;
 }
 
 function setSpeakTranscript(text) {
@@ -189,30 +203,83 @@ function setSpeakCorrection(text) {
   $("speak-play-correction").disabled = !text;
 }
 
-$("speak-rec").addEventListener("click", () => {
+let speakRecognition = null;
+
+async function speakHandleTranscript(text) {
+  text = (text || "").trim();
+  if (!text) return;
+  setSpeakTranscript(text);
+  try {
+    const corr = await api("/api/correct", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text, level: state.level }),
+    });
+    setSpeakCorrection(corr.correction);
+  } catch (e) {
+    setSpeakCorrection("Erro ao corrigir: " + e.message);
+  }
+}
+
+$("speak-rec").addEventListener("click", async () => {
+  // 1) Preferencial: reconhecimento de voz do navegador (não usa backend).
+  const rec = getSpeechRecognition();
+  if (rec) {
+    speakRecognition = rec;
+    $("speak-rec").disabled = true;
+    $("speak-stop").disabled = false;
+    rec.onresult = (e) => speakHandleTranscript(e.results[0][0].transcript);
+    rec.onerror = (e) => {
+      const map = {
+        "not-allowed": "permissão do microfone negada",
+        "no-speech": "não detectei sua fala, tente de novo",
+        "audio-capture": "microfone não encontrado",
+      };
+      $("speak-transcript").textContent = "⚠️ " + (map[e.error] || "erro no reconhecimento: " + e.error);
+    };
+    rec.onend = () => {
+      $("speak-rec").disabled = false;
+      $("speak-stop").disabled = true;
+      speakRecognition = null;
+    };
+    try {
+      rec.start();
+    } catch (e) {
+      $("speak-transcript").textContent = "⚠️ Não foi possível iniciar a gravação: " + e.message;
+      rec.onend();
+    }
+    return;
+  }
+  // 2) Fallback: grava e envia para o backend (/api/stt).
   $("speak-rec").disabled = true;
   $("speak-stop").disabled = false;
-  startRec(async (bytes, mime) => {
-    const fd = new FormData();
-    const ext = mime.includes("webm") ? "webm" : mime.includes("ogg") ? "ogg" : "wav";
-    fd.append("file", new Blob([bytes], { type: mime }), "audio." + ext);
-    try {
-      const stt = await api("/api/stt", { method: "POST", body: fd });
-      setSpeakTranscript(stt.transcript);
-      const corr = await api("/api/correct", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: stt.transcript, level: state.level }),
-      });
-      setSpeakCorrection(corr.correction);
-    } catch (e) {
-      $("speak-transcript").textContent = "Erro STT: " + e.message + "\n(Digite abaixo para corrigir manualmente.)";
-    }
-  });
+  try {
+    await startRec(async (bytes, mime) => {
+      const fd = new FormData();
+      const ext = mime.includes("webm") ? "webm" : mime.includes("ogg") ? "ogg" : "wav";
+      fd.append("file", new Blob([bytes], { type: mime }), "audio." + ext);
+      try {
+        const stt = await api("/api/stt", { method: "POST", body: fd });
+        await speakHandleTranscript(stt.transcript);
+      } catch (e) {
+        $("speak-transcript").textContent = "Transcrição indisponível no servidor: " + e.message + "\n(Digite abaixo para corrigir manualmente.)";
+      }
+    });
+  } catch (e) {
+    $("speak-transcript").textContent = "⚠️ Não consegui acessar o microfone: " + e.message;
+    $("speak-rec").disabled = false;
+    $("speak-stop").disabled = true;
+  }
 });
 
 $("speak-stop").addEventListener("click", () => {
-  mediaRecorder.stop();
+  if (speakRecognition) {
+    speakRecognition.stop();
+    return;
+  }
+  if (mediaRecorder && mediaRecorder.state !== "inactive") {
+    mediaRecorder.stop();
+  }
   $("speak-rec").disabled = false;
   $("speak-stop").disabled = true;
 });
@@ -480,25 +547,74 @@ $("conv-send").addEventListener("click", () => {
   aiTurn(text);
 });
 
-$("conv-rec").addEventListener("click", () => {
+let convRecognition = null;
+
+$("conv-rec").addEventListener("click", async () => {
+  // 1) Preferencial: reconhecimento de voz do navegador (não usa backend).
+  const rec = getSpeechRecognition();
+  if (rec) {
+    convRecognition = rec;
+    $("conv-rec").disabled = true;
+    $("conv-stop").disabled = false;
+    rec.onresult = (e) => {
+      const text = (e.results[0][0].transcript || "").trim();
+      if (text) {
+        addMsg("user", text);
+        aiTurn(text);
+      }
+    };
+    rec.onerror = (e) => {
+      const map = {
+        "not-allowed": "permissão do microfone negada",
+        "no-speech": "não detectei sua fala, tente de novo",
+        "audio-capture": "microfone não encontrado",
+      };
+      addMsg("ai", "⚠️ " + (map[e.error] || "erro no reconhecimento de voz: " + e.error));
+    };
+    rec.onend = () => {
+      $("conv-rec").disabled = false;
+      $("conv-stop").disabled = true;
+      convRecognition = null;
+    };
+    try {
+      rec.start();
+    } catch (e) {
+      addMsg("ai", "⚠️ Não foi possível iniciar a gravação: " + e.message);
+      rec.onend();
+    }
+    return;
+  }
+  // 2) Fallback: grava e envia para o backend (/api/stt).
   $("conv-rec").disabled = true;
   $("conv-stop").disabled = false;
-  startRec(async (bytes, mime) => {
-    const fd = new FormData();
-    const ext = mime.includes("webm") ? "webm" : mime.includes("ogg") ? "ogg" : "wav";
-    fd.append("file", new Blob([bytes], { type: mime }), "audio." + ext);
-    try {
-      const stt = await api("/api/stt", { method: "POST", body: fd });
-      addMsg("user", stt.transcript);
-      await aiTurn(stt.transcript);
-    } catch (e) {
-      addMsg("user", "(erro STT: " + e.message + ")");
-    }
-  });
+  try {
+    await startRec(async (bytes, mime) => {
+      const fd = new FormData();
+      const ext = mime.includes("webm") ? "webm" : mime.includes("ogg") ? "ogg" : "wav";
+      fd.append("file", new Blob([bytes], { type: mime }), "audio." + ext);
+      try {
+        const stt = await api("/api/stt", { method: "POST", body: fd });
+        addMsg("user", stt.transcript);
+        await aiTurn(stt.transcript);
+      } catch (e) {
+        addMsg("ai", "⚠️ Transcrição indisponível no servidor: " + e.message);
+      }
+    });
+  } catch (e) {
+    addMsg("ai", "⚠️ Não consegui acessar o microfone: " + e.message);
+    $("conv-rec").disabled = false;
+    $("conv-stop").disabled = true;
+  }
 });
 
 $("conv-stop").addEventListener("click", () => {
-  mediaRecorder.stop();
+  if (convRecognition) {
+    convRecognition.stop();
+    return;
+  }
+  if (mediaRecorder && mediaRecorder.state !== "inactive") {
+    mediaRecorder.stop();
+  }
   $("conv-rec").disabled = false;
   $("conv-stop").disabled = true;
 });
