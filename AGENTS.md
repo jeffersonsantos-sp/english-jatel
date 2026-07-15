@@ -38,3 +38,9 @@ O Python deste SO é *externally managed* (PEP 668). `pip install` puro falha.
 ## Pipeline original do projeto (brainstore → skill)
 - `brainstore/ideias-*.md` (notas) → `scripts/convert_brainstore_to_prompt.py` → `prompts/<skill>/` (markdown + json).
 - `skills/english-flow/` tem o protótipo CLI original (`app.py` + `SKILL.md`).
+
+## Skills disponíveis (`.opencode/skills/`)
+- **`english-jatel`** — app full-stack (módulos Listen/Speak/Write/Read/Conversar/Grammar/MemHack, auth, conteúdo orientado a dados, CI/CD por tags).
+- **`english-jatel-render`** — deploy e operação no **Render** (Web Service Docker a partir do GitHub, ajustes de free tier: porta `$PORT`, voz via Web Speech API, keepalive, disco efêmero). Prompt base em `prompts/english-jatel-render/`.
+- **`mcp-integration`** — integração MCP.
+- Prompt de deploy Docker/Kubernetes: `prompts/english-jatel-deploy/`; doc em `docs/technical/deploy-kubernetes.md` e `docs/technical/deploy-render.md`.
