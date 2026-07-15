@@ -27,7 +27,7 @@ spec:
           # Slot ATIVO (producao atual). Para promover, atualize a imagem do
           # slot green, escale-o para 1, aguarde o health e vire o Service
           # (slot: blue -> green). Veja docs/technical/deploy-kubernetes.md.
-          image: updateinformatica/english-jatel:v1.5.0
+          image: updateinformatica/english-jatel:v1.6.0
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
@@ -35,6 +35,12 @@ spec:
           envFrom:
             - configMapRef:
                 name: english-jatel-config
+          env:
+            - name: OPENROUTER_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: english-jatel-secrets
+                  key: OPENROUTER_API_KEY
           # ADMIN_PASS/SESSION_SECRET usam defaults do app; OPENROUTER_API_KEY
           # deve ser injetado em runtime (ex.: kubectl set env).
           volumeMounts:
