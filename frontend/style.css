@@ -498,6 +498,20 @@ label.field-label {
     linear-gradient(180deg, var(--bg-1), var(--bg-0));
   backdrop-filter: blur(8px);
 }
+.login-wrap {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  min-height: 100vh;
+  background:
+    radial-gradient(1000px 600px at 20% 0%, rgba(124, 92, 255, 0.25), transparent 60%),
+    radial-gradient(900px 500px at 100% 100%, rgba(45, 212, 255, 0.18), transparent 55%),
+    linear-gradient(180deg, var(--bg-1), var(--bg-0));
+}
 .login-card {
   width: 100%;
   max-width: 360px;
