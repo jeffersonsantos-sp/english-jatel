@@ -4,7 +4,6 @@ const state = {
   level: "iniciante",
   persona: "cafe",
   voice: "",
-  category: "all",
   listenText: "",
   history: [],
 };
@@ -72,7 +71,6 @@ document.querySelectorAll(".tab").forEach((btn) => {
 
 $("level").addEventListener("change", (e) => (state.level = e.target.value));
 $("persona").addEventListener("change", (e) => (state.persona = e.target.value));
-$("category").addEventListener("change", (e) => (state.category = e.target.value));
 
 /* ---------- Vozes da IA ---------- */
 (async () => {
@@ -118,7 +116,7 @@ $("listen-play").addEventListener("click", async () => {
     const data = await api("/api/content", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ level: state.level, module: "listen", category: state.category }),
+      body: JSON.stringify({ level: state.level, module: "listen", category: "all" }),
     });
     state.listenText = data.text;
     $("listen-sentence").textContent = data.text;
@@ -329,7 +327,7 @@ $("read-load").addEventListener("click", async () => {
     const data = await api("/api/content", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ level: state.level, module: "read", category: state.category }),
+      body: JSON.stringify({ level: state.level, module: "read", category: "all" }),
     });
     $("read-text").textContent = data.text;
     const g = Object.entries(data.glossary || {})
