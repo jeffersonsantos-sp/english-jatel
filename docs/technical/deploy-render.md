@@ -102,8 +102,7 @@ curl -s -b cookies.txt -X POST https://english-jatel.onrender.com/api/converse \
   reinício/deploy, `users.json` e `memhack_progress.json` são recriados — contas de
   aluno e progresso do MemHack **resetam** (o `admin` volta ao seed). Para uso real:
   - **Render Starter** (~US$7/mo) com disco persistente, ou
-  - apontar os dados para um **Postgres externo** (Supabase/Neon), ou
-  - usar **Kubernetes** (PVC) / **Oracle Always Free** (`docker run -v`).
+  - usar **Kubernetes** (PVC) para persistência.
 - **Cold start** após dormir (mitigado pelo keepalive).
 - **~750 h/mês** de execução no free (suficiente p/ 1 serviço 24/7 com keepalive).
 

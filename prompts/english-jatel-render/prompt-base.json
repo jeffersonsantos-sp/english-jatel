@@ -26,7 +26,7 @@
   ],
   "free_tier_limits": [
     "Disco efemero: /app/data nao persiste; users.json/memhack_progress.json resetam a cada reinicio/deploy",
-    "Persistir dados: Render Starter (disco), Postgres externo (Supabase/Neon), Kubernetes (PVC) ou Oracle Always Free",
+    "Persistir dados: Render Starter (disco) ou Kubernetes (PVC)",
     "Cold start apos 15 min de inatividade (mitigado pelo keepalive)",
     "~750 h/mes de execucao no free"
   ],

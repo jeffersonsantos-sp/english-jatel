@@ -43,8 +43,8 @@ partir do GitHub), respeitando os ajustes ja feitos no repositorio para o free t
 
 ### Limitacoes do free tier (avisar sempre)
 - **Disco efemero**: `/app/data` nao persiste; `users.json`/`memhack_progress.json`
-  resetam a cada reinicio/deploy. Para persistir: Render Starter (disco), Postgres
-  externo (Supabase/Neon), Kubernetes (PVC) ou Oracle Always Free.
+  resetam a cada reinicio/deploy. Para persistir: Render Starter (disco) ou
+  Kubernetes (PVC).
 - **Cold start** apos 15 min de inatividade (mitigado pelo keepalive).
 - ~750 h/mes de execucao no free.
 
