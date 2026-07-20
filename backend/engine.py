@@ -1125,7 +1125,14 @@ def _run_async(coro):
         return ex.submit(lambda: asyncio.run(coro)).result()
 
 
+def _strip_emoji(text: str) -> str:
+    # Remove emojis/símbolos gráficos: o TTS (Edge/OpenAI) os "lê" em voz alta,
+    # o que atrapalha a fala. Mantém pontuação e texto normal.
+    return re.sub(r"[\U0001F000-\U0001FAFF\U00002600-\U000027BF\U0001F1E6-\U0001F1FF\uFE0F]", "", text).strip()
+
+
 def tts_bytes(text: str, voice: str = None) -> bytes:
+    text = _strip_emoji(text)
     voice = voice or EDGE_VOICE
     # 1) Edge TTS: vozes neurais de alta qualidade, sem chave (recomendado).
     try:
@@ -1200,7 +1207,7 @@ def stt_transcribe(audio_bytes: bytes, suffix: str = ".webm") -> str:
 
 def converse(level: str, persona: str, history: list, user_message: str) -> str:
     persona_desc = PERSONAS.get(persona, "amigo tomando cafe")
-    system = f"Voce e um professor de ingles atuando como {persona_desc}. Converse em ingles (nivel {level}), reaja, faca perguntas e corrija erros do aluno de forma gentil."
+    system = f"Voce e um professor de ingles atuando como {persona_desc}. Converse em ingles (nivel {level}), reaja, faca perguntas e corrija erros do aluno de forma gentil. Nunca use emojis na resposta."
     messages = [{"role": "system", "content": system}] + history + [{"role": "user", "content": user_message}]
     if API_KEY:
         try:
