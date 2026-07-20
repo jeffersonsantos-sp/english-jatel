@@ -42,6 +42,9 @@ então a API tem prioridade sobre os arquivos estáticos. `GET /` retorna `front
 - **TTS** (`engine.tts_bytes`): prioridade Edge TTS (vozes neurais, sem chave) →
   OpenAI `tts-1` → `pyttsx3` (offline). O frontend (`app.js` → `playTts`) reproduz
   o MP3 base64; se tudo falhar, usa `speechSynthesis` do navegador.
+- **Emojis no TTS**: o `tts_bytes` remove emojis do texto (`_strip_emoji`) antes da
+  síntese, e a conversa proíbe emojis na resposta (system prompt) — evita que o TTS
+  "leia" a descrição do emoji em voz alta.
 - **Voz**: `EDGE_TTS_VOICE` (env) ou parâmetro `voice` no `/api/tts`; UI tem seletor.
 
 ## Endpoints
@@ -98,7 +101,10 @@ persistido por usuário (multi-tenant).
 
 - Sem framework/build: HTML/CSS/JS puro.
 - `app.js` usa URLs relativas (`/api/...`), então funciona no mesmo servidor.
-- Gravação de voz: `MediaRecorder`; reprodução de TTS: `new Audio(data:...)`.
+- Gravação de voz (Conversar/Speak): usa a **Web Speech API** do navegador
+  (`window.SpeechRecognition`) no cliente — transcreve sem depender do backend; há
+  fallback para `MediaRecorder` + `/api/stt` (Whisper). Requer HTTPS e Chrome/Edge.
+- Reprodução de TTS: `new Audio(data:...)`.
 - Listen é ditado: o texto da frase fica oculto (`classList.add("hidden")`) até o
   "Verificar", quando é revelado (`classList.remove("hidden")`).
 

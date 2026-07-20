@@ -38,7 +38,7 @@ o slot indicado em `spec.selector.slot` (começa em `blue`).
 ```bash
 # 1. Aponte o green para a nova imagem e suba 1 réplica
 kubectl -n english-jatel set image deploy/english-jatel-green \
-  english-jatel=updateinformatica/english-jatel:v1.6.0
+  english-jatel=updateinformatica/english-jatel:v1.8.2
 kubectl -n english-jatel scale deploy/english-jatel-green --replicas=1
 
 # 2. Aguarde o green ficar Ready/saudavel
@@ -91,14 +91,15 @@ sobrescrever em produção.
 ### Habilitar o LLM (correção/conversa)
 
 Sem `OPENROUTER_API_KEY` no pod, o app roda em **modo demo** (TTS funciona; correção/conversa
-ficam heurísticas). Para ligar o LLM na implantação, injete a chave (ela já existe como
-GitHub secret, mas não chega sozinha ao cluster):
+ficam heurísticas). O deploy atual já injeta a chave via **Secret** `english-jatel-secrets`
+(referenciado por `secretKeyRef` nos Deployments blue/green). Para recriar/habilitar:
 
 ```bash
-kubectl -n english-jatel set env deploy/english-jatel OPENROUTER_API_KEY=<sua_key>
+kubectl -n english-jatel create secret generic english-jatel-secrets \
+  --from-literal=OPENROUTER_API_KEY=<sua_key>
 ```
 
-Ou crie um Secret e adicione um `secretRef` no container do Deployment (veja histórico do git).
+Alternativamente: `kubectl -n english-jatel set env deploy/english-jatel-blue OPENROUTER_API_KEY=<sua_key>`.
 Se o deploy for feito pelo pipeline (`cd.yaml`), prefira um step que crie o Secret a partir de
 `${{ secrets.OPENROUTER_API_KEY }}` em vez de comitar a chave.
 

@@ -46,7 +46,14 @@ via `docker compose` e manifestos Kubernetes em `k8s/`.
 - **Speak**: STT (gravacao) ou texto -> correcao + TTS da correcao.
 - **Write**: correcao de texto (ERRO -> CORRECAO -> REGRA -> SUGESTAO).
 - **Read**: texto + glossario + pergunta de compreensao.
-- **Conversar**: chat com IA (personas: cafe, entrevistador, negocios).
+- **Conversar**: chat com IA. **9 personas** (cafe, entrevistador, negocios,
+  viagens, familia, filmes, musicas, futebol, devops) — expostas em `/api/personas`.
+  - Gravacao de voz usa a **Web Speech API do navegador** (`window.SpeechRecognition`)
+    no cliente (o Whisper/PyTorch nao roda em hospedagem com pouca RAM); fallback p/ `/api/stt`.
+  - A IA **nao usa emojis** (system prompt proibe) e o `tts_bytes` remove emojis do texto
+    antes da sintese, para o TTS nao "ler" a descricao do emoji em voz alta.
+  - O seletor **Categoria** da barra foi removido (redundante com Persona); Listen/Read
+    usam `category: "all"`. O MemHack mantem seu proprio seletor de categoria.
 - **Grammar**: tópicos por nivel CEFR (A1-C2), com `structure`/`explanation`/
   `examples`; fonte `backend/grammar.json` (recarregavel via
   `POST /api/admin/reload-grammar`).

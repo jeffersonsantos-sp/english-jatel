@@ -18,6 +18,10 @@ partir do GitHub), respeitando os ajustes ja feitos no repositorio para o free t
 - **Voz no navegador**: gravacao (abas Conversar/Speak) usa a **Web Speech API**
   (`window.SpeechRecognition`) no cliente — Whisper nao roda no free tier (pouca RAM);
   ha fallback para `/api/stt`. Requer HTTPS (o Render fornece) e Chrome/Edge.
+- **Estado atual do app**: 9 personas na conversacao; respostas **sem emojis** (system
+  prompt proibe e `tts_bytes` remove emojis do texto, evitando que o TTS "leia" a
+  descricao do emoji); seletor **Categoria** removido da barra (redundante com Persona),
+  Listen/Read usam `category: "all"`. Versao atual: **v1.8.2**.
 - **Keepalive**: `.github/workflows/keepalive.yaml` pinga `/api/health` a cada 10 min
   (secret `RENDER_URL`) para o free nao dormir.
 
