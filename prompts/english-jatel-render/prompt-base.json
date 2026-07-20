@@ -8,6 +8,7 @@
     "port": "Render injeta $PORT; Dockerfile roda uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}",
     "health_check": "/api/health (status/llm/provider)",
     "voice": "gravacao (Conversar/Speak) usa Web Speech API do navegador (window.SpeechRecognition); Whisper nao roda no free tier; fallback /api/stt; requer HTTPS e Chrome/Edge",
+    "app_state": "9 personas na conversacao; respostas sem emojis (system prompt + tts_bytes remove emojis, evitando TTS ler descricao do emoji); seletor Categoria removido da barra (Listen/Read usam category all); versao atual v1.8.2",
     "keepalive": ".github/workflows/keepalive.yaml pinga /api/health a cada 10 min via secret RENDER_URL"
   },
   "workflow": [

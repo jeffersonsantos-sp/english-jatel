@@ -11,8 +11,13 @@ e **manifestos Kubernetes**, seguindo as convencoes ja estabelecidas neste repos
 ### Contexto tecnico (o que ja usamos)
 - **Dockerfile**: imagem `python:3.11-slim`, cria venv em `/opt/venv`, copia
   `backend/` e `frontend/`, roda como usuario nao-root (`appuser`, uid 10001), expoe
-  `8000`, healthcheck em `/api/health`, entrypoint `uvicorn main:app --host 0.0.0.0 --port 8000`.
-  O `.dockerignore` exclui `.env`, `data/`, `node_modules`, `*.md`, etc.
+  `8000`, healthcheck em `/api/health`, entrypoint `uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}`
+  (porta dinamica p/ Render, default 8000 no k8s/local). O `.dockerignore` exclui
+  `.env`, `data/`, `node_modules`, `*.md`, etc.
+- **App (estado atual)**: 9 personas na conversacao (cafe, entrevistador, negocios,
+  viagens, familia, filmes, musicas, futebol, devops); voz via **Web Speech API** no
+  navegador (sem Whisper no servidor); respostas sem emojis e TTS remove emojis;
+  seletor **Categoria** removido da barra (Listen/Read usam `category: "all"`).
 - **docker-compose.yaml**: service `english-flow`, build do contexto `.`, imagem
   `english-flow:latest`, porta `8000:8000`, env `EDGE_TTS_VOICE`/`ADMIN_USER`/
   `ADMIN_PASS`/`SESSION_SECRET`/`DATA_DIR`, `env_file: backend/.env`, volume nomeado

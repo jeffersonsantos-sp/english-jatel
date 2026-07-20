@@ -32,6 +32,12 @@ que o repositorio ja tem para rodar nele. Complementa a skill `english-jatel`
    Requer **Chrome/Edge** (Firefox nao suporta bem) e permissao de microfone.
 3. **Keepalive** (`.github/workflows/keepalive.yaml`): `curl` em `/api/health` a
    cada 10 min via secret `RENDER_URL`, evitando o "sleep" apos 15 min.
+4. **Sem emojis na conversa** (`backend/engine.py`): o `system prompt` proibe emojis
+   e `tts_bytes` remove emojis do texto antes da sintese — o TTS nao "le" a descricao
+   do emoji em voz alta.
+5. **Seletor Categoria removido** da barra (`frontend/`): redundante com Persona (9
+   personas ja cobrem os temas); Listen/Read usam `category: "all"`. MemHack mantem
+   seu proprio seletor. Versao atual: **v1.8.2**.
 
 ## Passo a passo (dashboard)
 1. **New + → Web Service** → repo `english-jatel`, branch `main`.

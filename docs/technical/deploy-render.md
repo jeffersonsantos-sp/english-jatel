@@ -43,6 +43,13 @@ do backend. Há fallback para `/api/stt` em navegadores sem suporte.
 > Requer **HTTPS** (o Render já fornece) e navegador compatível (**Chrome/Edge**;
 > Firefox não suporta bem). Ao gravar pela 1ª vez, aceite a permissão do microfone.
 
+### 4. Comportamentos recentes do app (v1.8.x)
+- **Sem emojis na conversa**: o `system prompt` proíbe emojis e o `tts_bytes` remove
+  emojis do texto antes da síntese — o TTS não "lê" a descrição do emoji em voz alta.
+- **Seletor Categoria removido** da barra (redundante com Persona — as 9 personas já
+  cobrem os temas). Listen/Read passam a usar `category: "all"`; o **MemHack** mantém
+  seu próprio seletor de categoria.
+
 ### 3. Keepalive (não deixar o free tier dormir)
 O free "dorme" após 15 min de inatividade (cold start de ~30-60 s). O workflow
 `.github/workflows/keepalive.yaml` faz `curl` em `/api/health` a cada 10 min.
