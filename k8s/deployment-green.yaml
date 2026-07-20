@@ -27,7 +27,7 @@ spec:
         fsGroup: 10001
       containers:
         - name: english-jatel
-          image: updateinformatica/english-jatel:v1.8.0
+          image: updateinformatica/english-jatel:v1.8.1
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
