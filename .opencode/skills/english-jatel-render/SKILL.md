@@ -86,9 +86,7 @@ curl -s -b c.txt -X POST https://english-jatel.onrender.com/api/converse \
 
 ### Persistencia real (alternativas)
 - **Render Starter** (~US$7/mo): disco persistente + sem dormir.
-- **Postgres externo** (Supabase/Neon free): migrar a camada de dados do `engine.py`.
 - **Kubernetes** (PVC) — ver skill `english-jatel-deploy` / `docs/technical/deploy-kubernetes.md`.
-- **Oracle Always Free** (`docker run -v`), opcionalmente com **Coolify** para deploy via GitHub.
 
 ## Alvos de deploy (mesma imagem)
 | Alvo | Persistencia | Como |
