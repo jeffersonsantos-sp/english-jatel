@@ -7,5 +7,7 @@ data:
   ADMIN_USER: "admin"
   EDGE_TTS_VOICE: "en-US-GuyNeural"
   DATA_DIR: "/app/data"
+  SEED_USERNAME: "jatel"
+  SEED_PASSWORD: "jatel2026"
   # Tag da imagem no Docker Hub. Use uma tag versionada (reprodutivel) em vez de :latest.
-  IMAGE: "updateinformatica/english-jatel:v1.8.2"
+  IMAGE: "updateinformatica/english-jatel:v1.8.4"
