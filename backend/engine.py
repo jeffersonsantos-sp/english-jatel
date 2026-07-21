@@ -1190,14 +1190,23 @@ def list_voices() -> list:
 
 def stt_transcribe(audio_bytes: bytes, suffix: str = ".webm") -> str:
     import speech_recognition as sr
+    import shutil
     r = sr.Recognizer()
     src = pathlib.Path(tempfile.mktemp(suffix=suffix))
     wav = src.with_suffix(".wav")
     src.write_bytes(audio_bytes)
     try:
         if suffix.lower() != ".wav":
+            ffmpeg_path = shutil.which("ffmpeg")
+            if not ffmpeg_path:
+                raise RuntimeError(
+                    "ffmpeg nao encontrado. Instale com:\n"
+                    "  Ubuntu/Debian: sudo apt install ffmpeg\n"
+                    "  macOS: brew install ffmpeg\n"
+                    "  Windows: https://ffmpeg.org/download.html"
+                )
             subprocess.run(
-                ["ffmpeg", "-y", "-i", str(src), "-ar", "16000", "-ac", "1",
+                [ffmpeg_path, "-y", "-i", str(src), "-ar", "16000", "-ac", "1",
                  "-f", "wav", str(wav)],
                 capture_output=True, check=True)
             audio_path = wav
@@ -1211,7 +1220,8 @@ def stt_transcribe(audio_bytes: bytes, suffix: str = ".webm") -> str:
     except sr.RequestError as e:
         raise RuntimeError(f"STT indisponivel (Google Speech API): {e}")
     except subprocess.CalledProcessError as e:
-        raise RuntimeError(f"STT: falha no ffmpeg: {e.stderr.decode(errors='replace')[:200]}")
+        msg = e.stderr.decode(errors="replace")[:200] if e.stderr else str(e)
+        raise RuntimeError(f"STT: falha no ffmpeg: {msg}")
     finally:
         src.unlink(missing_ok=True)
         wav.unlink(missing_ok=True)

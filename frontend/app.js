@@ -226,7 +226,7 @@ $("speak-rec").addEventListener("click", async () => {
         }
       } catch (e) {
         console.error("STT error:", e);
-        $("speak-transcript").textContent = "Erro STT: " + (e.message || e) + "\n(Digite abaixo para corrigir manualmente.)";
+        $("speak-transcript").textContent = "🎤 (erro: " + (e.message || e) + ")\n(Digite abaixo para corrigir manualmente.)";
       }
     });
   } catch (e) {
@@ -531,7 +531,7 @@ $("conv-rec").addEventListener("click", async () => {
         }
       } catch (e) {
         console.error("STT error:", e);
-        addMsg("user", "(erro STT: " + (e.message || e) + ")");
+        addMsg("user", "🎤 (erro: " + (e.message || e) + ")");
       }
     });
   } catch (e) {
