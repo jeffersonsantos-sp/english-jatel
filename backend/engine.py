@@ -1210,6 +1210,8 @@ def stt_transcribe(audio_bytes: bytes, suffix: str = ".webm") -> str:
         return ""
     except sr.RequestError as e:
         raise RuntimeError(f"STT indisponivel (Google Speech API): {e}")
+    except subprocess.CalledProcessError as e:
+        raise RuntimeError(f"STT: falha no ffmpeg: {e.stderr.decode(errors='replace')[:200]}")
     finally:
         src.unlink(missing_ok=True)
         wav.unlink(missing_ok=True)

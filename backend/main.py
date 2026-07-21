@@ -278,10 +278,14 @@ async def tts(req: TtsReq):
 async def stt(file: UploadFile = File(...)):
     data = await file.read()
     suffix = "." + (file.filename.split(".")[-1] if file.filename and "." in file.filename else "webm")
+    import traceback
     try:
         transcript = engine.stt_transcribe(data, suffix)
     except RuntimeError as e:
         raise HTTPException(status_code=501, detail=str(e))
+    except Exception as e:
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"STT interno: {type(e).__name__}: {e}")
     return {"transcript": transcript}
 
 
