@@ -1,11 +1,10 @@
 const API = "";
 
 const state = {
-  lang: "en",
   level: "iniciante",
   persona: "cafe",
-  _applyingLang: false,
   voice: "",
+  category: "all",
   listenText: "",
   history: [],
 };
@@ -13,7 +12,8 @@ const state = {
 const $ = (id) => document.getElementById(id);
 
 function showError(el, msg) {
-  if (el) el.textContent = "⚠️ " + msg;
+  if (el) el.textContent = "⚠️ Erro: " + msg;
+  console.error(msg);
 }
 
 async function api(path, opts) {
@@ -27,9 +27,8 @@ async function api(path, opts) {
 
 function browserSpeak(text) {
   try {
-    const sttLang = { en: "en-US", es: "es-ES", fr: "fr-FR" }[state.lang] || "en-US";
     const u = new SpeechSynthesisUtterance(text);
-    u.lang = sttLang;
+    u.lang = "en-US";
     u.rate = 0.95;
     speechSynthesis.cancel();
     speechSynthesis.speak(u);
@@ -45,7 +44,7 @@ async function playTts(text) {
     const data = await api("/api/tts", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text, level: state.level, voice: state.voice, lang: state.lang }),
+      body: JSON.stringify({ text, level: state.level, voice: state.voice }),
     });
     if (!ttsAudio) ttsAudio = new Audio();
     ttsAudio.pause();
@@ -73,81 +72,27 @@ document.querySelectorAll(".tab").forEach((btn) => {
 
 $("level").addEventListener("change", (e) => (state.level = e.target.value));
 $("persona").addEventListener("change", (e) => (state.persona = e.target.value));
+$("category").addEventListener("change", (e) => (state.category = e.target.value));
 
 /* ---------- Vozes da IA ---------- */
-async function loadVoices() {
+(async () => {
   try {
-    const data = await api("/api/voices?lang=" + state.lang);
+    const data = await api("/api/voices");
     const sel = $("voice");
     sel.innerHTML = "";
     data.voices.forEach((v) => {
       const o = document.createElement("option");
       o.value = v.id;
       o.textContent = v.name;
-      if (!sel.options.length) o.selected = true;
+      if (v.id === "en-US-JennyNeural") o.selected = true;
       sel.appendChild(o);
     });
     state.voice = sel.value;
   } catch (e) {
     console.warn("voices indisponivel:", e.message);
   }
-}
-loadVoices();
+})();
 $("voice").addEventListener("change", (e) => (state.voice = e.target.value));
-
-/* ---------- Idioma ---------- */
-const savedLang = localStorage.getItem("jatel_lang");
-if (savedLang) state.lang = savedLang;
-window.__lang = state.lang;
-$("lang").value = state.lang;
-// Apply initial translations
-applyTranslations();
-const hintKey = "speak_hint_" + state.lang;
-$("speak-hint-text").textContent = __t(hintKey);
-const convKey = "converse_subtitle_" + state.lang;
-$("converse-subtitle").textContent = __t(convKey);
-const gramKey = "grammar_subtitle_" + state.lang;
-$("grammar-subtitle").textContent = __t(gramKey);
-$("lang").addEventListener("change", (e) => {
-  if (state._applyingLang) return;
-  state.lang = e.target.value;
-  window.__lang = state.lang;
-  localStorage.setItem("jatel_lang", state.lang);
-  state.history = [];
-  $("chat").innerHTML = "";
-  // Update speak hint per language
-  const hintKey = "speak_hint_" + state.lang;
-  $("speak-hint-text").textContent = __t(hintKey);
-  // Update converse subtitle per language
-  const convKey = "converse_subtitle_" + state.lang;
-  $("converse-subtitle").textContent = __t(convKey);
-  // Update grammar subtitle per language
-  const gramKey = "grammar_subtitle_" + state.lang;
-  $("grammar-subtitle").textContent = __t(gramKey);
-  loadVoices();
-  applyTranslations();
-  memhackLoadCategories();
-  const activeTab = document.querySelector(".tab.active");
-  if (activeTab && activeTab.dataset.tab === "grammar") loadGrammar();
-});
-
-/* ---------- MemHack carregar categorias (separado para recarga) ---------- */
-async function memhackLoadCategories() {
-  try {
-    const data = await api("/api/memhack/categories?lang=" + state.lang);
-    const sel = $("memhack-category");
-    sel.innerHTML = "";
-    data.categories.forEach((c) => {
-      const o = document.createElement("option");
-      o.value = c.id;
-      o.textContent = c.label;
-      sel.appendChild(o);
-    });
-    memhackLoadNext();
-  } catch (e) {
-    console.warn("memhack/categories indisponivel:", e.message);
-  }
-}
 
 /* ---------- Health ---------- */
 (async () => {
@@ -173,7 +118,7 @@ $("listen-play").addEventListener("click", async () => {
     const data = await api("/api/content", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ level: state.level, module: "listen", category: "all", lang: state.lang }),
+      body: JSON.stringify({ level: state.level, module: "listen", category: state.category }),
     });
     state.listenText = data.text;
     $("listen-sentence").textContent = data.text;
@@ -216,34 +161,32 @@ $("listen-check").addEventListener("click", () => {
 });
 
 /* ---------- Speak ---------- */
-let mediaRecorder, chunks;
+let mediaRecorder, chunks, mediaStream;
 state.speakTranscript = "";
 state.speakCorrection = "";
 
 async function startRec(onStop) {
-  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-  mediaRecorder = new MediaRecorder(stream);
+  if (mediaRecorder && mediaRecorder.state === "recording") {
+    mediaRecorder.stop();
+  }
+  mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  const mime = MediaRecorder.isTypeSupported("audio/webm;codecs=opus")
+    ? "audio/webm;codecs=opus"
+    : MediaRecorder.isTypeSupported("audio/webm")
+    ? "audio/webm"
+    : "audio/ogg;codecs=opus";
+  mediaRecorder = new MediaRecorder(mediaStream, mime ? { mimeType: mime } : undefined);
   chunks = [];
-  mediaRecorder.ondataavailable = (e) => chunks.push(e.data);
+  mediaRecorder.ondataavailable = (e) => {
+    if (e.data.size > 0) chunks.push(e.data);
+  };
   mediaRecorder.onstop = () => {
-    const blob = new Blob(chunks, { type: mediaRecorder.mimeType });
+    if (mediaStream) mediaStream.getTracks().forEach((t) => t.stop());
+    if (chunks.length === 0) return;
+    const blob = new Blob(chunks, { type: mediaRecorder.mimeType || "audio/webm" });
     blob.arrayBuffer().then((buf) => onStop(new Uint8Array(buf), blob.type));
-    // Libera o microfone.
-    if (mediaRecorder.stream) mediaRecorder.stream.getTracks().forEach((t) => t.stop());
   };
   mediaRecorder.start();
-}
-
-// Reconhecimento de voz do navegador (Web Speech API). Roda no cliente, sem
-// depender do backend/Whisper — ideal para hospedagem com pouca RAM.
-function getSpeechRecognition() {
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SR) return null;
-  const r = new SR();
-  r.lang = { en: "en-US", es: "es-ES", fr: "fr-FR" }[state.lang] || "en-US";
-  r.interimResults = false;
-  r.maxAlternatives = 1;
-  return r;
 }
 
 function setSpeakTranscript(text) {
@@ -258,84 +201,47 @@ function setSpeakCorrection(text) {
   $("speak-play-correction").disabled = !text;
 }
 
-let speakRecognition = null;
-
-async function speakHandleTranscript(text) {
-  text = (text || "").trim();
-  if (!text) return;
-  setSpeakTranscript(text);
-  try {
-    const corr = await api("/api/correct", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text, level: state.level, lang: state.lang }),
-    });
-    setSpeakCorrection(corr.correction);
-  } catch (e) {
-    setSpeakCorrection("Erro ao corrigir: " + e.message);
-  }
-}
-
 $("speak-rec").addEventListener("click", async () => {
-  // 1) Preferencial: reconhecimento de voz do navegador (não usa backend).
-  const rec = getSpeechRecognition();
-  if (rec) {
-    speakRecognition = rec;
-    $("speak-rec").disabled = true;
-    $("speak-stop").disabled = false;
-    rec.onresult = (e) => speakHandleTranscript(e.results[0][0].transcript);
-    rec.onerror = (e) => {
-      const map = {
-        "not-allowed": "permissão do microfone negada",
-        "no-speech": "não detectei sua fala, tente de novo",
-        "audio-capture": "microfone não encontrado",
-      };
-      $("speak-transcript").textContent = "⚠️ " + (map[e.error] || "erro no reconhecimento: " + e.error);
-    };
-    rec.onend = () => {
-      $("speak-rec").disabled = false;
-      $("speak-stop").disabled = true;
-      speakRecognition = null;
-    };
-    try {
-      rec.start();
-    } catch (e) {
-      $("speak-transcript").textContent = "⚠️ Não foi possível iniciar a gravação: " + e.message;
-      rec.onend();
-    }
-    return;
-  }
-  // 2) Fallback: grava e envia para o backend (/api/stt).
   $("speak-rec").disabled = true;
+  $("speak-rec").textContent = "🎤 Gravando...";
   $("speak-stop").disabled = false;
   try {
     await startRec(async (bytes, mime) => {
+      $("speak-rec").disabled = false;
+      $("speak-rec").textContent = "🎤 Gravar";
+      $("speak-stop").disabled = true;
       const fd = new FormData();
       const ext = mime.includes("webm") ? "webm" : mime.includes("ogg") ? "ogg" : "wav";
       fd.append("file", new Blob([bytes], { type: mime }), "audio." + ext);
       try {
         const stt = await api("/api/stt", { method: "POST", body: fd });
-        await speakHandleTranscript(stt.transcript);
+        setSpeakTranscript(stt.transcript || "(audio vazio)");
+        if (stt.transcript) {
+          const corr = await api("/api/correct", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ text: stt.transcript, level: state.level }),
+          });
+          setSpeakCorrection(corr.correction);
+        }
       } catch (e) {
-        $("speak-transcript").textContent = "Transcrição indisponível no servidor: " + e.message + "\n(Digite abaixo para corrigir manualmente.)";
+        $("speak-transcript").textContent = "Erro STT: " + e.message + "\n(Digite abaixo para corrigir manualmente.)";
       }
     });
   } catch (e) {
-    $("speak-transcript").textContent = "⚠️ Não consegui acessar o microfone: " + e.message;
     $("speak-rec").disabled = false;
+    $("speak-rec").textContent = "🎤 Gravar";
     $("speak-stop").disabled = true;
+    $("speak-transcript").textContent = "Erro microfone: " + e.message;
   }
 });
 
 $("speak-stop").addEventListener("click", () => {
-  if (speakRecognition) {
-    speakRecognition.stop();
-    return;
-  }
-  if (mediaRecorder && mediaRecorder.state !== "inactive") {
+  if (mediaRecorder && mediaRecorder.state === "recording") {
     mediaRecorder.stop();
   }
   $("speak-rec").disabled = false;
+  $("speak-rec").textContent = "🎤 Gravar";
   $("speak-stop").disabled = true;
 });
 
@@ -354,7 +260,7 @@ $("speak-correct-text").addEventListener("click", async () => {
     const corr = await api("/api/correct", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text, level: state.level, lang: state.lang }),
+      body: JSON.stringify({ text, level: state.level }),
     });
     setSpeakCorrection(corr.correction);
   } catch (e) {
@@ -370,7 +276,7 @@ $("write-check").addEventListener("click", async () => {
     const data = await api("/api/correct", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text, level: state.level, lang: state.lang }),
+      body: JSON.stringify({ text, level: state.level }),
     });
     $("write-result").textContent = data.correction;
   } catch (e) {
@@ -384,13 +290,13 @@ $("read-load").addEventListener("click", async () => {
     const data = await api("/api/content", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ level: state.level, module: "read", category: "all", lang: state.lang }),
+      body: JSON.stringify({ level: state.level, module: "read", category: state.category }),
     });
     $("read-text").textContent = data.text;
     const g = Object.entries(data.glossary || {})
       .map(([k, v]) => `${k}: ${v}`)
       .join("  |  ");
-    $("read-glossary").textContent = __t("glossary_label") + " " + g;
+    $("read-glossary").textContent = "Glossário: " + g;
   } catch (e) {
     showError($("read-glossary"), e.message);
   }
@@ -405,7 +311,7 @@ $("read-check").addEventListener("click", async () => {
     const data = await api("/api/correct", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text, level: state.level, lang: state.lang }),
+      body: JSON.stringify({ text, level: state.level }),
     });
     $("read-result").textContent = data.correction;
   } catch (e) {
@@ -430,7 +336,7 @@ $("read-check").addEventListener("click", async () => {
   }
 })();
 
-function grammarExampleSentence(example) {
+function grammarEnglishPart(example) {
   return example.split(" — ")[0].trim();
 }
 
@@ -440,7 +346,7 @@ async function loadGrammar() {
     const data = await api("/api/grammar", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ level: $("grammar-level").value, lang: state.lang }),
+      body: JSON.stringify({ level: $("grammar-level").value }),
     });
     $("grammar-topic").textContent = data.topic || "";
     $("grammar-structure").textContent = data.structure || "";
@@ -454,8 +360,8 @@ async function loadGrammar() {
       const btn = document.createElement("button");
       btn.className = "btn ghost grammar-play";
       btn.textContent = "🔊";
-      btn.title = __t("grammar_listen_label", { lang: __t("grammar_lang_" + state.lang) });
-      btn.addEventListener("click", () => playTts(grammarExampleSentence(ex)));
+      btn.title = "Ouvir frase em inglês";
+      btn.addEventListener("click", () => playTts(grammarEnglishPart(ex)));
       li.appendChild(span);
       li.appendChild(btn);
       list.appendChild(li);
@@ -470,7 +376,22 @@ $("grammar-next").addEventListener("click", loadGrammar);
 $("grammar-level").addEventListener("change", loadGrammar);
 
 /* ---------- MemHack (SRS) ---------- */
-memhackLoadCategories();
+(async () => {
+  try {
+    const data = await api("/api/memhack/categories");
+    const sel = $("memhack-category");
+    sel.innerHTML = "";
+    data.categories.forEach((c) => {
+      const o = document.createElement("option");
+      o.value = c.id;
+      o.textContent = c.label;
+      sel.appendChild(o);
+    });
+    memhackLoadNext();
+  } catch (e) {
+    console.warn("memhack/categories indisponivel:", e.message);
+  }
+})();
 
 let memhackCurrent = null;
 
@@ -483,7 +404,7 @@ async function memhackLoadNext() {
     const data = await api("/api/memhack/next", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ category, lang: state.lang }),
+      body: JSON.stringify({ category }),
     });
     memhackCurrent = data.done ? null : data.phrase;
     if (data.done) {
@@ -494,8 +415,7 @@ async function memhackLoadNext() {
       return;
     }
     document.querySelectorAll(".memhack-rating button").forEach((b) => (b.disabled = false));
-    const targetKey = { en: "en", es: "es", fr: "fr" }[state.lang] || "en";
-    $("memhack-phrase").textContent = data.phrase[targetKey];
+    $("memhack-phrase").textContent = data.phrase.en;
     $("memhack-pt").textContent = data.phrase.pt;
     const studied = data.studied || 0;
     const total = data.total || 0;
@@ -507,10 +427,7 @@ async function memhackLoadNext() {
 
 $("memhack-category").addEventListener("change", memhackLoadNext);
 $("memhack-play").addEventListener("click", () => {
-  if (memhackCurrent) {
-    const targetKey = { en: "en", es: "es", fr: "fr" }[state.lang] || "en";
-    playTts(memhackCurrent[targetKey]);
-  }
+  if (memhackCurrent) playTts(memhackCurrent.en);
 });
 $("memhack-reveal").addEventListener("click", () => {
   $("memhack-pt").classList.toggle("hidden");
@@ -528,25 +445,23 @@ document.querySelectorAll(".memhack-rating button").forEach((btn) => {
           category,
           phrase_id: memhackCurrent.id,
           difficulty: btn.dataset.diff,
-          lang: state.lang,
         }),
       });
       memhackCurrent = data.done ? null : data.phrase;
       if (data.done) {
         $("memhack-progress").textContent = "";
-      $("memhack-phrase").textContent = data.message || __t("memhack_done");
+        $("memhack-phrase").textContent = data.message || "Concluído por enquanto.";
         $("memhack-pt").textContent = "";
         document.querySelectorAll(".memhack-rating button").forEach((b) => (b.disabled = true));
-        $("memhack-msg").textContent = "⏱️ " + __t("memhack_done");
+        $("memhack-msg").textContent = "⏱️ Revisão agendada. Volte mais tarde!";
         return;
       }
       $("memhack-pt").classList.add("hidden");
-      const targetKey = { en: "en", es: "es", fr: "fr" }[state.lang] || "en";
-      $("memhack-phrase").textContent = data.phrase[targetKey];
+      $("memhack-phrase").textContent = data.phrase.en;
       $("memhack-pt").textContent = data.phrase.pt;
       const studied = data.studied || 0;
       const total = data.total || 0;
-    $("memhack-progress").textContent = __t("memhack_progress", { studied, total });
+      $("memhack-progress").textContent = `Progresso: ${studied}/${total} frases em treino`;
     } catch (e) {
       showError($("memhack-msg"), e.message);
     }
@@ -572,7 +487,6 @@ async function aiTurn(message) {
         persona: state.persona,
         history: state.history,
         message,
-        lang: state.lang,
       }),
     });
     state.history.push({ role: "user", content: message });
@@ -594,81 +508,43 @@ $("conv-send").addEventListener("click", () => {
   aiTurn(text);
 });
 
-let convRecognition = null;
-
 $("conv-rec").addEventListener("click", async () => {
-  // 1) Preferencial: reconhecimento de voz do navegador (não usa backend).
-  const rec = getSpeechRecognition();
-  if (rec) {
-    convRecognition = rec;
-    $("conv-rec").disabled = true;
-    $("conv-stop").disabled = false;
-    rec.continuous = true;
-    let convAccum = "";
-    rec.onresult = (e) => {
-      const text = (e.results[0][0].transcript || "").trim();
-      if (text) {
-        convAccum += (convAccum ? " " : "") + text;
-      }
-    };
-    rec.onerror = (e) => {
-      const map = {
-        "not-allowed": "permissão do microfone negada",
-        "no-speech": "não detectei sua fala, tente de novo",
-        "audio-capture": "microfone não encontrado",
-      };
-      addMsg("ai", "⚠️ " + (map[e.error] || "erro no reconhecimento de voz: " + e.error));
-    };
-    rec.onend = () => {
-      $("conv-rec").disabled = false;
-      $("conv-stop").disabled = true;
-      convRecognition = null;
-      const finalText = convAccum.trim();
-      convAccum = "";
-      if (finalText) {
-        addMsg("user", finalText);
-        aiTurn(finalText);
-      }
-    };
-    try {
-      rec.start();
-    } catch (e) {
-      addMsg("ai", "⚠️ Não foi possível iniciar a gravação: " + e.message);
-      rec.onend();
-    }
-    return;
-  }
-  // 2) Fallback: grava e envia para o backend (/api/stt).
   $("conv-rec").disabled = true;
+  $("conv-rec").textContent = "🎤 Gravando...";
   $("conv-stop").disabled = false;
   try {
     await startRec(async (bytes, mime) => {
+      $("conv-rec").disabled = false;
+      $("conv-rec").textContent = "🎤 Gravar";
+      $("conv-stop").disabled = true;
       const fd = new FormData();
       const ext = mime.includes("webm") ? "webm" : mime.includes("ogg") ? "ogg" : "wav";
       fd.append("file", new Blob([bytes], { type: mime }), "audio." + ext);
       try {
         const stt = await api("/api/stt", { method: "POST", body: fd });
-        addMsg("user", stt.transcript);
-        await aiTurn(stt.transcript);
+        if (stt.transcript) {
+          addMsg("user", stt.transcript);
+          await aiTurn(stt.transcript);
+        } else {
+          addMsg("user", "(STT: audio vazio ou inaudivel)");
+        }
       } catch (e) {
-        addMsg("ai", "⚠️ Transcrição indisponível no servidor: " + e.message);
+        addMsg("user", "(erro STT: " + e.message + ")");
       }
     });
   } catch (e) {
-    addMsg("ai", "⚠️ Não consegui acessar o microfone: " + e.message);
     $("conv-rec").disabled = false;
+    $("conv-rec").textContent = "🎤 Gravar";
     $("conv-stop").disabled = true;
+    addMsg("user", "(erro microfone: " + e.message + ")");
   }
 });
 
 $("conv-stop").addEventListener("click", () => {
-  if (convRecognition) {
-    convRecognition.stop();
-    return;
-  }
-  if (mediaRecorder && mediaRecorder.state !== "inactive") {
+  if (mediaRecorder && mediaRecorder.state === "recording") {
     mediaRecorder.stop();
   }
   $("conv-rec").disabled = false;
+  $("conv-rec").textContent = "🎤 Gravar";
   $("conv-stop").disabled = true;
 });

@@ -1,9 +1,7 @@
-# English JATEL — App de ensino de inglês, espanhol e francês
+# English Flow — App de ensino de inglês
 
 Treina as 4 habilidades (**listen, speak, write, read**) com correções e
 **conversação por IA** (a IA fala e você fala com ela).
-Seletor de idioma no topo alterna entre **en** (Inglês), **es** (Espanhol),
-**fr** (Francês).
 
 ## Arquitetura
 - `backend/` — API FastAPI (`engine.py` + `main.py`)
@@ -58,14 +56,13 @@ endpoint `/api/stt` (opcional).
 | Método | Rota | Descrição |
 |--------|------|-----------|
 | GET | `/api/health` | status + se LLM está ativo |
-| GET | `/api/levels` | níveis disponíveis (por `lang`) |
+| GET | `/api/levels` | níveis disponíveis |
 | GET | `/api/personas` | personas de conversação |
-| GET | `/api/languages` | lista idiomas disponíveis |
-| POST | `/api/content` | texto/glossário por nível+módulo+`lang` |
-| POST | `/api/correct` | corrige texto (erro→correção→regra→sugestão, por `lang`) |
-| POST | `/api/tts` | gera áudio (base64) da frase (por `lang`) |
+| POST | `/api/content` | texto/glossário por nível+módulo |
+| POST | `/api/correct` | corrige texto (erro→correção→regra→sugestão) |
+| POST | `/api/tts` | gera áudio (base64) da frase |
 | POST | `/api/stt` | transcreve áudio enviado |
-| POST | `/api/converse` | turno de conversa com a IA (por `lang`) |
+| POST | `/api/converse` | turno de conversa com a IA |
 
 ## Próximos passos sugeridos
 - Histórico de erros recorrentes + revisão espaçada.
