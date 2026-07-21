@@ -1,0 +1,231 @@
+{
+  "levels": ["A1", "A2", "B1", "B2", "C1", "C2"],
+  "grammar": {
+    "A1": [
+      {
+        "topic": "Verbes être et avoir",
+        "structure": "être: suis/es/est/sommes/êtes/sont; avoir: ai/as/a/avons/avez/ont",
+        "explanation": "Les verbes 'être' (ser/estar) et 'avoir' (ter) sont les verbes les plus importants en français. Ils servent aussi d'auxiliaires pour les temps composés.",
+        "examples": [
+          "Je suis brésilien. — Eu sou brasileiro.",
+          "Tu es fatigué ? — Você está cansado?",
+          "Il a 25 ans. — Ele tem 25 anos.",
+          "Nous avons une maison. — Nós temos uma casa.",
+          "Elles sont heureuses. — Elas estão felizes.",
+          "C'est un bon livre. — É um bom livro."
+        ]
+      },
+      {
+        "topic": "Articles définis et indéfinis",
+        "structure": "le/la/l'/les (définis); un/une/des (indéfinis)",
+        "explanation": "Les articles s'accordent en genre et en nombre avec le nom. 'Le' pour masculin singulier, 'la' pour féminin, 'l'' devant voyelle, 'les' pour pluriel.",
+        "examples": [
+          "Le chat dort. — O gato dorme.",
+          "La maison est grande. — A casa é grande.",
+          "L'enfant joue. — A criança brinca.",
+          "Un chien aboie. — Um cachorro late.",
+          "Des fleurs magnifiques. — Umas flores magníficas."
+        ]
+      },
+      {
+        "topic": "Présent de l'indicatif (verbes réguliers)",
+        "structure": "Radical + -e/-es/-e/-ons/-ez/-ent (ER); -s/-s/-t/-ssons/-ssez/-ssent (IR)",
+        "explanation": "Les verbes du 1er groupe (-er) et du 2e groupe (-ir) sont réguliers au présent. Les terminaisons changent selon le groupe.",
+        "examples": [
+          "Je parle français. — Eu falo francês.",
+          "Tu manges du pain. — Você come pão.",
+          "Il habite à Paris. — Ele mora em Paris.",
+          "Nous finissons le travail. — Nós terminamos o trabalho.",
+          "Ils vendent leur voiture. — Eles vendem seu carro.",
+          "Vous chantez bien. — Vocês cantam bem."
+        ]
+      }
+    ],
+    "A2": [
+      {
+        "topic": "Passé composé",
+        "structure": "avoir/être (présent) + participe passé (-é, -i, -u, etc.)",
+        "explanation": "Le passé composé exprime une action passée achevée. La plupart des verbes utilisent 'avoir', quelques-uns (venir, aller, naître, mourir, etc.) utilisent 'être'.",
+        "examples": [
+          "J'ai mangé une pizza. — Eu comi uma pizza.",
+          "Tu as vu ce film ? — Você viu esse filme?",
+          "Elle est allée à Lyon. — Ela foi a Lyon.",
+          "Nous avons fini. — Nós terminamos.",
+          "Ils sont arrivés hier. — Eles chegaram ontem."
+        ]
+      },
+      {
+        "topic": "Verbes pronominaux",
+        "structure": "me/te/se/nous/vous/se + verbe conjugué",
+        "explanation": "Les verbes pronominaux indiquent que l'action est faite par le sujet sur lui-même. Le pronom réfléchi s'accorde avec la personne.",
+        "examples": [
+          "Je me lève tôt. — Eu me levanto cedo.",
+          "Comment tu t'appelles ? — Como você se chama?",
+          "Il se lave les mains. — Ele lava as mãos.",
+          "Nous nous couchons tard. — Nós nos deitamos tarde.",
+          "Ils se promènent. — Eles passeiam."
+        ]
+      },
+      {
+        "topic": "La négation",
+        "structure": "ne ... pas / plus / jamais / rien / personne / aucun",
+        "explanation": "La négation en français encadre le verbe : 'ne' avant le verbe, 'pas' (ou autre mot négatif) après. 'Ne' devient 'n'' devant une voyelle.",
+        "examples": [
+          "Je ne parle pas espagnol. — Eu não falo espanhol.",
+          "Il ne fume plus. — Ele não fuma mais.",
+          "Elle n'a jamais voyagé. — Ela nunca viajou.",
+          "Je ne vois rien. — Não vejo nada.",
+          "Personne n'est venu. — Ninguém veio.",
+          "Je n'ai aucun doute. — Não tenho nenhuma dúvida."
+        ]
+      }
+    ],
+    "B1": [
+      {
+        "topic": "Imparfait",
+        "structure": "Radical (1ère pers. plur. présent) + -ais/-ais/-ait/-ions/-iez/-aient",
+        "explanation": "L'imparfait décrit des actions passées habituelles, des états, des contextes ou des actions en cours dans le passé. Correspond au pretérito imperfeito en portugais.",
+        "examples": [
+          "Quand j'étais enfant, je jouais au parc. — Quando eu era criança, brincava no parque.",
+          "Il faisait beau. — Fazia bom tempo.",
+          "Nous habitions à Paris. — Nós morávamos em Paris.",
+          "Pendant qu'elle lisait, il cuisinait. — Enquanto ela lia, ele cozinhava.",
+          "C'était une belle journée. — Era um belo dia."
+        ]
+      },
+      {
+        "topic": "Futur simple",
+        "structure": "Infinitif + -ai/-as/-a/-ons/-ez/-ont",
+        "explanation": "Le futur simple exprime une action à venir. La plupart des verbes ajoutent les terminaisons à l'infinitif. Certains verbes ont un radical irrégulier.",
+        "examples": [
+          "Je voyagerai en France l'année prochaine. — Viajarei para a França no ano que vem.",
+          "Tu parleras français couramment. — Você falará francês fluentemente.",
+          "Il viendra demain. — Ele virá amanhã.",
+          "Nous finirons le projet. — Nós terminaremos o projeto."
+        ]
+      },
+      {
+        "topic": "Comparatifs et superlatifs",
+        "structure": "plus/moins/aussi + adjectif + que; le/la/les plus/moins + adjectif",
+        "explanation": "Le comparatif compare deux éléments. Le superlatif exprime le degré maximal ou minimal d'une qualité.",
+        "examples": [
+          "Marie est plus grande qu'Anne. — Maria é mais alta que Ana.",
+          "Ce livre est aussi intéressant que celui-ci. — Este livro é tão interessante quanto este.",
+          "C'est le meilleur restaurant de la ville. — É o melhor restaurante da cidade.",
+          "Elle parle plus vite que moi. — Ela fala mais rápido que eu."
+        ]
+      }
+    ],
+    "B2": [
+      {
+        "topic": "Subjonctif présent",
+        "structure": "Radical (3e pers. plur. présent) + -e/-es/-e/-ions/-iez/-ent",
+        "explanation": "Le subjonctif exprime le doute, le désir, l'émotion, la nécessité ou l'incertitude. Il est utilisé dans des propositions subordonnées après certains verbes et locutions.",
+        "examples": [
+          "Je veux que tu parles avec lui. — Quero que você fale com ele.",
+          "Il faut que nous partions. — Precisamos partir.",
+          "Bien qu'il soit fatigué, il travaille. — Embora esteja cansado, ele trabalha.",
+          "J'aimerais que vous veniez. — Gostaria que vocês viessem.",
+          "Il est important que tu saches la vérité. — É importante que você saiba a verdade."
+        ]
+      },
+      {
+        "topic": "Conditionnel présent",
+        "structure": "Infinitif + -ais/-ais/-ait/-ions/-iez/-aient",
+        "explanation": "Le conditionnel exprime une action hypothétique, un souhait, une demande polie ou un futur dans le passé. Ses terminaisons sont les mêmes que l'imparfait.",
+        "examples": [
+          "Je voudrais un café, s'il vous plaît. — Gostaria de um café, por favor.",
+          "Tu pourrais m'aider ? — Você poderia me ajudar?",
+          "Il a dit qu'il viendrait. — Ele disse que viria.",
+          "Nous achèterions une maison si nous avions de l'argent. — Compraríamos uma casa se tivéssemos dinheiro.",
+          "Ce serait merveilleux ! — Seria maravilhoso!"
+        ]
+      },
+      {
+        "topic": "Pronoms COD et COI",
+        "structure": "me/te/le/la/nous/vous/les (COD); me/te/lui/nous/vous/leur (COI)",
+        "explanation": "Les pronoms remplacent le complément d'objet direct (COD) ou indirect (COI) pour éviter la répétition. Ils se placent avant le verbe aux temps simples.",
+        "examples": [
+          "Je le vois demain. — Eu o vejo amanhã.",
+          "Je t'ai acheté un cadeau. — Comprei um presente para você.",
+          "Lui as-tu donné le livre ? — Você deu o livro a ele/ela?",
+          "Il nous a appelés. — Ele nos chamou.",
+          "Je leur ai expliqué. — Expliquei a eles."
+        ]
+      }
+    ],
+    "C1": [
+      {
+        "topic": "Subjonctif passé",
+        "structure": "avoir/être (subjonctif présent) + participe passé",
+        "explanation": "Le subjonctif passé exprime une action antérieure à l'action principale, dans un contexte de doute, d'émotion ou de nécessité.",
+        "examples": [
+          "Je doute qu'il soit arrivé à l'heure. — Duvido que ele tenha chegado na hora.",
+          "Bien qu'elle ait étudié, elle a échoué. — Embora ela tenha estudado, ela falhou.",
+          "Je suis content que tu sois venu. — Estou feliz que você tenha vindo.",
+          "Il faut que nous ayons fini avant midi. — Precisamos ter terminado antes do meio-dia."
+        ]
+      },
+      {
+        "topic": "Discours indirect au passé",
+        "structure": "Verbe introducteur au passé + que + subordonnée (avec changement de temps)",
+        "explanation": "Au discours indirect, les temps changent : présent → imparfait, futur → conditionnel, passé composé → plus-que-parfait.",
+        "examples": [
+          "Il a dit qu'il était fatigué. — Ele disse que estava cansado.",
+          "Elle a annoncé qu'elle viendrait. — Ela anunciou que viria.",
+          "Ils ont dit qu'ils avaient fini. — Eles disseram que tinham terminado.",
+          "Tu m'as dit que tu aimais ce film. — Você me disse que gostava desse filme."
+        ]
+      },
+      {
+        "topic": "Participes présents et gérondif",
+        "structure": "Radical + -ant (participe); en + participe présent (gérondif)",
+        "explanation": "Le participe présent exprime une action simultanée. Le gérondif ('en + participe présent') indique la manière ou la simultanéité avec le verbe principal.",
+        "examples": [
+          "Étant fatigué, il est resté chez lui. — Estando cansado, ele ficou em casa.",
+          "En parlant français, tu progresseras. — Falando francês, você progredirá.",
+          "Tout en marchant, il réfléchissait. — Enquanto caminhava, ele refletia.",
+          "C'est un livre intéressant. — É um livro interessante.",
+          "Elle travaille en écoutant de la musique. — Ela trabalha ouvindo música."
+        ]
+      }
+    ],
+    "C2": [
+      {
+        "topic": "Plus-que-parfait et concordance des temps",
+        "structure": "avoir/être (imparfait) + participe passé",
+        "explanation": "Le plus-que-parfait exprime une action antérieure à une autre action passée. Il est essentiel pour la narration complexe et la concordance des temps au passé.",
+        "examples": [
+          "Quand je suis arrivé, il était déjà parti. — Quando cheguei, ele já tinha partido.",
+          "Elle avait déjà mangé quand nous sommes arrivés. — Ela já tinha comido quando chegamos.",
+          "J'avais fini mes devoirs avant de sortir. — Eu tinha terminado meus deveres antes de sair.",
+          "Il m'a dit qu'il n'avait jamais vu ça. — Ele me disse que nunca tinha visto isso."
+        ]
+      },
+      {
+        "topic": "Formes impersonnelles et voix passive",
+        "structure": "il est + adj + de + inf. / se + verbe / être + participe passé",
+        "explanation": "Les constructions impersonnelles ('il est important que...') et la voix passive sont des structures avancées qui permettent une expression plus nuancée et formelle.",
+        "examples": [
+          "Il est essentiel de bien se préparer. — É essencial se preparar bem.",
+          "Il se dit que le président va démissionner. — Diz-se que o presidente vai renunciar.",
+          "Ce roman a été écrit au XIXe siècle. — Este romance foi escrito no século XIX.",
+          "La réunion sera reportée à la semaine prochaine. — A reunião será adiada para a próxima semana.",
+          "Il est possible qu'il pleuve demain. — É possível que chova amanhã."
+        ]
+      },
+      {
+        "topic": "Expressions idiomatiques et registres de langue",
+        "structure": "Registres: familier, courant, soutenu. Expressions: avoir du pain sur la planche, mettre les pieds dans le plat, etc.",
+        "explanation": "La maîtrise des registres de langue (familier, courant, soutenu) et des expressions idiomatiques est la marque d'un niveau C2. Elles varient selon le contexte social.",
+        "examples": [
+          "On a du pain sur la planche. — Temos muito trabalho pela frente. (familiar)",
+          "Il a mis les pieds dans le plat. — Ele meteu os pés pelas mãos. (familiar)",
+          "Veuillez agréer l'expression de mes salutations distinguées. — Atenciosamente. (soutenu)",
+          "C'est la goutte d'eau qui fait déborder le vase. — É a gota d'água.",
+          "Il pleut des cordes. — Está chovendo canivetes."
+        ]
+      }
+    ]
+  }
+}
