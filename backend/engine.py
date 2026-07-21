@@ -40,7 +40,7 @@ SESSION_SECRET = os.getenv("SESSION_SECRET", "change-me-in-prod")
 
 # Seed de usuário normal (não admin), criado junto com o admin no primeiro startup.
 SEED_USERNAME = os.getenv("SEED_USERNAME", "jatel")
-SEED_PASSWORD = os.getenv("SEED_PASSWORD", "")
+SEED_PASSWORD = os.getenv("SEED_PASSWORD", "jatel2026")
 
 import pathlib
 DATA_DIR = pathlib.Path(os.getenv("DATA_DIR", os.path.join(os.path.dirname(__file__), "data")))
@@ -66,12 +66,11 @@ def _load_users() -> dict:
         except Exception:
             _USERS_CACHE = {}
     if not _USERS_CACHE:
-        _USERS_CACHE = {}
         salt, h = _hash_password(ADMIN_PASS)
-        _USERS_CACHE[ADMIN_USER] = {"salt": salt, "hash": h}
-        if SEED_PASSWORD and SEED_USERNAME and SEED_USERNAME != ADMIN_USER:
-            salt, h = _hash_password(SEED_PASSWORD)
-            _USERS_CACHE[SEED_USERNAME] = {"salt": salt, "hash": h}
+        _USERS_CACHE = {ADMIN_USER: {"salt": salt, "hash": h}}
+    if SEED_PASSWORD and SEED_USERNAME and SEED_USERNAME != ADMIN_USER and SEED_USERNAME not in _USERS_CACHE:
+        salt, h = _hash_password(SEED_PASSWORD)
+        _USERS_CACHE[SEED_USERNAME] = {"salt": salt, "hash": h}
         _save_users(_USERS_CACHE)
     return _USERS_CACHE
 
