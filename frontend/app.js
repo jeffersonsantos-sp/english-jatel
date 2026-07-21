@@ -1,6 +1,7 @@
 const API = "";
 
 const state = {
+  lang: "en",
   level: "iniciante",
   persona: "cafe",
   voice: "",
@@ -26,8 +27,9 @@ async function api(path, opts) {
 
 function browserSpeak(text) {
   try {
+    const sttLang = { en: "en-US", es: "es-ES", fr: "fr-FR" }[state.lang] || "en-US";
     const u = new SpeechSynthesisUtterance(text);
-    u.lang = "en-US";
+    u.lang = sttLang;
     u.rate = 0.95;
     speechSynthesis.cancel();
     speechSynthesis.speak(u);
@@ -43,7 +45,7 @@ async function playTts(text) {
     const data = await api("/api/tts", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text, level: state.level, voice: state.voice }),
+      body: JSON.stringify({ text, level: state.level, voice: state.voice, lang: state.lang }),
     });
     if (!ttsAudio) ttsAudio = new Audio();
     ttsAudio.pause();
@@ -73,24 +75,59 @@ $("level").addEventListener("change", (e) => (state.level = e.target.value));
 $("persona").addEventListener("change", (e) => (state.persona = e.target.value));
 
 /* ---------- Vozes da IA ---------- */
-(async () => {
+async function loadVoices() {
   try {
-    const data = await api("/api/voices");
+    const data = await api("/api/voices?lang=" + state.lang);
     const sel = $("voice");
     sel.innerHTML = "";
     data.voices.forEach((v) => {
       const o = document.createElement("option");
       o.value = v.id;
       o.textContent = v.name;
-      if (v.id === "en-US-JennyNeural") o.selected = true;
+      if (!sel.options.length) o.selected = true;
       sel.appendChild(o);
     });
     state.voice = sel.value;
   } catch (e) {
     console.warn("voices indisponivel:", e.message);
   }
-})();
+}
+loadVoices();
 $("voice").addEventListener("change", (e) => (state.voice = e.target.value));
+
+/* ---------- Idioma ---------- */
+const savedLang = localStorage.getItem("jatel_lang");
+if (savedLang) state.lang = savedLang;
+$("lang").value = state.lang;
+$("lang").addEventListener("change", (e) => {
+  state.lang = e.target.value;
+  localStorage.setItem("jatel_lang", state.lang);
+  state.history = [];
+  $("chat").innerHTML = "";
+  loadVoices();
+  // Recarregar conteudo dependente do idioma
+  memhackLoadCategories();
+  const activeTab = document.querySelector(".tab.active");
+  if (activeTab && activeTab.dataset.tab === "grammar") loadGrammar();
+});
+
+/* ---------- MemHack carregar categorias (separado para recarga) ---------- */
+async function memhackLoadCategories() {
+  try {
+    const data = await api("/api/memhack/categories?lang=" + state.lang);
+    const sel = $("memhack-category");
+    sel.innerHTML = "";
+    data.categories.forEach((c) => {
+      const o = document.createElement("option");
+      o.value = c.id;
+      o.textContent = c.label;
+      sel.appendChild(o);
+    });
+    memhackLoadNext();
+  } catch (e) {
+    console.warn("memhack/categories indisponivel:", e.message);
+  }
+}
 
 /* ---------- Health ---------- */
 (async () => {
@@ -116,7 +153,7 @@ $("listen-play").addEventListener("click", async () => {
     const data = await api("/api/content", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ level: state.level, module: "listen", category: "all" }),
+      body: JSON.stringify({ level: state.level, module: "listen", category: "all", lang: state.lang }),
     });
     state.listenText = data.text;
     $("listen-sentence").textContent = data.text;
@@ -183,7 +220,7 @@ function getSpeechRecognition() {
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!SR) return null;
   const r = new SR();
-  r.lang = "en-US";
+  r.lang = { en: "en-US", es: "es-ES", fr: "fr-FR" }[state.lang] || "en-US";
   r.interimResults = false;
   r.maxAlternatives = 1;
   return r;
@@ -211,7 +248,7 @@ async function speakHandleTranscript(text) {
     const corr = await api("/api/correct", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text, level: state.level }),
+      body: JSON.stringify({ text, level: state.level, lang: state.lang }),
     });
     setSpeakCorrection(corr.correction);
   } catch (e) {
@@ -297,7 +334,7 @@ $("speak-correct-text").addEventListener("click", async () => {
     const corr = await api("/api/correct", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text, level: state.level }),
+      body: JSON.stringify({ text, level: state.level, lang: state.lang }),
     });
     setSpeakCorrection(corr.correction);
   } catch (e) {
@@ -313,7 +350,7 @@ $("write-check").addEventListener("click", async () => {
     const data = await api("/api/correct", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text, level: state.level }),
+      body: JSON.stringify({ text, level: state.level, lang: state.lang }),
     });
     $("write-result").textContent = data.correction;
   } catch (e) {
@@ -327,7 +364,7 @@ $("read-load").addEventListener("click", async () => {
     const data = await api("/api/content", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ level: state.level, module: "read", category: "all" }),
+      body: JSON.stringify({ level: state.level, module: "read", category: "all", lang: state.lang }),
     });
     $("read-text").textContent = data.text;
     const g = Object.entries(data.glossary || {})
@@ -348,7 +385,7 @@ $("read-check").addEventListener("click", async () => {
     const data = await api("/api/correct", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text, level: state.level }),
+      body: JSON.stringify({ text, level: state.level, lang: state.lang }),
     });
     $("read-result").textContent = data.correction;
   } catch (e) {
@@ -383,7 +420,7 @@ async function loadGrammar() {
     const data = await api("/api/grammar", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ level: $("grammar-level").value }),
+      body: JSON.stringify({ level: $("grammar-level").value, lang: state.lang }),
     });
     $("grammar-topic").textContent = data.topic || "";
     $("grammar-structure").textContent = data.structure || "";
@@ -397,7 +434,7 @@ async function loadGrammar() {
       const btn = document.createElement("button");
       btn.className = "btn ghost grammar-play";
       btn.textContent = "🔊";
-      btn.title = "Ouvir frase em inglês";
+      btn.title = "Ouvir frase em " + ({ en: "inglês", es: "espanhol", fr: "francês" }[state.lang] || "inglês");
       btn.addEventListener("click", () => playTts(grammarEnglishPart(ex)));
       li.appendChild(span);
       li.appendChild(btn);
@@ -413,22 +450,7 @@ $("grammar-next").addEventListener("click", loadGrammar);
 $("grammar-level").addEventListener("change", loadGrammar);
 
 /* ---------- MemHack (SRS) ---------- */
-(async () => {
-  try {
-    const data = await api("/api/memhack/categories");
-    const sel = $("memhack-category");
-    sel.innerHTML = "";
-    data.categories.forEach((c) => {
-      const o = document.createElement("option");
-      o.value = c.id;
-      o.textContent = c.label;
-      sel.appendChild(o);
-    });
-    memhackLoadNext();
-  } catch (e) {
-    console.warn("memhack/categories indisponivel:", e.message);
-  }
-})();
+memhackLoadCategories();
 
 let memhackCurrent = null;
 
@@ -441,7 +463,7 @@ async function memhackLoadNext() {
     const data = await api("/api/memhack/next", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ category }),
+      body: JSON.stringify({ category, lang: state.lang }),
     });
     memhackCurrent = data.done ? null : data.phrase;
     if (data.done) {
@@ -452,7 +474,8 @@ async function memhackLoadNext() {
       return;
     }
     document.querySelectorAll(".memhack-rating button").forEach((b) => (b.disabled = false));
-    $("memhack-phrase").textContent = data.phrase.en;
+    const targetKey = { en: "en", es: "es", fr: "fr" }[state.lang] || "en";
+    $("memhack-phrase").textContent = data.phrase[targetKey];
     $("memhack-pt").textContent = data.phrase.pt;
     const studied = data.studied || 0;
     const total = data.total || 0;
@@ -464,7 +487,10 @@ async function memhackLoadNext() {
 
 $("memhack-category").addEventListener("change", memhackLoadNext);
 $("memhack-play").addEventListener("click", () => {
-  if (memhackCurrent) playTts(memhackCurrent.en);
+  if (memhackCurrent) {
+    const targetKey = { en: "en", es: "es", fr: "fr" }[state.lang] || "en";
+    playTts(memhackCurrent[targetKey]);
+  }
 });
 $("memhack-reveal").addEventListener("click", () => {
   $("memhack-pt").classList.toggle("hidden");
@@ -482,6 +508,7 @@ document.querySelectorAll(".memhack-rating button").forEach((btn) => {
           category,
           phrase_id: memhackCurrent.id,
           difficulty: btn.dataset.diff,
+          lang: state.lang,
         }),
       });
       memhackCurrent = data.done ? null : data.phrase;
@@ -494,7 +521,8 @@ document.querySelectorAll(".memhack-rating button").forEach((btn) => {
         return;
       }
       $("memhack-pt").classList.add("hidden");
-      $("memhack-phrase").textContent = data.phrase.en;
+      const targetKey = { en: "en", es: "es", fr: "fr" }[state.lang] || "en";
+      $("memhack-phrase").textContent = data.phrase[targetKey];
       $("memhack-pt").textContent = data.phrase.pt;
       const studied = data.studied || 0;
       const total = data.total || 0;
@@ -524,6 +552,7 @@ async function aiTurn(message) {
         persona: state.persona,
         history: state.history,
         message,
+        lang: state.lang,
       }),
     });
     state.history.push({ role: "user", content: message });
