@@ -887,6 +887,47 @@ _EMBEDDED_GRAMMAR = {
     ],
 }
 
+# --- Listen/Read orientado a dados (arquivo externo, por idioma) ---
+LISTEN_FILES = {
+    "en": None,  # ingles usa o dicionário embutido LISTEN
+    "es": os.getenv("LISTEN_FILE_ES", os.path.join(os.path.dirname(__file__), "listen_es.json")),
+    "fr": os.getenv("LISTEN_FILE_FR", os.path.join(os.path.dirname(__file__), "listen_fr.json")),
+}
+READ_FILES = {
+    "en": None,  # ingles usa o dicionário embutido READ
+    "es": os.getenv("READ_FILE_ES", os.path.join(os.path.dirname(__file__), "read_es.json")),
+    "fr": os.getenv("READ_FILE_FR", os.path.join(os.path.dirname(__file__), "read_fr.json")),
+}
+
+_LISTEN_DATA = {}  # {lang: {level: {category: [str]}}}
+_READ_DATA = {}    # {lang: {level: {category: [dict]}}}
+
+
+def _load_listen_read():
+    for lang, fp in LISTEN_FILES.items():
+        if fp and os.path.exists(fp):
+            try:
+                with open(fp, encoding="utf-8") as f:
+                    _LISTEN_DATA[lang] = json.load(f)
+                print(f"[listen] {lang} carregado de {fp}")
+            except Exception as e:
+                print(f"[listen] falha ao ler {fp}: {e}")
+        else:
+            _LISTEN_DATA[lang] = None  # usa fallback embutido
+    for lang, fp in READ_FILES.items():
+        if fp and os.path.exists(fp):
+            try:
+                with open(fp, encoding="utf-8") as f:
+                    _READ_DATA[lang] = json.load(f)
+                print(f"[read] {lang} carregado de {fp}")
+            except Exception as e:
+                print(f"[read] falha ao ler {fp}: {e}")
+        else:
+            _READ_DATA[lang] = None  # usa fallback embutido
+
+
+_load_listen_read()
+
 # --- Grammar orientado a dados (arquivo externo, por idioma) ---
 # Cada idioma tem seu proprio arquivo grammar_{lang}.json.
 # O conteudo embutido acima e usado como fallback apenas para ingles.
@@ -961,17 +1002,21 @@ def normalize_level(level: str) -> str:
 
 def get_content(level: str, module: str, category: str = "all", lang: str = "en") -> dict:
     level = normalize_level(level)
-    # Listen/Read usam sempre ingles por enquanto; quando houver conteudo ES/FR,
-    # selecionar pool por lang.
-    pool_map = {"listen": LISTEN, "read": READ}
-    pool = pool_map.get(module, LISTEN).get(level, {})
+    lang = lang if lang in LANGUAGES else "en"
+    if module == "read":
+        ext = _READ_DATA.get(lang)
+        pool = ext if ext else READ
+    else:
+        ext = _LISTEN_DATA.get(lang)
+        pool = ext if ext else LISTEN
+    pool = pool.get(level, {})
     if category and category != "all":
         items = pool.get(category, [])
     else:
         items = [x for cat in pool.values() for x in cat]
     if not items:
         items = [x for cat in pool.values() for x in cat]
-    key = (level, module, category)
+    key = (lang, level, module, category)
     q = _CONTENT_QUEUES.get(key)
     if not q:
         q = items[:]

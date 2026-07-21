@@ -30,7 +30,7 @@ O Python deste SO é *externally managed* (PEP 668). `pip install` puro falha.
 - `frontend/`: SPA vanilla (HTML/CSS/JS, sem build). `app.js` usa URLs relativas (`/api/...`).
 - Banco de frases: dicionários `LISTEN`/`READ` em `engine.py`, chaveados por `nível -> categoria -> lista`. `get_content` usa uma fila embaralhada por `(nível, módulo, categoria)` (sem repetir até esgotar). **Para adicionar frases, edite esses dicionários.** `CATEGORIES` alimenta o seletor da UI.
 - **Grammar (CEFR)**: conteúdo é **orientado a dados**, em `backend/grammar.json` (`{"levels": [...], "grammar": {<nível>: [{topic, structure, explanation, examples}]}}`). No startup o `engine.py` carrega esse arquivo (fallback ao dicionário embutido se faltar/inválido). **Para adicionar/editar lições de Grammar, edite `grammar.json`** e recarregue sem rebuild via `POST /api/admin/reload-grammar` (só admin). Para sobrescrever em runtime, monte um arquivo e ajuste `GRAMMAR_FILE`.
-- **Multi-idioma**: cada idioma tem seu próprio grammar file (`grammar_es.json`, `grammar_fr.json`) e memhack file (`memhack_es.json`, `memhack_fr.json`). O seletor `lang` no frontend controla qual conteúdo é carregado.
+- **Multi-idioma**: cada idioma tem seu próprio grammar file (`grammar_es.json`, `grammar_fr.json`) e memhack file (`memhack_es.json`, `memhack_fr.json`). Listen/Read agora também: `listen_es.json`, `listen_fr.json`, `read_es.json`, `read_fr.json` — carregados em `_LISTEN_DATA`/`_READ_DATA` e usados por `get_content()` conforme `lang`. O seletor `lang` no frontend controla qual conteúdo é carregado.
 - Listen é exercício de **ditado**: o frontend esconde o texto da frase até o "Verificar". Não antecipe a exibição.
 
 ## Validação (sem lint/testes configurados)

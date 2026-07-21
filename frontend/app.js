@@ -410,7 +410,7 @@ $("read-check").addEventListener("click", async () => {
   }
 })();
 
-function grammarEnglishPart(example) {
+function grammarExampleSentence(example) {
   return example.split(" — ")[0].trim();
 }
 
@@ -435,7 +435,7 @@ async function loadGrammar() {
       btn.className = "btn ghost grammar-play";
       btn.textContent = "🔊";
       btn.title = "Ouvir frase em " + ({ en: "inglês", es: "espanhol", fr: "francês" }[state.lang] || "inglês");
-      btn.addEventListener("click", () => playTts(grammarEnglishPart(ex)));
+      btn.addEventListener("click", () => playTts(grammarExampleSentence(ex)));
       li.appendChild(span);
       li.appendChild(btn);
       list.appendChild(li);
