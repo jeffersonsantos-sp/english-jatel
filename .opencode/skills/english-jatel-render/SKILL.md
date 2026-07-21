@@ -37,7 +37,10 @@ que o repositorio ja tem para rodar nele. Complementa a skill `english-jatel`
    do emoji em voz alta.
 5. **Seletor Categoria removido** da barra (`frontend/`): redundante com Persona (9
    personas ja cobrem os temas); Listen/Read usam `category: "all"`. MemHack mantem
-   seu proprio seletor. Versao atual: **v1.8.2**.
+   seu proprio seletor.
+6. **Multi-idioma** (v1.9.0): seletor `lang` no topo alterna entre Ingles/Espanhol/
+   Frances. TTS, STT, prompts da IA, gramatica (`grammar_es/fr.json`) e MemHack
+   (`memhack_es/fr.json`) se adaptam ao idioma selecionado. Versao atual: **v1.9.0**.
 
 ## Passo a passo (dashboard)
 1. **New + → Web Service** → repo `english-jatel`, branch `main`.

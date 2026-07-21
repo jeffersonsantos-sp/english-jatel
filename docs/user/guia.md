@@ -1,8 +1,9 @@
-# Guia do Usuário — English Flow
+# Guia do Usuário — English JATEL
 
-Aplicativo web para treinar inglês nas habilidades **Listen, Speak, Write, Read** e
-**Conversar**, mais **Grammar** (gramática por nível CEFR) e **MemHack** (memorização com
-repetição espaçada), com correção automática e conversação por IA.
+Aplicativo web para treinar **inglês, espanhol e francês** nas habilidades
+**Listen, Speak, Write, Read** e **Conversar**, mais **Grammar** (gramática por
+nível CEFR) e **MemHack** (memorização com repetição espaçada), com correção
+automática e conversação por IA. Selecione o idioma no topo da página.
 
 ## Acesso
 

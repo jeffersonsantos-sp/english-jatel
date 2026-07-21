@@ -18,6 +18,8 @@ e **manifestos Kubernetes**, seguindo as convencoes ja estabelecidas neste repos
   viagens, familia, filmes, musicas, futebol, devops); voz via **Web Speech API** no
   navegador (sem Whisper no servidor); respostas sem emojis e TTS remove emojis;
   seletor **Categoria** removido da barra (Listen/Read usam `category: "all"`).
+  **Multi-idioma**: seletor `lang` no topo alterna entre Ingles/Espanhol/Frances;
+  grammar/memhack carregados por idioma. Versao atual: **v1.9.0**.
 - **docker-compose.yaml**: service `english-flow`, build do contexto `.`, imagem
   `english-flow:latest`, porta `8000:8000`, env `EDGE_TTS_VOICE`/`ADMIN_USER`/
   `ADMIN_PASS`/`SESSION_SECRET`/`DATA_DIR`, `env_file: backend/.env`, volume nomeado

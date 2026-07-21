@@ -1,7 +1,8 @@
-# Documentação Técnica — English Flow
+# Documentação Técnica — English JATEL (multi-idioma)
 
-App de ensino de inglês: backend FastAPI que serve a API **e** o frontend SPA
-num único servidor.
+App de ensino de **inglês, espanhol e francês**: backend FastAPI que serve a API
+**e** o frontend SPA num único servidor. Seletor `lang` no topo alterna entre
+**en** (Inglês), **es** (Espanhol), **fr** (Francês).
 
 ## Estrutura
 
@@ -33,6 +34,20 @@ Python deste SO é *externally managed* (PEP 668); use venv ou `--break-system-p
 
 O `main.py` registra as rotas `/api/*` **antes** de `app.mount("/", StaticFiles(...))`,
 então a API tem prioridade sobre os arquivos estáticos. `GET /` retorna `frontend/index.html`.
+
+## Multi-idioma
+
+- **Seletor `lang`** no topo da UI: `Inglês | Espanhol | Francês`.
+- **Prompts da IA**: `correct()` e `converse()` usam `LANG_META` para ajustar
+  o prompt (ex.: "professor de espanhol", "professor de frances") e mensagens
+  de fallback.
+- **TTS por idioma**: `LANG_VOICES` mapeia `en`→`en-US-JennyNeural`,
+  `es`→`es-ES-ElviraNeural`, `fr`→`fr-FR-DeniseNeural` (Edge TTS).
+- **STT** (Web Speech API): `r.lang` ajustado conforme `lang` selecionado.
+- **Grammar**: arquivos `grammar.json` (EN), `grammar_es.json` (ES),
+  `grammar_fr.json` (FR) — cada um com 6 níveis CEFR (A1-C2).
+- **MemHack**: arquivos `memhack.json` (EN), `memhack_es.json` (ES),
+  `memhack_fr.json` (FR) — progresso SRS chaveado por `{user}::{lang}`.
 
 ## LLM e TTS
 
