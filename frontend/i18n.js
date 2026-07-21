@@ -135,7 +135,12 @@ function __t(key, replacements = {}) {
 function applyTranslations() {
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.dataset.i18n;
-    if (key) el.textContent = __t(key);
+    if (!key) return;
+    if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
+      el.placeholder = __t(key);
+    } else {
+      el.textContent = __t(key);
+    }
   });
   document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
     const key = el.dataset.i18nPlaceholder;
