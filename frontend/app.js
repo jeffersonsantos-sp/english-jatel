@@ -554,11 +554,12 @@ $("conv-rec").addEventListener("click", async () => {
     convRecognition = rec;
     $("conv-rec").disabled = true;
     $("conv-stop").disabled = false;
+    rec.continuous = true;
+    let convAccum = "";
     rec.onresult = (e) => {
       const text = (e.results[0][0].transcript || "").trim();
       if (text) {
-        addMsg("user", text);
-        aiTurn(text);
+        convAccum += (convAccum ? " " : "") + text;
       }
     };
     rec.onerror = (e) => {
@@ -573,6 +574,12 @@ $("conv-rec").addEventListener("click", async () => {
       $("conv-rec").disabled = false;
       $("conv-stop").disabled = true;
       convRecognition = null;
+      const finalText = convAccum.trim();
+      convAccum = "";
+      if (finalText) {
+        addMsg("user", finalText);
+        aiTurn(finalText);
+      }
     };
     try {
       rec.start();
