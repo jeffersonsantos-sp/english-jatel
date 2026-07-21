@@ -13,12 +13,13 @@ description: >
 
 # SKILL: english-jatel
 
-Tutor de ingles full-stack com login e multi-usuario. Um unico servidor FastAPI
-serve a API `/api/*` e o frontend SPA (`index.html`, `style.css`, `app.js`,
-`auth.js`, `login.html`). Modulos: **Listen, Speak, Write, Read, Conversar,
-Grammar, MemHack**. CI/CD via GitHub Actions: testes no `ci.yaml`, build/push da
-imagem no Docker Hub no `cd.yaml` disparado por **git tag `v*`**. Deploy tambem
-via `docker compose` e manifestos Kubernetes em `k8s/`.
+Tutor de **ingles, espanhol e frances** full-stack com login e multi-usuario.
+Seletor de idioma no topo alterna entre **en** (Ingles), **es** (Espanhol),
+**fr** (Frances). Um unico servidor FastAPI serve a API `/api/*` e o frontend SPA
+(`index.html`, `style.css`, `app.js`, `auth.js`, `login.html`). Modulos: **Listen,
+Speak, Write, Read, Conversar, Grammar, MemHack**. CI/CD via GitHub Actions:
+testes no `ci.yaml`, build/push da imagem no Docker Hub no `cd.yaml` disparado por
+**git tag `v*`**. Deploy tambem via `docker compose` e manifestos Kubernetes em `k8s/`.
 
 ## Quando usar
 - Rodar ou explicar o app English JATEL localmente, via Docker ou no Kubernetes.
@@ -54,12 +55,15 @@ via `docker compose` e manifestos Kubernetes em `k8s/`.
     antes da sintese, para o TTS nao "ler" a descricao do emoji em voz alta.
   - O seletor **Categoria** da barra foi removido (redundante com Persona); Listen/Read
     usam `category: "all"`. O MemHack mantem seu proprio seletor de categoria.
-- **Grammar**: tópicos por nivel CEFR (A1-C2), com `structure`/`explanation`/
-  `examples`; fonte `backend/grammar.json` (recarregavel via
-  `POST /api/admin/reload-grammar`).
+- **Multi-idioma**: seletor `lang` no topo alterna entre Ingles/Espanhol/Frances.
+  TTS, STT, prompts da IA e conteudo (gramatica + MemHack) se adaptam ao idioma.
+- **Grammar**: topicos por nivel CEFR (A1-C2), com `structure`/`explanation`/
+  `examples`; arquivos `grammar.json` (EN), `grammar_es.json` (ES), `grammar_fr.json` (FR).
+  Recarregavel via `POST /api/admin/reload-grammar`.
 - **MemHack**: frases por categoria (rotina, trabalho, escola, familia, diversao,
   esportes) com SRS estilo Leitner (box 1-5; facil sobe, medio mantem, dificil
-  desce). Fonte `backend/memhack.json`; progresso por usuario persistido.
+  desce). Arquivos `memhack.json` (EN), `memhack_es.json` (ES), `memhack_fr.json` (FR);
+  progresso por usuario+idioma persistido.
 
 ## Como rodar
 ```bash

@@ -1,20 +1,21 @@
 # English JATEL
 
-Aplicativo de ensino de inglês que treina **Listen, Speak, Write, Read** e **Conversação por IA**,
-mais módulos de **Grammar** (gramática por nível CEFR) e **MemHack** (memorização com repetição
-espaçada), tudo em um único servidor (API FastAPI + frontend estático). Inclui **login de
-administrador**, **múltiplos usuários** e **deploy via Docker e Kubernetes**.
+Aplicativo de ensino de **inglês, espanhol e francês** que treina **Listen, Speak, Write, Read**
+e **Conversação por IA**, mais módulos de **Grammar** (gramática por nível CEFR) e **MemHack**
+(memorização com repetição espaçada), tudo em um único servidor (API FastAPI + frontend estático).
+Inclui **login de administrador**, **múltiplos usuários** e **deploy via Docker e Kubernetes**.
 
 ## Funcionalidades
 
+- **Multi-idioma** — seletor no topo alterna entre **Inglês**, **Espanhol** e **Francês**. TTS, STT, prompts da IA e conteúdo (gramática + MemHack) se adaptam ao idioma selecionado.
 - **Listen** — ditado: ouça a frase, digite o que ouviu e confira.
 - **Speak** — gravação por microfone (STT) ou texto digitado, com correção e áudio da correção (TTS).
-- **Write** — correção de texto em inglês por LLM.
+- **Write** — correção de texto por LLM no idioma selecionado.
 - **Read** — texto + glossário e pergunta de compreensão corrigida.
-- **Conversar** — chat com IA (personas: café, entrevistador, negócios).
-- **Grammar** — lições de gramática por nível CEFR (**A1 → C2**), com estrutura (fórmula), explicação e exemplos. Conteúdo em `backend/grammar.json` (orientado a dados).
-- **MemHack** — memorização de frases por categorias (Rotina, Trabalho, Escola, Família, Diversão, Esportes) com **repetição espaçada (SRS)**. Ouça a frase, treine e classifique: Fácil / Médio / Difícil. Conteúdo em `backend/memhack.json`.
-- **Auth** — tela de login; usuário `admin`/`mudar123` por padrão. Apenas o **admin** cria/lista usuários; qualquer usuário troca a própria senha.
+- **Conversar** — chat com IA (personas: café, entrevistador, negócios, etc.) no idioma selecionado.
+- **Grammar** — lições de gramática por nível CEFR (**A1 → C2**), com estrutura, explicação e exemplos. Conteúdo em `backend/grammar.json` (EN), `grammar_es.json` (ES), `grammar_fr.json` (FR).
+- **MemHack** — memorização de frases por categorias com **repetição espaçada (SRS)**. Conteúdo em `backend/memhack.json` (EN), `memhack_es.json` (ES), `memhack_fr.json` (FR).
+- **Auth** — tela de login; usuário `admin`/`mudar123` por padrão. Seed automático de usuário normal via `SEED_USERNAME`/`SEED_PASSWORD`.
 
 ## Pré-requisitos
 
@@ -76,38 +77,42 @@ kubectl -n english-jatel port-forward svc/english-jatel 8080:80
 
 ## Conteúdo orientado a dados (Grammar e MemHack)
 
-Não é preciso editar o código para adicionar lições/frases:
+Não é preciso editar o código para adicionar lições/frases. Cada idioma tem seu próprio arquivo:
 
-- **Grammar**: `backend/grammar.json` — `{"levels": [...], "grammar": {<nível>: [{topic, structure, explanation, examples}]}}`.
-  Carregado no startup (fallback ao embutido se faltar). Recarregue sem rebuild:
-  `POST /api/admin/reload-grammar` (somente admin).
-- **MemHack**: `backend/memhack.json` — `{"categories": [...], "phrases": {<categoria>: [{id, en, pt}]}}`.
-  O progresso de repetição espaçada de cada usuário fica em `DATA_DIR/memhack_progress.json`.
-- `LISTEN`/`READ` (Listen/Read) continuam em dicionários em `engine.py`.
+- **Grammar EN**: `backend/grammar.json` — `{"levels": [...], "grammar": {<nível>: [{topic, structure, explanation, examples}]}}`
+- **Grammar ES**: `backend/grammar_es.json` (mesma estrutura)
+- **Grammar FR**: `backend/grammar_fr.json` (mesma estrutura)
+- **MemHack EN**: `backend/memhack.json` — `{"categories": [...], "phrases": {<categoria>: [{id, en, pt}]}}`
+- **MemHack ES**: `backend/memhack_es.json` (chave `es` em vez de `en`)
+- **MemHack FR**: `backend/memhack_fr.json` (chave `fr` em vez de `en`)
+
+Recarregue sem rebuild com `POST /api/admin/reload-grammar` (admin). O progresso SRS de cada
+usuário+idioma fica em `DATA_DIR/memhack_progress.json`.
 
 ## Endpoints (resumo)
 
 | Método | Rota | Auth | Descrição |
 |--------|------|------|-----------|
+| GET | `/api/languages` | — | idiomas suportados (`en`, `es`, `fr`) |
 | GET | `/api/health` | — | status/llm/provider |
 | GET | `/api/levels` | — | níveis de Listen/Read |
 | GET | `/api/personas` | — | personas de conversa |
-| GET | `/api/voices` | — | vozes Edge TTS |
+| GET | `/api/voices?lang=` | — | vozes Edge TTS (filtradas por idioma) |
 | GET | `/api/categories` | — | categorias de conteúdo |
 | GET | `/api/grammar-levels` | — | níveis CEFR (A1–C2) |
-| GET | `/api/memhack/categories` | — | categorias do MemHack |
-| POST | `/api/content` | sim | frase/texto de Listen/Read |
-| POST | `/api/correct` | sim | correção de texto |
-| POST | `/api/tts` | sim | áudio MP3 (base64) |
+| GET | `/api/memhack/categories?lang=` | — | categorias do MemHack por idioma |
+| POST | `/api/content` | sim | frase/texto de Listen/Read (+ `lang`) |
+| POST | `/api/correct` | sim | correção de texto (+ `lang`) |
+| POST | `/api/tts` | sim | áudio MP3 (base64, + `lang`) |
 | POST | `/api/stt` | sim | transcrição de áudio |
-| POST | `/api/converse` | sim | resposta da IA |
-| POST | `/api/grammar` | sim | tópico de gramática por nível |
-| POST | `/api/memhack/next` | sim | próxima frase a revisar |
-| POST | `/api/memhack/review` | sim | registra dificuldade e devolve próxima |
+| POST | `/api/converse` | sim | resposta da IA (+ `lang`) |
+| POST | `/api/grammar` | sim | tópico de gramática por nível (+ `lang`) |
+| POST | `/api/memhack/next` | sim | próxima frase a revisar (+ `lang`) |
+| POST | `/api/memhack/review` | sim | registra dificuldade (+ `lang`) |
 | POST | `/api/auth/login` · `/logout` · `/me` | — | autenticação |
 | POST | `/api/auth/change-password` | sim | troca própria senha |
 | POST | `/api/auth/register` · `GET /api/auth/users` | **admin** | gerência de usuários |
-| POST | `/api/admin/reload-grammar` | **admin** | recarrega `grammar.json` |
+| POST | `/api/admin/reload-grammar` | **admin** | recarrega grammar do idioma (`lang`) |
 
 ## CI/CD
 
