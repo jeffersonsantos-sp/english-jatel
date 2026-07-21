@@ -1,0 +1,98 @@
+{
+  "iniciante": {
+    "rotina": [
+      "Me despierto temprano cada mañana.",
+      "Ella se lava los dientes antes del desayuno.",
+      "Comemos el almuerzo a las doce.",
+      "Él ve la televisión por la noche.",
+      "Ellos se acuestan a las diez de la noche.",
+      "Mi madre prepara café por la mañana.",
+      "El gato duerme en mi cama.",
+      "Camino a la escuela con mis amigos."
+    ],
+    "trabalho": [
+      "Él trabaja en una oficina en el centro.",
+      "Ella responde correos todo el día.",
+      "Tenemos una reunión a las tres de la tarde.",
+      "Ellos están ocupados esta semana.",
+      "Termino el trabajo a las seis.",
+      "Mi jefe es muy amable.",
+      "Ella escribe informes para la empresa.",
+      "Almorzamos juntos en la oficina."
+    ],
+    "viagem": [
+      "Viajamos en tren a la ciudad.",
+      "Ella compra un billete en la estación.",
+      "Él lleva una maleta pequeña.",
+      "Ellos visitan el museo de vacaciones.",
+      "Me gusta tomar fotos de la playa.",
+      "Reservamos una habitación en un hotel.",
+      "El aeropuerto está lejos de aquí.",
+      "Ella habla un poco de inglés cuando viaja."
+    ]
+  },
+  "intermediario": {
+    "rotina": [
+      "Aunque prefiero el té, tomo café por las mañanas.",
+      "Ella suele salir a correr antes de ir a la oficina.",
+      "Solemos cocinar en casa en lugar de pedir comida a domicilio.",
+      "Él rara vez se queda despierto después de la medianoche.",
+      "Ellos disfrutan leer antes de dormir.",
+      "He adquirido el hábito de escribir un diario diariamente.",
+      "Ella encuentra relajante escuchar música mientras limpia.",
+      "A menudo quedamos con amigos para desayunar los fines de semana."
+    ],
+    "trabalho": [
+      "Ella ha estado liderando el proyecto desde la primavera pasada.",
+      "Deberíamos delegar esta tarea al nuevo becario.",
+      "Él señaló algunos fallos en la presentación.",
+      "El cliente solicitó un cronograma revisado.",
+      "Distribuiré el acta después de la reunión.",
+      "Ellos acordaron posponer el lanzamiento una semana.",
+      "Ella negoció mejores condiciones con el proveedor.",
+      "Se espera que cumplamos el plazo el próximo mes."
+    ],
+    "viagem": [
+      "Reservamos una visita guiada por el casco antiguo.",
+      "Ella extravió su pasaporte en el hotel.",
+      "Él logró tomar el vuelo de conexión justo a tiempo.",
+      "Alquilaron un coche para explorar el campo.",
+      "Cambié algo de dinero en el quiosco del aeropuerto.",
+      "Paseamos por el mercado local durante horas.",
+      "Ella tuvo dificultades para comunicarse en el idioma extranjero.",
+      "El vuelo se retrasó debido al mal tiempo."
+    ]
+  },
+  "avancado": {
+    "rotina": [
+      "A pesar de su apretada agenda, mantiene un riguroso régimen de ejercicio.",
+      "Él ha cultivado una rutina matutina basada en la atención plena y la quietud.",
+      "La exclusión deliberada de pantallas en la cena ha fortalecido la cohesión familiar.",
+      "Ella siempre rechaza la tentación de sucumbir a la distracción digital.",
+      "Su predilección por la productividad nocturna a menudo afecta su ritmo circadiano.",
+      "Hemos curado sistemáticamente hábitos que atenúan el estrés acumulativo.",
+      "La optimización incremental de su flujo de trabajo generó ganancias desproporcionadas.",
+      "Ella defiende una filosofía de mejora personal medida e incremental."
+    ],
+    "trabalho": [
+      "El paradigma vigente de supervisión jerárquica se está desmantelando gradualmente.",
+      "Su incisiva delineación de los riesgos galvanizó a las partes interesadas.",
+      "Debemos conciliar incentivos divergentes para evitar fricciones operativas.",
+      "Las premisas aparentemente benignas de la propuesta ocultan responsabilidades latentes.",
+      "Él diseñó un marco de contingencia resistente a impactos externos.",
+      "La junta ratificó la reestructuración a pesar de la disidencia interna.",
+      "Una delineación inequívoca de responsabilidades mitigó la ambigüedad posterior.",
+      "Determinamos que el cuello de botella surgió de la propiedad fragmentada."
+    ],
+    "viagem": [
+      "El itinerario fue meticulosamente calibrado para evitar fricciones logísticas.",
+      "Ella navegó el laberinto burocrático con notable aplomo.",
+      "El encuentro fortuito en la aldea remota resultó transformador.",
+      "Su insaciable pasión por viajar a menudo compromete su estabilidad doméstica.",
+      "Conciliamos los itinerarios divergentes en un plan cohesivo.",
+      "El lugar aparentemente austero ocultaba una corriente subyacente de cultura vibrante.",
+      "Ella se esforzó por sumergirse en la lengua vernácula en lugar de enclaves turísticos.",
+      "El éxito de la expedición dependió de una preparación empírica."
+    ]
+  }
+}
