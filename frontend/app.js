@@ -225,7 +225,8 @@ $("speak-rec").addEventListener("click", async () => {
           setSpeakCorrection(corr.correction);
         }
       } catch (e) {
-        $("speak-transcript").textContent = "Erro STT: " + e.message + "\n(Digite abaixo para corrigir manualmente.)";
+        console.error("STT error:", e);
+        $("speak-transcript").textContent = "Erro STT: " + (e.message || e) + "\n(Digite abaixo para corrigir manualmente.)";
       }
     });
   } catch (e) {
@@ -529,7 +530,8 @@ $("conv-rec").addEventListener("click", async () => {
           addMsg("user", "(STT: audio vazio ou inaudivel)");
         }
       } catch (e) {
-        addMsg("user", "(erro STT: " + e.message + ")");
+        console.error("STT error:", e);
+        addMsg("user", "(erro STT: " + (e.message || e) + ")");
       }
     });
   } catch (e) {
