@@ -4,6 +4,7 @@ const state = {
   lang: "en",
   level: "iniciante",
   persona: "cafe",
+  _applyingLang: false,
   voice: "",
   listenText: "",
   history: [],
@@ -12,8 +13,7 @@ const state = {
 const $ = (id) => document.getElementById(id);
 
 function showError(el, msg) {
-  if (el) el.textContent = "⚠️ Erro: " + msg;
-  console.error(msg);
+  if (el) el.textContent = "⚠️ " + msg;
 }
 
 async function api(path, opts) {
@@ -98,14 +98,34 @@ $("voice").addEventListener("change", (e) => (state.voice = e.target.value));
 /* ---------- Idioma ---------- */
 const savedLang = localStorage.getItem("jatel_lang");
 if (savedLang) state.lang = savedLang;
+window.__lang = state.lang;
 $("lang").value = state.lang;
+// Apply initial translations
+applyTranslations();
+const hintKey = "speak_hint_" + state.lang;
+$("speak-hint-text").textContent = __t(hintKey);
+const convKey = "converse_subtitle_" + state.lang;
+$("converse-subtitle").textContent = __t(convKey);
+const gramKey = "grammar_subtitle_" + state.lang;
+$("grammar-subtitle").textContent = __t(gramKey);
 $("lang").addEventListener("change", (e) => {
+  if (state._applyingLang) return;
   state.lang = e.target.value;
+  window.__lang = state.lang;
   localStorage.setItem("jatel_lang", state.lang);
   state.history = [];
   $("chat").innerHTML = "";
+  // Update speak hint per language
+  const hintKey = "speak_hint_" + state.lang;
+  $("speak-hint-text").textContent = __t(hintKey);
+  // Update converse subtitle per language
+  const convKey = "converse_subtitle_" + state.lang;
+  $("converse-subtitle").textContent = __t(convKey);
+  // Update grammar subtitle per language
+  const gramKey = "grammar_subtitle_" + state.lang;
+  $("grammar-subtitle").textContent = __t(gramKey);
   loadVoices();
-  // Recarregar conteudo dependente do idioma
+  applyTranslations();
   memhackLoadCategories();
   const activeTab = document.querySelector(".tab.active");
   if (activeTab && activeTab.dataset.tab === "grammar") loadGrammar();
@@ -370,7 +390,7 @@ $("read-load").addEventListener("click", async () => {
     const g = Object.entries(data.glossary || {})
       .map(([k, v]) => `${k}: ${v}`)
       .join("  |  ");
-    $("read-glossary").textContent = "Glossário: " + g;
+    $("read-glossary").textContent = __t("glossary_label") + " " + g;
   } catch (e) {
     showError($("read-glossary"), e.message);
   }
@@ -434,7 +454,7 @@ async function loadGrammar() {
       const btn = document.createElement("button");
       btn.className = "btn ghost grammar-play";
       btn.textContent = "🔊";
-      btn.title = "Ouvir frase em " + ({ en: "inglês", es: "espanhol", fr: "francês" }[state.lang] || "inglês");
+      btn.title = __t("grammar_listen_label", { lang: __t("grammar_lang_" + state.lang) });
       btn.addEventListener("click", () => playTts(grammarExampleSentence(ex)));
       li.appendChild(span);
       li.appendChild(btn);
@@ -514,10 +534,10 @@ document.querySelectorAll(".memhack-rating button").forEach((btn) => {
       memhackCurrent = data.done ? null : data.phrase;
       if (data.done) {
         $("memhack-progress").textContent = "";
-        $("memhack-phrase").textContent = data.message || "Concluído por enquanto.";
+      $("memhack-phrase").textContent = data.message || __t("memhack_done");
         $("memhack-pt").textContent = "";
         document.querySelectorAll(".memhack-rating button").forEach((b) => (b.disabled = true));
-        $("memhack-msg").textContent = "⏱️ Revisão agendada. Volte mais tarde!";
+        $("memhack-msg").textContent = "⏱️ " + __t("memhack_done");
         return;
       }
       $("memhack-pt").classList.add("hidden");
@@ -526,7 +546,7 @@ document.querySelectorAll(".memhack-rating button").forEach((btn) => {
       $("memhack-pt").textContent = data.phrase.pt;
       const studied = data.studied || 0;
       const total = data.total || 0;
-      $("memhack-progress").textContent = `Progresso: ${studied}/${total} frases em treino`;
+    $("memhack-progress").textContent = __t("memhack_progress", { studied, total });
     } catch (e) {
       showError($("memhack-msg"), e.message);
     }
