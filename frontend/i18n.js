@@ -116,7 +116,7 @@ const TRANSLATIONS = {
   users_create: { en: "Create user", es: "Crear usuario", fr: "Créer utilisateur", pt: "Criar usuário" },
   users_existing: { en: "Existing users", es: "Usuarios existentes", fr: "Utilisateurs existants", pt: "Usuários existentes" },
   users_close: { en: "Close", es: "Cerrar", fr: "Fermer", pt: "Fechar" },
-  footer_copyright: { en: "Copyright © 2026 JATEL IA produced by Jefferson Santos", es: "Copyright © 2026 JATEL IA producido por Jefferson Santos", fr: "Copyright © 2026 JATEL IA produit par Jefferson Santos", pt: "Copyright © 2026 JATEL IA produzido por Jefferson Santos" },
+  footer_copyright: { en: "Copyright © 2026 JATEL IA developed by Jefferson Santos", es: "Copyright © 2026 JATEL IA desarrollado por Jefferson Santos", fr: "Copyright © 2026 JATEL IA développé par Jefferson Santos", pt: "Copyright © 2026 JATEL IA desenvolvido por Jefferson Santos" },
   grammar_listen_label: { en: "Listen to sentence in {lang}", es: "Escuchar frase en {lang}", fr: "Écouter la phrase en {lang}", pt: "Ouvir frase em {lang}" },
   grammar_lang_en: { en: "English", es: "inglés", fr: "anglais", pt: "inglês" },
   grammar_lang_es: { en: "Spanish", es: "español", fr: "espagnol", pt: "espanhol" },
