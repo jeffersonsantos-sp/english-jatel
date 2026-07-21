@@ -13,13 +13,13 @@
   <div id="login-overlay" class="login-overlay">
     <form id="login-form" class="login-card">
       <div class="logo">🌊</div>
-      <h1 data-i18n="login_title">English JATEL</h1>
-      <p class="subtitle" data-i18n="login_subtitle">Acesso restrito — faça login para continuar</p>
-      <label class="field-label" for="login-user" data-i18n="login_user_label">Usuário</label>
-      <input id="login-user" type="text" autocomplete="username" data-i18n-placeholder="login_user_label" placeholder="admin" />
-      <label class="field-label" for="login-pass" data-i18n="login_pass_label">Senha</label>
+      <h1>English JATEL</h1>
+      <p class="subtitle">Acesso restrito — faça login para continuar</p>
+      <label class="field-label" for="login-user">Usuário</label>
+      <input id="login-user" type="text" autocomplete="username" placeholder="admin" />
+      <label class="field-label" for="login-pass">Senha</label>
       <input id="login-pass" type="password" autocomplete="current-password" placeholder="••••••••" />
-      <button id="login-btn" class="btn" type="submit" data-i18n="login_btn">Entrar</button>
+      <button id="login-btn" class="btn" type="submit">Entrar</button>
       <div id="login-error" class="login-error"></div>
     </form>
   </div>
@@ -28,161 +28,161 @@
     <header class="topbar">
       <div class="brand">
         <div class="logo">🌊</div>
-        <h1 data-i18n="app_title">English JATEL</h1>
-        <span class="tag" data-i18n="app_subtitle">Aprenda ouvindo, falando &amp; conversando</span>
+        <h1>English JATEL</h1>
+        <span class="tag">Aprenda ouvindo, falando &amp; conversando</span>
       </div>
 
       <div class="controls">
-        <label data-i18n="lang_label">Idioma:
-          <div class="field">
-            <select id="lang">
-              <option value="en" data-i18n="lang_en">Inglês</option>
-              <option value="es" data-i18n="lang_es">Espanhol</option>
-              <option value="fr" data-i18n="lang_fr">Francês</option>
-            </select>
-          </div>
-        </label>
-        <label data-i18n="level_label">Nível:
+        <label>Nível:
           <div class="field">
             <select id="level">
-              <option value="iniciante" data-i18n="level_iniciante">Iniciante</option>
-              <option value="intermediario" data-i18n="level_intermediario">Intermediário</option>
-              <option value="avancado" data-i18n="level_avancado">Avançado</option>
+              <option value="iniciante">Iniciante</option>
+              <option value="intermediario">Intermediário</option>
+              <option value="avancado">Avançado</option>
             </select>
           </div>
         </label>
-        <label data-i18n="voice_label">Voz da IA:
+        <label>Voz da IA:
           <div class="field">
-            <select id="voice"><option value="" data-i18n="loading">Carregando...</option></select>
+            <select id="voice"><option value="">Carregando...</option></select>
           </div>
         </label>
-        <label data-i18n="persona_label">Persona (conversa):
+        <label>Categoria:
+          <div class="field">
+            <select id="category">
+              <option value="all">Todas</option>
+              <option value="rotina">Rotina</option>
+              <option value="trabalho">Trabalho</option>
+              <option value="viagem">Viagem</option>
+            </select>
+          </div>
+        </label>
+        <label>Persona (conversa):
           <div class="field">
             <select id="persona">
-              <option value="cafe" data-i18n="persona_cafe">Café</option>
-              <option value="entrevistador" data-i18n="persona_entrevistador">Entrevistador</option>
-              <option value="negocios" data-i18n="persona_negocios">Negócios</option>
-              <option value="viagens" data-i18n="persona_viagens">Viagens</option>
-              <option value="familia" data-i18n="persona_familia">Família</option>
-              <option value="filmes" data-i18n="persona_filmes">Filmes</option>
-              <option value="series" data-i18n="persona_series">Séries</option>
-              <option value="musicas" data-i18n="persona_musicas">Músicas</option>
-              <option value="futebol" data-i18n="persona_futebol">Futebol</option>
-              <option value="devops" data-i18n="persona_devops">DevOps</option>
+              <option value="cafe">Café</option>
+              <option value="entrevistador">Entrevistador</option>
+              <option value="negocios">Negócios</option>
+              <option value="viagens">Viagens</option>
+              <option value="familia">Família</option>
+              <option value="filmes">Filmes</option>
+              <option value="musicas">Músicas</option>
+              <option value="futebol">Futebol</option>
+              <option value="devops">DevOps</option>
             </select>
           </div>
         </label>
-        <span id="status" class="status" data-i18n-title="status_title" title="Status da conexão">●</span>
-        <button id="logout-btn" class="btn ghost" data-i18n="logout_btn" data-i18n-title="logout_btn" title="Sair">Sair</button>
-        <button id="change-pass-btn" class="btn ghost" data-i18n-title="change_pass_btn" title="Trocar senha">⚙️ <span data-i18n="change_pass_btn">Senha</span></button>
-        <button id="users-btn" class="btn ghost" data-i18n-title="users_btn" title="Gerenciar usuários">👥 <span data-i18n="users_btn">Usuários</span></button>
+        <span id="status" class="status" title="Status da conexão">●</span>
+        <button id="logout-btn" class="btn ghost" title="Sair">Sair</button>
+        <button id="change-pass-btn" class="btn ghost" title="Trocar senha">⚙️ Senha</button>
+        <button id="users-btn" class="btn ghost" title="Gerenciar usuários">👥 Usuários</button>
       </div>
 
       <nav class="tabs">
-        <button class="tab active" data-tab="listen" data-i18n="listen_tab">Listen</button>
-        <button class="tab" data-tab="speak" data-i18n="speak_tab">Speak</button>
-        <button class="tab" data-tab="write" data-i18n="write_tab">Write</button>
-        <button class="tab" data-tab="read" data-i18n="read_tab">Read</button>
-        <button class="tab" data-tab="converse" data-i18n="converse_tab">Conversar</button>
-        <button class="tab" data-tab="grammar" data-i18n="grammar_tab">Grammar</button>
-        <button class="tab" data-tab="memhack" data-i18n="memhack_tab">MemHack</button>
-      </nav>
+        <button class="tab active" data-tab="listen">Listen</button>
+        <button class="tab" data-tab="speak">Speak</button>
+        <button class="tab" data-tab="write">Write</button>
+        <button class="tab" data-tab="read">Read</button>
+          <button class="tab" data-tab="converse">Conversar</button>
+          <button class="tab" data-tab="grammar">Grammar</button>
+          <button class="tab" data-tab="memhack">MemHack</button>
+        </nav>
     </header>
 
     <main>
       <section id="listen" class="panel active card">
-        <h2 data-i18n="listen_title">Listen</h2>
-        <p class="subtitle" data-i18n="listen_subtitle">Escute a frase, faça o ditado e confira depois.</p>
+        <h2>Listen</h2>
+        <p class="subtitle">Escute a frase, faça o ditado e confira depois.</p>
         <div class="btn-group">
-          <button id="listen-play" class="btn" data-i18n="listen_play">🔊 Ouvir frase</button>
-          <button id="listen-repeat" class="btn ghost" disabled data-i18n="listen_repeat">🔁 Repetir</button>
-          <button id="listen-next" class="btn ghost" data-i18n="listen_next">⏭ Próxima</button>
+          <button id="listen-play" class="btn">🔊 Ouvir frase</button>
+          <button id="listen-repeat" class="btn ghost" disabled>🔁 Repetir</button>
+          <button id="listen-next" class="btn ghost">⏭ Próxima</button>
         </div>
         <div id="listen-sentence" class="sentence hidden"></div>
-        <label class="field-label" for="listen-answer" data-i18n="listen_label">Ditado (o que você ouviu):</label>
-        <input id="listen-answer" type="text" data-i18n-placeholder="listen_placeholder" placeholder="Digite a frase ouvida" />
+        <label class="field-label" for="listen-answer">Ditado (o que você ouviu):</label>
+        <input id="listen-answer" type="text" placeholder="Digite a frase ouvida" />
         <div class="btn-group">
-          <button id="listen-check" class="btn" data-i18n="listen_check">Verificar</button>
+          <button id="listen-check" class="btn">Verificar</button>
         </div>
         <div id="listen-result" class="result"></div>
       </section>
 
       <section id="speak" class="panel card">
-        <h2 data-i18n="speak_title">Speak</h2>
-        <p class="subtitle" data-i18n="speak_subtitle">Responda em voz alta (gravação) ou digite — e ouça a correção.</p>
-        <p class="hint"><span id="speak-hint-text" data-i18n="speak_hint_en">Responda em inglês: <em>“Tell me about your last weekend.”</em></span></p>
+        <h2>Speak</h2>
+        <p class="subtitle">Responda em voz alta (gravação) ou digite — e ouça a correção.</p>
+        <p class="hint">Responda em inglês: <em>“Tell me about your last weekend.”</em></p>
         <div class="btn-group">
-          <button id="speak-rec" class="btn" data-i18n="speak_rec">🎤 Gravar</button>
-          <button id="speak-stop" class="btn ghost" disabled data-i18n="speak_stop">⏹ Parar</button>
+          <button id="speak-rec" class="btn">🎤 Gravar</button>
+          <button id="speak-stop" class="btn ghost" disabled>⏹ Parar</button>
         </div>
         <div id="speak-transcript" class="result"></div>
         <div class="btn-group">
-          <button id="speak-play-transcript" class="btn ghost" disabled data-i18n="speak_hear_transcript">🔊 Ouvir transcrição</button>
+          <button id="speak-play-transcript" class="btn ghost" disabled>🔊 Ouvir transcrição</button>
         </div>
         <div id="speak-correction" class="result"></div>
         <div class="btn-group">
-          <button id="speak-play-correction" class="btn ghost" disabled data-i18n="speak_hear_correction">🔊 Ouvir correção</button>
+          <button id="speak-play-correction" class="btn ghost" disabled>🔊 Ouvir correção</button>
         </div>
 
         <hr class="divider" />
-        <label class="field-label" for="speak-text" data-i18n="speak_or_type">Ou digite sua resposta para corrigir:</label>
-        <textarea id="speak-text" rows="4" data-i18n-placeholder="speak_placeholder" placeholder="Escreva em inglês..."></textarea>
+        <label class="field-label" for="speak-text">Ou digite sua resposta para corrigir:</label>
+        <textarea id="speak-text" rows="4" placeholder="Escreva em inglês..."></textarea>
         <div class="btn-group">
-          <button id="speak-correct-text" class="btn" data-i18n="speak_correct_text">Corrigir texto</button>
+          <button id="speak-correct-text" class="btn">Corrigir texto</button>
         </div>
       </section>
 
       <section id="write" class="panel card">
-        <h2 data-i18n="write_title">Write</h2>
-        <p class="subtitle" data-i18n="write_subtitle">Escreva um parágrafo e receba uma correção detalhada.</p>
-        <label class="field-label" for="write-text" data-i18n="write_label">Seu texto:</label>
-        <textarea id="write-text" rows="6" data-i18n-placeholder="write_placeholder" placeholder="Escreva um parágrafo em inglês..."></textarea>
+        <h2>Write</h2>
+        <p class="subtitle">Escreva um parágrafo e receba uma correção detalhada.</p>
+        <label class="field-label" for="write-text">Seu texto:</label>
+        <textarea id="write-text" rows="6" placeholder="Escreva um parágrafo em inglês..."></textarea>
         <div class="btn-group">
-          <button id="write-check" class="btn" data-i18n="write_check">Corrigir</button>
+          <button id="write-check" class="btn">Corrigir</button>
         </div>
         <div id="write-result" class="result"></div>
       </section>
 
       <section id="read" class="panel card">
-        <h2 data-i18n="read_title">Read</h2>
-        <p class="subtitle" data-i18n="read_subtitle">Leia o texto, consulte o glossário e responda à pergunta.</p>
+        <h2>Read</h2>
+        <p class="subtitle">Leia o texto, consulte o glossário e responda à pergunta.</p>
         <div class="btn-group">
-          <button id="read-load" class="btn" data-i18n="read_load">📄 Carregar texto</button>
-          <button id="read-next" class="btn ghost" data-i18n="read_next">⏭ Próximo</button>
+          <button id="read-load" class="btn">📄 Carregar texto</button>
+          <button id="read-next" class="btn ghost">⏭ Próximo</button>
         </div>
         <div id="read-text" class="sentence"></div>
         <div id="read-glossary" class="glossary"></div>
-        <label class="field-label" for="read-answer" data-i18n="read_question">Pergunta de compreensão:</label>
-        <input id="read-answer" type="text" data-i18n-placeholder="read_placeholder" placeholder="Sua resposta" />
+        <label class="field-label" for="read-answer">Pergunta de compreensão (em inglês):</label>
+        <input id="read-answer" type="text" placeholder="Sua resposta" />
         <div class="btn-group">
-          <button id="read-check" class="btn" data-i18n="read_check">Corrigir</button>
+          <button id="read-check" class="btn">Corrigir</button>
         </div>
         <div id="read-result" class="result"></div>
       </section>
 
       <section id="converse" class="panel card">
-        <h2 data-i18n="converse_title">Conversar com a IA</h2>
-        <p class="subtitle"><span id="converse-subtitle" data-i18n="converse_subtitle_en">Bate-papo em inglês com a persona escolhida.</span></p>
+        <h2>Conversar com a IA</h2>
+        <p class="subtitle">Bate-papo em inglês com a persona escolhida.</p>
         <div id="chat" class="chat"></div>
         <div class="converse-controls">
-          <button id="conv-ai-start" class="btn ghost" data-i18n="conv_ai_start">🤖 IA fala primeiro</button>
-          <button id="conv-rec" class="btn" data-i18n="conv_rec">🎤 Gravar</button>
-          <button id="conv-stop" class="btn ghost" disabled data-i18n="conv_stop">⏹ Parar</button>
-          <input id="conv-text" type="text" data-i18n-placeholder="conv_placeholder" placeholder="Ou digite sua mensagem..." />
-          <button id="conv-send" class="btn" data-i18n="conv_send">Enviar</button>
+          <button id="conv-ai-start" class="btn ghost">🤖 IA fala primeiro</button>
+          <button id="conv-rec" class="btn">🎤 Gravar</button>
+          <button id="conv-stop" class="btn ghost" disabled>⏹ Parar</button>
+          <input id="conv-text" type="text" placeholder="Ou digite sua mensagem..." />
+          <button id="conv-send" class="btn">Enviar</button>
         </div>
       </section>
 
       <section id="grammar" class="panel card">
-        <h2 data-i18n="grammar_title">Grammar</h2>
-        <p class="subtitle"><span id="grammar-subtitle" data-i18n="grammar_subtitle_en">Aprenda gramática inglesa por nível (Quadro Europeu CEFR).</span></p>
-        <label class="field-label" for="grammar-level" data-i18n="grammar_cefr_label">Nível CEFR:</label>
+        <h2>Grammar</h2>
+        <p class="subtitle">Aprenda gramática inglesa por nível (Quadro Europeu CEFR).</p>
+        <label class="field-label" for="grammar-level">Nível CEFR:</label>
         <div class="field">
           <select id="grammar-level"></select>
         </div>
         <div class="btn-group">
-          <button id="grammar-load" class="btn" data-i18n="grammar_load">📘 Carregar tópico</button>
-          <button id="grammar-next" class="btn ghost" data-i18n="grammar_next">⏭ Próximo</button>
+          <button id="grammar-load" class="btn">📘 Carregar tópico</button>
+          <button id="grammar-next" class="btn ghost">⏭ Próximo</button>
         </div>
         <h3 id="grammar-topic" class="grammar-topic"></h3>
         <div id="grammar-structure" class="grammar-structure"></div>
@@ -192,9 +192,9 @@
       </section>
 
       <section id="memhack" class="panel card">
-        <h2 data-i18n="memhack_title">MemHack</h2>
-        <p class="subtitle" data-i18n="memhack_subtitle">Memorize frases com repetição espaçada. Ouça, treine e classifique a dificuldade.</p>
-        <label class="field-label" for="memhack-category" data-i18n="memhack_category_label">Categoria:</label>
+        <h2>MemHack</h2>
+        <p class="subtitle">Memorize frases com repetição espaçada. Ouça, treine e classifique a dificuldade.</p>
+        <label class="field-label" for="memhack-category">Categoria:</label>
         <div class="field">
           <select id="memhack-category"></select>
         </div>
@@ -202,36 +202,36 @@
           <div id="memhack-progress" class="memhack-progress"></div>
           <div id="memhack-phrase" class="memhack-phrase"></div>
           <div class="btn-group">
-            <button id="memhack-play" class="btn" data-i18n="memhack_play">🔊 Ouvir frase</button>
-            <button id="memhack-reveal" class="btn ghost" data-i18n="memhack_reveal">👁 Tradução</button>
+            <button id="memhack-play" class="btn">🔊 Ouvir frase</button>
+            <button id="memhack-reveal" class="btn ghost">👁 Tradução</button>
           </div>
           <div id="memhack-pt" class="memhack-pt hidden"></div>
           <div class="btn-group memhack-rating">
-            <button class="btn memhack-easy" data-diff="facil" data-i18n="memhack_easy">✅ Fácil</button>
-            <button class="btn memhack-medium" data-diff="medio" data-i18n="memhack_medium">🟡 Médio</button>
-            <button class="btn memhack-hard" data-diff="dificil" data-i18n="memhack_hard">🔴 Difícil</button>
+            <button class="btn memhack-easy" data-diff="facil">✅ Fácil</button>
+            <button class="btn memhack-medium" data-diff="medio">🟡 Médio</button>
+            <button class="btn memhack-hard" data-diff="dificil">🔴 Difícil</button>
           </div>
           <div id="memhack-msg" class="result"></div>
         </div>
       </section>
     </main>
 
-    <footer class="footer" data-i18n="footer_copyright">
+    <footer class="footer">
       Copyright © 2026 Jefferson Santos
     </footer>
   </div>
 
   <div id="change-pass-modal" class="login-overlay" style="display:none;">
     <form id="change-pass-form" class="login-card">
-      <h1 data-i18n="change_pass_title">Trocar senha</h1>
-      <label class="field-label" for="cp-current" data-i18n="cp_current_label">Senha atual</label>
-      <input id="cp-current" type="password" autocomplete="current-password" data-i18n-placeholder="cp_current_placeholder" placeholder="••••••••" />
-      <label class="field-label" for="cp-new" data-i18n="cp_new_label">Nova senha</label>
-      <input id="cp-new" type="password" autocomplete="new-password" data-i18n-placeholder="cp_new_placeholder" placeholder="mín. 4 caracteres" />
-      <label class="field-label" for="cp-confirm" data-i18n="cp_confirm_label">Confirmar nova senha</label>
-      <input id="cp-confirm" type="password" autocomplete="new-password" data-i18n-placeholder="cp_confirm_placeholder" placeholder="repita a nova senha" />
-      <button id="cp-save" class="btn" type="submit" data-i18n="cp_save">Salvar</button>
-      <button id="cp-cancel" class="btn ghost" type="button" data-i18n="cp_cancel">Cancelar</button>
+      <h1>Trocar senha</h1>
+      <label class="field-label" for="cp-current">Senha atual</label>
+      <input id="cp-current" type="password" autocomplete="current-password" placeholder="••••••••" />
+      <label class="field-label" for="cp-new">Nova senha</label>
+      <input id="cp-new" type="password" autocomplete="new-password" placeholder="mín. 4 caracteres" />
+      <label class="field-label" for="cp-confirm">Confirmar nova senha</label>
+      <input id="cp-confirm" type="password" autocomplete="new-password" placeholder="repita a nova senha" />
+      <button id="cp-save" class="btn" type="submit">Salvar</button>
+      <button id="cp-cancel" class="btn ghost" type="button">Cancelar</button>
       <div id="change-pass-error" class="login-error"></div>
       <div id="change-pass-ok" class="login-error" style="color:var(--ok)"></div>
     </form>
@@ -239,24 +239,23 @@
 
   <div id="users-modal" class="login-overlay" style="display:none;">
     <form id="users-form" class="login-card">
-      <h1 data-i18n="users_title">Gerenciar usuários</h1>
-      <label class="field-label" for="u-username" data-i18n="users_new_label">Novo usuário</label>
-      <input id="u-username" type="text" data-i18n-placeholder="users_username_placeholder" placeholder="nome de usuário" />
-      <label class="field-label" for="u-password" data-i18n="users_pass_label">Senha</label>
-      <input id="u-password" type="password" data-i18n-placeholder="users_pass_placeholder" placeholder="mín. 4 caracteres" />
-      <label class="field-label" for="u-confirm" data-i18n="users_confirm_label">Confirmar senha</label>
-      <input id="u-confirm" type="password" data-i18n-placeholder="users_confirm_placeholder" placeholder="repita a senha" />
-      <button id="u-add" class="btn" type="submit" data-i18n="users_create">Criar usuário</button>
+      <h1>Gerenciar usuários</h1>
+      <label class="field-label" for="u-username">Novo usuário</label>
+      <input id="u-username" type="text" placeholder="nome de usuário" />
+      <label class="field-label" for="u-password">Senha</label>
+      <input id="u-password" type="password" placeholder="mín. 4 caracteres" />
+      <label class="field-label" for="u-confirm">Confirmar senha</label>
+      <input id="u-confirm" type="password" placeholder="repita a senha" />
+      <button id="u-add" class="btn" type="submit">Criar usuário</button>
       <div id="users-error" class="login-error"></div>
       <div id="users-ok" class="login-error" style="color:var(--ok)"></div>
       <hr class="divider" />
-      <label class="field-label" data-i18n="users_existing">Usuários existentes</label>
+      <label class="field-label">Usuários existentes</label>
       <ul id="users-list" class="users-list"></ul>
-      <button id="users-cancel" class="btn ghost" type="button" data-i18n="users_close">Fechar</button>
+      <button id="users-cancel" class="btn ghost" type="button">Fechar</button>
     </form>
   </div>
 
-  <script src="i18n.js"></script>
   <script src="auth.js"></script>
   <script src="app.js"></script>
 </body>

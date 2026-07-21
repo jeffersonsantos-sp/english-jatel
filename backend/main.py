@@ -40,19 +40,16 @@ class ContentReq(BaseModel):
     level: str
     module: str
     category: str = "all"
-    lang: str = "en"
 
 
 class TtsReq(BaseModel):
     text: str
     voice: str = None
-    lang: str = "en"
 
 
 class CorrectReq(BaseModel):
     text: str
     level: str = "iniciante"
-    lang: str = "en"
 
 
 class ConverseReq(BaseModel):
@@ -60,7 +57,6 @@ class ConverseReq(BaseModel):
     persona: str = "cafe"
     history: List[Dict[str, str]] = []
     message: str = ""
-    lang: str = "en"
 
 
 class LoginReq(BaseModel):
@@ -79,7 +75,7 @@ class NewUserReq(BaseModel):
 
 
 # ---- Auth guard: protege "/" e "/api/*" (exceto rotas públicas) ----
-PUBLIC_API = {"/api/auth/login", "/api/auth/logout", "/api/auth/me", "/api/health", "/api/languages"}
+PUBLIC_API = {"/api/auth/login", "/api/auth/logout", "/api/auth/me", "/api/health"}
 
 
 @app.middleware("http")
@@ -208,63 +204,47 @@ def grammar_levels():
 
 class GrammarReq(BaseModel):
     level: str = "A1"
-    lang: str = "en"
 
 
 @app.post("/api/grammar")
 def grammar(req: GrammarReq):
-    return engine.get_grammar(req.level, req.lang)
-
-
-class ReloadGrammarReq(BaseModel):
-    lang: str = None
+    return engine.get_grammar(req.level)
 
 
 @app.post("/api/admin/reload-grammar")
-def reload_grammar(req: ReloadGrammarReq, request: Request):
+def reload_grammar(request: Request):
     _require_admin(request)
-    engine.reload_grammar(req.lang)
-    if req.lang:
-        counts = {req.lang: len(engine.GRAMMAR.get(req.lang, {}))}
-    else:
-        counts = {lv: len(engine.GRAMMAR.get(lv, {})) for lv in engine.GRAMMAR_LEVELS}
-    return {"ok": True, "levels": engine.GRAMMAR_LEVELS, "counts": counts}
-
-
-# ---- Idiomas suportados ----
-@app.get("/api/languages")
-def languages():
-    return {"languages": engine.LANGUAGES, "meta": {k: {"name": v["name"]} for k, v in engine.LANG_META.items()}}
+    engine.reload_grammar()
+    counts = {lv: len(engine.GRAMMAR.get(lv, [])) for lv in engine.GRAMMAR_LEVELS}
+    return {"ok": True, "levels": engine.GRAMMAR_LEVELS, "counts": counts, "source": engine.GRAMMAR_FILE}
 
 
 # ---- MemHack (memorizacao com repeticao espacada) ----
 class MemHackNextReq(BaseModel):
     category: str
-    lang: str = "en"
 
 
 @app.get("/api/memhack/categories")
-def memhack_categories(lang: str = "en"):
-    return {"categories": engine.get_memhack_categories(lang)}
+def memhack_categories():
+    return {"categories": engine.get_memhack_categories()}
 
 
 @app.post("/api/memhack/next")
 def memhack_next(req: MemHackNextReq, request: Request):
     user = _require_user(request)
-    return engine.get_memhack_next(user, req.category, req.lang)
+    return engine.get_memhack_next(user, req.category)
 
 
 class MemHackReviewReq(BaseModel):
     category: str
     phrase_id: str
     difficulty: str
-    lang: str = "en"
 
 
 @app.post("/api/memhack/review")
 def memhack_review(req: MemHackReviewReq, request: Request):
     user = _require_user(request)
-    result = engine.review_memhack(user, req.category, req.phrase_id, req.difficulty, req.lang)
+    result = engine.review_memhack(user, req.category, req.phrase_id, req.difficulty)
     if "error" in result:
         raise HTTPException(status_code=400, detail=result["error"])
     return result
@@ -272,22 +252,22 @@ def memhack_review(req: MemHackReviewReq, request: Request):
 
 @app.post("/api/content")
 def content(req: ContentReq):
-    return engine.get_content(req.level, req.module, req.category, req.lang)
+    return engine.get_content(req.level, req.module, req.category)
 
 
 @app.post("/api/correct")
 def correct(req: CorrectReq):
-    return {"correction": engine.correct(req.text, req.level, req.lang)}
+    return {"correction": engine.correct(req.text, req.level)}
 
 
 @app.get("/api/voices")
-def voices(lang: str = ""):
-    return {"voices": engine.list_voices(lang)}
+def voices():
+    return {"voices": engine.list_voices()}
 
 
 @app.post("/api/tts")
 async def tts(req: TtsReq):
-    audio = engine.tts_bytes(req.text, req.voice, req.lang)
+    audio = engine.tts_bytes(req.text, req.voice)
     if not audio:
         raise HTTPException(status_code=501, detail="TTS indisponivel")
     b64 = base64.b64encode(audio).decode()
@@ -307,7 +287,7 @@ async def stt(file: UploadFile = File(...)):
 
 @app.post("/api/converse")
 def converse(req: ConverseReq):
-    reply = engine.converse(req.level, req.persona, req.history, req.message, req.lang)
+    reply = engine.converse(req.level, req.persona, req.history, req.message)
     return {"reply": reply}
 
 
