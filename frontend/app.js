@@ -162,8 +162,21 @@ $("listen-check").addEventListener("click", () => {
 
 /* ---------- Speak ---------- */
 let mediaRecorder, chunks, mediaStream;
+let speakRecognition = null;
 state.speakTranscript = "";
 state.speakCorrection = "";
+
+// Reconhecimento de voz do navegador (Web Speech API). Roda no cliente, sem
+// depender do backend/ffmpeg/whisper.
+function getSpeechRecognition() {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) return null;
+  const r = new SR();
+  r.lang = "en-US";
+  r.interimResults = false;
+  r.maxAlternatives = 1;
+  return r;
+}
 
 async function startRec(onStop) {
   if (mediaRecorder && mediaRecorder.state === "recording") {
@@ -202,6 +215,46 @@ function setSpeakCorrection(text) {
 }
 
 $("speak-rec").addEventListener("click", async () => {
+  // 1) Preferencial: Web Speech API do navegador
+  const rec = getSpeechRecognition();
+  if (rec) {
+    speakRecognition = rec;
+    $("speak-rec").disabled = true;
+    $("speak-rec").textContent = "🎤 Gravando...";
+    $("speak-stop").disabled = false;
+    rec.onresult = (e) => {
+      const text = (e.results[e.results.length - 1][0].transcript || "").trim();
+      if (text) setSpeakTranscript(text);
+    };
+    rec.onerror = (e) => {
+      $("speak-transcript").textContent = "⚠️ " + (e.error === "no-speech" ? "não detectei sua fala" : "erro: " + e.error);
+    };
+    rec.onend = async () => {
+      $("speak-rec").disabled = false;
+      $("speak-rec").textContent = "🎤 Gravar";
+      $("speak-stop").disabled = true;
+      speakRecognition = null;
+      const text = state.speakTranscript;
+      if (text) {
+        try {
+          const corr = await api("/api/correct", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ text, level: state.level }),
+          });
+          setSpeakCorrection(corr.correction);
+        } catch (e) {
+          $("speak-correction").textContent = "⚠️ " + e.message;
+        }
+      }
+    };
+    try { rec.start(); } catch (e) {
+      $("speak-transcript").textContent = "⚠️ " + e.message;
+      rec.onend();
+    }
+    return;
+  }
+  // 2) Fallback: grava e envia para o backend (/api/stt).
   $("speak-rec").disabled = true;
   $("speak-rec").textContent = "🎤 Gravando...";
   $("speak-stop").disabled = false;
@@ -238,6 +291,7 @@ $("speak-rec").addEventListener("click", async () => {
 });
 
 $("speak-stop").addEventListener("click", () => {
+  if (speakRecognition) { speakRecognition.stop(); return; }
   if (mediaRecorder && mediaRecorder.state === "recording") {
     mediaRecorder.stop();
   }
@@ -509,7 +563,50 @@ $("conv-send").addEventListener("click", () => {
   aiTurn(text);
 });
 
+let convRecognition = null;
+
 $("conv-rec").addEventListener("click", async () => {
+  // 1) Preferencial: Web Speech API do navegador (não usa backend).
+  const rec = getSpeechRecognition();
+  if (rec) {
+    convRecognition = rec;
+    $("conv-rec").disabled = true;
+    $("conv-rec").textContent = "🎤 Gravando...";
+    $("conv-stop").disabled = false;
+    rec.continuous = true;
+    let convAccum = "";
+    rec.onresult = (e) => {
+      const idx = e.results.length - 1;
+      const text = (e.results[idx][0].transcript || "").trim();
+      if (text) convAccum += (convAccum ? " " : "") + text;
+    };
+    rec.onerror = (e) => {
+      const map = {
+        "not-allowed": "permissão do microfone negada",
+        "no-speech": "não detectei sua fala, tente de novo",
+        "audio-capture": "microfone não encontrado",
+      };
+      addMsg("ai", "⚠️ " + (map[e.error] || "erro no reconhecimento de voz: " + e.error));
+    };
+    rec.onend = () => {
+      $("conv-rec").disabled = false;
+      $("conv-rec").textContent = "🎤 Gravar";
+      $("conv-stop").disabled = true;
+      convRecognition = null;
+      const finalText = convAccum.trim();
+      convAccum = "";
+      if (finalText) {
+        addMsg("user", finalText);
+        aiTurn(finalText);
+      }
+    };
+    try { rec.start(); } catch (e) {
+      addMsg("ai", "⚠️ Não foi possível iniciar a gravação: " + e.message);
+      rec.onend();
+    }
+    return;
+  }
+  // 2) Fallback: grava e envia para o backend (/api/stt).
   $("conv-rec").disabled = true;
   $("conv-rec").textContent = "🎤 Gravando...";
   $("conv-stop").disabled = false;
@@ -543,6 +640,7 @@ $("conv-rec").addEventListener("click", async () => {
 });
 
 $("conv-stop").addEventListener("click", () => {
+  if (convRecognition) { convRecognition.stop(); return; }
   if (mediaRecorder && mediaRecorder.state === "recording") {
     mediaRecorder.stop();
   }
