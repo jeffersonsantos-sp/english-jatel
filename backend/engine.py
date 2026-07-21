@@ -357,6 +357,7 @@ PERSONAS = {
     "viagens": "companheiro de viagem animado",
     "familia": "membro da familia curioso",
     "filmes": "amigo cinéfilo que adora filmes",
+    "series": "amigo viciado em series que maratona toda temporada",
     "musicas": "amigo apaixonado por música",
     "futebol": "torcedor fanático de futebol",
     "devops": "colega de DevOps e tecnologia",
