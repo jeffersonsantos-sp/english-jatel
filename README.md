@@ -1,4 +1,4 @@
-# English JATEL
+# JATEL-IA
 
 Aplicativo de ensino de **inglês, espanhol e francês** que treina **Listen, Speak, Write, Read**
 e **Conversação por IA**, mais módulos de **Grammar** (gramática por nível CEFR) e **MemHack**

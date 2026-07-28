@@ -1,4 +1,4 @@
-# Documentação Técnica — English JATEL (multi-idioma)
+# Documentação Técnica — JATEL-IA (multi-idioma)
 
 App de ensino de **inglês, espanhol e francês**: backend FastAPI que serve a API
 **e** o frontend SPA num único servidor. Seletor `lang` no topo alterna entre

@@ -1,6 +1,6 @@
 # Processo de desenvolvimento e versionamento por tags
 
-Este documento descreve o fluxo ponta a ponta do projeto English JATEL: desde o
+Este documento descreve o fluxo ponta a ponta do projeto JATEL-IA: desde o
 desenvolvimento local até o build, os testes, a publicação da imagem no Docker Hub
 e o versionamento semântico via git tags.
 
