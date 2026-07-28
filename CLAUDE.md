@@ -44,7 +44,29 @@ python3 -c "from fastapi.testclient import TestClient; import main; c=TestClient
 # Frontend syntax check:
 node --check frontend/app.js
 ```
+### Backup Procedures (Obrigatório antes de alterações)
 
+Antes de fazer QUALQUER alteração no código, configuração ou conteúdo, você DEVE seguir os procedimentos de backup da skill `backup-procedures`.
+
+Esta skill está disponível em `.opencode/skills/backup-procedures/SKILL.md` e fornece:
+
+- Procedimentos para criar backup local completo antes de alterações
+- Verificação da integridade do backup
+- Instruções para restaurar do backup se necessário
+- Melhores práticas para proteção contra erros humanos
+
+Como usar:
+
+```bash
+# Pergunte se deseja fazer backup (sempre faça isso primeiro!)
+# Crie diretório de backup e copie o repositório (excluindo o próprio backup)
+mkdir -p repo-backup
+rsync -av --exclude='repo-backup/' . ./repo-backup/
+
+# Verifique se o backup foi criado corretamente
+find . -type f | ! -path "./repo-backup/*" | wc -l
+find ./repo-backup -type f | wc -l
+```
 ### Kubernetes
 ```bash
 kubectl apply -k k8s/

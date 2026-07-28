@@ -14,7 +14,10 @@ Use esta skill sempre que planejar:
 
 ## Procedimentos
 
-### 1. Backup Local Completo
+### 1. Perguntar se deseja a fazer o backup
+Perguntar Primeiro  se deseja realizar o backup , antes de proceseguir 
+
+### 2. Backup Local Completo
 Antes de qualquer alteração, crie um backup completo:
 
 ```bash
@@ -25,7 +28,7 @@ mkdir -p repo-backup
 rsync -av --exclude='repo-backup/' . ./repo-backup/
 ```
 
-### 2. Verificação do Backup
+### 3. Verificação do Backup
 Verifique se o backup foi criado corretamente:
 
 ```bash
@@ -34,14 +37,14 @@ find . -type f | ! -path "./repo-backup/*" | wc -l
 find ./repo-backup -type f | wc -l
 ```
 
-### 3. Configurar .gitignore
+### 4. Configurar .gitignore
 Certifique-se de que o diretório de backup está no .gitignore:
 
 ```
 repo-backup/**
 ```
 
-### 4. Restaurando do Backup (se necessário)
+### 5. Restaurando do Backup (se necessário)
 ```bash
 # Restaurar arquivo específico
 cp -r repo-backup/caminho/para/arquivo .
@@ -52,10 +55,11 @@ rsync -av --exclude='repo-backup/' ./repo-backup/ ./
 
 ## Melhores Práticas
 
-1. **Sempre faça backup primeiro** - Nunca inverta esta ordem
-2. **Valide o backup** - Confirme que os arquivos foram copiados corretamente
-3. **Inclua dados de usuário** - Lembre-se de backup em `backend/data/`
-4. **Mantenha backups recentes** - Faça novo backup antes de cada sessão de trabalho significativa
+1. **Sempre Pergunta se vai desejar fazer o backup** 
+2. **Sempre faça backup primeiro** - Nunca inverta esta ordem
+3. **Valide o backup** - Confirme que os arquivos foram copiados corretamente
+4. **Inclua dados de usuário** - Lembre-se de backup em `backend/data/`
+5. **Mantenha backups recentes** - Faça novo backup antes de cada sessão de trabalho significativa
 5. **Documente alterações** - Anote o que você planeja fazer antes de fazer o backup
 
 ## Verificação de Pré-condições

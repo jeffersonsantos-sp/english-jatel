@@ -34,6 +34,31 @@ OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
 EDGE_VOICE = os.getenv("EDGE_TTS_VOICE", "en-US-JennyNeural")
 IS_OPENROUTER = "openrouter" in BASE_URL
 
+# --- Multi-idioma ---
+SUPPORTED_LANGS = ("en", "es", "fr")
+DEFAULT_LANG = "en"
+
+LANG_META = {
+    "en": {"label": "Inglês", "prompt_prefix": "professor de inglês", "stt_lang": "en-US"},
+    "es": {"label": "Espanhol", "prompt_prefix": "profesor de español", "stt_lang": "es-ES"},
+    "fr": {"label": "Francês", "prompt_prefix": "professeur de français", "stt_lang": "fr-FR"},
+}
+
+LANG_VOICES = {
+    "en": os.getenv("EDGE_TTS_VOICE", "en-US-JennyNeural"),
+    "es": os.getenv("EDGE_TTS_VOICE_ES", "es-ES-ElviraNeural"),
+    "fr": os.getenv("EDGE_TTS_VOICE_FR", "fr-FR-DeniseNeural"),
+}
+
+def get_lang() -> str:
+    return DEFAULT_LANG
+
+def get_lang_meta(lang: str = DEFAULT_LANG) -> dict:
+    return LANG_META.get(lang, LANG_META[DEFAULT_LANG])
+
+def get_default_voice(lang: str = DEFAULT_LANG) -> str:
+    return LANG_VOICES.get(lang, LANG_VOICES[DEFAULT_LANG])
+
 # --- Autenticação (multi-usuário, persistido em arquivo) ---
 ADMIN_USER = os.getenv("ADMIN_USER", "admin")
 ADMIN_PASS = os.getenv("ADMIN_PASS", "mudar123")
@@ -895,31 +920,54 @@ GRAMMAR = {
 # (admin) para recarregar em tempo de execucao.
 GRAMMAR_FILE = os.getenv("GRAMMAR_FILE", os.path.join(os.path.dirname(__file__), "grammar.json"))
 
+def _grammar_file_for_lang(lang: str) -> str:
+    if lang == DEFAULT_LANG:
+        return GRAMMAR_FILE
+    alt = os.path.join(os.path.dirname(__file__), f"grammar_{lang}.json")
+    if os.path.exists(alt):
+        return alt
+    return GRAMMAR_FILE
 
-def load_grammar_data():
+
+GRAMMAR_CACHE = {}
+
+
+def load_grammar_data(lang: str = DEFAULT_LANG):
     global GRAMMAR, GRAMMAR_LEVELS
-    if not os.path.exists(GRAMMAR_FILE):
+    filepath = _grammar_file_for_lang(lang)
+    if not os.path.exists(filepath):
         return
     try:
-        with open(GRAMMAR_FILE, encoding="utf-8") as f:
+        with open(filepath, encoding="utf-8") as f:
             data = json.load(f)
     except Exception as e:
-        print(f"[grammar] falha ao ler {GRAMMAR_FILE}: {e}; usando conteudo embutido")
+        print(f"[grammar] falha ao ler {filepath}: {e}; usando conteudo embutido")
         return
     grammar = data.get("grammar")
     levels = data.get("levels")
     if not isinstance(grammar, dict) or not grammar:
-        print(f"[grammar] {GRAMMAR_FILE} sem 'grammar' valido; usando embutido")
+        print(f"[grammar] {filepath} sem 'grammar' valido; usando embutido")
         return
     if not levels:
         levels = [lv for lv in GRAMMAR_LEVELS if lv in grammar] + [lv for lv in grammar if lv not in GRAMMAR_LEVELS]
-    GRAMMAR = {lv: grammar[lv] for lv in levels if lv in grammar}
+    GRAMMAR_CACHE[lang] = {lv: grammar[lv] for lv in levels if lv in grammar}
     GRAMMAR_LEVELS = levels
-    print(f"[grammar] carregado de {GRAMMAR_FILE}: {len(levels)} niveis")
+    print(f"[grammar] carregado de {filepath}: {len(levels)} niveis (lang={lang})")
 
 
-def reload_grammar():
-    load_grammar_data()
+def _load_grammar(lang: str = DEFAULT_LANG):
+    if lang not in GRAMMAR_CACHE:
+        load_grammar_data(lang)
+    return GRAMMAR_CACHE.get(lang, GRAMMAR)
+
+
+def reload_grammar(lang: str | None = None):
+    if lang:
+        GRAMMAR_CACHE.pop(lang, None)
+        load_grammar_data(lang)
+    else:
+        GRAMMAR_CACHE.clear()
+        load_grammar_data()
     for k in list(_CONTENT_QUEUES):
         if isinstance(k, tuple) and k and k[0] == "grammar":
             _CONTENT_QUEUES.pop(k, None)
@@ -953,7 +1001,7 @@ def normalize_level(level: str) -> str:
     return level if level in LEVELS else "iniciante"
 
 
-def get_content(level: str, module: str, category: str = "all") -> dict:
+def get_content(level: str, module: str, category: str = "all", lang: str = DEFAULT_LANG) -> dict:
     level = normalize_level(level)
     if module == "read":
         item = _next_item(level, "read", category)
@@ -965,9 +1013,10 @@ def normalize_cefr(level: str) -> str:
     return level if level in GRAMMAR_LEVELS else "A1"
 
 
-def _next_grammar(level: str):
-    topics = GRAMMAR.get(normalize_cefr(level), [])
-    key = ("grammar", normalize_cefr(level))
+def _next_grammar(level: str, lang: str = DEFAULT_LANG):
+    grammar_data = _load_grammar(lang)
+    topics = grammar_data.get(normalize_cefr(level), [])
+    key = ("grammar", normalize_cefr(level), lang)
     q = _CONTENT_QUEUES.get(key)
     if not q:
         q = topics[:]
@@ -978,8 +1027,8 @@ def _next_grammar(level: str):
     return q.pop(0)
 
 
-def get_grammar(level: str) -> dict:
-    topic = _next_grammar(level)
+def get_grammar(level: str, lang: str = DEFAULT_LANG) -> dict:
+    topic = _next_grammar(level, lang)
     if not topic:
         return {"topic": "", "explanation": "", "structure": "", "examples": []}
     return {
@@ -996,25 +1045,38 @@ def get_grammar(level: str) -> dict:
 MEMHACK_FILE = os.getenv("MEMHACK_FILE", os.path.join(os.path.dirname(__file__), "memhack.json"))
 MEMHACK_PROGRESS_FILE = pathlib.Path(os.getenv("MEMHACK_PROGRESS", os.path.join(DATA_DIR, "memhack_progress.json")))
 
+def _memhack_file_for_lang(lang: str) -> str:
+    if lang == DEFAULT_LANG:
+        return MEMHACK_FILE
+    alt = os.path.join(os.path.dirname(__file__), f"memhack_{lang}.json")
+    if os.path.exists(alt):
+        return alt
+    return MEMHACK_FILE
+
 # Intervalos (segundos) por box: 1min, 10min, 1h, 1 dia, 7 dias.
 MEMHACK_BOX_INTERVALS = {1: 60, 2: 600, 3: 3600, 4: 86400, 5: 604800}
 MEMHACK_MAX_BOX = 5
 MEMHACK_NEW_BOX = 1
 
-_MEMHACK_CACHE = None
+_MEMHACK_CACHE = {}
 
 
-def _load_memhack():
-    global _MEMHACK_CACHE
-    if _MEMHACK_CACHE is not None:
-        return _MEMHACK_CACHE
+def _load_memhack(lang: str = DEFAULT_LANG):
+    if lang in _MEMHACK_CACHE and _MEMHACK_CACHE[lang] is not None:
+        return _MEMHACK_CACHE[lang]
+    filepath = _memhack_file_for_lang(lang)
     try:
-        with open(MEMHACK_FILE, encoding="utf-8") as f:
-            _MEMHACK_CACHE = json.load(f)
+        with open(filepath, encoding="utf-8") as f:
+            data = json.load(f)
     except Exception as e:
-        print(f"[memhack] falha ao ler {MEMHACK_FILE}: {e}")
-        _MEMHACK_CACHE = {"categories": [], "labels": {}, "phrases": {}}
-    return _MEMHACK_CACHE
+        print(f"[memhack] falha ao ler {filepath}: {e}")
+        data = {"categories": [], "labels": {}, "phrases": {}}
+    _MEMHACK_CACHE[lang] = data
+    return data
+
+
+def _memhack_progress_key(user: str, lang: str) -> str:
+    return f"{user}::{lang}"
 
 
 def _load_memhack_progress() -> dict:
@@ -1031,27 +1093,27 @@ def _save_memhack_progress(data: dict) -> None:
     MEMHACK_PROGRESS_FILE.write_text(json.dumps(data, indent=2))
 
 
-def get_memhack_categories() -> list:
-    d = _load_memhack()
+def get_memhack_categories(lang: str = DEFAULT_LANG) -> list:
+    d = _load_memhack(lang)
     labels = d.get("labels", {})
     return [{"id": c, "label": labels.get(c, c)} for c in d.get("categories", [])]
 
 
-def _memhack_phrase(category: str, pid: str):
-    for p in _load_memhack().get("phrases", {}).get(category, []):
+def _memhack_phrase(category: str, pid: str, lang: str = DEFAULT_LANG):
+    for p in _load_memhack(lang).get("phrases", {}).get(category, []):
         if p.get("id") == pid:
             return p
     return None
 
 
-def get_memhack_next(user: str, category: str) -> dict:
-    d = _load_memhack()
+def get_memhack_next(user: str, category: str, lang: str = DEFAULT_LANG) -> dict:
+    d = _load_memhack(lang)
     phrases = d.get("phrases", {}).get(category, [])
     if not phrases:
         return {"done": True, "message": "Sem frases nesta categoria."}
-    progress = _load_memhack_progress().get(user, {}).get(category, {})
+    progress_key = _memhack_progress_key(user, lang)
+    progress = _load_memhack_progress().get(progress_key, {}).get(category, {})
     now = time.time()
-    # Candidatos: vencidos (due <= now) ou ainda nao iniciados.
     candidates = [p for p in phrases if progress.get(p["id"], {}).get("due", 0) <= now]
     if not candidates:
         soonest = min(
@@ -1080,13 +1142,14 @@ def get_memhack_next(user: str, category: str) -> dict:
     }
 
 
-def review_memhack(user: str, category: str, phrase_id: str, difficulty: str) -> dict:
+def review_memhack(user: str, category: str, phrase_id: str, difficulty: str, lang: str = DEFAULT_LANG) -> dict:
     if difficulty not in ("facil", "medio", "dificil"):
         return {"error": "dificuldade invalida (use facil/medio/dificil)"}
-    if not _memhack_phrase(category, phrase_id):
+    if not _memhack_phrase(category, phrase_id, lang):
         return {"error": "frase nao encontrada"}
     progress_all = _load_memhack_progress()
-    cat_prog = progress_all.setdefault(user, {}).setdefault(category, {})
+    progress_key = _memhack_progress_key(user, lang)
+    cat_prog = progress_all.setdefault(progress_key, {}).setdefault(category, {})
     box = cat_prog.get(phrase_id, {}).get("box", MEMHACK_NEW_BOX)
     if difficulty == "facil":
         box = min(MEMHACK_MAX_BOX, box + 1)
@@ -1095,7 +1158,10 @@ def review_memhack(user: str, category: str, phrase_id: str, difficulty: str) ->
     interval = MEMHACK_BOX_INTERVALS.get(box, MEMHACK_BOX_INTERVALS[MEMHACK_MAX_BOX])
     cat_prog[phrase_id] = {"box": box, "due": time.time() + interval}
     _save_memhack_progress(progress_all)
-    return get_memhack_next(user, category)
+    return get_memhack_next(user, category, lang)
+
+
+def heuristic_correct(text: str) -> str:
     fixes = []
     t = text
     m = re.match(r"\b(he|she|it)\s+([a-z]+)\b", t, re.I)
@@ -1120,12 +1186,14 @@ def _client():
     return OpenAI(api_key=API_KEY, base_url=BASE_URL, default_headers=headers)
 
 
-def correct(text: str, level: str) -> str:
+def correct(text: str, level: str, lang: str = DEFAULT_LANG) -> str:
+    meta = get_lang_meta(lang)
+    prompt_prefix = meta["prompt_prefix"]
     if API_KEY:
         try:
             client = _client()
             prompt = (
-                f"Voce e um professor de ingles. Corrija o texto abaixo (nivel {level}). "
+                f"Voce e um professor de {prompt_prefix}. Corrija o texto abaixo (nivel {level}). "
                 f"Formato: ERRO -> CORRECAO -> REGRA -> SUGESTAO.\n\n{text}"
             )
             r = client.chat.completions.create(
@@ -1145,8 +1213,8 @@ def _run_async(coro):
         return ex.submit(lambda: asyncio.run(coro)).result()
 
 
-def tts_bytes(text: str, voice: str = None) -> bytes:
-    voice = voice or EDGE_VOICE
+def tts_bytes(text: str, voice: str = None, lang: str = DEFAULT_LANG) -> bytes:
+    voice = voice or get_default_voice(lang)
     # 1) Edge TTS: vozes neurais de alta qualidade, sem chave (recomendado).
     try:
         import edge_tts
@@ -1180,14 +1248,14 @@ def tts_bytes(text: str, voice: str = None) -> bytes:
     return b""
 
 
-_VOICES_CACHE = None
+_VOICES_CACHE = {}
 
 
-def list_voices() -> list:
-    global _VOICES_CACHE
-    if _VOICES_CACHE is not None:
-        return _VOICES_CACHE
+def list_voices(lang: str = DEFAULT_LANG) -> list:
+    if lang in _VOICES_CACHE:
+        return _VOICES_CACHE[lang]
     voices = []
+    prefix = LANG_VOICES.get(lang, LANG_VOICES[DEFAULT_LANG]).split("-")[0]
     try:
         import edge_tts
 
@@ -1196,20 +1264,35 @@ def list_voices() -> list:
 
         all_voices = _run_async(_list())
         for v in all_voices:
-            if v["ShortName"].startswith("en-"):  # só ingles
+            if lang == "en" and v["ShortName"].startswith("en-"):
+                voices.append({"id": v["ShortName"], "name": v.get("FriendlyName", v["ShortName"])})
+            elif lang == "es" and v["ShortName"].startswith("es-"):
+                voices.append({"id": v["ShortName"], "name": v.get("FriendlyName", v["ShortName"])})
+            elif lang == "fr" and v["ShortName"].startswith("fr-"):
                 voices.append({"id": v["ShortName"], "name": v.get("FriendlyName", v["ShortName"])})
     except Exception:
-        voices = [{"id": "en-US-JennyNeural", "name": "Jenny (US, female)"},
-                  {"id": "en-US-GuyNeural", "name": "Guy (US, male)"},
-                  {"id": "en-GB-SoniaNeural", "name": "Sonia (UK, female)"},
-                  {"id": "en-AU-NatashaNeural", "name": "Natasha (AU, female)"}]
-    _VOICES_CACHE = voices
+        if lang == "en":
+            voices = [{"id": "en-US-JennyNeural", "name": "Jenny (US, female)"},
+                      {"id": "en-US-GuyNeural", "name": "Guy (US, male)"},
+                      {"id": "en-GB-SoniaNeural", "name": "Sonia (UK, female)"},
+                      {"id": "en-AU-NatashaNeural", "name": "Natasha (AU, female)"}]
+        elif lang == "es":
+            voices = [{"id": "es-ES-ElviraNeural", "name": "Elvira (ES, female)"},
+                      {"id": "es-MX-DaliaNeural", "name": "Dalia (MX, female)"}]
+        elif lang == "fr":
+            voices = [{"id": "fr-FR-DeniseNeural", "name": "Denise (FR, female)"},
+                      {"id": "fr-FR-HenriNeural", "name": "Henri (FR, male)"}]
+        else:
+            voices = [{"id": LANG_VOICES.get(lang, LANG_VOICES[DEFAULT_LANG]), "name": "Default"}]
+    _VOICES_CACHE[lang] = voices
     return voices
 
 
-def stt_transcribe(audio_bytes: bytes, suffix: str = ".webm") -> str:
+def stt_transcribe(audio_bytes: bytes, suffix: str = ".webm", lang: str = DEFAULT_LANG) -> str:
     import speech_recognition as sr
     import shutil
+    meta = get_lang_meta(lang)
+    stt_lang = meta["stt_lang"]
     r = sr.Recognizer()
     src = pathlib.Path(tempfile.mktemp(suffix=suffix))
     wav = src.with_suffix(".wav")
@@ -1233,7 +1316,7 @@ def stt_transcribe(audio_bytes: bytes, suffix: str = ".webm") -> str:
             audio_path = src
         with sr.AudioFile(str(audio_path)) as audio_src:
             audio = r.record(audio_src)
-        return r.recognize_google(audio, language="en-US")
+        return r.recognize_google(audio, language=stt_lang)
     except sr.UnknownValueError:
         return ""
     except sr.RequestError as e:
@@ -1246,10 +1329,20 @@ def stt_transcribe(audio_bytes: bytes, suffix: str = ".webm") -> str:
         wav.unlink(missing_ok=True)
 
 
-def converse(level: str, persona: str, history: list, user_message: str) -> str:
+def converse(level: str, persona: str, history: list, user_message: str, lang: str = DEFAULT_LANG) -> str:
+    meta = get_lang_meta(lang)
+    prompt_prefix = meta["prompt_prefix"]
     persona_desc = PERSONAS.get(persona, "amigo tomando cafe")
-    system = f"Voce e um professor de ingles atuando como {persona_desc}. Converse em ingles (nivel {level}), reaja, faca perguntas e corrija erros do aluno de forma gentil."
+    system = f"Voce e um professor de {prompt_prefix} atuando como {persona_desc}. Converse em {prompt_prefix.split()[-1]} (nivel {level}), reaja, faca perguntas e corrija erros do aluno de forma gentil."
     messages = [{"role": "system", "content": system}] + history + [{"role": "user", "content": user_message}]
+    if API_KEY:
+        try:
+            client = _client()
+            r = client.chat.completions.create(model=OPENAI_MODEL, messages=messages)
+            return r.choices[0].message.content.strip()
+        except Exception as e:
+            return f"[LLM indisponivel: {e}] Hello! Tell me more about that."
+    return "Hello! That's interesting. Can you tell me more?"
     if API_KEY:
         try:
             client = _client()
