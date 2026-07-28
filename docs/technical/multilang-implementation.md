@@ -189,29 +189,101 @@ Todos os testes passaram:
 
 ---
 
-## Próximos passos — Conversa (Persona)
+## Registro de Backup
 
-### Planejado: Remover Category selector e corrigir Persona na IA
+| Data | Backup | Arquivos |
+|------|--------|----------|
+| Jul/2026 (antes das melhorias de Persona) | ✅ Criado | 4424 arquivos em `repo-backup/` |
 
-**Problema atual**: O módulo Conversa tem um seletor de Categoria separado do seletor de Persona. A Categoria é redundante — cada Persona já define o contexto de conversa (ex.: `cafe` = conversa informal, `devops` = contexto técnico). A IA também não reconhece bem a escolha de Persona, porque o `persona` é enviado ao LLM mas o system prompt não reforça o papel associado à persona.
+---
 
-**O que será feito**:
-1. Remover o seletor de Categoria da UI de Conversa (já está descontinuado no `app.js`)
-2. Garantir que a Persona selecionada seja passada corretamente ao LLM no system prompt
-3. Melhorar o system prompt do `converse()` para reforçar o papel da persona escolhida
-4. Mapear cada persona para um nome de papel em português/inglês que a IA entenda
+## O que ainda precisa ser implementado (passo a passo)
 
-**Arquivos envolvidos**: `frontend/app.js`, `backend/engine.py`, `backend/main.py`
+### ✅ Passo A: STT hardcoded no frontend (resolvido)
 
-#### Detalhamento da Persona fix:
+**Correção aplicada**:
+1. `getSpeechRecognition(lang)` já era dinâmico (aceitava `lang` como parâmetro e mapeava para `es-ES`/`fr-FR`/`en-US`)
+2. `browserSpeak(text)` hardcodeava `en-US` — corrigido para aceitar parâmetro `lang` e mapear para `es-ES`/`fr-FR`/`en-US`
+3. `playTts()` agora passa `state.lang` para `browserSpeak()`
 
-O `converse()` em `engine.py` usa o `PERSONAS` dict para o prefixo do prompt:
-```python
-persona_label = PERSONAS.get(persona, persona)
-prompt = f"Voce e um {persona_label}. Responda em {lang_label}..."
-```
+**Arquivo**: `frontend/app.js` (linhas ~29-60)
 
-O problema é que o `PERSONAS` dict tem valores em português que descrevem o papel ("amigo tomando café", "colega de DevOps"), mas o LLM não interpreta bem esse papel. A melhoria é usar nomes de papel mais explícitos e estruturados, e reforçar no system prompt que a IA DEVE adotar o papel da persona selecionada.
+### ✅ Passo B/C: Listen/Read por idioma (resolvido)
+
+**Arquivos criados**:
+- `backend/listen_es.json` — frases de ditado em espanhol (3 níveis × 3 categorias × 8 frases)
+- `backend/read_es.json` — textos de leitura em espanhol com glossário PT-BR
+- `backend/listen_fr.json` — frases de ditado em francês (3 níveis × 3 categorias × 8 frases)
+- `backend/read_fr.json` — textos de leitura em francês com glossário PT-BR
+
+**Atualizações em `engine.py`**:
+- Adicionados `_listen_file_for_lang()`, `_read_file_for_lang()`, `_load_listen_file()`, `_load_read_file()`
+- Adicionados `_LISTEN_CACHE` e `_READ_CACHE` por idioma
+- `_next_item()` agora aceita `lang` e carrega conteúdo do arquivo por idioma quando disponível
+- `get_content()` passa `lang` para `_next_item()`
+- `_CONTENT_QUEUES` agora inclui `lang` como quarta chave da tupla
+
+### ✅ Passo D: Correção heuristics — limitação documentada
+
+**Status**: Acceptable for initial phase. `heuristic_correct()` usa regex específicas de inglês; para ES/FR retorna fallback quando o LLM não está disponível. A correção real para ES/FR é feita pelo LLM via `correct()`.
+
+### ✅ Passo E: Cache invalidation (resolvido)
+
+**Problema**: `reload_grammar()` limpava `GRAMMAR_CACHE` mas não `_MEMHACK_CACHE`, `_LISTEN_CACHE` nem `_READ_CACHE`.
+
+**Correção aplicada**:
+- `reload_grammar(lang)` agora também invalida `_MEMHACK_CACHE`, `_LISTEN_CACHE` e `_READ_CACHE` para a linguagem específica
+- `reload_grammar()` (sem `lang`) limpa todos os caches de conteúdo
+- Limpeza de `_CONTENT_QUEUES` atualizada para filtrar por `lang` na tupla
+
+### ✅ Passo F: STT multipart `lang` (resolvido)
+
+**Problema**: O endpoint `POST /api/stt` usava `lang` como query parameter, o que pode não funcionar corretamente com FormData multipart no frontend.
+
+**Correção aplicada**:
+- Frontend (`app.js`): `lang` agora é enviado como campo FormData (`fd.append("lang", state.lang)`) em vez de query parameter
+- Backend (`main.py`): endpoint STT agora usa `Form("en")` para ler `lang` do body do FormData
+- Export `Form` adicionado aos imports do `fastapi` em `main.py`
+
+### ✅ Passo G: Validação e testes (concluído)
+
+Todos os testes passaram:
+- Health check: OK
+- Grammar por idioma (EN/ES/FR): OK
+- MemHack por idioma (EN/ES/FR): OK (6 categorias cada)
+- Listen/Read por idioma (EN/ES/FR): OK (conteúdo e glossário corretos)
+- TTS por idioma (EN/ES/FR): OK
+- Correct per language (EN/ES/FR): OK
+- Frontend syntax (JS): OK
+- Todos os JSON files validam: OK
+
+### ✅ Passo H: PERSONAS redesign (resolvido)
+
+**Problema**: O dict `PERSONAS` tinha descritores em português ("amigo tomando café", "colega de DevOps") que não davam contexto suficiente à IA para adotar o papel. O system prompt de `converse()` também não reforçava claramente a adoção do role.
+
+**Correção aplicada**:
+- Redesenho do dict `PERSONAS` para usar descrições de role por idioma (EN/ES/FR) como instruções explícitas para a IA
+- Melhoria do system prompt de `converse()` para instruir explicitamente a IA a adotar o papel da persona selecionada
+- Remoção de código duplicado no final da função `converse()`
+- Backend (`engine.py`): `PERSONAS` agora tem dicts por langue com instructions claras de role
+
+### ❌ Passo I: Remover Category selector da UI (pendente)
+
+**Problema**: O seletor de Categoria na barra header é redundante para a experiência do usuário. O Conversation module não usa Category, e o Listen/Read pode usar "all" como padrão.
+
+**O que fazer**:
+1. Remover o `<select id="category">` do `frontend/index.html`
+2. Garantir que `state.category` permanece `"all"` por padrão em `frontend/app.js`
+3. Verificar que Listen/Read continuam funcionando sem o seletor
+
+### ❌ Passo J: Melhorar reconhecimento de Persona pela IA (pendente)
+
+**Problema**: Quando o usuario troca de Persona, a IA nem sempre reconhece a mudança de papel. A melhoria do system prompt em Passo H já resolve parcialmente isso, mas mais melhorias são necessárias:
+
+**O que fazer**:
+1. Adicionar instrução mais forte no system prompt de `converse()` para que a IA adote imediatamente o role da persona
+2. Garantir que o histórico de conversa nao contenha informações de persona de uma conversa anterior quando trocar
+3. Possivelmente incluir o nome da persona na primeira mensagem do system prompt para reforço
 
 ---
 
@@ -219,7 +291,7 @@ O problema é que o `PERSONAS` dict tem valores em português que descrevem o pa
 
 | Fase | Item | Esforco | Dependencia |
 |------|------|---------|-------------|
-| **1** | Remover Category selector da UI de Conversa | Baixo | Nenhuma |
-| **2** | Melhorar system prompt de converse() com persona role explícito | Medio | Nenhuma |
-| **3** | Mapear personas para nomes de papel claros (EN/ES/FR) | Baixo | Passo 2 |
-| **4** | Testar e validar que a IA reconhece a persona escolhida | Medio | Fases 1-3 |
+| **1** | Remover Category selector da UI | Baixo | Nenhuma |
+| **2** | Melhorar system prompt de converse() com reforço de persona | Medio | Nenhuma |
+| **3** | Adicionar instrução de reset de persona no início da conversa | Baixo | Fase 2 |
+| **4** | Testar e validar que a IA reconhece a persona ao trocar | Medio | Fases 1-3 |
