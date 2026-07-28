@@ -201,11 +201,11 @@ function speakStopRecording() {
 
 // Reconhecimento de voz do navegador (Web Speech API). Roda no cliente, sem
 // depender do backend/ffmpeg/whisper.
-function getSpeechRecognition() {
+function getSpeechRecognition(lang) {
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!SR) return null;
   const r = new SR();
-  r.lang = "en-US";
+  r.lang = lang === "es" ? "es-ES" : lang === "fr" ? "fr-FR" : "en-US";
   r.interimResults = false;
   r.maxAlternatives = 1;
   return r;
@@ -249,7 +249,7 @@ function setSpeakCorrection(text) {
 
 $("speak-rec").addEventListener("click", async () => {
   // 1) Preferencial: Web Speech API do navegador
-  const rec = getSpeechRecognition();
+  const rec = getSpeechRecognition(state.lang);
   if (rec) {
     speakRecognition = rec;
     $("speak-rec").disabled = true;
@@ -617,7 +617,7 @@ function convStopRecording() {
 
 $("conv-rec").addEventListener("click", async () => {
   // 1) Preferencial: Web Speech API do navegador (não usa backend).
-  const rec = getSpeechRecognition();
+  const rec = getSpeechRecognition(state.lang);
   if (rec) {
     convRecognition = rec;
     $("conv-rec").disabled = true;
