@@ -186,3 +186,40 @@ Todos os testes passaram:
 ---
 
 > **Nota**: antes de cada implementacao, seguir o procedimento de backup da skill `backup-procedures`.
+
+---
+
+## Próximos passos — Conversa (Persona)
+
+### Planejado: Remover Category selector e corrigir Persona na IA
+
+**Problema atual**: O módulo Conversa tem um seletor de Categoria separado do seletor de Persona. A Categoria é redundante — cada Persona já define o contexto de conversa (ex.: `cafe` = conversa informal, `devops` = contexto técnico). A IA também não reconhece bem a escolha de Persona, porque o `persona` é enviado ao LLM mas o system prompt não reforça o papel associado à persona.
+
+**O que será feito**:
+1. Remover o seletor de Categoria da UI de Conversa (já está descontinuado no `app.js`)
+2. Garantir que a Persona selecionada seja passada corretamente ao LLM no system prompt
+3. Melhorar o system prompt do `converse()` para reforçar o papel da persona escolhida
+4. Mapear cada persona para um nome de papel em português/inglês que a IA entenda
+
+**Arquivos envolvidos**: `frontend/app.js`, `backend/engine.py`, `backend/main.py`
+
+#### Detalhamento da Persona fix:
+
+O `converse()` em `engine.py` usa o `PERSONAS` dict para o prefixo do prompt:
+```python
+persona_label = PERSONAS.get(persona, persona)
+prompt = f"Voce e um {persona_label}. Responda em {lang_label}..."
+```
+
+O problema é que o `PERSONAS` dict tem valores em português que descrevem o papel ("amigo tomando café", "colega de DevOps"), mas o LLM não interpreta bem esse papel. A melhoria é usar nomes de papel mais explícitos e estruturados, e reforçar no system prompt que a IA DEVE adotar o papel da persona selecionada.
+
+---
+
+## Ordem de execução recomendada (próximos passos)
+
+| Fase | Item | Esforco | Dependencia |
+|------|------|---------|-------------|
+| **1** | Remover Category selector da UI de Conversa | Baixo | Nenhuma |
+| **2** | Melhorar system prompt de converse() com persona role explícito | Medio | Nenhuma |
+| **3** | Mapear personas para nomes de papel claros (EN/ES/FR) | Baixo | Passo 2 |
+| **4** | Testar e validar que a IA reconhece a persona escolhida | Medio | Fases 1-3 |
