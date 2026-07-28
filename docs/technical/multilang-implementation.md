@@ -267,23 +267,23 @@ Todos os testes passaram:
 - Remoção de código duplicado no final da função `converse()`
 - Backend (`engine.py`): `PERSONAS` agora tem dicts por langue com instructions claras de role
 
-### ❌ Passo I: Remover Category selector da UI (pendente)
+### ✅ Passo I: Remover Category selector da UI (resolvido)
 
-**Problema**: O seletor de Categoria na barra header é redundante para a experiência do usuário. O Conversation module não usa Category, e o Listen/Read pode usar "all" como padrão.
+**Correção aplicada**:
+- Removido `<select id="category">` (seletor global de Categoria) do `frontend/index.html`
+- `state.category` permanece `"all"` por padrão em `frontend/app.js`
+- Listen/Read continuam funcionando sem o seletor (sempre usam todas as categorias)
 
-**O que fazer**:
-1. Remover o `<select id="category">` do `frontend/index.html`
-2. Garantir que `state.category` permanece `"all"` por padrão em `frontend/app.js`
-3. Verificar que Listen/Read continuam funcionando sem o seletor
+### ✅ Passo J: Melhorar reconhecimento de Persona pela IA (resolvido)
 
-### ❌ Passo J: Melhorar reconhecimento de Persona pela IA (pendente)
+**Problema**: Quando o usuario trocava de Persona, o `state.history` não era limpo — o histórico da conversa anterior carregava contexto de uma persona diferente, fazendo a IA ignorar a nova escolha.
 
-**Problema**: Quando o usuario troca de Persona, a IA nem sempre reconhece a mudança de papel. A melhoria do system prompt em Passo H já resolve parcialmente isso, mas mais melhorias são necessárias:
+**Correção aplicada**:
+- Adicionada função `clearChat()` em `frontend/app.js` que limpa o chat e reset `state.history`
+- Adicionado event listener `$("persona").addEventListener("change", ...)` que chama `clearChat()` ao trocar de persona
+- Agora quando o usuario muda de persona, o histórico é limpo e a IA reconhece imediatamente a nova escolha
 
-**O que fazer**:
-1. Adicionar instrução mais forte no system prompt de `converse()` para que a IA adote imediatamente o role da persona
-2. Garantir que o histórico de conversa nao contenha informações de persona de uma conversa anterior quando trocar
-3. Possivelmente incluir o nome da persona na primeira mensagem do system prompt para reforço
+**Arquivo**: `frontend/app.js` (nova função `clearChat()` + handler de mudança de persona)
 
 ---
 
