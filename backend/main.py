@@ -295,6 +295,18 @@ def converse(req: ConverseReq):
     return {"reply": reply}
 
 
+class SetLangReq(BaseModel):
+    lang: str = "en"
+
+
+@app.post("/api/set-lang")
+def set_lang(req: SetLangReq, request: Request):
+    # Salva o idioma no cookie de sessão
+    user = _require_user(request)
+    engine.set_user_lang(user, req.lang)
+    return {"ok": True, "lang": req.lang}
+
+
 @app.get("/")
 def index():
     return FileResponse(os.path.join(FRONTEND_DIR, "index.html"))
