@@ -45,7 +45,7 @@ async function playTts(text) {
     const data = await api("/api/tts", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text, level: state.level, voice: state.voice }),
+      body: JSON.stringify({ text, level: state.level, voice: state.voice, lang: state.lang }),
     });
     if (!ttsAudio) ttsAudio = new Audio();
     ttsAudio.pause();
@@ -78,19 +78,32 @@ $("lang").addEventListener("change", async (e) => {
   } catch (err) {
     console.warn("Lang set error:", err);
   }
-});
-
-/* ---------- Vozes da IA ---------- */
-(async () => {
   try {
-    const data = await api("/api/voices");
+    const data = await api("/api/voices?lang=" + encodeURIComponent(state.lang));
     const sel = $("voice");
     sel.innerHTML = "";
     data.voices.forEach((v) => {
       const o = document.createElement("option");
       o.value = v.id;
       o.textContent = v.name;
-      if (v.id === "en-US-JennyNeural") o.selected = true;
+      sel.appendChild(o);
+    });
+    state.voice = sel.value;
+  } catch (_) {}
+});
+
+/* ---------- Vozes da IA ---------- */
+(async () => {
+  try {
+    const lang = state.lang;
+    const data = await api("/api/voices?lang=" + encodeURIComponent(lang));
+    const sel = $("voice");
+    sel.innerHTML = "";
+    data.voices.forEach((v) => {
+      const o = document.createElement("option");
+      o.value = v.id;
+      o.textContent = v.name;
+      if (v.id === (lang === "es" ? "es-ES-ElviraNeural" : lang === "fr" ? "fr-FR-DeniseNeural" : "en-US-JennyNeural")) o.selected = true;
       sel.appendChild(o);
     });
     state.voice = sel.value;
@@ -124,7 +137,7 @@ $("listen-play").addEventListener("click", async () => {
     const data = await api("/api/content", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ level: state.level, module: "listen", category: state.category }),
+      body: JSON.stringify({ level: state.level, module: "listen", category: state.category, lang: state.lang }),
     });
     state.listenText = data.text;
     $("listen-sentence").textContent = data.text;
@@ -290,18 +303,18 @@ $("speak-rec").addEventListener("click", async () => {
       const fd = new FormData();
       const ext = mime.includes("webm") ? "webm" : mime.includes("ogg") ? "ogg" : "wav";
       fd.append("file", new Blob([bytes], { type: mime }), "audio." + ext);
-      try {
-        const stt = await api("/api/stt", { method: "POST", body: fd });
-        setSpeakTranscript(stt.transcript || "(audio vazio)");
-        if (stt.transcript) {
-          const corr = await api("/api/correct", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ text: stt.transcript, level: state.level }),
-          });
-          setSpeakCorrection(corr.correction);
-        }
-      } catch (e) {
+try {
+         const stt = await api("/api/stt?lang=" + encodeURIComponent(state.lang), { method: "POST", body: fd });
+         setSpeakTranscript(stt.transcript || "(audio vazio)");
+         if (stt.transcript) {
+           const corr = await api("/api/correct", {
+             method: "POST",
+             headers: { "Content-Type": "application/json" },
+             body: JSON.stringify({ text: stt.transcript, level: state.level, lang: state.lang }),
+           });
+           setSpeakCorrection(corr.correction);
+         }
+       } catch (e) {
         console.error("STT error:", e);
         $("speak-transcript").textContent = "🎤 (erro: " + (e.message || e) + ")\n(Digite abaixo para corrigir manualmente.)";
       }
@@ -331,7 +344,7 @@ $("speak-correct-text").addEventListener("click", async () => {
     const corr = await api("/api/correct", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text, level: state.level }),
+      body: JSON.stringify({ text, level: state.level, lang: state.lang }),
     });
     setSpeakCorrection(corr.correction);
   } catch (e) {
@@ -347,7 +360,7 @@ $("write-check").addEventListener("click", async () => {
     const data = await api("/api/correct", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text, level: state.level }),
+      body: JSON.stringify({ text, level: state.level, lang: state.lang }),
     });
     $("write-result").textContent = data.correction;
   } catch (e) {
@@ -361,7 +374,7 @@ $("read-load").addEventListener("click", async () => {
     const data = await api("/api/content", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ level: state.level, module: "read", category: state.category }),
+      body: JSON.stringify({ level: state.level, module: "read", category: state.category, lang: state.lang }),
     });
     $("read-text").textContent = data.text;
     const g = Object.entries(data.glossary || {})
@@ -393,7 +406,8 @@ $("read-check").addEventListener("click", async () => {
 /* ---------- Grammar (CEFR) ---------- */
 (async () => {
   try {
-    const data = await api("/api/grammar-levels");
+    const lang = state.lang;
+    const data = await api("/api/grammar-levels?lang=" + encodeURIComponent(lang));
     const sel = $("grammar-level");
     sel.innerHTML = "";
     data.levels.forEach((lv) => {
@@ -417,7 +431,7 @@ async function loadGrammar() {
     const data = await api("/api/grammar", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ level: $("grammar-level").value }),
+      body: JSON.stringify({ level: $("grammar-level").value, lang: state.lang }),
     });
     $("grammar-topic").textContent = data.topic || "";
     $("grammar-structure").textContent = data.structure || "";
@@ -431,7 +445,7 @@ async function loadGrammar() {
       const btn = document.createElement("button");
       btn.className = "btn ghost grammar-play";
       btn.textContent = "🔊";
-      btn.title = "Ouvir frase em inglês";
+      btn.title = "Ouvir frase em ingles";
       btn.addEventListener("click", () => playTts(grammarEnglishPart(ex)));
       li.appendChild(span);
       li.appendChild(btn);
@@ -449,7 +463,8 @@ $("grammar-level").addEventListener("change", loadGrammar);
 /* ---------- MemHack (SRS) ---------- */
 (async () => {
   try {
-    const data = await api("/api/memhack/categories");
+    const lang = state.lang;
+    const data = await api("/api/memhack/categories?lang=" + encodeURIComponent(lang));
     const sel = $("memhack-category");
     sel.innerHTML = "";
     data.categories.forEach((c) => {
@@ -468,6 +483,7 @@ let memhackCurrent = null;
 
 async function memhackLoadNext() {
   const category = $("memhack-category").value;
+  const lang = state.lang;
   $("memhack-msg").textContent = "";
   $("memhack-pt").classList.add("hidden");
   $("memhack-pt").textContent = "";
@@ -475,12 +491,12 @@ async function memhackLoadNext() {
     const data = await api("/api/memhack/next", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ category }),
+      body: JSON.stringify({ category, lang }),
     });
     memhackCurrent = data.done ? null : data.phrase;
     if (data.done) {
       $("memhack-progress").textContent = "";
-      $("memhack-phrase").textContent = data.message || "Concluído por enquanto.";
+      $("memhack-phrase").textContent = data.message || "Concluido por enquanto.";
       $("memhack-pt").textContent = "";
       document.querySelectorAll(".memhack-rating button").forEach((b) => (b.disabled = true));
       return;
@@ -508,6 +524,7 @@ document.querySelectorAll(".memhack-rating button").forEach((btn) => {
   btn.addEventListener("click", async () => {
     if (!memhackCurrent) return;
     const category = $("memhack-category").value;
+    const lang = state.lang;
     try {
       const data = await api("/api/memhack/review", {
         method: "POST",
@@ -516,15 +533,16 @@ document.querySelectorAll(".memhack-rating button").forEach((btn) => {
           category,
           phrase_id: memhackCurrent.id,
           difficulty: btn.dataset.diff,
+          lang,
         }),
       });
       memhackCurrent = data.done ? null : data.phrase;
       if (data.done) {
         $("memhack-progress").textContent = "";
-        $("memhack-phrase").textContent = data.message || "Concluído por enquanto.";
+        $("memhack-phrase").textContent = data.message || "Concluido por enquanto.";
         $("memhack-pt").textContent = "";
         document.querySelectorAll(".memhack-rating button").forEach((b) => (b.disabled = true));
-        $("memhack-msg").textContent = "⏱️ Revisão agendada. Volte mais tarde!";
+        $("memhack-msg").textContent = "⏱ Revisao agendada. Volte mais tarde!";
         return;
       }
       $("memhack-pt").classList.add("hidden");
@@ -558,6 +576,7 @@ async function aiTurn(message) {
         persona: state.persona,
         history: state.history,
         message,
+        lang: state.lang,
       }),
     });
     state.history.push({ role: "user", content: message });
@@ -643,23 +662,23 @@ $("conv-rec").addEventListener("click", async () => {
   $("conv-rec").disabled = true;
   $("conv-rec").textContent = "🎤 Gravando...";
   $("conv-stop").disabled = false;
-  try {
-    await startRec(async (bytes, mime) => {
-      $("conv-rec").disabled = false;
-      $("conv-rec").textContent = "🎤 Gravar";
-      $("conv-stop").disabled = true;
-      const fd = new FormData();
-      const ext = mime.includes("webm") ? "webm" : mime.includes("ogg") ? "ogg" : "wav";
-      fd.append("file", new Blob([bytes], { type: mime }), "audio." + ext);
-      try {
-        const stt = await api("/api/stt", { method: "POST", body: fd });
-        if (stt.transcript) {
-          addMsg("user", stt.transcript);
-          await aiTurn(stt.transcript);
-        } else {
-          addMsg("user", "(STT: audio vazio ou inaudivel)");
-        }
-      } catch (e) {
+try {
+       await startRec(async (bytes, mime) => {
+         $("conv-rec").disabled = false;
+         $("conv-rec").textContent = "🎤 Gravar";
+         $("conv-stop").disabled = true;
+         const fd = new FormData();
+         const ext = mime.includes("webm") ? "webm" : mime.includes("ogg") ? "ogg" : "wav";
+         fd.append("file", new Blob([bytes], { type: mime }), "audio." + ext);
+         try {
+           const stt = await api("/api/stt?lang=" + encodeURIComponent(state.lang), { method: "POST", body: fd });
+           if (stt.transcript) {
+             addMsg("user", stt.transcript);
+             await aiTurn(stt.transcript);
+           } else {
+             addMsg("user", "(STT: audio vazio ou inaudivel)");
+           }
+         } catch (e) {
         console.error("STT error:", e);
         addMsg("user", "🎤 (erro: " + (e.message || e) + ")");
       }

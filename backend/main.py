@@ -40,16 +40,19 @@ class ContentReq(BaseModel):
     level: str
     module: str
     category: str = "all"
+    lang: str = "en"
 
 
 class TtsReq(BaseModel):
     text: str
     voice: str = None
+    lang: str = "en"
 
 
 class CorrectReq(BaseModel):
     text: str
     level: str = "iniciante"
+    lang: str = "en"
 
 
 class ConverseReq(BaseModel):
@@ -57,6 +60,7 @@ class ConverseReq(BaseModel):
     persona: str = "cafe"
     history: List[Dict[str, str]] = []
     message: str = ""
+    lang: str = "en"
 
 
 class LoginReq(BaseModel):
@@ -204,17 +208,23 @@ def grammar_levels():
 
 class GrammarReq(BaseModel):
     level: str = "A1"
+    lang: str = "en"
 
 
 @app.post("/api/grammar")
 def grammar(req: GrammarReq):
-    return engine.get_grammar(req.level)
+    return engine.get_grammar(req.level, req.lang)
+
+
+class ReloadGrammarReq(BaseModel):
+    lang: str | None = None
 
 
 @app.post("/api/admin/reload-grammar")
-def reload_grammar(request: Request):
+def reload_grammar(request: Request, req: ReloadGrammarReq | None = None):
     _require_admin(request)
-    engine.reload_grammar()
+    lang = req.lang if req else None
+    engine.reload_grammar(lang)
     counts = {lv: len(engine.GRAMMAR.get(lv, [])) for lv in engine.GRAMMAR_LEVELS}
     return {"ok": True, "levels": engine.GRAMMAR_LEVELS, "counts": counts, "source": engine.GRAMMAR_FILE}
 
@@ -222,29 +232,31 @@ def reload_grammar(request: Request):
 # ---- MemHack (memorizacao com repeticao espacada) ----
 class MemHackNextReq(BaseModel):
     category: str
+    lang: str = "en"
 
 
 @app.get("/api/memhack/categories")
-def memhack_categories():
-    return {"categories": engine.get_memhack_categories()}
+def memhack_categories(lang: str = "en"):
+    return {"categories": engine.get_memhack_categories(lang)}
 
 
 @app.post("/api/memhack/next")
 def memhack_next(req: MemHackNextReq, request: Request):
     user = _require_user(request)
-    return engine.get_memhack_next(user, req.category)
+    return engine.get_memhack_next(user, req.category, req.lang)
 
 
 class MemHackReviewReq(BaseModel):
     category: str
     phrase_id: str
     difficulty: str
+    lang: str = "en"
 
 
 @app.post("/api/memhack/review")
 def memhack_review(req: MemHackReviewReq, request: Request):
     user = _require_user(request)
-    result = engine.review_memhack(user, req.category, req.phrase_id, req.difficulty)
+    result = engine.review_memhack(user, req.category, req.phrase_id, req.difficulty, req.lang)
     if "error" in result:
         raise HTTPException(status_code=400, detail=result["error"])
     return result
@@ -252,22 +264,22 @@ def memhack_review(req: MemHackReviewReq, request: Request):
 
 @app.post("/api/content")
 def content(req: ContentReq):
-    return engine.get_content(req.level, req.module, req.category)
+    return engine.get_content(req.level, req.module, req.category, req.lang)
 
 
 @app.post("/api/correct")
 def correct(req: CorrectReq):
-    return {"correction": engine.correct(req.text, req.level)}
+    return {"correction": engine.correct(req.text, req.level, req.lang)}
 
 
 @app.get("/api/voices")
-def voices():
-    return {"voices": engine.list_voices()}
+def voices(lang: str = "en"):
+    return {"voices": engine.list_voices(lang)}
 
 
 @app.post("/api/tts")
 async def tts(req: TtsReq):
-    audio = engine.tts_bytes(req.text, req.voice)
+    audio = engine.tts_bytes(req.text, req.voice, req.lang)
     if not audio:
         raise HTTPException(status_code=501, detail="TTS indisponivel")
     b64 = base64.b64encode(audio).decode()
@@ -275,12 +287,12 @@ async def tts(req: TtsReq):
 
 
 @app.post("/api/stt")
-async def stt(file: UploadFile = File(...)):
+async def stt(file: UploadFile = File(...), lang: str = "en"):
     data = await file.read()
     suffix = "." + (file.filename.split(".")[-1] if file.filename and "." in file.filename else "webm")
     import traceback
     try:
-        transcript = engine.stt_transcribe(data, suffix)
+        transcript = engine.stt_transcribe(data, suffix, lang)
     except RuntimeError as e:
         raise HTTPException(status_code=501, detail=str(e))
     except Exception as e:
@@ -291,7 +303,7 @@ async def stt(file: UploadFile = File(...)):
 
 @app.post("/api/converse")
 def converse(req: ConverseReq):
-    reply = engine.converse(req.level, req.persona, req.history, req.message)
+    reply = engine.converse(req.level, req.persona, req.history, req.message, req.lang)
     return {"reply": reply}
 
 

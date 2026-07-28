@@ -36,3 +36,15 @@ O Python deste SO é *externally managed* (PEP 668). `pip install` puro falha.
 - Backend (sem subir servidor): `python3 -c "from fastapi.testclient import TestClient; import main; c=TestClient(main.app); print(c.get('/api/health').json())"`
 - Frontend: `node --check frontend/app.js`
 - Não há suíte de testes, typecheck ou lint neste repo.
+
+## Procedimentos de Backup (backup-procedures skill)
+Antes de fazer qualquer alteração no código, configuração ou conteúdo, é obrigatório criar um backup usando a skill `backup-procedures`. Esta skill está disponível em `.opencode/skills/backup-procedures/SKILL.md` e fornece procedimentos para:
+
+- Criar backup local completo antes de alterações
+- Verificar a integridade do backup
+- Restaurar do backup se necessário
+- Melhores práticas para proteção contra erros humanos
+
+Para usar esta skill, simplesmente siga os procedimentos descritos no arquivo SKILL.md ou peça para que eu (o agente) execute o backup antes de qualquer modificação.
+
+Os backups são armazenados no diretório `repo-backup/` que está ignorado pelo Git (ver .gitignore).
