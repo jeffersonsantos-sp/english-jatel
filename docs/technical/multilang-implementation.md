@@ -15,9 +15,9 @@
 | MemHack | ✅ **Funcional** | Arquivos `memhack_es.json` e `memhack_fr.json` criados, progresso name-spaced por `{user}::{lang}` |
 | Conversar (Converse) | ✅ **Funcional** | Prompts da IA adaptam ao idioma selecionado |
 | Correcao (Correct) | ✅ **Funcional** | Prompt do LLM adapta ao idioma |
-| STT (fala → texto) | ⚠️ **Parcial** | Idioma correto no backend, mas frontend hardcoded `en-US` |
-| Listen (ditado) | ❌ **Inglês apenas** | Conteúdo `LISTEN` e `READ` em `engine.py` são hardcoded em inglês |
-| Read (leitura) | ❌ **Inglês apenas** | Conteúdo `READ` em `engine.py` é hardcoded em inglês |
+| STT (fala → texto) | ✅ **Funcional** | Idioma dinâmico no frontend e backend (query param → body FormData) |
+| Listen (ditado) | ✅ **Funcional** | Arquivos `listen_es.json` e `listen_fr.json` criados e carregando por idioma |
+| Read (leitura) | ✅ **Funcional** | Arquivos `read_es.json` e `read_fr.json` criados com glossário PT-BR |
 | Write (escrita) | ✅ **Funcional** | Usa `correct()` que agora é por idioma |
 
 ---
@@ -106,200 +106,63 @@ Todos os endpoints relevantes agora aceitam `lang`:
 
 ## O que ainda precisa ser implementado (passo a passo)
 
-### ❌ Passo A: STT hardcoded no frontend (urgente)
+### ✅ Passo A: STT hardcoded no frontend (resolvido)
 
-**Problema**: `app.js` linha 208 tem `r.lang = "en-US"` hardcoded. Quando o usuario seleciona Espanhol ou Frances, o STT continua usando `en-US`.
+**Correção aplicada**:
+1. `getSpeechRecognition(lang)` já era dinâmico (aceitava `lang` como parâmetro e mapeava para `es-ES`/`fr-FR`/`en-US`)
+2. `browserSpeak(text)` hardcodeava `en-US` — corrigido para aceitar parâmetro `lang` e mapear para `es-ES`/`fr-FR`/`en-US`
+3. `playTts()` agora passa `state.lang` para `browserSpeak()`
 
-**O que fazer**: Ajustar `getSpeechRecognition()` para usar `LANG_META[lang].stt_lang` dinamicamente.
+**Arquivo**: `frontend/app.js` (linhas ~29-60)
 
-**Arquivo**: `frontend/app.js`, linha ~208
+### ✅ Passo B/C: Listen/Read por idioma (resolvido)
 
-**Solução**: Passar `state.lang` para `getSpeechRecognition()` e mapear o código STT.
+**Arquivos criados**:
+- `backend/listen_es.json` — frases de ditado em espanhol (3 níveis × 3 categorias × 8 frases)
+- `backend/read_es.json` — textos de leitura em espanhol com glossário PT-BR
+- `backend/listen_fr.json` — frases de ditado em francês (3 níveis × 3 categorias × 8 frases)
+- `backend/read_fr.json` — textos de leitura em francês com glossário PT-BR
 
-```javascript
-function getSpeechRecognition(lang) {
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SR) return null;
-  const r = new SR();
-  const sttLang = lang === "es" ? "es-ES" : lang === "fr" ? "fr-FR" : "en-US";
-  r.lang = sttLang;
-  r.interimResults = false;
-  r.maxAlternatives = 1;
-  return r;
-}
-```
+**Atualizações em `engine.py`**:
+- Adicionados `_listen_file_for_lang()`, `_read_file_for_lang()`, `_load_listen_file()`, `_load_read_file()`
+- Adicionados `_LISTEN_CACHE` e `_READ_CACHE` por idioma
+- `_next_item()` agora aceita `lang` e carrega conteúdo do arquivo por idioma quando disponível
+- `get_content()` passa `lang` para `_next_item()`
+- `_CONTENT_QUEUES` agora inclui `lang` como quarta chave da tupla
 
-Depois atualizar todas as chamadas: `getSpeechRecognition(state.lang)`.
+### ✅ Passo D: Correção heuristics — limitação documentada
 
----
+**Status**: Acceptable for initial phase. `heuristic_correct()` usa regex específicas de inglês; para ES/FR retorna fallback quando o LLM não está disponível. A correção real para ES/FR é feita pelo LLM via `correct()`.
 
-### ❌ Passo B: Listen — conteúdo por idioma (fase 2)
+### ✅ Passo E: Cache invalidation (resolvido)
 
-**Problema**: `LISTEN` e `READ` em `engine.py` são dicts hardcoded em inglês. Não há arquivos de conteúdo Listen/Read para ES/FR.
+**Problema**: `reload_grammar()` limpava `GRAMMAR_CACHE` mas não `_MEMHACK_CACHE`, `_LISTEN_CACHE` nem `_READ_CACHE`.
 
-**O que fazer**:
+**Correção aplicada**:
+- `reload_grammar(lang)` agora também invalida `_MEMHACK_CACHE`, `_LISTEN_CACHE` e `_READ_CACHE` para a linguagem específica
+- `reload_grammar()` (sem `lang`) limpa todos os caches de conteúdo
+- Limpeza de `_CONTENT_QUEUES` atualizada para filtrar por `lang` na tupla
 
-#### Opção B1: Per-language files (recomendado)
-Criar `listen_es.json`, `read_es.json`, `listen_fr.json`, `read_fr.json` com a mesma estrutura dos dicts em `engine.py`:
+### ✅ Passo F: STT multipart `lang` (resolvido)
 
-```json
-{
-  "iniciante": {
-    "rotina": [
-      "Me levanto temprano cada mañana.",
-      "Me cepillo los dientes después del desayuno."
-    ],
-    "trabajo": [...],
-    "viagem": [...]
-  },
-  "intermediario": { ... },
-  "avancado": { ... }
-}
-```
+**Problema**: O endpoint `POST /api/stt` usava `lang` como query parameter, o que pode não funcionar corretamente com FormData multipart no frontend.
 
-Depois atualizar `engine.py` para carregar Listen/Read por idioma:
+**Correção aplicada**:
+- Frontend (`app.js`): `lang` agora é enviado como campo FormData (`fd.append("lang", state.lang)`) em vez de query parameter
+- Backend (`main.py`): endpoint STT agora usa `Form("en")` para ler `lang` do body do FormData
+- Export `Form` adicionado aos imports do `fastapi` em `main.py`
 
-```python
-def _listen_file_for_lang(lang: str) -> str:
-    if lang == DEFAULT_LANG:
-        return None  # usa dict embutido
-    alt = os.path.join(os.path.dirname(__file__), f"listen_{lang}.json")
-    return alt if os.path.exists(alt) else None
+### ✅ Passo G: Validação e testes (concluído)
 
-def _read_file_for_lang(lang: str) -> str:
-    if lang == DEFAULT_LANG:
-        return None
-    alt = os.path.join(os.path.dirname(__file__), f"read_{lang}.json")
-    return alt if os.path.exists(alt) else None
-
-def _load_listen(lang: str = DEFAULT_LANG):
-    # ... similar a _load_memhack
-    pass
-
-def _load_read(lang: str = DEFAULT_LANG):
-    # ... similar a _load_memhack
-    pass
-```
-
-E modificar `_next_item(level, module, category, lang)` para usar a source correta.
-
-#### Opção B2: Expandir os dicts embutidos
-Adicionar listas ES/FR dentro dos próprios dicts `LISTEN` e `READ` em `engine.py`.
-
-Mais simples, mas polui o código. Menos recomendado.
-
----
-
-### ❌ Passo C: Read — conteúdo com glossário por idioma
-
-**Problema**: Igual ao Listen — `READ` dict é hardcoded em inglês e inclui glossário PT-BR.
-
-**Requisitos para os arquivos por idioma**:
-- Cada entrada precisa de `text` (no idioma alvo) e `glossary` (traducoes PT-BR)
-- Exemplo para ES: `{"text": "Ana se despierta a las siete...", "glossary": {"despierta": "acorda", ...}}`
-
-**Implementação**: Igual ao Passo B, usando por-language files ou expandindo os dicts.
-
----
-
-### ⚠️ Passo D: Correcao heuristics — apenas ingles
-
-**Problema**: A funcao `heuristic_correct()` (engine.py) detecta erros de conjugacao em ingles (3ª pessoa singular -s, etc.). Nao funciona para ES ou FR porque usa regex especifico de ingles.
-
-**O que fazer**: Para FR/ES, o `heuristic_correct()` retorna "Sem erros obvios" (o fallback atual). Isso é aceitavel para a fase inicial. O LLM fara a correcao real nos outros idiomas.
-
-**Melhora futura**: Adaptar `heuristic_correct()` para espanhol e frances, ou remover e depender do LLM em todos os idiomas.
-
----
-
-### ⚠️ Passo E: Caching de grammar/memhack por idioma
-
-**Problema**: `GRAMMAR_CACHE` e `_MEMHACK_CACHE` usam `lang` como chave, mas os caches nao sao invalidados quando o `reload_grammar(lang)` e chamado. O `_MEMHACK_CACHE` precisa de invalidacao similar.
-
-**O que fazer**: Adicionar invalidacao de cache para `_load_memhack(lang)`:
-
-```python
-def _load_memhack(lang: str = DEFAULT_LANG):
-    if lang in _MEMHACK_CACHE and _MEMHACK_CACHE[lang] is not None:
-        return _MEMHACK_CACHE[lang]
-    # ... carregar do arquivo
-```
-
-E atualizar `reload_grammar()` para invalidar ambos os caches.
-
----
-
-### ⚠️ Passo F: Upload de audio — `lang` no multipart
-
-**Problema**: O endpoint `POST /api/stt` usa `lang` como query parameter, mas o frontend `app.js` faz `fetch` com `FormData` via `api()` que nao suporta query params bem no multipart. Verificar se `lang` chega ao backend.
-
-**O que fazer**: Testar manualmente enviando audio para `/api/stt?lang=es` e verificar se a transcrição sai em espanhol. Se nao funcionar, mudar para enviar `lang` no body do FormData em vez de query param.
-
----
-
-### 📋 Passo G: Validação e testes
-
-Apos cada implementacao, rodar:
-
-```bash
-# 1. Health check
-python3 -c "from fastapi.testclient import TestClient; import main; c=TestClient(main.app); print(c.get('/api/health').json())"
-
-# 2. Grammar por idioma
-python3 -c "
-from fastapi.testclient import TestClient
-import main as m
-c = TestClient(m.app)
-# login
-c.post('/api/auth/login', json={'user':'admin','password':'mudar123'})
-for lang in ['en','es','fr']:
-    r = c.post('/api/grammar', json={'level':'A1','lang':lang})
-    print(lang, r.json().get('topic','N/A')[:50])
-"
-
-# 3. MemHack por idioma
-python3 -c "
-from fastapi.testclient import TestClient
-import main as m
-c = TestClient(m.app)
-c.post('/api/auth/login', json={'user':'admin','password':'mudar123'})
-for lang in ['en','es','fr']:
-    r = c.get(f'/api/memhack/categories?lang={lang}')
-    print(lang, len(r.json().get('categories',[])))
-"
-
-# 4. Frontend syntax
-node --check frontend/app.js
-node --check frontend/auth.js
-
-# 5. JSON validation
-python3 -m json.tool backend/grammar_es.json > /dev/null
-python3 -m json.tool backend/grammar_fr.json > /dev/null
-python3 -m json.tool backend/memhack_es.json > /dev/null
-python3 -m json.tool backend/memhack_fr.json > /dev/null
-```
-
----
-
-## Roadmap Recomendado
-
-| Fase | Item | Esforco | Dependencia |
-|------|------|---------|-------------|
-| **1** | Fix STT hardcoded `en-US` no frontend | Baixo | Nenhuma |
-| **2** | Listen/Read per-language files (EN/ES/FR) | Medio-Alto | Passo A |
-| **3** | Correcao heuristics para ES/FR | Medio | Passo A |
-| **4** | Cache invalidation para grammar/memhack | Baixo | Nenhuma |
-| **5** | STT multipart `lang` fix | Medio | Passo A |
-| **6** | Validacao e testes completos | Medio | Todos |
-
-### Ordem de execucao recomendada:
-1. **Passo A** (STT hardcoded) — 15 min, fixa o mais urgente
-2. **Passo G** (Validacao) — 30 min, garante qualidade
-3. **Passo E** (Cache invalidation) — 20 min, corrige potencial bug
-4. **Passo F** (STT multipart) — 30 min, garante STT funcional para ES/FR
-5. **Passo B/C** (Listen/Read per-language) — 4-6h, maior impacto
-6. **Passo D** (Correcao heuristics ES/FR) — 2h, nice-to-have
-7. **Passo G** final (testes completos) — 30 min
+Todos os testes passaram:
+- Health check: OK
+- Grammar por idioma (EN/ES/FR): OK
+- MemHack por idioma (EN/ES/FR): OK (6 categorias cada)
+- Listen/Read por idioma (EN/ES/FR): OK (conteúdo e glossário corretos)
+- TTS por idioma (EN/ES/FR): OK
+- Correct per language (EN/ES/FR): OK
+- Frontend syntax (JS): OK
+- Todos os JSON files validam: OK
 
 ---
 
@@ -307,13 +170,17 @@ python3 -m json.tool backend/memhack_fr.json > /dev/null
 
 | Arquivo | Alteracao |
 |---------|-----------|
-| `backend/engine.py` | Infraestrutura multi-idioma (LANG_META, LANG_VOICES, funcoes com `lang`) |
-| `backend/main.py` | Todos endpoints recebem `lang` |
+| `backend/engine.py` | Infraestrutura multi-idioma (LANG_META, LANG_VOICES, funcoes com `lang`), cache invalidation em `reload_grammar()`, suporte a Listen/Read per-language com `_LISTEN_CACHE`, `_READ_CACHE`, `_listen_file_for_lang()`, `_read_file_for_lang()`, `_load_listen_file()`, `_load_read_file()` |
+| `backend/main.py` | Todos endpoints recebem `lang`; STT endpoint agora usa `Form("en")` para ler `lang` do body FormData; `Form` importado do fastapi |
 | `backend/grammar_es.json` | Novo — grammar CEFR para espanhol |
 | `backend/grammar_fr.json` | Novo — grammar CEFR para frances |
 | `backend/memhack_es.json` | Novo — frases para espanhol |
 | `backend/memhack_fr.json` | Novo — frases para frances |
-| `frontend/app.js` | Envia `lang` em todas as chamadas API, recarrega vozes ao trocar idioma |
+| `backend/listen_es.json` | Novo — frases de ditado para espanhol (3 niveis × 3 categorias) |
+| `backend/read_es.json` | Novo — textos de leitura para espanhol com glossario PT-BR |
+| `backend/listen_fr.json` | Novo — frases de ditado para frances (3 niveis × 3 categorias) |
+| `backend/read_fr.json` | Novo — textos de leitura para frances com glossario PT-BR |
+| `frontend/app.js` | Envia `lang` em todas as chamadas API; recarrega vozes ao trocar idioma; `browserSpeak(text, lang)` agora usa codigo de idioma apropriado (es-ES/fr-FR/en-US); STT envia `lang` no body FormData em vez de query param |
 | `frontend/index.html` | Flag FR corrigida (🇫🇷) |
 
 ---

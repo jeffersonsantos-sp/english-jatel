@@ -928,9 +928,39 @@ def _grammar_file_for_lang(lang: str) -> str:
         return alt
     return GRAMMAR_FILE
 
+def _listen_file_for_lang(lang: str) -> str | None:
+    if lang == DEFAULT_LANG:
+        return None
+    alt = os.path.join(os.path.dirname(__file__), f"listen_{lang}.json")
+    return alt if os.path.exists(alt) else None
+
+def _read_file_for_lang(lang: str) -> str | None:
+    if lang == DEFAULT_LANG:
+        return None
+    alt = os.path.join(os.path.dirname(__file__), f"read_{lang}.json")
+    return alt if os.path.exists(alt) else None
+
+def _load_listen_file(filepath: str) -> dict | None:
+    try:
+        with open(filepath, encoding="utf-8") as f:
+            data = json.load(f)
+        return data if isinstance(data, dict) else None
+    except Exception as e:
+        print(f"[listen] falha ao ler {filepath}: {e}")
+        return None
+
+def _load_read_file(filepath: str) -> dict | None:
+    try:
+        with open(filepath, encoding="utf-8") as f:
+            data = json.load(f)
+        return data if isinstance(data, dict) else None
+    except Exception as e:
+        print(f"[read] falha ao ler {filepath}: {e}")
+        return None
 
 GRAMMAR_CACHE = {}
-
+_LISTEN_CACHE = {}
+_READ_CACHE = {}
 
 def load_grammar_data(lang: str = DEFAULT_LANG):
     global GRAMMAR, GRAMMAR_LEVELS
@@ -962,15 +992,25 @@ def _load_grammar(lang: str = DEFAULT_LANG):
 
 
 def reload_grammar(lang: str | None = None):
+    global GRAMMAR_CACHE
     if lang:
         GRAMMAR_CACHE.pop(lang, None)
+        _MEMHACK_CACHE.pop(lang, None)
+        _LISTEN_CACHE.pop(lang, None)
+        _READ_CACHE.pop(lang, None)
         load_grammar_data(lang)
+        for k in list(_CONTENT_QUEUES):
+            if isinstance(k, tuple) and len(k) == 4 and k[3] == lang:
+                _CONTENT_QUEUES.pop(k, None)
     else:
         GRAMMAR_CACHE.clear()
+        _MEMHACK_CACHE.clear()
+        _LISTEN_CACHE.clear()
+        _READ_CACHE.clear()
         load_grammar_data()
-    for k in list(_CONTENT_QUEUES):
-        if isinstance(k, tuple) and k and k[0] == "grammar":
-            _CONTENT_QUEUES.pop(k, None)
+        for k in list(_CONTENT_QUEUES):
+            if isinstance(k, tuple):
+                _CONTENT_QUEUES.pop(k, None)
 
 
 load_grammar_data()
@@ -980,15 +1020,34 @@ import random
 _CONTENT_QUEUES = {}
 
 
-def _next_item(level: str, module: str, category: str):
-    pool = (READ[level] if module == "read" else LISTEN[level])
+def _next_item(level: str, module: str, category: str, lang: str = DEFAULT_LANG):
+    listen_data = LISTEN
+    read_data = READ
+    if lang != DEFAULT_LANG:
+        if lang not in _LISTEN_CACHE:
+            lf = _listen_file_for_lang(lang)
+            if lf:
+                d = _load_listen_file(lf)
+                if d:
+                    _LISTEN_CACHE[lang] = d
+        if lang not in _READ_CACHE:
+            rf = _read_file_for_lang(lang)
+            if rf:
+                d = _load_read_file(rf)
+                if d:
+                    _READ_CACHE[lang] = d
+        if lang in _LISTEN_CACHE:
+            listen_data = _LISTEN_CACHE[lang]
+        if lang in _READ_CACHE:
+            read_data = _READ_CACHE[lang]
+    pool = (read_data[level] if module == "read" else listen_data[level])
     if category and category != "all":
         items = pool.get(category, [])
     else:
         items = [x for cat in pool.values() for x in cat]
     if not items:
         items = [x for cat in pool.values() for x in cat]
-    key = (level, module, category)
+    key = (level, module, category, lang)
     q = _CONTENT_QUEUES.get(key)
     if not q:
         q = items[:]
@@ -1004,9 +1063,9 @@ def normalize_level(level: str) -> str:
 def get_content(level: str, module: str, category: str = "all", lang: str = DEFAULT_LANG) -> dict:
     level = normalize_level(level)
     if module == "read":
-        item = _next_item(level, "read", category)
+        item = _next_item(level, "read", category, lang)
         return {"text": item["text"], "glossary": item["glossary"]}
-    return {"text": _next_item(level, "listen", category)}
+    return {"text": _next_item(level, "listen", category, lang)}
 
 
 def normalize_cefr(level: str) -> str:
