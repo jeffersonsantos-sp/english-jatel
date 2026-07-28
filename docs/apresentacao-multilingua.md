@@ -1,4 +1,4 @@
-# English JATEL — Expansão Multi-idiomas (Opção C)
+# JATEL-IA — Expansão Multi-idiomas (Opção C)
 
 **Apresentação para Diretoria / Patrocinadores**
 ✅ **Aprovado em Julho/2026** — escopo expandido para **Espanhol + Francês**
@@ -8,7 +8,7 @@ _Documento de concepção (design só, sem implementação)_
 
 ## Slide 1 — Contexto e oportunidade
 
-- O **English JATEL** é um tutor de inglês full-stack (Listen, Speak, Write, Read,
+- O **JATEL-IA** é um tutor de inglês full-stack (Listen, Speak, Write, Read,
   Conversação com IA, Grammar, MemHack) já em produção (Render + Docker Hub + k8s).
 - **Demanda identificada:** alunos querem treinar **espanhol** e **francês** no mesmo
   produto, sem precisar de apps separados.

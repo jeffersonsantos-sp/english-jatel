@@ -1,4 +1,4 @@
-# Guia do Usuário — English JATEL
+# Guia do Usuário — JATEL-IA
 
 Aplicativo web para treinar **inglês, espanhol e francês** nas habilidades
 **Listen, Speak, Write, Read** e **Conversar**, mais **Grammar** (gramática por

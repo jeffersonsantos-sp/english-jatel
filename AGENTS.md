@@ -1,4 +1,4 @@
-# AGENTS.md — English JATEL
+# AGENTS.md — JATEL-IA
 
 App de ensino de **inglês** (listen/speak/write/read + conversação por IA).
 Backend FastAPI serve a API **e** o frontend estático a partir de um único servidor.

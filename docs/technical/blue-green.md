@@ -1,6 +1,6 @@
-# Blue/Green no Kubernetes (English JATEL)
+# Blue/Green no Kubernetes (JATEL-IA)
 
-Estratégia de deploy sem downtime e com rollback instantâneo para o English JATEL.
+Estratégia de deploy sem downtime e com rollback instantâneo para o JATEL-IA.
 Dois Deployments compartilham o rótulo `app: english-jatel`, diferenciados por
 `slot: blue` (ativo) e `slot: green` (standby). O Service roteia o tráfego para o
 slot indicado em `spec.selector.slot` (começa em `blue`).

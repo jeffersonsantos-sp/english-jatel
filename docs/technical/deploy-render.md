@@ -1,6 +1,6 @@
 # Deploy no Render
 
-Guia de como o **English JATEL** está integrado ao [Render](https://render.com)
+Guia de como o **JATEL-IA** está integrado ao [Render](https://render.com)
 como Web Service em container, além dos ajustes feitos no repositório para rodar
 no free tier. Complementa `docs/technical/deploy-kubernetes.md` (k8s) e
 `docs/technical/blue-green.md`.

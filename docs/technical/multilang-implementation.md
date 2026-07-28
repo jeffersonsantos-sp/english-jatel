@@ -181,7 +181,7 @@ Todos os testes passaram:
 | `backend/listen_fr.json` | Novo — frases de ditado para frances (3 niveis × 3 categorias) |
 | `backend/read_fr.json` | Novo — textos de leitura para frances com glossario PT-BR |
 | `frontend/app.js` | Envia `lang` em todas as chamadas API; recarrega vozes ao trocar idioma; `browserSpeak(text, lang)` agora usa codigo de idioma apropriado (es-ES/fr-FR/en-US); STT envia `lang` no body FormData em vez de query param |
-| `frontend/index.html` | Flag FR corrigida (🇫🇷) |
+| `frontend/index.html` | Flag FR corrigida (🇫🇷); seletor de Categoria removido; header simplificado |
 
 ---
 
