@@ -12,7 +12,7 @@ Endpoints:
   POST /api/converse     {level, persona, history, message} -> {reply}
 """
 
-from fastapi import FastAPI, UploadFile, File, HTTPException, Request, Response
+from fastapi import FastAPI, UploadFile, File, Form, HTTPException, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
@@ -287,7 +287,7 @@ async def tts(req: TtsReq):
 
 
 @app.post("/api/stt")
-async def stt(file: UploadFile = File(...), lang: str = "en"):
+async def stt(file: UploadFile = File(...), lang: str = Form("en")):
     data = await file.read()
     suffix = "." + (file.filename.split(".")[-1] if file.filename and "." in file.filename else "webm")
     import traceback

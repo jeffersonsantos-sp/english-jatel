@@ -26,10 +26,11 @@ async function api(path, opts) {
   return res.json();
 }
 
-function browserSpeak(text) {
+function browserSpeak(text, lang) {
   try {
     const u = new SpeechSynthesisUtterance(text);
-    u.lang = "en-US";
+    const langMap = { es: "es-ES", fr: "fr-FR" };
+    u.lang = langMap[lang] || "en-US";
     u.rate = 0.95;
     speechSynthesis.cancel();
     speechSynthesis.speak(u);
@@ -53,11 +54,11 @@ async function playTts(text) {
     ttsAudio.load();
     const p = ttsAudio.play();
     if (p && typeof p.catch === "function") {
-      await p.catch(() => browserSpeak(text));
+      await p.catch(() => browserSpeak(text, state.lang));
     }
   } catch (e) {
     console.warn("TTS backend indisponivel, usando voz do navegador:", e.message);
-    browserSpeak(text);
+    browserSpeak(text, state.lang);
   }
 }
 
@@ -303,8 +304,9 @@ $("speak-rec").addEventListener("click", async () => {
       const fd = new FormData();
       const ext = mime.includes("webm") ? "webm" : mime.includes("ogg") ? "ogg" : "wav";
       fd.append("file", new Blob([bytes], { type: mime }), "audio." + ext);
+      fd.append("lang", state.lang);
 try {
-         const stt = await api("/api/stt?lang=" + encodeURIComponent(state.lang), { method: "POST", body: fd });
+         const stt = await api("/api/stt", { method: "POST", body: fd });
          setSpeakTranscript(stt.transcript || "(audio vazio)");
          if (stt.transcript) {
            const corr = await api("/api/correct", {

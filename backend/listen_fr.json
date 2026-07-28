@@ -1,0 +1,98 @@
+{
+  "iniciante": {
+    "rotina": [
+      "Je me lève tôt chaque matin.",
+      "Elle se brosse les dents après le petit-déjeuner.",
+      "Nous déjeunons à midi.",
+      "Il regarde la télévision le soir.",
+      "Ils se couchent à dix heures du soir.",
+      "Ma mère prépare le café le matin.",
+      "Le chat dort sur mon lit.",
+      "Je marche à l'école avec mes amis."
+    ],
+    "trabalho": [
+      "Il travaille dans un bureau en centre-ville.",
+      "Elle répond aux e-mails toute la journée.",
+      "Nous avons une réunion à trois heures de l'après-midi.",
+      "Ils sont occupés cette semaine.",
+      "Je finis le travail à six heures.",
+      "Mon patron est très sympathique.",
+      "Elle rédige des rapports pour l'entreprise.",
+      "Nous déjeunons ensemble au bureau."
+    ],
+    "viagem": [
+      "Nous voyageons en train jusqu'à la ville.",
+      "Elle achète un billet à la gare.",
+      "Il porte une petite valise.",
+      "Ils visitent le musée pendant les vacances.",
+      "J'aime prendre des photos de la plage.",
+      "Nous réservons une chambre à l'hôtel.",
+      "L'aéroport est loin d'ici.",
+      "Elle parle un peu d'espagnol quand elle voyage."
+    ]
+  },
+  "intermediario": {
+    "rotina": [
+      "Bien que nous préférions le thé, nous buvons du café le matin.",
+      "Elle a tendance à sortir courir avant d'aller au bureau.",
+      "Nous cuisinons à la maison plutôt que de commander à emporter.",
+      "Il reste rarement éveillé jusqu'après minuit.",
+      "Ils aiment lire avant de dormir.",
+      "J'ai pris l'habitude de tenir un journal chaque jour.",
+      "Elle trouve relaxant d'écouter de la musique en faisant le ménage.",
+      "Nous retrouvons souvent des amis pour le brunch le week-end."
+    ],
+    "trabalho": [
+      "Elle dirige le projet depuis le printemps dernier.",
+      "Nous devrions déléguer cette tâche au nouveau stagiaire.",
+      "Il a signalé quelques faiblesses dans la présentation.",
+      "Le client a demandé un calendrier révisé.",
+      "Je ferai distribuer le compte rendu après la réunion.",
+      "Ils ont accepté de reporter le lancement d'une semaine.",
+      "Elle a négocié de meilleures conditions avec le fournisseur.",
+      "Nous devrions atteindre la date limite le mois prochain."
+    ],
+    "viagem": [
+      "Nous avons réservé une visite guidée de la vieille ville.",
+      "Elle a égaré son passeport à l'hôtel.",
+      "Il a réussi à attraper le vol de correspondance juste à temps.",
+      "Ils ont loué une voiture pour explorer la campagne.",
+      "J'ai changé un peu d'argent au kiosque de l'aéroport.",
+      "Nous avons flané sur le marché local pendant des heures.",
+      "Elle a eu du mal à communiquer dans la langue étrangère.",
+      "Le vol a été retardé en raison du mauvais temps."
+    ]
+  },
+  "avancado": {
+    "rotina": [
+      "Malgré son emploi du temps chargé, elle maintient un programme d'exercice rigoureux.",
+      "Il a cultivé une routine matinale basée sur la pleine conscience et le calme.",
+      "La séquence délibérée des écrans le soir a renforcé la cohésion familiale.",
+      "Elle repousse invariablement la tentation de succomber à la distraction numérique.",
+      "Sa prédilection pour la productivité nocturne compromet souvent son rythme circadien.",
+      "Nous avons systématiquement sélectionné des habitudes qui atténuent l'accumulation de stress.",
+      "L'optimisation progressive de son flux de travail a généré des résultats disproportionnés.",
+      "Elle défend une philosophie d'amélioration personnelle mesurée et progressive."
+    ],
+    "trabalho": [
+      "Le paradigme actuel de supervision hiérarchique est progressivement démantelé en faveur de l'autonomie distribuée.",
+      "Sa délimitation perspicace des risques a galvanisé les parties prenantes.",
+      "Nous devons concilier les intérêts divergents pour éviter les frictions opérationnelles.",
+      "Les prémisses apparemment inoffensives de la proposition occultent les risques latents.",
+      "Il a conçu un cadre de contingence résilient aux chocs extérieurs.",
+      "Le conseil a approuvé la restructuration malgré la dissension interne.",
+      "Cette délimitation sans équivoque des responsabilités a atténué l'ambiguïté ultérieure.",
+      "Nous avons déterminé que le goulot d'étranglement émanait d'une propriété fragmentée."
+    ],
+    "viagem": [
+      "L'itinéraire a été méticuleusement calibré pour éviter les frictions logistiques.",
+      "Elle a navigué dans le labyrinthe bureaucratique avec une remarquable assurance.",
+      "La rencontre fortuite dans le village isolé s'est révélée transformatrice.",
+      "Son esprit aventureux insatiable met souvent en péril sa stabilité domestique.",
+      "Nous avons réconcilié les itinéraires divergents en un plan cohérent.",
+      "L'endroit apparemment austère dissimulait un courant sous-jacent de culture vibrante.",
+      "Elle s'est efforcée de se plonger dans le vocabulaire local plutôt que dans les enclaves touristiques.",
+      "Le succès de l'expédition reposait sur une préparation empirique."
+    ]
+  }
+}
