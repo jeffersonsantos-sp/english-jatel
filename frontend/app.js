@@ -568,6 +568,16 @@ function addMsg(role, text) {
   $("chat").scrollTop = $("chat").scrollHeight;
 }
 
+function clearChat() {
+  $("chat").innerHTML = "";
+  state.history = [];
+}
+
+$("persona").addEventListener("change", (e) => {
+  state.persona = e.target.value;
+  clearChat();
+});
+
 async function aiTurn(message) {
   try {
     const data = await api("/api/converse", {
