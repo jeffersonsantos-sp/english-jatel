@@ -106,6 +106,25 @@ def set_user_password(username: str, password: str) -> None:
     _save_users(users)
 
 
+def set_user_lang(username: str, lang: str) -> None:
+    """Salva o idioma preferido do usuário (en, es, fr)."""
+    if lang not in ("en", "es", "fr"):
+        raise ValueError("Idioma não suportado")
+    users = _load_users()
+    if username not in users:
+        raise ValueError("usuário não existe")
+    # Ensure the user dict has the language field
+    users[username]["lang"] = lang
+    _save_users(users)
+
+
+def get_user_lang(username: str) -> str:
+    """Retorna o idioma salvo do usuário, padrão 'en'."""
+    users = _load_users()
+    user = users.get(username, {})
+    return user.get("lang", "en")
+
+
 def list_users() -> list:
     return sorted(_load_users().keys())
 

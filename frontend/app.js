@@ -1,6 +1,7 @@
 const API = "";
 
 const state = {
+  lang: "en",
   level: "iniciante",
   persona: "cafe",
   voice: "",
@@ -70,9 +71,14 @@ document.querySelectorAll(".tab").forEach((btn) => {
   });
 });
 
-$("level").addEventListener("change", (e) => (state.level = e.target.value));
-$("persona").addEventListener("change", (e) => (state.persona = e.target.value));
-$("category").addEventListener("change", (e) => (state.category = e.target.value));
+$("lang").addEventListener("change", async (e) => {
+  state.lang = e.target.value;
+  try {
+    await api("/api/set-lang", { method: "POST", body: JSON.stringify({ lang: state.lang }) });
+  } catch (err) {
+    console.warn("Lang set error:", err);
+  }
+});
 
 /* ---------- Vozes da IA ---------- */
 (async () => {
