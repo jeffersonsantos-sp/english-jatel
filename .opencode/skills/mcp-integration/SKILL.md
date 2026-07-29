@@ -1,7 +1,7 @@
 ---
 name: mcp-integration
 description: >
-  Integra o projeto (skills geradas a partir de brainstore, ex.: english-flow) com
+  Integra o projeto (skills geradas a partir de brainstore, ex.: english-jatel) com
   servidores MCP (Model Context Protocol): expoe capacidades como ferramentas MCP
   ou consome servidores MCP externos. Use para conectar as skills do repo a um
   agente/IDE via MCP, ou para dar as skills acesso a ferramentas externas.
@@ -9,7 +9,7 @@ description: >
 
 # SKILL: mcp-integration
 
-Scaffold para conectar as skills deste repositorio (ver `skills/english-flow/`,
+Scaffold para conectar as skills deste repositorio (ver `skills/english-jatel/`,
 `brainstore/`, `scripts/`) a servidores MCP (Model Context Protocol).
 
 > Estado: **parcialmente implementado**. `mcp/server.py` ja expoe as capacidades
@@ -17,7 +17,7 @@ Scaffold para conectar as skills deste repositorio (ver `skills/english-flow/`,
 > ferramentas alem das listadas em `mcp/server.py`.
 
 ## Quando usar
-- Expor uma skill do repo (ex.: `english-flow`) como um servidor MCP (ferramentas
+- Expor uma skill do repo (ex.: `english-jatel`) como um servidor MCP (ferramentas
   tipo `correct_text`, `generate_tts`, `converse`).
 - Fazer uma skill consumir ferramentas de um servidor MCP externo (busca, arquivos, API).
 - Padronizar descoberta e invocacao de skills via MCP em vez de prompt solto.
@@ -25,7 +25,7 @@ Scaffold para conectar as skills deste repositorio (ver `skills/english-flow/`,
 ## Contexto do repositorio (verificado)
 - Pipeline: `brainstore/ideias-*.md` -> `scripts/convert_brainstore_to_prompt.py`
   -> `prompts/<skill>/` (markdown+json) -> `skills/<skill>/` (SKILL.md + codigo).
-- `skills/english-flow/` ja tem `SKILL.md` e `app.py` (prototipo CLI) e a app web
+- `skills/english-jatel/` ja tem `SKILL.md` e `app.py` (prototipo CLI) e a app web
   em `backend/` (FastAPI) com endpoints `/api/*` documentados em `docs/technical/`.
 - `mcp/` (raiz) existe mas esta vazio — provavel velocity para servidores MCP.
 
@@ -69,7 +69,7 @@ Conecte a um cliente/agente MCP apontando para `mcp/server.py`. O servidor herda
 - Python externamente gerenciado (PEP 668): usar venv ou `pip install --break-system-packages`.
 
 ## Arquivos relacionados
-- `skills/english-flow/SKILL.md` — skill de exemplo ja documentada.
+- `skills/english-jatel/SKILL.md` — skill de exemplo ja documentada.
 - `backend/main.py`, `backend/engine.py` — fonte real das capacidades.
 - `docs/technical/arquitetura.md` — endpoints e arquitetura.
 - `AGENTS.md` — convencoes gerais do repo.

@@ -35,7 +35,7 @@ Edite o arquivo de configuracao do Claude Desktop:
 ```json
 {
   "mcpServers": {
-    "english-flow": {
+    "english-jatel": {
       "command": "<REPO>/.venv/bin/python",
       "args": ["<REPO>/mcp/server.py"]
     }
@@ -54,7 +54,7 @@ Exemplo representativo:
 ```json
 {
   "mcpServers": {
-    "english-flow": {
+    "english-jatel": {
       "command": "<REPO>/.venv/bin/python",
       "args": ["<REPO>/mcp/server.py"]
     }

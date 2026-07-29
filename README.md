@@ -176,10 +176,9 @@ Skills disponíveis para agentes de IA operarem este projeto:
 
 | Skill | Escopo | Prompt base |
 |-------|--------|-------------|
-| [`english-jatel`](.opencode/skills/english-jatel/SKILL.md) | App full-stack (módulos, auth, conteúdo, CI/CD) | — |
+| [`english-jatel`](skills/english-jatel/SKILL.md) | App full-stack (módulos, auth, conteúdo, CI/CD) | — |
 | [`english-jatel-render`](.opencode/skills/english-jatel-render/SKILL.md) | Deploy e operação no **Render** (PaaS/free tier) | [`prompts/english-jatel-render/`](prompts/english-jatel-render/prompt-base.md) |
 | [`mcp-integration`](.opencode/skills/mcp-integration/SKILL.md) | Integração MCP | — |
-| [`english-flow`](skills/english-flow/SKILL.md) | Protótipo CLI original | [`prompts/english-flow/`](prompts/english-flow/prompt-base.md) |
 
 > Prompt de deploy Docker/Kubernetes: [`prompts/english-jatel-deploy/`](prompts/english-jatel-deploy/prompt-base.md).
 
