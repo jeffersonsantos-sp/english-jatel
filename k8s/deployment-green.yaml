@@ -41,6 +41,10 @@ spec:
                 secretKeyRef:
                   name: english-jatel-secrets
                   key: OPENROUTER_API_KEY
+          # Para criar o Secret (nao versionado):
+          #   kubectl create secret generic english-jatel-secrets \
+          #     --from-literal=OPENROUTER_API_KEY=sua_chave
+          # Se o Secret nao existir, o pod nao sobe (protecao contra modo demo em prod).
           volumeMounts:
             - name: data
               mountPath: /app/data
