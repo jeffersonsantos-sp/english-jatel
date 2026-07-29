@@ -56,21 +56,6 @@
             </select>
           </div>
         </label>
-        <label><span data-i18n="label-persona">Persona (conversa):</span>
-          <div class="field">
-            <select id="persona">
-              <option value="cafe">Café</option>
-              <option value="entrevistador">Entrevistador</option>
-              <option value="negocios">Negócios</option>
-              <option value="viagens">Viagens</option>
-              <option value="familia">Família</option>
-              <option value="filmes">Filmes</option>
-              <option value="musicas">Músicas</option>
-              <option value="futebol">Futebol</option>
-              <option value="devops">DevOps</option>
-            </select>
-          </div>
-        </label>
         <span id="status" class="status" title="Status da conexão">●</span>
         <button id="logout-btn" class="btn ghost" title="Sair" data-i18n="btn-logout" data-i18n-title="btn-logout">Sair</button>
         <button id="change-pass-btn" class="btn ghost" title="Trocar senha" data-i18n="btn-pass" data-i18n-title="cp-title">⚙️ Senha</button>
@@ -160,7 +145,24 @@
       </section>
 
       <section id="converse" class="panel card">
-        <h2 data-i18n="converse-title">Conversar com a IA</h2>
+        <div class="converse-header">
+          <h2 data-i18n="converse-title">Conversar com a IA</h2>
+          <label class="field-label converse-persona-label"><span data-i18n="label-persona">Persona:</span>
+            <div class="field">
+              <select id="persona">
+                <option value="cafe">Café</option>
+                <option value="entrevistador">Entrevistador</option>
+                <option value="negocios">Negócios</option>
+                <option value="viagens">Viagens</option>
+                <option value="familia">Família</option>
+                <option value="filmes">Filmes</option>
+                <option value="musicas">Músicas</option>
+                <option value="futebol">Futebol</option>
+                <option value="devops">DevOps</option>
+              </select>
+            </div>
+          </label>
+        </div>
         <p class="subtitle" data-i18n="converse-sub">Bate-papo em inglês com a persona escolhida.</p>
         <div id="chat" class="chat"></div>
         <div class="converse-controls">
