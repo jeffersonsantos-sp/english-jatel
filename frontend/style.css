@@ -457,6 +457,17 @@ label.field-label {
   border-bottom-right-radius: 4px;
 }
 
+.converse-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.converse-header h2 { margin: 0; }
+.converse-persona-label { margin: 0; }
+.converse-persona-label .field { display: inline-block; }
+.converse-persona-label select { min-width: 140px; }
+
 .converse-controls {
   display: flex;
   gap: 10px;
