@@ -331,6 +331,12 @@ Default credentials are set in `backend/.env` (gitignored). See `backend/.env.ex
 
 ---
 
-## License
+## License & Intellectual Property
 
-Private — Personal and Educational Use
+**Private — All Rights Reserved**
+
+© 2026 Jefferson Santos. Unauthorized copying, reproduction, distribution, or modification of this software, in whole or in part, is strictly prohibited.
+
+This repository and its contents (source code, documentation, images, prompts, skills) are the intellectual property of the author. Forking, cloning for redistribution, or deriving derivative works without explicit written permission is not permitted.
+
+For inquiries, contact: [jeffersonsantos-sp](https://github.com/jeffersonsantos-sp)
