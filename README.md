@@ -103,7 +103,6 @@ kubectl -n english-jatel port-forward svc/english-jatel 8080:80
 # Open http://localhost:8080
 ```
 
-**Login**: `admin` / `mudar123`
 
 ---
 
@@ -294,6 +293,14 @@ english-jatel/
 └── PROVAS_CRIACAO.md         # Authorship proof
 ```
 
+## Login de Acesso
+
+```
+admin - J@Tel2026!! 
+jatel -Update2026!
+estudante -Estudo@2026!  
+
+```
 ---
 
 ## Author
