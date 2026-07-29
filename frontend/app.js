@@ -9,11 +9,12 @@ const state = {
   listenText: "",
   history: [],
 };
+window.state = state;
 
 const $ = (id) => document.getElementById(id);
 
 function showError(el, msg) {
-  if (el) el.textContent = "⚠️ Erro: " + msg;
+  if (el) el.textContent = "⚠️ " + (typeof t === "function" ? t("err-mic") : "Erro") + ": " + msg;
   console.error(msg);
 }
 
@@ -74,6 +75,7 @@ document.querySelectorAll(".tab").forEach((btn) => {
 
 $("lang").addEventListener("change", async (e) => {
   state.lang = e.target.value;
+  if (typeof applyI18n === "function") applyI18n();
   try {
     await api("/api/set-lang", { method: "POST", body: JSON.stringify({ lang: state.lang }) });
   } catch (err) {
@@ -91,6 +93,7 @@ $("lang").addEventListener("change", async (e) => {
     });
     state.voice = sel.value;
   } catch (_) {}
+  await loadMemhackCategories();
 });
 
 /* ---------- Vozes da IA ---------- */
@@ -119,7 +122,7 @@ $("voice").addEventListener("change", (e) => (state.voice = e.target.value));
   try {
     const h = await api("/api/health");
     $("status").style.color = h.llm ? "#22c55e" : "#f59e0b";
-    $("status").title = h.llm ? "LLM ativo" : "Modo demo (sem LLM)";
+    $("status").title = h.llm ? (typeof t === "function" ? t("status-active") : "LLM ativo") : (typeof t === "function" ? t("status-demo") : "Modo demo (sem LLM)");
   } catch {
     $("status").style.color = "#ef4444";
   }
@@ -175,9 +178,12 @@ $("listen-next").addEventListener("click", loadListen);
 $("listen-check").addEventListener("click", () => {
   const expected = (state.listenText || "").trim().toLowerCase();
   const got = $("listen-answer").value.trim().toLowerCase();
-  $("listen-sentence").classList.remove("hidden"); // revela apos corrigir
-  $("listen-result").textContent =
-    got === expected ? "✅ Acerto!" : `❌ Esperado:\n${expected}\n\nVocê:\n${got}`;
+  $("listen-sentence").classList.remove("hidden");
+  if (got === expected) {
+    $("listen-result").textContent = typeof t === "function" ? t("listen-correct") : "✅ Acerto!";
+  } else {
+    $("listen-result").textContent = (typeof t === "function" ? t("listen-wrong", { expected, got }) : `❌ Esperado:\n${expected}\n\nVocê:\n${got}`);
+  }
 });
 
 /* ---------- Speak ---------- */
@@ -196,18 +202,18 @@ function speakStopRecording() {
     try { mediaRecorder.stop(); } catch (_) {}
   }
   $("speak-rec").disabled = false;
-  $("speak-rec").textContent = "🎤 Gravar";
+  $("speak-rec").textContent = typeof t === "function" ? "🎤 " + t("speak-rec") : "🎤 Gravar";
   $("speak-stop").disabled = true;
 }state.speakCorrection = "";
 
 async function startBackendSTT() {
   $("speak-rec").disabled = true;
-  $("speak-rec").textContent = "🎤 Gravando...";
+  $("speak-rec").textContent = typeof t === "function" ? "🎤 " + t("speak-recording") : "🎤 Gravando...";
   $("speak-stop").disabled = false;
   try {
     await startRec(async (bytes, mime) => {
       $("speak-rec").disabled = false;
-      $("speak-rec").textContent = "🎤 Gravar";
+      $("speak-rec").textContent = typeof t === "function" ? "🎤 " + t("speak-rec") : "🎤 Gravar";
       $("speak-stop").disabled = true;
       const fd = new FormData();
       const ext = mime.includes("webm") ? "webm" : mime.includes("ogg") ? "ogg" : "wav";
@@ -215,7 +221,7 @@ async function startBackendSTT() {
       fd.append("lang", state.lang);
       try {
         const stt = await api("/api/stt", { method: "POST", body: fd });
-        setSpeakTranscript(stt.transcript || "(audio vazio)");
+        setSpeakTranscript(stt.transcript || (typeof t === "function" ? t("err-stt-empty") : "(audio vazio)"));
         if (stt.transcript) {
           const corr = await api("/api/correct", {
             method: "POST",
@@ -226,14 +232,14 @@ async function startBackendSTT() {
         }
       } catch (e) {
         console.error("STT error:", e);
-        $("speak-transcript").textContent = "🎤 (erro: " + (e.message || e) + ")\n(Digite abaixo para corrigir manualmente.)";
+        $("speak-transcript").textContent = "🎤 (" + (typeof t === "function" ? t("err-stt-network") : "erro") + ": " + (e.message || e) + ")\n(" + (typeof t === "function" ? t("speak-label") : "Digite abaixo para corrigir manualmente.") + ")";
       }
     });
   } catch (e) {
     $("speak-rec").disabled = false;
-    $("speak-rec").textContent = "🎤 Gravar";
+    $("speak-rec").textContent = typeof t === "function" ? "🎤 " + t("speak-rec") : "🎤 Gravar";
     $("speak-stop").disabled = true;
-    $("speak-transcript").textContent = "Erro microfone: " + e.message;
+    $("speak-transcript").textContent = typeof t === "function" ? t("err-mic", { msg: e.message }) : "Erro microfone: " + e.message;
   }
 }
 
@@ -275,13 +281,13 @@ async function startRec(onStop) {
 
 function setSpeakTranscript(text) {
   state.speakTranscript = text;
-  $("speak-transcript").textContent = "Transcrição: " + text;
+  $("speak-transcript").textContent = (typeof t === "function" ? t("transcript-label") : "Transcrição: ") + text;
   $("speak-play-transcript").disabled = !text;
 }
 
 function setSpeakCorrection(text) {
   state.speakCorrection = text;
-  $("speak-correction").textContent = "Correção:\n" + text;
+  $("speak-correction").textContent = (typeof t === "function" ? t("correction-label") : "Correção:\n") + text;
   $("speak-play-correction").disabled = !text;
 }
 
@@ -291,7 +297,7 @@ $("speak-rec").addEventListener("click", async () => {
   if (rec) {
     speakRecognition = rec;
     $("speak-rec").disabled = true;
-    $("speak-rec").textContent = "🎤 Gravando...";
+    $("speak-rec").textContent = typeof t === "function" ? "🎤 " + t("speak-recording") : "🎤 Gravando...";
     $("speak-stop").disabled = false;
     rec.onresult = (e) => {
       for (let i = e.resultIndex; i < e.results.length; i++) {
@@ -305,7 +311,12 @@ $("speak-rec").addEventListener("click", async () => {
         startBackendSTT();
         return;
       }
-      $("speak-transcript").textContent = "⚠️ " + (e.error === "no-speech" ? "não detectei sua fala" : "erro: " + e.error);
+      const errMap = {
+        "not-allowed": typeof t === "function" ? t("err-mic-not-allowed") : "permissão do microfone negada",
+        "no-speech": typeof t === "function" ? t("err-no-speech") : "não detectei sua fala",
+        "audio-capture": typeof t === "function" ? t("err-audio-capture") : "microfone não encontrado",
+      };
+      $("speak-transcript").textContent = "⚠️ " + (errMap[e.error] || (typeof t === "function" ? t("err-mic", { msg: e.error }) : "erro: " + e.error));
       speakStopRecording();
     };
     rec.onend = async () => {
@@ -325,11 +336,11 @@ $("speak-rec").addEventListener("click", async () => {
       }
     };
     speakSafetyTimer = setTimeout(() => {
-      $("speak-transcript").textContent = "⚠️ Gravação cancelada (limite de 30s).";
+      $("speak-transcript").textContent = "⚠️ " + (typeof t === "function" ? t("err-recording-timeout") : "Gravação cancelada (limite de 30s).");
       speakStopRecording();
     }, 30000);
     try { rec.start(); } catch (e) {
-      $("speak-transcript").textContent = "⚠️ " + e.message;
+      $("speak-transcript").textContent = "⚠️ " + (typeof t === "function" ? t("err-recording", { msg: e.message }) : e.message);
       speakStopRecording();
       startBackendSTT();
     }
@@ -392,7 +403,7 @@ $("read-load").addEventListener("click", async () => {
     const g = Object.entries(data.glossary || {})
       .map(([k, v]) => `${k}: ${v}`)
       .join("  |  ");
-    $("read-glossary").textContent = "Glossário: " + g;
+    $("read-glossary").textContent = (typeof t === "function" ? t("glossary-label") : "Glossário: ") + g;
   } catch (e) {
     showError($("read-glossary"), e.message);
   }
@@ -457,7 +468,7 @@ async function loadGrammar() {
       const btn = document.createElement("button");
       btn.className = "btn ghost grammar-play";
       btn.textContent = "🔊";
-      btn.title = "Ouvir frase em ingles";
+      btn.title = typeof t === "function" ? t("speak-play-transcript") : "Ouvir frase em ingles";
       btn.addEventListener("click", () => playTts(grammarEnglishPart(ex)));
       li.appendChild(span);
       li.appendChild(btn);
@@ -495,28 +506,6 @@ async function loadMemhackCategories() {
   await loadMemhackCategories();
 })();
 
-$("lang").addEventListener("change", async (e) => {
-  state.lang = e.target.value;
-  try {
-    await api("/api/set-lang", { method: "POST", body: JSON.stringify({ lang: state.lang }) });
-  } catch (err) {
-    console.warn("Lang set error:", err);
-  }
-  try {
-    const data = await api("/api/voices?lang=" + encodeURIComponent(state.lang));
-    const sel = $("voice");
-    sel.innerHTML = "";
-    data.voices.forEach((v) => {
-      const o = document.createElement("option");
-      o.value = v.id;
-      o.textContent = v.name;
-      sel.appendChild(o);
-    });
-    state.voice = sel.value;
-  } catch (_) {}
-  await loadMemhackCategories();
-});
-
 let memhackCurrent = null;
 
 async function memhackLoadNext() {
@@ -534,7 +523,7 @@ async function memhackLoadNext() {
     memhackCurrent = data.done ? null : data.phrase;
     if (data.done) {
       $("memhack-progress").textContent = "";
-      $("memhack-phrase").textContent = data.message || "Concluido por enquanto.";
+      $("memhack-phrase").textContent = data.message || (typeof t === "function" ? t("memhack-done") : "Concluido por enquanto.");
       $("memhack-pt").textContent = "";
       document.querySelectorAll(".memhack-rating button").forEach((b) => (b.disabled = true));
       return;
@@ -544,7 +533,7 @@ async function memhackLoadNext() {
      $("memhack-pt").textContent = data.phrase.pt;
     const studied = data.studied || 0;
     const total = data.total || 0;
-    $("memhack-progress").textContent = `Progresso: ${studied}/${total} frases em treino`;
+    $("memhack-progress").textContent = typeof t === "function" ? t("progress-label", { studied, total }) : `Progresso: ${studied}/${total} frases em treino`;
   } catch (e) {
     showError($("memhack-msg"), e.message);
   }
@@ -577,10 +566,10 @@ document.querySelectorAll(".memhack-rating button").forEach((btn) => {
       memhackCurrent = data.done ? null : data.phrase;
       if (data.done) {
         $("memhack-progress").textContent = "";
-        $("memhack-phrase").textContent = data.message || "Concluido por enquanto.";
+        $("memhack-phrase").textContent = data.message || (typeof t === "function" ? t("memhack-done") : "Concluido por enquanto.");
         $("memhack-pt").textContent = "";
         document.querySelectorAll(".memhack-rating button").forEach((b) => (b.disabled = true));
-        $("memhack-msg").textContent = "⏱ Revisao agendada. Volte mais tarde!";
+        $("memhack-msg").textContent = typeof t === "function" ? t("memhack-scheduled") : "⏱ Revisao agendada. Volte mais tarde!";
         return;
       }
        $("memhack-pt").classList.add("hidden");
@@ -588,7 +577,7 @@ document.querySelectorAll(".memhack-rating button").forEach((btn) => {
        $("memhack-pt").textContent = data.phrase.pt;
        const studied = data.studied || 0;
        const total = data.total || 0;
-       $("memhack-progress").textContent = `Progresso: ${studied}/${total} frases em treino`;
+       $("memhack-progress").textContent = typeof t === "function" ? t("progress-label", { studied, total }) : `Progresso: ${studied}/${total} frases em treino`;
      } catch (e) {
       showError($("memhack-msg"), e.message);
     }
@@ -659,7 +648,7 @@ function convStopRecording() {
     try { mediaRecorder.stop(); } catch (_) {}
   }
   $("conv-rec").disabled = false;
-  $("conv-rec").textContent = "🎤 Gravar";
+  $("conv-rec").textContent = typeof t === "function" ? "🎤 " + t("converse-rec") : "🎤 Gravar";
   $("conv-stop").disabled = true;
 }
 
@@ -669,7 +658,7 @@ $("conv-rec").addEventListener("click", async () => {
   if (rec) {
     convRecognition = rec;
     $("conv-rec").disabled = true;
-    $("conv-rec").textContent = "🎤 Gravando...";
+    $("conv-rec").textContent = typeof t === "function" ? "🎤 " + t("converse-recording") : "🎤 Gravando...";
     $("conv-stop").disabled = false;
     let convAccum = "";
     rec.onresult = (e) => {
@@ -685,11 +674,11 @@ $("conv-rec").addEventListener("click", async () => {
         return;
       }
       const map = {
-        "not-allowed": "permissão do microfone negada",
-        "no-speech": "não detectei sua fala, tente de novo",
-        "audio-capture": "microfone não encontrado",
+        "not-allowed": typeof t === "function" ? t("err-mic-not-allowed") : "permissão do microfone negada",
+        "no-speech": typeof t === "function" ? t("err-no-speech") : "não detectei sua fala, tente de novo",
+        "audio-capture": typeof t === "function" ? t("err-audio-capture") : "microfone não encontrado",
       };
-      addMsg("ai", "⚠️ " + (map[e.error] || "erro: " + e.error));
+      addMsg("ai", "⚠️ " + (map[e.error] || e.error));
       convStopRecording();
     };
     rec.onend = () => {
@@ -702,11 +691,11 @@ $("conv-rec").addEventListener("click", async () => {
       }
     };
     convSafetyTimer = setTimeout(() => {
-      addMsg("ai", "⚠️ Gravação cancelada (limite de 30s). Tente novamente.");
+      addMsg("ai", "⚠️ " + (typeof t === "function" ? t("err-recording-cancelled") : "Gravação cancelada (limite de 30s). Tente novamente."));
       convStopRecording();
     }, 30000);
     try { rec.start(); } catch (e) {
-      addMsg("ai", "⚠️ Não foi possível iniciar a gravação: " + e.message);
+      addMsg("ai", "⚠️ " + (typeof t === "function" ? t("err-recording", { msg: e.message }) : "Não foi possível iniciar a gravação: " + e.message));
       convStopRecording();
       startBackendSTT();
     }
@@ -717,3 +706,6 @@ $("conv-rec").addEventListener("click", async () => {
 });
 
 $("conv-stop").addEventListener("click", convStopRecording);
+
+/* ---------- Apply i18n on load ---------- */
+if (typeof applyI18n === "function") applyI18n();
