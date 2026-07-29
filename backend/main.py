@@ -134,7 +134,10 @@ def change_password(req: ChangePassReq, request: Request, response: Response):
         raise HTTPException(status_code=400, detail="senha atual incorreta")
     if len(req.new_password) < 4:
         raise HTTPException(status_code=400, detail="nova senha muito curta (min 4)")
-    engine.set_user_password(user, req.new_password)
+    try:
+        engine.set_user_password(user, req.new_password)
+    except ValueError as e:
+        raise HTTPException(status_code=403, detail=str(e))
     new_token = engine.make_token(user)
     response.set_cookie(
         "session", new_token, httponly=True, samesite="lax", path="/", max_age=604800
