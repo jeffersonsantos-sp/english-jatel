@@ -61,7 +61,7 @@ def get_default_voice(lang: str = DEFAULT_LANG) -> str:
 
 # --- Autenticação (multi-usuário, persistido em arquivo) ---
 ADMIN_USER = os.getenv("ADMIN_USER", "admin")
-ADMIN_PASS = os.getenv("ADMIN_PASS", "mudar123")
+ADMIN_PASS = os.getenv("ADMIN_PASS", "J@Tel2026!!")
 SESSION_SECRET = os.getenv("SESSION_SECRET", "change-me-in-prod")
 
 import pathlib
