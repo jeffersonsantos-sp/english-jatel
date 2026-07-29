@@ -200,12 +200,12 @@ function speakStopRecording() {
   $("speak-stop").disabled = true;
 }state.speakCorrection = "";
 
-function startBackendSTT() {
+async function startBackendSTT() {
   $("speak-rec").disabled = true;
   $("speak-rec").textContent = "🎤 Gravando...";
   $("speak-stop").disabled = false;
   try {
-    startRec(async (bytes, mime) => {
+    await startRec(async (bytes, mime) => {
       $("speak-rec").disabled = false;
       $("speak-rec").textContent = "🎤 Gravar";
       $("speak-stop").disabled = true;
@@ -331,6 +331,7 @@ $("speak-rec").addEventListener("click", async () => {
     try { rec.start(); } catch (e) {
       $("speak-transcript").textContent = "⚠️ " + e.message;
       speakStopRecording();
+      startBackendSTT();
     }
     return;
   }
@@ -707,6 +708,7 @@ $("conv-rec").addEventListener("click", async () => {
     try { rec.start(); } catch (e) {
       addMsg("ai", "⚠️ Não foi possível iniciar a gravação: " + e.message);
       convStopRecording();
+      startBackendSTT();
     }
     return;
   }
