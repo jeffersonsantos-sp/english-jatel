@@ -89,7 +89,7 @@ def _load_users() -> dict:
             _USERS_CACHE = {}
     if not _USERS_CACHE:
         salt, h = _hash_password(ADMIN_PASS)
-        _USERS_CACHE = {ADMIN_USER: {"salt": salt, "hash": h}}
+        _USERS_CACHE = {ADMIN_USER: {"salt": salt, "hash": h, "can_change_password": True}}
         _save_users(_USERS_CACHE)
     return _USERS_CACHE
 
@@ -99,6 +99,26 @@ def _save_users(users: dict) -> None:
     _USERS_CACHE = users
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     USERS_FILE.write_text(json.dumps(users, indent=2))
+
+
+def _seed_users() -> None:
+    users = _load_users()
+    seeds = {
+        "jatel": {"password": "Update2026!", "can_change_password": True},
+        "estudante": {"password": "Estudo@2026!", "can_change_password": False},
+    }
+    changed = False
+    for uname, cfg in seeds.items():
+        if uname not in users:
+            salt, h = _hash_password(cfg["password"])
+            users[uname] = {"salt": salt, "hash": h, "can_change_password": cfg["can_change_password"]}
+            changed = True
+    for uname in users:
+        if "can_change_password" not in users[uname]:
+            users[uname]["can_change_password"] = True
+            changed = True
+    if changed:
+        _save_users(users)
 
 
 def verify_user(username: str, password: str) -> bool:
@@ -111,14 +131,14 @@ def verify_user(username: str, password: str) -> bool:
     return hmac.compare_digest(dk.hex(), u["hash"])
 
 
-def add_user(username: str, password: str) -> None:
+def add_user(username: str, password: str, can_change_password: bool = True) -> None:
     users = _load_users()
     if username in users:
         raise ValueError("usuário já existe")
     if len(password) < 4:
         raise ValueError("senha muito curta (mín. 4)")
     salt, h = _hash_password(password)
-    users[username] = {"salt": salt, "hash": h}
+    users[username] = {"salt": salt, "hash": h, "can_change_password": can_change_password}
     _save_users(users)
 
 
@@ -126,8 +146,10 @@ def set_user_password(username: str, password: str) -> None:
     users = _load_users()
     if username not in users:
         raise ValueError("usuário não existe")
+    if not users[username].get("can_change_password", True):
+        raise ValueError("este usuario nao pode alterar a senha")
     salt, h = _hash_password(password)
-    users[username] = {"salt": salt, "hash": h}
+    users[username] = {"salt": salt, "hash": h, "can_change_password": users[username].get("can_change_password", True)}
     _save_users(users)
 
 
@@ -190,6 +212,8 @@ def verify_token(token: str) -> bool:
         return False
 
 LEVELS = ["iniciante", "intermediario", "avancado"]
+
+_seed_users()
 
 # Banco de frases/textos por nivel e categoria.
 # Listen = frases curtas para ditado. Read = textos com glossario.
