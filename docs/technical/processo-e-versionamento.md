@@ -120,12 +120,32 @@ docker run -d -p 8000:8000 -e OPENROUTER_API_KEY=... updateinformatica/english-j
 - [ ] `cd.yaml` concluído (imagem publicada + smoke test ok).
 - [ ] Imagem puxada/deployada no host alvo com `OPENROUTER_API_KEY`.
 - [ ] Login e funcionalidades validados em produção (HTTPS).
-
-- [ ] Login e funcionalidades validadas em produção (HTTPS).
+- [ ] Referências de versão atualizadas em `k8s/` e `docs/` (configmap, deployments, docs técnicos).
 
 ## 6. Próximos passos
 
-### 6.1 Criar novos usuários
+### 6.1 Estado atual do conteúdo (v1.11.3)
+
+| Módulo | EN | ES | FR |
+|--------|----|----|----|
+| Grammar (CEFR A1–C2) | ✅ Completo (46 tópicos) | ✅ Completo (46 tópicos, `structure`/`examples` em ES) | ✅ Completo (47 tópicos, `structure`/`examples` em FR) |
+| MemHack (SRS) | ✅ Completo (6 categorias × 8 frases) | ✅ Completo (6 categorias × 8 frases) | ✅ Completo (6 categorias × 8 frases) |
+| Listen (ditado) | ✅ Embutido no `engine.py` (LISTEN dict) | ✅ `listen_es.json` (3 níveis × 3 categorias × 8 frases) | ✅ `listen_fr.json` (3 níveis × 3 categorias × 8 frases) |
+| Read (leitura) | ✅ Embutido no `engine.py` (READ dict) | ✅ `read_es.json` (3 níveis × 3 categorias × 3 textos + glossário PT-BR) | ✅ `read_fr.json` (3 níveis × 3 categorias × 3 textos + glossário PT-BR) |
+| Conversar / Corrigir | ✅ Prompts multilíngues (EN/ES/FR) | ✅ Prompts multilíngues | ✅ Prompts multilíngues |
+| TTS | ✅ Vozes Edge TTS por idioma | ✅ Vozes Edge TTS por idioma | ✅ Vozes Edge TTS por idioma |
+| STT | ✅ Web Speech API (cliente) + fallback `/api/stt` | ✅ Web Speech API + fallback | ✅ Web Speech API + fallback |
+
+### 6.2 Grammar ES/FR — concluído
+
+O Grammar para **Espanhol** e **Francês** foi traduzido. Os arquivos `grammar_es.json` e `grammar_fr.json` têm:
+- **`structure`** — fórmulas gramaticais adaptadas para o idioma-alvo (ES/FR).
+- **`explanation`** — explicação em português do BR, contextualizada para o idioma-alvo.
+- **`examples`** — frases modelo em ES/FR com tradução PT-BR (ex.: "Yo soy estudiante." em vez de "I am a student.").
+
+Validação: 0 exemplos em inglês nas versões ES/FR. Recarregar via `POST /api/admin/reload-grammar` e conferir no frontend (abas Grammar → ES/FR).
+
+### 6.3 Criar novos usuários
 
 Usuários padrão criados via seed no `engine.py`:
 - `admin` / `mudar123` (admin, pode trocar senha)
@@ -148,12 +168,13 @@ Resumo:
 5. Atualize README.md e este documento
 6. Faça commit, tag `vX.Y.Z`, build e push da imagem
 
-### 6.3 Atualizar versão do K8s
+### 6.3 Atualizar versão do K8s e docs
 
 1. Atualize `k8s/configmap.yaml` → `IMAGE: updateinformatica/english-jatel:vX.Y.Z`
 2. Atualize `k8s/deployment-blue.yaml` e `k8s/deployment-green.yaml` → `image: ...`
-3. Valide com `kubectl apply --dry-run=client -k k8s/`
-4. Faça commit e tag
+3. Atualize referências de versão em `docs/technical/deploy-kubernetes.md`, `docs/technical/blue-green.md` e `docs/apresentacao-multilingua.md`
+4. Valide com `kubectl apply --dry-run=client -k k8s/`
+5. Faça commit e tag
 
 ## 7. Segurança
 

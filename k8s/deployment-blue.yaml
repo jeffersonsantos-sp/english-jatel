@@ -27,7 +27,7 @@ spec:
           # Slot ATIVO (producao atual). Para promover, atualize a imagem do
           # slot green, escale-o para 1, aguarde o health e vire o Service
           # (slot: blue -> green). Veja docs/technical/deploy-kubernetes.md.
-          image: updateinformatica/english-jatel:v1.11.1
+          image: updateinformatica/english-jatel:v1.11.3
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
