@@ -1,10 +1,10 @@
 services:
-  english-flow:
+  english-jatel:
     build:
       context: .
       dockerfile: Dockerfile
-    image: english-flow:latest
-    container_name: english-flow
+    image: english-jatel:latest
+    container_name: english-jatel
     ports:
       - "8000:8000"
     environment:
