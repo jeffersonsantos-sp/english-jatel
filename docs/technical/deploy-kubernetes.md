@@ -38,7 +38,7 @@ o slot indicado em `spec.selector.slot` (começa em `blue`).
 ```bash
 # 1. Aponte o green para a nova imagem e suba 1 réplica
 kubectl -n english-jatel set image deploy/english-jatel-green \
-  english-jatel=updateinformatica/english-jatel:v1.12.1
+  english-jatel=updateinformatica/english-jatel:v1.12.2
 kubectl -n english-jatel scale deploy/english-jatel-green --replicas=1
 
 # 2. Aguarde o green ficar Ready/saudavel

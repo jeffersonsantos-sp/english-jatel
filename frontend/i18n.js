@@ -20,7 +20,7 @@ const I18N = {
 
     // tabs
     "tab-listen": "Listen",
-    "tab-speak": "Speak",
+    "tab-speak": "Pronunciation",
     "tab-write": "Write",
     "tab-read": "Read",
     "tab-converse": "Conversation",
@@ -41,8 +41,8 @@ const I18N = {
     "listen-wrong": "Expected:\n{expected}\n\nYours:\n{got}",
 
     // speak
-    "speak-title": "Speak",
-    "speak-sub": "Answer aloud (recording) or type — and hear the correction.",
+    "speak-title": "Pronunciation",
+    "speak-sub": "Practice pronunciation: record a sentence and hear the correction.",
     "speak-hint": "Answer in English: \"Tell me about your last weekend.\"",
     "speak-rec": "Record",
     "speak-recording": "Recording...",
@@ -162,7 +162,7 @@ const I18N = {
 
     // tabs
     "tab-listen": "Escuchar",
-    "tab-speak": "Hablar",
+    "tab-speak": "Pronunciación",
     "tab-write": "Escribir",
     "tab-read": "Leer",
     "tab-converse": "Conversar",
@@ -182,8 +182,8 @@ const I18N = {
     "listen-wrong": "Esperado:\n{expected}\n\nTu respuesta:\n{got}",
 
     // speak
-    "speak-title": "Hablar",
-    "speak-sub": "Responde en voz alta (grabación) o escribe — y escucha la corrección.",
+    "speak-title": "Pronunciación",
+    "speak-sub": "Practica la pronunciación: graba una frase y escucha la corrección.",
     "speak-hint": "Responde en inglés: \"Tell me about your last weekend.\"",
     "speak-rec": "Grabar",
     "speak-recording": "Grabando...",
@@ -303,7 +303,7 @@ const I18N = {
 
     // tabs
     "tab-listen": "Écouter",
-    "tab-speak": "Parler",
+    "tab-speak": "Prononciation",
     "tab-write": "Écrire",
     "tab-read": "Lire",
     "tab-converse": "Conversation",
@@ -323,8 +323,8 @@ const I18N = {
     "listen-wrong": "Attendu :\n{expected}\n\nVotre réponse :\n{got}",
 
     // speak
-    "speak-title": "Parler",
-    "speak-sub": "Répondez à voix haute (enregistrement) ou tapez — et écoutez la correction.",
+    "speak-title": "Prononciation",
+    "speak-sub": "Entraînez votre prononciation : enregistrez une phrase et écoutez la correction.",
     "speak-hint": "Répondez en anglais : \"Tell me about your last weekend.\"",
     "speak-rec": "Enregistrer",
     "speak-recording": "Enregistrement...",

@@ -10,4 +10,4 @@ data:
   SEED_USERNAME: "jatel"
   SEED_PASSWORD: "jatel2026"
   # Tag da imagem no Docker Hub. Use uma tag versionada (reprodutivel) em vez de :latest.
-  IMAGE: "updateinformatica/english-jatel:v1.12.1"
+  IMAGE: "updateinformatica/english-jatel:v1.12.2"
