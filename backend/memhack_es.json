@@ -9,11 +9,11 @@
   ],
   "labels": {
     "rotina": "Rotina",
-    "trabalho": "Trabajo",
     "escola": "Escuela",
     "familia": "Familia",
     "diversao": "Diversion",
-    "esportes": "Deportes"
+    "esportes": "Deportes",
+    "trabajo": "Trabajo"
   },
   "phrases": {
     "rotina": [
