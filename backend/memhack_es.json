@@ -1,1 +1,272 @@
-{"categories": ["rotina", "trabalho", "escola", "familia", "diversao", "esportes"], "labels": {"rotina": "Rotina", "trabalho": "Trabajo", "escola": "Escuela", "familia": "Familia", "diversao": "Diversion", "esportes": "Deportes"}, "phrases": {"rotina": [{"id": "rotina-1", "es": "Me levanto temprano cada mañana.", "pt": "Eu acordo cedo todas as manhãs."}, {"id": "rotina-2", "es": "Me cepillo los dientes después del desayuno.", "pt": "Escovo os dentes após o café da manhã."}, {"id": "rotina-3", "es": "Bebo una taza de café antes de trabajar.", "pt": "Bebo uma xícara de café antes do trabalho."}, {"id": "rotina-4", "es": "Paseo al perro por la tarde.", "pt": "Levo o cachorro passear à noite."}, {"id": "rotina-5", "es": "Ceno con mi familia.", "pt": "Faço o jantar para minha família."}, {"id": "rotina-6", "es": "Me acuesto a las diez de la noche.", "pt": "Vou para a cama às dez horas."}, {"id": "rotina-7", "es": "Reviso el móvil al despertarme.", "pt": "Olho o celular assim que acordo."}, {"id": "rotina-8", "es": "Hago la ropa los fines de semana.", "pt": "Lavo a roupa nos fins de semana."}], "trabajo": [{"id": "trabajo-1", "es": "Asisto a una reunión cada lunes.", "pt": "Participo de uma reunião toda segunda."}, {"id": "trabajo-2", "es": "Respondo correos electrónicos por la mañana.", "pt": "Respondo e-mails de manhã."}, {"id": "trabajo-3", "es": "Trabajo desde casa los viernes.", "pt": "Trabalho de casa às sextas."}, {"id": "trabajo-4", "es": "Termino el informe antes de la fecha límite.", "pt": "Termino o relatório antes do prazo."}, {"id": "trabajo-5", "es": "Hablo con los clientes por teléfono.", "pt": "Converso com clientes por telefone."}, {"id": "trabajo-6", "es": "Uso la computadora todo el día.", "pt": "Uso o computador o dia todo."}, {"id": "trabajo-7", "es": "Tomo un descanso corto al mediodía.", "pt": "Faço uma pausa curta ao meio-dia."}, {"id": "trabajo-8", "es": "Envío la factura a la empresa.", "pt": "Envio a nota fiscal para a empresa."}], "escola": [{"id": "escola-1", "es": "Estudio matemáticas y ciencias.", "pt": "Estudo matemática e ciências."}, {"id": "escola-2", "es": "El profesor explica la lección claramente.", "pt": "O professor explica a lição claramente."}, {"id": "escola-3", "es": "Hago la tarea después de la escuela.", "pt": "Faço o dever de casa após a escola."}, {"id": "escola-4", "es": "Leo un libro en la biblioteca.", "pt": "Leio um livro na biblioteca."}, {"id": "escola-5", "es": "Tomo apuntes durante la clase.", "pt": "Anoto durante a aula."}, {"id": "escola-6", "es": "Apruebo el examen con buenas notas.", "pt": "Passo no exame com boas notas."}, {"id": "escola-7", "es": "Reúno con mis compañeros en la cafetería.", "pt": "Encontro meus colegas na lanchonete."}, {"id": "escola-8", "es": "Aprendo una palabra nueva cada día.", "pt": "Aprendo uma palavra nova todo dia."}], "familia": [{"id": "familia-1", "es": "Cenamos juntos todas las noches.", "pt": "Jantamos juntos todas as noites."}, {"id": "familia-2", "es": "Mi madre cocina comida deliciosa.", "pt": "Minha mãe cozinha comida deliciosa."}, {"id": "familia-3", "es": "Ayudo a mi padre en el jardín.", "pt": "Ajudo meu pai no jardim."}, {"id": "familia-4", "es": "Mi hermano toca la guitarra.", "pt": "Meu irmão toca violão."}, {"id": "familia-5", "es": "Visitamos a mis abuelos los domingos.", "pt": "Visitamos meus avós no domingo."}, {"id": "familia-6", "es": "Mi hermana cuida del bebé.", "pt": "Minha irmã cuida do bebê."}, {"id": "familia-7", "es": "Vemos una película en noche de familia.", "pt": "Assistimos a um filme na noite de família."}, {"id": "familia-8", "es": "Quiero mucho a mi familia.", "pt": "Amo muito minha família."}], "diversao": [{"id": "diversao-1", "es": "Escucho música cuando me relajo.", "pt": "Ouço música quando relaxo."}, {"id": "diversao-2", "es": "Vamos al cine los sábados.", "pt": "Vamos ao cinema aos sábados."}, {"id": "diversao-3", "es": "Juego videojuegos con mis amigos.", "pt": "Jogo videogame com meus amigos."}, {"id": "diversao-4", "es": "Ella canta y baila en las fiestas.", "pt": "Ela canta e dança em festas."}, {"id": "diversao-5", "es": "Viajamos a la playa en verano.", "pt": "Viajamos à praia no verão."}, {"id": "diversao-6", "es": "Tomo fotos de lugares bonitos.", "pt": "Tiro fotos de lugares bonitos."}, {"id": "diversao-7", "es": "Ellos ríen el chiste gracioso.", "pt": "Eles riem da piada engraçada."}, {"id": "diversao-8", "es": "Me gusta pasear por el parque.", "pt": "Gosto de caminhar no parque."}], "esportes": [{"id": "esportes-1", "es": "Juego al fútbol con mis amigos.", "pt": "Jogo futebol com meus amigos."}, {"id": "esportes-2", "es": "Ella corre cinco kilómetros cada día.", "pt": "Ela corre cinco quilômetros todo dia."}, {"id": "esportes-3", "es": "Nadamos en la piscina los fines de semana.", "pt": "Nadamos na piscina nos fins de semana."}, {"id": "esportes-4", "es": "Él levanta pesas en el gimnasio.", "pt": "Ele levanta pesos na academia."}, {"id": "esportes-5", "es": "Ellos montan en bicicleta en el parque.", "pt": "Eles andam de bicicleta no parque."}, {"id": "esportes-6", "es": "Veo el partido en la televisión.", "pt": "Assisto à partida na TV."}, {"id": "esportes-7", "es": "El equipo gana el campeonato.", "pt": "O time vence o campeonato."}, {"id": "esportes-8", "es": "Me estiro antes de hacer ejercicio.", "pt": "Eu alongo antes de me exercitar."}]}}
+{
+  "categories": [
+    "rotina",
+    "trabajo",
+    "escola",
+    "familia",
+    "diversao",
+    "esportes"
+  ],
+  "labels": {
+    "rotina": "Rotina",
+    "trabalho": "Trabajo",
+    "escola": "Escuela",
+    "familia": "Familia",
+    "diversao": "Diversion",
+    "esportes": "Deportes"
+  },
+  "phrases": {
+    "rotina": [
+      {
+        "id": "rotina-1",
+        "es": "Me levanto temprano cada mañana.",
+        "pt": "Eu acordo cedo todas as manhãs."
+      },
+      {
+        "id": "rotina-2",
+        "es": "Me cepillo los dientes después del desayuno.",
+        "pt": "Escovo os dentes após o café da manhã."
+      },
+      {
+        "id": "rotina-3",
+        "es": "Bebo una taza de café antes de trabajar.",
+        "pt": "Bebo uma xícara de café antes do trabalho."
+      },
+      {
+        "id": "rotina-4",
+        "es": "Paseo al perro por la tarde.",
+        "pt": "Levo o cachorro passear à noite."
+      },
+      {
+        "id": "rotina-5",
+        "es": "Ceno con mi familia.",
+        "pt": "Faço o jantar para minha família."
+      },
+      {
+        "id": "rotina-6",
+        "es": "Me acuesto a las diez de la noche.",
+        "pt": "Vou para a cama às dez horas."
+      },
+      {
+        "id": "rotina-7",
+        "es": "Reviso el móvil al despertarme.",
+        "pt": "Olho o celular assim que acordo."
+      },
+      {
+        "id": "rotina-8",
+        "es": "Hago la ropa los fines de semana.",
+        "pt": "Lavo a roupa nos fins de semana."
+      }
+    ],
+    "trabajo": [
+      {
+        "id": "trabajo-1",
+        "es": "Asisto a una reunión cada lunes.",
+        "pt": "Participo de uma reunião toda segunda."
+      },
+      {
+        "id": "trabajo-2",
+        "es": "Respondo correos electrónicos por la mañana.",
+        "pt": "Respondo e-mails de manhã."
+      },
+      {
+        "id": "trabajo-3",
+        "es": "Trabajo desde casa los viernes.",
+        "pt": "Trabalho de casa às sextas."
+      },
+      {
+        "id": "trabajo-4",
+        "es": "Termino el informe antes de la fecha límite.",
+        "pt": "Termino o relatório antes do prazo."
+      },
+      {
+        "id": "trabajo-5",
+        "es": "Hablo con los clientes por teléfono.",
+        "pt": "Converso com clientes por telefone."
+      },
+      {
+        "id": "trabajo-6",
+        "es": "Uso la computadora todo el día.",
+        "pt": "Uso o computador o dia todo."
+      },
+      {
+        "id": "trabajo-7",
+        "es": "Tomo un descanso corto al mediodía.",
+        "pt": "Faço uma pausa curta ao meio-dia."
+      },
+      {
+        "id": "trabajo-8",
+        "es": "Envío la factura a la empresa.",
+        "pt": "Envio a nota fiscal para a empresa."
+      }
+    ],
+    "escola": [
+      {
+        "id": "escola-1",
+        "es": "Estudio matemáticas y ciencias.",
+        "pt": "Estudo matemática e ciências."
+      },
+      {
+        "id": "escola-2",
+        "es": "El profesor explica la lección claramente.",
+        "pt": "O professor explica a lição claramente."
+      },
+      {
+        "id": "escola-3",
+        "es": "Hago la tarea después de la escuela.",
+        "pt": "Faço o dever de casa após a escola."
+      },
+      {
+        "id": "escola-4",
+        "es": "Leo un libro en la biblioteca.",
+        "pt": "Leio um livro na biblioteca."
+      },
+      {
+        "id": "escola-5",
+        "es": "Tomo apuntes durante la clase.",
+        "pt": "Anoto durante a aula."
+      },
+      {
+        "id": "escola-6",
+        "es": "Apruebo el examen con buenas notas.",
+        "pt": "Passo no exame com boas notas."
+      },
+      {
+        "id": "escola-7",
+        "es": "Reúno con mis compañeros en la cafetería.",
+        "pt": "Encontro meus colegas na lanchonete."
+      },
+      {
+        "id": "escola-8",
+        "es": "Aprendo una palabra nueva cada día.",
+        "pt": "Aprendo uma palavra nova todo dia."
+      }
+    ],
+    "familia": [
+      {
+        "id": "familia-1",
+        "es": "Cenamos juntos todas las noches.",
+        "pt": "Jantamos juntos todas as noites."
+      },
+      {
+        "id": "familia-2",
+        "es": "Mi madre cocina comida deliciosa.",
+        "pt": "Minha mãe cozinha comida deliciosa."
+      },
+      {
+        "id": "familia-3",
+        "es": "Ayudo a mi padre en el jardín.",
+        "pt": "Ajudo meu pai no jardim."
+      },
+      {
+        "id": "familia-4",
+        "es": "Mi hermano toca la guitarra.",
+        "pt": "Meu irmão toca violão."
+      },
+      {
+        "id": "familia-5",
+        "es": "Visitamos a mis abuelos los domingos.",
+        "pt": "Visitamos meus avós no domingo."
+      },
+      {
+        "id": "familia-6",
+        "es": "Mi hermana cuida del bebé.",
+        "pt": "Minha irmã cuida do bebê."
+      },
+      {
+        "id": "familia-7",
+        "es": "Vemos una película en noche de familia.",
+        "pt": "Assistimos a um filme na noite de família."
+      },
+      {
+        "id": "familia-8",
+        "es": "Quiero mucho a mi familia.",
+        "pt": "Amo muito minha família."
+      }
+    ],
+    "diversao": [
+      {
+        "id": "diversao-1",
+        "es": "Escucho música cuando me relajo.",
+        "pt": "Ouço música quando relaxo."
+      },
+      {
+        "id": "diversao-2",
+        "es": "Vamos al cine los sábados.",
+        "pt": "Vamos ao cinema aos sábados."
+      },
+      {
+        "id": "diversao-3",
+        "es": "Juego videojuegos con mis amigos.",
+        "pt": "Jogo videogame com meus amigos."
+      },
+      {
+        "id": "diversao-4",
+        "es": "Ella canta y baila en las fiestas.",
+        "pt": "Ela canta e dança em festas."
+      },
+      {
+        "id": "diversao-5",
+        "es": "Viajamos a la playa en verano.",
+        "pt": "Viajamos à praia no verão."
+      },
+      {
+        "id": "diversao-6",
+        "es": "Tomo fotos de lugares bonitos.",
+        "pt": "Tiro fotos de lugares bonitos."
+      },
+      {
+        "id": "diversao-7",
+        "es": "Ellos ríen el chiste gracioso.",
+        "pt": "Eles riem da piada engraçada."
+      },
+      {
+        "id": "diversao-8",
+        "es": "Me gusta pasear por el parque.",
+        "pt": "Gosto de caminhar no parque."
+      }
+    ],
+    "esportes": [
+      {
+        "id": "esportes-1",
+        "es": "Juego al fútbol con mis amigos.",
+        "pt": "Jogo futebol com meus amigos."
+      },
+      {
+        "id": "esportes-2",
+        "es": "Ella corre cinco kilómetros cada día.",
+        "pt": "Ela corre cinco quilômetros todo dia."
+      },
+      {
+        "id": "esportes-3",
+        "es": "Nadamos en la piscina los fines de semana.",
+        "pt": "Nadamos na piscina nos fins de semana."
+      },
+      {
+        "id": "esportes-4",
+        "es": "Él levanta pesas en el gimnasio.",
+        "pt": "Ele levanta pesos na academia."
+      },
+      {
+        "id": "esportes-5",
+        "es": "Ellos montan en bicicleta en el parque.",
+        "pt": "Eles andam de bicicleta no parque."
+      },
+      {
+        "id": "esportes-6",
+        "es": "Veo el partido en la televisión.",
+        "pt": "Assisto à partida na TV."
+      },
+      {
+        "id": "esportes-7",
+        "es": "El equipo gana el campeonato.",
+        "pt": "O time vence o campeonato."
+      },
+      {
+        "id": "esportes-8",
+        "es": "Me estiro antes de hacer ejercicio.",
+        "pt": "Eu alongo antes de me exercitar."
+      }
+    ]
+  }
+}
