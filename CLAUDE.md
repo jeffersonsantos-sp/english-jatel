@@ -3,15 +3,15 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Repository Structure
-The project (English JATEL) is a multi-language teaching app (**English, Spanish, French**): a FastAPI backend that serves both the API and a static frontend SPA from a single server. Language selector (`lang`) in the top bar switches between EN/ES/FR.
+The project (JATEL-IA) is a multilingual teaching app (**English, Spanish, French**): a FastAPI backend that serves both the API and a static frontend SPA from a single server. Language selector (`lang`) switches between EN/ES/FR. Full UI i18n translates all labels, buttons, tabs, and messages.
 
 - **`backend/`** — FastAPI app (`main.py`), business logic (`engine.py`), data-driven content (`grammar.json`, `grammar_es.json`, `grammar_fr.json`, `memhack.json`, `memhack_es.json`, `memhack_fr.json`), user store, and serves `frontend/`
-- **`frontend/`** — build-free SPA: `index.html`, `style.css`, `app.js`, `auth.js`, `login.html` (vanilla HTML/CSS/JS, no framework)
+- **`frontend/`** — build-free SPA: `index.html`, `style.css`, `app.js`, `auth.js`, `i18n.js` (120+ translation keys EN/ES/FR), `login.html` (vanilla HTML/CSS/JS, no framework)
 - **`mcp/`** — `server.py`, an MCP (stdio) server exposing backend capabilities as tools, reusing `engine.py`
-- **`k8s/`** — Kubernetes manifests (namespace, configmap, pvc, deployment, service, kustomization)
+- **`k8s/`** — Kubernetes manifests (namespace, configmap, pvc, deployment-blue, deployment-green, service, kustomization)
 - **`docker-compose.yaml`, `Dockerfile`** — containerized deployment
-- **`docs/`** — `technical/` (architecture, k8s deploy, versioning) and `user/` (guide)
-- **`skills/`, `prompts/`, `brainstore/`, `scripts/`** — original skill/prompt pipeline (brainstore notes → prompts)
+- **`docs/`** — `technical/` (architecture, k8s deploy, versioning, blue/green, render) and `user/` (guide)
+- **`skills/`, `prompts/`, `brainstore/`** — AI agent skill/prompt pipeline
 
 ## Common Development Tasks
 
@@ -42,31 +42,12 @@ Connect to Claude Desktop / OpenCode — see `docs/technical/mcp.md`.
 # Backend smoke test (no server needed):
 python3 -c "from fastapi.testclient import TestClient; import main; c=TestClient(main.app); print(c.get('/api/health').json())"
 # Frontend syntax check:
-node --check frontend/app.js
+node --check frontend/app.js && node --check frontend/i18n.js
 ```
-### Backup Procedures (Obrigatório antes de alterações)
 
-Antes de fazer QUALQUER alteração no código, configuração ou conteúdo, você DEVE seguir os procedimentos de backup da skill `backup-procedures`.
+### Backup Procedures (required before changes)
+Before making any code, config, or content changes, create a backup in `repo-backup/` (gitignored).
 
-Esta skill está disponível em `.opencode/skills/backup-procedures/SKILL.md` e fornece:
-
-- Procedimentos para criar backup local completo antes de alterações
-- Verificação da integridade do backup
-- Instruções para restaurar do backup se necessário
-- Melhores práticas para proteção contra erros humanos
-
-Como usar:
-
-```bash
-# Pergunte se deseja fazer backup (sempre faça isso primeiro!)
-# Crie diretório de backup e copie o repositório (excluindo o próprio backup)
-mkdir -p repo-backup
-rsync -av --exclude='repo-backup/' . ./repo-backup/
-
-# Verifique se o backup foi criado corretamente
-find . -type f | ! -path "./repo-backup/*" | wc -l
-find ./repo-backup -type f | wc -l
-```
 ### Kubernetes
 ```bash
 kubectl apply -k k8s/
@@ -80,23 +61,25 @@ kubectl -n english-jatel port-forward svc/english-jatel 8080:80
 - **Auth**: middleware `auth_guard` protects `/` and `/api/*` (except public routes) via an HMAC-signed HttpOnly session cookie (`engine.verify_token`). Admin-only routes (`_require_admin`): `register`, `users`, `reload-grammar`. Any authenticated user can change their own password. Default admin `admin`/`mudar123`; passwords stored as PBKDF2 (per-user salt) in `backend/data/users.json` (gitignored).
 - **LLM**: OpenRouter (text-only) via OpenAI-compatible client. `engine.py` reads `OPENROUTER_API_KEY` (or `OPENAI_API_KEY`) and points `BASE_URL` to `https://openrouter.ai/api/v1`. Demo mode works without a key (heuristic correction).
 - **TTS**: `engine.tts_bytes` tries Edge TTS (neural, no key) → OpenAI `tts-1` → `pyttsx3` (offline). Fallback in frontend: `speechSynthesis`. Voice via `EDGE_TTS_VOICE` env or `voice` param.
-- **Multi-language**: every endpoint accepts `lang` (`en`/`es`/`fr`). TTS uses `LANG_VOICES`, STT adjusts recognition language, LLM prompts adapt via `LANG_META`. Grammar and MemHack files are per-language (`grammar_es.json`, `grammar_fr.json`, `memhack_es.json`, `memhack_fr.json`). Progress is namespaced as `{user}::{lang}`.
+- **Multi-language**: every endpoint accepts `lang` (`en`/`es`/`fr`). TTS uses `LANG_VOICES`, STT adjusts recognition language, LLM prompts adapt via `LANG_META`. Grammar and MemHack files are per-language. Progress is namespaced as `{user}::{lang}`.
+- **i18n UI**: `frontend/i18n.js` contains a translation dictionary with 120+ keys per language (EN/ES/FR). HTML elements use `data-i18n` attributes. `applyI18n()` is called on page load and on every language change. Dynamic strings in `app.js` use the `t()` helper function.
 - **Content is data-driven** (edit files, not code):
-  - Listen/Read: `LISTEN`/`READ` dicts in `engine.py`, keyed `level → category → list`; `get_content` uses a shuffled queue per `(level, module, category)` (no repeats until exhausted).
-  - Grammar (CEFR A1–C2 per language): `backend/grammar.json` (`{"levels": [...], "grammar": {<level>: [{topic, structure, explanation, examples}]}}`), loaded at startup (falls back to embedded). Reload at runtime via `POST /api/admin/reload-grammar` (admin only).
-  - MemHack (spaced repetition / SRS): `backend/memhack.json` (`{"categories": [...], "phrases": {<category>: [{id, en, pt}]}}`); per-user progress in `DATA_DIR/memhack_progress.json`. Leitner-style boxes 1–5 with growing intervals (1min→10min→1h→1d→7d); `review` moves box up (facil)/hold (medio)/down (dificil).
+  - Listen/Read: JSON files per language (`listen_es.json`, `read_fr.json`, etc.) or dicts in `engine.py` for EN.
+  - Grammar (CEFR A1–C2): `grammar.json`, `grammar_es.json`, `grammar_fr.json` — reload via `POST /api/admin/reload-grammar`.
+  - MemHack (SRS): `memhack.json`, `memhack_es.json`, `memhack_fr.json` — Leitner boxes 1–5.
+- **UI layout**: Persona selector is inside the Conversation section header (not in topbar). Tab "Pronunciation" (was "Speak" before v1.12.2).
 
 ## Important conventions
 
-- **Never commit** `backend/.env` or `backend/data/users.json` (both gitignored). LLM key goes via env/secret, never baked into the image.
-- **Listen is a dictation exercise**: the frontend hides the sentence text until "Verificar" — don't pre-reveal it.
-- **Frontend is vanilla JS** with relative URLs (`/api/...`), so it works served from the same server. No build step.
-- Versioning is by git tags (`v*`) — `cd.yaml` builds/pushes the Docker image only on a `v*` tag push. Keep `main` green; cut tags for releases.
+- **Never commit** `backend/.env` or `backend/data/users.json` (both gitignored).
+- **Listen is a dictation exercise**: the frontend hides the sentence text until "Verificar".
+- **Frontend is vanilla JS** with relative URLs (`/api/...`). No build step.
+- Versioning is by git tags (`v*`) — `cd.yaml` builds/pushes the Docker image only on a `v*` tag push.
 
 ## Key files
 - `backend/main.py` — FastAPI app, routes, auth middleware
 - `backend/engine.py` — all business logic (correction, TTS, STT, conversation, content, auth helpers)
-- `backend/grammar.json` / `backend/memhack.json` — data-driven lesson/phrase content
-- `mcp/server.py` — MCP stdio server wrapping `engine.py`
+- `frontend/i18n.js` — EN/ES/FR translation dictionary
 - `frontend/app.js`, `frontend/auth.js` — client logic
-- `k8s/` — Kubernetes manifests
+- `mcp/server.py` — MCP stdio server wrapping `engine.py`
+- `k8s/` — Kubernetes manifests (Blue/Green)

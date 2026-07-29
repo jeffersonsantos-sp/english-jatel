@@ -1,87 +1,91 @@
 ---
-name: english-flow
+name: english-jatel
 description: >
-  App de ensino de ingles que treina as 4 habilidades (listen, speak, write, read)
-  com correcao automatica e conversacao por IA (voz com voz). Use para ensinar,
-  praticar ou estender um tutor de ingles em português: ditado, fala, escrita,
-  leitura e chat de conversacao com LLM + TTS neural.
+  Multilingual AI-powered language learning app (EN/ES/FR) with Listen, Pronunciation,
+  Write, Read, Conversation (AI), Grammar (CEFR A1–C2), and MemHack (SRS).
+  Full i18n UI, CI/CD, Docker, Kubernetes Blue/Green, Render PaaS.
+  Use to run, explain, extend, deploy, or operate this full-stack application.
 ---
 
-# SKILL: english-flow
+# SKILL: english-jatel (JATEL-IA)
 
-Tutor de ingles full-stack: backend FastAPI (API + frontend estatico num so
-servidor) e frontend SPA sem build. Corrige texto com LLM, fala com Edge TTS
-(vozes neurais, sem chave) e conversa por LLM (OpenRouter, texto-only).
+Multilingual language learning platform: FastAPI backend serves API + static SPA.
+Supports **English, Spanish, French** with full UI internationalization (120+ translation keys).
 
-## Quando usar
-- Criar, rodar ou explicar o app English Flow.
-- Adicionar frases/textos, vozes, categorias ou modulos de treino.
-- Integrar LLM/TTS/STT ou ajustar correcao gramatical.
-- Estender a conversacao por IA (personas, contexto, niveis).
+## When to use
+- Run, explain, or extend the JATEL-IA application.
+- Add content (Grammar topics, MemHack phrases, Listen/Read sentences) per language.
+- Integrate LLM/TTS/STT or adjust grammar correction.
+- Deploy via Docker, Kubernetes, or Render.
+- Operate CI/CD pipeline (GitHub Actions).
 
-## Arquitetura (ver docs/technical/arquitetura.md)
-- `backend/main.py`: rotas `/api/*` registradas ANTES de `app.mount("/", StaticFiles(...))`,
-  entao a API tem prioridade. `GET /` serve `frontend/index.html`.
-- `backend/engine.py`: toda a logica (correcao, TTS, STT, conversa, banco de frases).
-- `frontend/`: SPA vanilla (`index.html`, `style.css`, `app.js`), URLs relativas `/api/...`.
-- Banco de frases: `LISTEN`/`READ` em `engine.py`, chaveados por `nivel -> categoria -> lista`.
-  `get_content` usa fila embaralhada por `(nivel, modulo, categoria)` — sem repetir ate esgotar.
+## Architecture (see docs/technical/arquitetura.md)
+- `backend/main.py`: routes `/api/*` registered before `app.mount("/", StaticFiles(...))`
+- `backend/engine.py`: all logic (correction, TTS, STT, conversation, content, auth)
+- `frontend/`: SPA vanilla (`index.html`, `style.css`, `app.js`, `auth.js`, `i18n.js`)
+- **i18n**: `i18n.js` contains EN/ES/FR dictionary (120+ keys). `applyI18n()` on load + lang change.
+- **Tabs**: Listen, Pronunciation, Write, Read, Conversation, Grammar, MemHack
+- **Persona**: inside Conversation section header (moved from topbar in v1.12.1)
+- **Content**: data-driven JSON files per language (edit files, not code)
 
-## Como rodar
+## How to run
 ```bash
 cd backend
-pip install -r requirements.txt            # PEP 668: use venv ou --break-system-packages
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
 python3 -m uvicorn main:app --host 127.0.0.1 --port 8000
-# abra http://localhost:8000
+# Open http://localhost:8000
 ```
-- `backend/.env` (gitignored) tem `OPENROUTER_API_KEY`, `OPENAI_MODEL`, `OPENROUTER_TITLE`.
-- Sem chave: correcao heuristica + voz do navegador (modo demo).
 
-## Provedores (config via env)
-- **LLM**: OpenRouter (texto-only) via cliente OpenAI-compatível; `BASE_URL` aponta para
-  `https://openrouter.ai/api/v1`, com headers `HTTP-Referer`/`X-Title`.
-- **TTS**: `engine.tts_bytes` prioriza Edge TTS (sem chave) -> OpenAI `tts-1` -> `pyttsx3`;
-  frontend faz fallback para `speechSynthesis`. Voz: `EDGE_TTS_VOICE` ou param `voice` em `/api/tts`.
-- **STT**: Whisper opcional no `/api/stt` (transcreve audio enviado).
+## Providers (config via env)
+- **LLM**: OpenRouter (text-only, OpenAI-compatible)
+- **TTS**: Edge TTS (neural, free) → OpenAI tts-1 → pyttsx3 fallback
+- **STT**: Web Speech API (browser) → SpeechRecognition + ffmpeg (backend fallback)
 
-## Modulos e fluxo
-- **listen (ditado)**: `POST /api/content` (module=listen) -> TTS da frase; frontend ESCODE o
-  texto ate "Verificar" (`classList.add("hidden")`), depois revela e compara com o ditado.
-  "Proxima" puxa nova frase sem repetir.
-- **speak**: grava (MediaRecorder) -> `POST /api/stt` -> transcricao -> `POST /api/correct`.
-- **write**: texto -> `POST /api/correct` -> `ERRO -> CORRECAO -> REGRA -> SUGESTAO`.
-- **read**: `POST /api/content` (module=read) -> texto + glossario; pergunta -> `POST /api/correct`.
-- **converse**: `POST /api/converse` com `{level, persona, history, message}` -> resposta da IA;
-  frontend fala a resposta (TTS) e mantem o historico.
+## Modules
+- **Listen**: dictation — TTS speaks, user types, check reveals answer
+- **Pronunciation**: record voice → transcript → AI correction → listen to correction
+- **Write**: free text → detailed correction (error → fix → rule → suggestion)
+- **Read**: leveled text + glossary → comprehension question → correction
+- **Conversation**: AI chat with personas (9 options) + voice support
+- **Grammar**: CEFR lessons (A1–C2), 46+ topics per language, hot-reloadable
+- **MemHack**: spaced repetition (Leitner boxes 1–5), per-user progress
 
-## Endpoints (resumo)
-| Metodo | Rota | Corpo | Retorno |
-|--------|------|-------|---------|
-| GET | `/api/health` | — | `{status, llm, provider}` |
-| GET | `/api/levels` | — | niveis |
-| GET | `/api/personas` | — | personas |
-| GET | `/api/voices` | — | vozes em ingles (Edge TTS) |
-| GET | `/api/categories` | — | categorias |
-| POST | `/api/content` | `{level, module, category?}` | `{text, glossary?}` |
-| POST | `/api/correct` | `{text, level}` | `{correction}` |
-| POST | `/api/tts` | `{text, voice?}` | `{audio_b64, format:"mp3"}` |
-| POST | `/api/stt` | multipart audio | `{transcript}` |
-| POST | `/api/converse` | `{level, persona, history, message}` | `{reply}` |
+## Key endpoints
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/health` | Status + LLM availability |
+| POST | `/api/content` | Listen/Read content |
+| POST | `/api/correct` | AI text correction |
+| POST | `/api/tts` | Text-to-speech (MP3) |
+| POST | `/api/stt` | Speech-to-text |
+| POST | `/api/converse` | AI conversation |
+| POST | `/api/grammar` | Grammar topic |
+| POST | `/api/memhack/next` | Next SRS phrase |
+| POST | `/api/memhack/review` | Record difficulty |
 
-## Como estender
-- **Mais frases**: edite `LISTEN`/`READ` em `engine.py` (mantenha `CATEGORIES` em sync).
-- **Nova voz**: `export EDGE_TTS_VOICE=...` ou adicione ao seletor em `frontend/index.html`.
-- **Nova categoria**: adicione a `CATEGORIES` e às chaves dos dicionarios.
-- **Novo modulo**: adicione rota em `main.py` + handler em `engine.py` + aba em `frontend/index.html` + listener em `app.js`.
+## How to extend
+- **Add Grammar**: edit `backend/grammar_{lang}.json`, reload via `POST /api/admin/reload-grammar`
+- **Add MemHack phrases**: edit `backend/memhack_{lang}.json`
+- **Add Listen/Read**: edit `backend/listen_{lang}.json` or `backend/read_{lang}.json`
+- **Add language**: see procedure in docs — create JSON content files + add option to `<select id="lang">`
+- **New module**: add route in `main.py` + handler in `engine.py` + tab in `index.html` + logic in `app.js`
 
-## Validacao (sem lint/testes)
+## Deployment
+- **Docker**: `docker compose up -d --build`
+- **Kubernetes**: `kubectl apply -k k8s/` (Blue/Green)
+- **Render**: auto-deploy on push to `main`
+- **CI/CD**: tag `v*` → `cd.yaml` builds + pushes to Docker Hub
+
+## Validation
 ```bash
 python3 -c "from fastapi.testclient import TestClient; import main; c=TestClient(main.app); print(c.get('/api/health').json())"
-node --check frontend/app.js
+node --check frontend/app.js && node --check frontend/i18n.js
 ```
 
-## Arquivos principais
-- `backend/main.py`, `backend/engine.py`, `backend/.env`, `backend/requirements.txt`
-- `frontend/index.html`, `frontend/style.css`, `frontend/app.js`
-- `docs/user/guia.md`, `docs/technical/arquitetura.md`, `AGENTS.md`
-- Protótipo CLI original: `skills/english-flow/app.py`
+## Key files
+- `backend/main.py`, `backend/engine.py`, `backend/.env`
+- `frontend/index.html`, `frontend/app.js`, `frontend/i18n.js`, `frontend/auth.js`
+- `k8s/` — Kubernetes manifests (Blue/Green)
+- `docs/technical/` — architecture, deploy, versioning, blue/green
+- `PROVAS_CRIACAO.md` — authorship proof

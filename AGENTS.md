@@ -1,50 +1,42 @@
 # AGENTS.md — JATEL-IA
 
-App de ensino de **inglês** (listen/speak/write/read + conversação por IA).
-Backend FastAPI serve a API **e** o frontend estático a partir de um único servidor.
+Multilingual AI-powered language learning app (English, Spanish, French).
+FastAPI backend serves both the API and the static frontend SPA from a single server.
 
-## Como rodar (um comando)
+## How to run (one command)
 ```bash
 cd backend
 pip install -r requirements.txt
 python3 -m uvicorn main:app --host 127.0.0.1 --port 8000
 ```
-Abra **http://localhost:8000** (o frontend `frontend/` é servido pelo próprio FastAPI; não há servidor estático separado).
+Open **http://localhost:8000** (the frontend `frontend/` is served by FastAPI itself; no separate static server).
 
-## Ambiente Python (gotcha importante)
-O Python deste SO é *externally managed* (PEP 668). `pip install` puro falha.
-- Recomendado: `python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt`
-- Alternativa: `pip install -r requirements.txt --break-system-packages`
-- O STT usa `SpeechRecognition` (Google Speech API gratuita, sem chave) + `ffmpeg` para converter áudio. O ffmpeg precisa estar instalado no sistema.
+## Python environment (important gotcha)
+This OS Python is *externally managed* (PEP 668). Plain `pip install` fails.
+- Recommended: `python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt`
+- Alternative: `pip install -r requirements.txt --break-system-packages`
+- STT uses `SpeechRecognition` (Google Speech API, free, no key) + `ffmpeg` for audio conversion. ffmpeg must be installed on the system.
 
-## Segredos / config
-- `backend/.env` contém `OPENROUTER_API_KEY`, `OPENAI_MODEL`, `OPENROUTER_TITLE`. Está no `.gitignore` — **não comitar**.
-- `engine.py` carrega `.env` relativo ao próprio diretório (`backend/.env`).
-- LLM usado: **OpenRouter** (texto-only). Não há TTS no OpenRouter; a voz vem do **Edge TTS** (sem chave, backend gera MP3). Fallback final no frontend: `speechSynthesis` do navegador.
-- Para trocar a voz da IA: `export EDGE_TTS_VOICE=en-US-GuyNeural` (ou via seletor no topo da UI).
+## Secrets / config
+- `backend/.env` contains `OPENROUTER_API_KEY`, `OPENAI_MODEL`, `OPENROUTER_TITLE`. It's in `.gitignore` — **never commit**.
+- `engine.py` loads `.env` relative to its own directory (`backend/.env`).
+- LLM: **OpenRouter** (text-only). TTS: **Edge TTS** (neural, no key needed). Fallback: browser `speechSynthesis`.
+- To change AI voice: `export EDGE_TTS_VOICE=en-US-GuyNeural` (or via the UI voice selector).
 
-## Arquitetura (não óbvia pelos nomes)
-- `backend/main.py`: rotas `/api/*` são registradas **antes** de `app.mount("/", StaticFiles(...))`, então elas têm prioridade sobre o estático. `GET /` retorna `frontend/index.html`.
-- `backend/engine.py`: toda a lógica (correção, TTS, STT, conversa, conteúdo).
-- `frontend/`: SPA vanilla (HTML/CSS/JS, sem build). `app.js` usa URLs relativas (`/api/...`).
-- Banco de frases: dicionários `LISTEN`/`READ` em `engine.py` (para inglês) e arquivos `listen_{lang}.json`/`read_{lang}.json` para ES/FR, chaveados por `nível → categoria → lista`. `get_content` usa uma fila embaralhada por `(nível, módulo, categoria, lang)` (sem repetir até esgotar). **Para adicionar frases EN, edite esses dicts; para ES/FR, edite os arquivos JSON correspondentes.**
-- **Grammar (CEFR)**: conteúdo é **orientado a dados**, em `backend/grammar.json` (`{"levels": [...], "grammar": {<nível>: [{topic, structure, explanation, examples}]}}`). No startup o `engine.py` carrega esse arquivo (fallback ao dicionário embutido se faltar/inválido). **Para adicionar/editar lições de Grammar, edite `grammar.json`** e recarregue sem rebuild via `POST /api/admin/reload-grammar` (só admin).
-- Listen é exercício de **ditado**: o frontend esconde o texto da frase até o "Verificar". Não antecipe a exibição.
-- **STT**: `SpeechRecognition` (Google Speech API, gratuita, sem chave) no frontend com fallback para `/api/stt`. O `lang` é enviado no body FormData (não como query param). O ffmpeg precisa estar instalado no sistema para conversão de áudio.
+## Architecture (not obvious from names)
+- `backend/main.py`: `/api/*` routes are registered **before** `app.mount("/", StaticFiles(...))`, so API takes priority. `GET /` returns `frontend/index.html`.
+- `backend/engine.py`: all logic (correction, TTS, STT, conversation, content).
+- `frontend/`: SPA vanilla (HTML/CSS/JS, no build). `app.js` uses relative URLs (`/api/...`).
+- Content is **data-driven**: Grammar in `grammar.json`/`grammar_es.json`/`grammar_fr.json`, MemHack in `memhack.json`/`memhack_es.json`/`memhack_fr.json`, Listen/Read in JSON files per language.
+- **i18n**: `frontend/i18n.js` contains EN/ES/FR translation dictionary (120+ keys). HTML uses `data-i18n` attributes. `applyI18n()` is called on load and on every language change.
+- **Persona selector**: located inside the Conversation section header (moved from topbar in v1.12.1).
+- **Tabs**: Listen, Pronunciation (renamed from Speak in v1.12.2), Write, Read, Conversation, Grammar, MemHack.
+- **STT**: Web Speech API (browser) with fallback to `/api/stt`. `lang` sent in FormData body.
 
-## Validação (sem lint/testes configurados)
-- Backend (sem subir servidor): `python3 -c "from fastapi.testclient import TestClient; import main; c=TestClient(main.app); print(c.get('/api/health').json())"`
-- Frontend: `node --check frontend/app.js`
-- Não há suíte de testes, typecheck ou lint neste repo.
+## Validation (no lint/test suite configured)
+- Backend (no server needed): `python3 -c "from fastapi.testclient import TestClient; import main; c=TestClient(main.app); print(c.get('/api/health').json())"`
+- Frontend: `node --check frontend/app.js && node --check frontend/i18n.js`
+- No test suite, typecheck, or lint configured in this repo.
 
-## Procedimentos de Backup (backup-procedures skill)
-Antes de fazer qualquer alteração no código, configuração ou conteúdo, é obrigatório criar um backup usando a skill `backup-procedures`. Esta skill está disponível em `.opencode/skills/backup-procedures/SKILL.md` e fornece procedimentos para:
-
-- Criar backup local completo antes de alterações
-- Verificar a integridade do backup
-- Restaurar do backup se necessário
-- Melhores práticas para proteção contra erros humanos
-
-Para usar esta skill, simplesmente siga os procedimentos descritos no arquivo SKILL.md ou peça para que eu (o agente) execute o backup antes de qualquer modificação.
-
-Os backups são armazenados no diretório `repo-backup/` que está ignorado pelo Git (ver .gitignore).
+## Backup procedures
+Before making any code, config, or content changes, create a backup in `repo-backup/` (gitignored).

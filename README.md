@@ -1,199 +1,310 @@
 # JATEL-IA
 
-Aplicativo de ensino de **inglês, espanhol e francês** que treina **Listen, Speak, Write, Read**
-e **Conversação por IA**, mais módulos de **Grammar** (gramática por nível CEFR) e **MemHack**
-(memorização com repetição espaçada), tudo em um único servidor (API FastAPI + frontend estático).
-Inclui **login de administrador**, **múltiplos usuários** e **deploy via Docker e Kubernetes**.
+### Multilingual AI-Powered Language Learning Platform
 
-## Funcionalidades
+[![CI](https://github.com/jeffersonsantos-sp/english-jatel/actions/workflows/ci.yaml/badge.svg)](https://github.com/jeffersonsantos-sp/english-jatel/actions/workflows/ci.yaml)
+[![CD](https://github.com/jeffersonsantos-sp/english-jatel/actions/workflows/cd.yaml/badge.svg)](https://github.com/jeffersonsantos-sp/english-jatel/actions/workflows/cd.yaml)
+[![Docker](https://img.shields.io/badge/Docker-Hub-blue?logo=docker)](https://hub.docker.com/r/updateinformatica/english-jatel)
+[![Kubernetes](https://img.shields.io/badge/Kubernetes-ready-326CE5?logo=kubernetes)](k8s/)
+[![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python)](https://python.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?logo=fastapi)](https://fastapi.tiangolo.com)
+[![Version](https://img.shields.io/badge/Version-v1.12.2-green)](https://github.com/jeffersonsantos-sp/english-jatel/releases)
 
-- **Multi-idioma** — seletor no topo alterna entre **Inglês**, **Espanhol** e **Francês**. TTS, STT, prompts da IA e conteúdo (gramática + MemHack) se adaptam ao idioma selecionado.
-- **Listen** — ditado: ouça a frase, digite o que ouviu e confira.
-- **Speak** — gravação por microfone (STT) ou texto digitado, com correção e áudio da correção (TTS).
-- **Write** — correção de texto por LLM no idioma selecionado.
-- **Read** — texto + glossário e pergunta de compreensão corrigida.
-- **Conversar** — chat com IA (personas: café, entrevistador, negócios, etc.) no idioma selecionado.
-- **Grammar** — lições de gramática por nível CEFR (**A1 → C2**), com estrutura, explicação e exemplos. Conteúdo em `backend/grammar.json` (EN), `grammar_es.json` (ES), `grammar_fr.json` (FR).
-- **MemHack** — memorização de frases por categorias com **repetição espaçada (SRS)**. Conteúdo em `backend/memhack.json` (EN), `memhack_es.json` (ES), `memhack_fr.json` (FR).
-- **Auth** — tela de login; usuário `admin`/`mudar123` por padrão. Seed automático de usuário normal via `SEED_USERNAME`/`SEED_PASSWORD`.
+> Full-stack application that trains **English, Spanish, and French** across Listen, Pronunciation, Write, Read, Conversation (AI-powered), Grammar (CEFR A1–C2), and Spaced Repetition (MemHack) — with a complete **i18n UI** that translates the entire interface per language.
 
-## Pré-requisitos
+---
 
-- Python 3.11+
-- Docker + Docker Compose (opcional, recomendado)
-- Kubernetes (opcional) + `kubectl`
-- Conta OpenRouter com `OPENROUTER_API_KEY` (modo demo funciona sem chave, com correção heurística)
+## Highlights
 
-## Como rodar localmente
+| Capability | Details |
+|-----------|---------|
+| **3 Languages** | English, Spanish, French — full UI + content + TTS + STT |
+| **7 Learning Modules** | Listen, Pronunciation, Write, Read, Conversation, Grammar, MemHack |
+| **Full i18n** | Every label, button, tab, placeholder, and message translates when switching language |
+| **AI Correction** | LLM-powered grammar/fluency correction via OpenRouter |
+| **Neural TTS** | Edge TTS voices per language (zero cost, no API key) |
+| **Speech-to-Text** | Web Speech API (browser) + backend fallback |
+| **Spaced Repetition** | Leitner-style SRS with per-user progress persistence |
+| **CEFR Grammar** | 46+ topics per language (A1–C2), data-driven, hot-reloadable |
+| **Auth & Multi-user** | PBKDF2 passwords, admin roles, session cookies |
+| **CI/CD** | GitHub Actions — CI on push, CD on git tag → Docker Hub |
+| **Deploy Ready** | Docker, Docker Compose, Kubernetes (Blue/Green), Render (PaaS) |
+
+---
+
+## Architecture
+
+```
+                    ┌──────────────────────────────────┐
+                    │         FastAPI Backend           │
+                    │   main.py (routes + auth)         │
+                    │   engine.py (logic + LLM + TTS)   │
+                    ├──────────────────────────────────┤
+  Browser ────────▶ │  /api/*   (JSON endpoints)        │
+  localhost:8000    │  /         (static SPA frontend)   │
+                    └──────────┬───────────────────────┘
+                               │
+              ┌────────────────┼────────────────┐
+              ▼                ▼                ▼
+        ┌──────────┐   ┌──────────┐   ┌──────────────┐
+        │ OpenRouter│   │ Edge TTS │   │ Web Speech   │
+        │ (LLM)    │   │ (neural) │   │ API (STT)    │
+        └──────────┘   └──────────┘   └──────────────┘
+```
+
+- **Single server** serves both API and static frontend (no separate build step)
+- **Data-driven content**: edit JSON files to add lessons — no code changes needed
+- **Multi-tenant SRS**: progress per user + language combination
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| **Backend** | Python 3.11, FastAPI, Uvicorn |
+| **Frontend** | Vanilla HTML/CSS/JS (SPA, no framework, no build) |
+| **LLM** | OpenRouter (OpenAI-compatible API) |
+| **TTS** | Edge TTS (neural voices, free) → OpenAI tts-1 → pyttsx3 fallback |
+| **STT** | Web Speech API (browser) → SpeechRecognition + ffmpeg (backend fallback) |
+| **Auth** | HMAC-signed HttpOnly cookies, PBKDF2 passwords |
+| **Database** | JSON files (users.json, memhack_progress.json) |
+| **Container** | Docker multi-stage (python:3.11-slim), 367MB |
+| **Orchestration** | Docker Compose, Kubernetes (Kustomize, Blue/Green) |
+| **CI/CD** | GitHub Actions (ci.yaml + cd.yaml) |
+| **Hosting** | Docker Hub, Render (PaaS), Kubernetes |
+
+---
+
+## Quick Start
+
+### Option 1 — Local (Python)
 
 ```bash
 cd backend
-python -m venv .venv && source .venv/bin/activate
+python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-python -m uvicorn main:app --host 127.0.0.1 --port 8000
-# abra http://localhost:8000
+python3 -m uvicorn main:app --host 127.0.0.1 --port 8000
+# Open http://localhost:8000
 ```
 
-> Python externamente gerenciado (PEP 668)? Use o venv acima ou `pip install -r requirements.txt --break-system-packages`.
-> A chave vai em `backend/.env` (gitignored) — use `backend/.env.example` como base.
-
-## Como rodar com Docker
+### Option 2 — Docker Compose
 
 ```bash
 docker compose up -d --build
+# Open http://localhost:8000
 ```
 
-- Variáveis de ambiente: `EDGE_TTS_VOICE`, `ADMIN_USER`, `ADMIN_PASS`, `SESSION_SECRET`, `DATA_DIR`.
-- Os dados dos usuários e o progresso do MemHack são persistidos em um **volume nomeado**
-  (`userdata` → `/app/data`), sobrevivendo a reinícios.
-- Acesse http://localhost:8000 e faça login com `admin` / `mudar123`.
-
-## Como rodar no Kubernetes
-
-Manifestos em `k8s/` (validados com `kubectl apply --dry-run=client`):
+### Option 3 — Kubernetes
 
 ```bash
 kubectl apply -k k8s/
-# acesso local (8000 pode estar em uso no host; use 8080):
 kubectl -n english-jatel port-forward svc/english-jatel 8080:80
-# abra http://localhost:8080
+# Open http://localhost:8080
 ```
 
-- O app usa `ADMIN_PASS`/`SESSION_SECRET` padrão do container (sem Secret comitado).
-- Em modo demo (sem `OPENROUTER_API_KEY` no pod), correção/conversa ficam heurísticas; TTS funciona.
-  Para habilitar o LLM na implantação:
-  ```bash
-  kubectl -n english-jatel set env deploy/english-jatel OPENROUTER_API_KEY=<sua_key>
-  ```
-- Veja [`docs/technical/deploy-kubernetes.md`](docs/technical/deploy-kubernetes.md) para detalhes
-  (Deployment, PVC, probes, Service, exposição via LoadBalancer/NodePort).
+**Login**: `admin` / `mudar123`
 
-## Autenticação e usuários
+---
 
-- Login em `/login`; conteúdo protegido (`/` e `/api/*` exigem sessão via cookie HttpOnly assinado com HMAC).
-- `POST /api/auth/change-password` — troca a senha do usuário logado.
-- `POST /api/auth/register` + `GET /api/auth/users` — **exigem admin** (usuário comum recebe 403).
-- Senhas armazenadas com **PBKDF2** (salt por usuário). O arquivo `users.json` **não** é versionado (`.gitignore`).
-- **Usuários padrão**:
-  | Usuário | Senha | Admin | Pode alterar senha |
-  |---------|-------|-------|-------------------|
-  | `admin` | `mudar123` | ✅ | ✅ |
-  | `jatel` | `Update2026!` | ❌ | ✅ |
-  | `estudante` | `Estudo@2026!` | ❌ | ❌ |
-- Para criar usuários adicionais: `POST /api/auth/register` (admin) ou via seed em `backend/engine.py` (variáveis `SEED_USERNAME`, `SEED_PASSWORD`).
+## Modules
 
-## Conteúdo orientado a dados (Grammar e MemHack)
+### Listen (Dictation)
+AI speaks a sentence → you type what you heard → check for accuracy. Text stays hidden until verification.
 
-Não é preciso editar o código para adicionar lições/frases. Cada idioma tem seu próprio arquivo:
+### Pronunciation (Speech)
+Record your voice (or type) → get transcript + AI correction → listen to corrected version. Uses Web Speech API with backend fallback.
 
-- **Grammar EN**: `backend/grammar.json` — `{"levels": [...], "grammar": {<nível>: [{topic, structure, explanation, examples}]}}`
-- **Grammar ES**: `backend/grammar_es.json` (mesma estrutura)
-- **Grammar FR**: `backend/grammar_fr.json` (mesma estrutura)
-- **MemHack EN**: `backend/memhack.json` — `{"categories": [...], "phrases": {<categoria>: [{id, en, pt}]}}`
-- **MemHack ES**: `backend/memhack_es.json` (chave `es` em vez de `en`)
-- **MemHack FR**: `backend/memhack_fr.json` (chave `fr` em vez de `en`)
+### Write (Writing)
+Write a paragraph → receive detailed correction: error → fix → rule → suggestion.
 
-Recarregue sem rebuild com `POST /api/admin/reload-grammar` (admin). O progresso SRS de cada
-usuário+idioma fica em `DATA_DIR/memhack_progress.json`.
+### Read (Comprehension)
+Read a leveled text with glossary → answer a comprehension question → get corrected.
 
-## Endpoints (resumo)
+### Conversation (AI Chat)
+Chat with an AI persona (Café, Interviewer, Business, Travel, Family, Movies, Music, Football, DevOps) — in the selected language. AI speaks first option, voice recording support.
 
-| Método | Rota | Auth | Descrição |
-|--------|------|------|-----------|
-| GET | `/api/languages` | — | idiomas suportados (`en`, `es`, `fr`) |
-| GET | `/api/health` | — | status/llm/provider |
-| GET | `/api/levels` | — | níveis de Listen/Read |
-| GET | `/api/personas` | — | personas de conversa |
-| GET | `/api/voices?lang=` | — | vozes Edge TTS (filtradas por idioma) |
-| GET | `/api/categories` | — | categorias de conteúdo |
-| GET | `/api/grammar-levels` | — | níveis CEFR (A1–C2) |
-| GET | `/api/memhack/categories?lang=` | — | categorias do MemHack por idioma |
-| POST | `/api/content` | sim | frase/texto de Listen/Read (+ `lang`) |
-| POST | `/api/correct` | sim | correção de texto (+ `lang`) |
-| POST | `/api/tts` | sim | áudio MP3 (base64, + `lang`) |
-| POST | `/api/stt` | sim | transcrição de áudio |
-| POST | `/api/converse` | sim | resposta da IA (+ `lang`) |
-| POST | `/api/grammar` | sim | tópico de gramática por nível (+ `lang`) |
-| POST | `/api/memhack/next` | sim | próxima frase a revisar (+ `lang`) |
-| POST | `/api/memhack/review` | sim | registra dificuldade (+ `lang`) |
-| POST | `/api/auth/login` · `/logout` · `/me` | — | autenticação |
-| POST | `/api/auth/change-password` | sim | troca própria senha |
-| POST | `/api/auth/register` · `GET /api/auth/users` | **admin** | gerência de usuários |
-| POST | `/api/admin/reload-grammar` | **admin** | recarrega grammar do idioma (`lang`) |
+### Grammar (CEFR)
+Lessons from A1 to C2: topic, structure formula, explanation, and example sentences with TTS. 46+ topics per language, data-driven from JSON.
 
-## CI/CD
+### MemHack (Spaced Repetition)
+Memorize phrases with Leitner-style SRS (boxes 1–5, intervals from 1min to 7days). Rate difficulty → system schedules next review. Progress persists per user.
 
-Dois workflows em `.github/workflows/`:
+---
 
-- **`ci.yaml`** — roda em todo push/PR para `main`: testa o backend (`/api/health` via `TestClient`) e o frontend (`node --check`).
-- **`cd.yaml`** — dispara **apenas no push de uma tag `v*`**: builda e publica a imagem no **Docker Hub**
-  (`updateinformatica/english-jatel:latest` e `:vX.Y.Z`), e faz um smoke test com a chave em runtime.
+## i18n — Full UI Internationalization
 
-Segredos no GitHub (Settings → Secrets and variables → Actions):
-`DOCKERHUB_USERNAME`, `DOCKERHUB_TOKEN`, `OPENROUTER_API_KEY` (e opcionalmente `ADMIN_USER`, `ADMIN_PASS`, `SESSION_SECRET`).
+When switching language (English / Español / Français), **every UI element** translates:
 
-## Versionamento por tags (releases)
+| Element | EN | ES | FR |
+|---------|----|----|-----|
+| Tabs | Listen, Pronunciation, Write, Read, Conversation, Grammar, MemHack | Escuchar, Pronunciación, Escribir, Leer, Conversar, Gramática, MemHack | Écouter, Prononciation, Écrire, Lire, Conversation, Grammaire, MemHack |
+| Buttons | Check, Record, Stop, Load | Comprobar, Grabar, Parar, Cargar | Vérifier, Enregistrer, Arrêter, Charger |
+| Labels | Level, AI Voice, Language, Persona | Nivel, Voz de IA, Idioma, Persona | Niveau, Voix de l'IA, Langue, Persona |
+| Feedback | Correct! | ¡Correcto! | Correct ! |
+| Errors | Microphone permission denied | Permiso de micrófono denegado | Permission du microphone refusée |
 
-O deploy é versionado por git tags semânticas. Para lançar uma versão:
+Implementation: `frontend/i18n.js` (translation dictionary) + `data-i18n` attributes in HTML.
 
-```bash
-git tag v1.4.0
-git push origin v1.4.0
+---
+
+## Content Management
+
+No code changes needed to add lessons. Each language has its own JSON files:
+
+| Content | EN | ES | FR |
+|---------|----|----|-----|
+| Grammar | `backend/grammar.json` | `backend/grammar_es.json` | `backend/grammar_fr.json` |
+| MemHack | `backend/memhack.json` | `backend/memhack_es.json` | `backend/memhack_fr.json` |
+| Listen | `LISTEN` dict in `engine.py` | `backend/listen_es.json` | `backend/listen_fr.json` |
+| Read | `READ` dict in `engine.py` | `backend/read_es.json` | `backend/read_fr.json` |
+
+Hot-reload Grammar without rebuild: `POST /api/admin/reload-grammar` (admin only).
+
+---
+
+## API Endpoints
+
+| Method | Endpoint | Auth | Description |
+|--------|----------|------|-------------|
+| GET | `/api/health` | — | Status, LLM availability |
+| GET | `/api/languages` | — | Supported languages |
+| GET | `/api/levels` | — | Difficulty levels |
+| GET | `/api/voices?lang=` | — | TTS voices per language |
+| GET | `/api/grammar-levels?lang=` | — | CEFR levels (A1–C2) |
+| GET | `/api/memhack/categories?lang=` | — | MemHack categories |
+| POST | `/api/content` | ✓ | Get Listen/Read content |
+| POST | `/api/correct` | ✓ | AI text correction |
+| POST | `/api/tts` | ✓ | Text-to-speech (MP3) |
+| POST | `/api/stt` | ✓ | Speech-to-text |
+| POST | `/api/converse` | ✓ | AI conversation |
+| POST | `/api/grammar` | ✓ | Grammar topic |
+| POST | `/api/memhack/next` | ✓ | Next SRS phrase |
+| POST | `/api/memhack/review` | ✓ | Record difficulty |
+| POST | `/api/auth/login` | — | Login |
+| POST | `/api/auth/register` | Admin | Create user |
+| POST | `/api/admin/reload-grammar` | Admin | Reload grammar |
+
+---
+
+## CI/CD Pipeline
+
+```
+git push main ──▶ CI (ci.yaml)
+                   ├─ backend: TestClient /api/health
+                   └─ frontend: node --check
+
+git tag vX.Y.Z ──▶ CD (cd.yaml)
+                   ├─ build Docker image
+                   ├─ push → Docker Hub (latest + vX.Y.Z)
+                   └─ smoke test (health check with API key)
 ```
 
-Isso aciona o `cd.yaml`, que publica:
-- `updateinformatica/english-jatel:latest`
-- `updateinformatica/english-jatel:v1.4.0`
+**Secrets**: `DOCKERHUB_USERNAME`, `DOCKERHUB_TOKEN`, `OPENROUTER_API_KEY`
 
-Mantenha o `main` sempre verde; corte tags só quando quiser um release. Veja
-[`docs/technical/processo-e-versionamento.md`](docs/technical/processo-e-versionamento.md) para o passo a passo completo.
+---
 
-## Deploy da imagem
+## Deploy Options
 
-Em qualquer host com Docker:
+| Platform | Method | Status |
+|----------|--------|--------|
+| **Docker Hub** | `updateinformatica/english-jatel:latest` | ✅ Published |
+| **Kubernetes** | Kustomize Blue/Green (`kubectl apply -k k8s/`) | ✅ Ready |
+| **Render** | Auto-deploy on push to `main` | ✅ Configured |
+| **Local** | `docker compose up` or `uvicorn` | ✅ Ready |
 
-```bash
-docker pull updateinformatica/english-jatel:latest
-docker run -d -p 8000:8000 \
-  -e OPENROUTER_API_KEY=sua_chave \
-  updateinformatica/english-jatel:latest
+---
+
+## Security
+
+- `.env` and `users.json` are gitignored — never committed
+- API key injected at runtime via environment variable
+- Passwords stored with PBKDF2 (per-user salt)
+- Session cookies: HttpOnly + HMAC-signed
+- HTTPS required in production (microphone + cookies)
+- Admin-only routes: user management, grammar reload
+
+---
+
+## Documentation
+
+| Document | Description |
+|----------|-------------|
+| [Architecture](docs/technical/arquitetura.md) | Technical deep-dive |
+| [Kubernetes Deploy](docs/technical/deploy-kubernetes.md) | k8s manifests + Blue/Green |
+| [Blue/Green Strategy](docs/technical/blue-green.md) | Zero-downtime deployment |
+| [Render Deploy](docs/technical/deploy-render.md) | PaaS deployment guide |
+| [Versioning Process](docs/technical/processo-e-versionamento.md) | Release workflow |
+| [User Guide](docs/user/guia.md) | End-user manual |
+| [Multilingual Presentation](docs/apresentacao-multilingua.md) | Business case deck |
+| [MCP Integration](docs/technical/mcp.md) | AI agent tooling |
+
+---
+
+## Skills & Prompts (AI Agent Integration)
+
+| Skill | Scope |
+|-------|-------|
+| [`english-jatel`](skills/english-flow/SKILL.md) | Full-stack app (modules, auth, content, CI/CD) |
+| [`mcp-integration`](.opencode/skills/mcp-integration/SKILL.md) | MCP server integration |
+
+| Prompt | Purpose |
+|--------|---------|
+| [Deploy](prompts/english-jatel-deploy/prompt-base.md) | Docker + Kubernetes deployment |
+| [Render Deploy](prompts/english-jatel-render/prompt-base.md) | Render PaaS deployment |
+| [Role](prompts/english-jatel-role/prompt-base.md) | AI agent role definition |
+| [Brainstorm](prompts/brainstorm.md) | Feature ideation |
+
+---
+
+## Project Structure
+
+```
+english-jatel/
+├── backend/
+│   ├── main.py              # FastAPI app, routes, auth middleware
+│   ├── engine.py             # All business logic (LLM, TTS, STT, content)
+│   ├── grammar.json          # EN grammar (CEFR A1–C2)
+│   ├── grammar_es.json       # ES grammar
+│   ├── grammar_fr.json       # FR grammar
+│   ├── memhack.json          # EN phrases (SRS)
+│   ├── memhack_es.json       # ES phrases
+│   ├── memhack_fr.json       # FR phrases
+│   ├── listen_es.json        # ES dictation sentences
+│   ├── listen_fr.json        # FR dictation sentences
+│   ├── read_es.json          # ES reading texts
+│   ├── read_fr.json          # FR reading texts
+│   └── requirements.txt
+├── frontend/
+│   ├── index.html            # SPA main page
+│   ├── login.html            # Login page
+│   ├── style.css             # Dark theme UI
+│   ├── app.js                # Client logic (modules, i18n integration)
+│   ├── auth.js               # Authentication logic
+│   └── i18n.js               # EN/ES/FR translation dictionary (120+ keys)
+├── k8s/                      # Kubernetes manifests (Blue/Green)
+├── mcp/                      # MCP stdio server
+├── .github/workflows/        # CI/CD pipelines
+├── docs/                     # Technical + user documentation
+├── prompts/                  # AI agent prompt templates
+├── skills/                   # AI agent skills
+├── brainstore/               # Feature ideation notes
+├── Dockerfile                # Multi-stage build
+├── docker-compose.yaml       # Local development
+└── PROVAS_CRIACAO.md         # Authorship proof
 ```
 
-## Segurança
+---
 
-- Nunca comite `.env` ou `users.json` (ambos ignorados no `.gitignore`/`.dockerignore`).
-- A chave do OpenRouter vai por **secret/variável de ambiente**, nunca embutida na imagem.
-- Use HTTPS em produção (obrigatório para microfone e para o cookie de sessão).
-- Altere `ADMIN_PASS` e `SESSION_SECRET` para valores fortes antes de expor publicamente.
-- Criação/listagem de usuários é restrita ao admin (retorna 403 para usuários comuns).
+## Author
 
-## Documentação
+**Jefferson Santos** — Full-stack Developer
 
-- [Deploy no Render (PaaS)](docs/technical/deploy-render.md)
-- [Deploy no Kubernetes](docs/technical/deploy-kubernetes.md)
-- [Blue/Green no Kubernetes](docs/technical/blue-green.md)
-- [Processo e versionamento por tags](docs/technical/processo-e-versionamento.md)
-- [Guia do usuário](docs/user/guia.md)
-- [Documentação técnica](docs/technical/arquitetura.md)
-- [AGENTS.md](AGENTS.md) — instruções para agentes de IA neste repositório
+- GitHub: [jeffersonsantos-sp](https://github.com/jeffersonsantos-sp)
+- Docker Hub: [updateinformatica](https://hub.docker.com/r/updateinformatica/english-jatel)
 
-## Skills e prompts
+---
 
-Skills disponíveis para agentes de IA operarem este projeto:
+## License
 
-| Skill | Escopo | Prompt base |
-|-------|--------|-------------|
-| [`english-jatel`](skills/english-jatel/SKILL.md) | App full-stack (módulos, auth, conteúdo, CI/CD) | — |
-| [`english-jatel-render`](.opencode/skills/english-jatel-render/SKILL.md) | Deploy e operação no **Render** (PaaS/free tier) | [`prompts/english-jatel-render/`](prompts/english-jatel-render/prompt-base.md) |
-| [`english-jatel-add-lang`](.opencode/skills/english-jatel-add-lang/SKILL.md) | Adicionar novo idioma | [`prompts/english-jatel-add-lang/`](prompts/english-jatel-add-lang/prompt-base.md) |
-| [`mcp-integration`](.opencode/skills/mcp-integration/SKILL.md) | Integração MCP | — |
-
-> Prompt de deploy Docker/Kubernetes: [`prompts/english-jatel-deploy/`](prompts/english-jatel-deploy/prompt-base.md).
-
-## Estrutura
-
-- `backend/` — API FastAPI (`main.py`), lógica (`engine.py`), conteúdo orientado a dados (`grammar.json`, `memhack.json`), store de usuários, frontend servido
-- `frontend/` — SPA sem build (`index.html`, `style.css`, `app.js`, `auth.js`, `login.html`)
-- `k8s/` — manifestos Kubernetes (namespace, configmap, pvc, deployment, service, kustomization)
-- `.github/workflows/` — `ci.yaml` (testes) e `cd.yaml` (build/push)
-- `docs/`, `skills/`, `prompts/`, `brainstore/`, `scripts/` — documentação e pipeline original
+Private — Personal and Educational Use

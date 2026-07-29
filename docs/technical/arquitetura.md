@@ -16,10 +16,12 @@ frontend/
   index.html     # SPA, sem build
   style.css
   app.js         # lógica do cliente (fetch /api/*, gravação de voz, TTS)
+  auth.js        # autenticação (login, logout, troca de senha, gerência de usuários)
+  i18n.js        # dicionário de tradução EN/ES/FR (120+ chaves) + applyI18n()
+  login.html     # página de login
 brainstore/      # notas de ideias (markdown)
-scripts/         # convert_brainstore_to_prompt.py (brainstore -> prompts)
-prompts/         # prompts gerados por skill
-skills/          # skill/cli protótipo (english-jatel/app.py, SKILL.md)
+prompts/         # prompts base para agentes de IA
+skills/          # skills para agentes de IA
 docs/            # user/ e technical/
 ```
 
@@ -114,11 +116,14 @@ persistido por usuário (multi-tenant).
 
 ## Frontend
 
-- Sem framework/build: HTML/CSS/JS puro.
+- Sem framework/build: HTML/CSS/JS puro. `auth.js`, `i18n.js`.
 - `app.js` usa URLs relativas (`/api/...`), então funciona no mesmo servidor.
-- Gravação de voz (Conversar/Speak): usa a **Web Speech API** do navegador
+- **i18n completo**: `i18n.js` contém dicionário EN/ES/FR (120+ chaves). Elementos HTML usam atributos `data-i18n`. `applyI18n()` é chamado no load e a cada troca de idioma.
+- **Abas**: Listen, **Pronunciation** (renomeado de Speak no v1.12.2), Write, Read, Conversation, Grammar, MemHack.
+- **Persona**: seletor dentro do header da aba Conversation (movido do topbar no v1.12.1).
+- Gravação de voz (Conversar/Pronunciation): usa a **Web Speech API** do navegador
   (`window.SpeechRecognition`) no cliente — transcreve sem depender do backend; há
-  fallback para `MediaRecorder` + `/api/stt` (Whisper). Requer HTTPS e Chrome/Edge.
+  fallback para `MediaRecorder` + `/api/stt`. Requer HTTPS e Chrome/Edge.
 - Reprodução de TTS: `new Audio(data:...)`.
 - Listen é ditado: o texto da frase fica oculto (`classList.add("hidden")`) até o
   "Verificar", quando é revelado (`classList.remove("hidden")`).
