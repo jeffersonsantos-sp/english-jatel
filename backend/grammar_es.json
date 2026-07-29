@@ -11,13 +11,13 @@
     "A1": [
       {
         "topic": "Verbo to be (ser / estar)",
-        "structure": "Subject + am / is / are (+ not) + complement",
+        "structure": "Sujeto + am / is / are (+ not) + complemento",
         "explanation": "Usamos am (eu), is (ele/ela/isto), are (você/nós/eles) para identidade, idade, profissão, origem e estado. Na negativa, acrescenta-se not (isn't / aren't / 'm not). Nas perguntas, o verbo vem antes do sujeito.",
         "examples": [
-          "I am a student. — Eu sou estudante.",
-          "She is from Brazil. — Ela é do Brasil.",
-          "They are not at home. — Eles não estão em casa.",
-          "Is he your brother? — Ele é seu irmão?"
+          "Yo soy estudiante. — Eu sou estudante.",
+          "Ella es de Brasil. — Ela é do Brasil.",
+          "Ellos no están en casa. — Eles não estão em casa.",
+          "¿Es él tu hermano? — Ele é seu irmão?"
         ]
       },
       {
@@ -25,10 +25,10 @@
         "structure": "I / you / he / she / it / we / they + verbo",
         "explanation": "O pronome define a forma do verbo. he, she e it exigem -s na 3ª pessoa do singular nos tempos simples. it refere-se a coisas, animais ou ideias.",
         "examples": [
-          "He speaks English. — Ele fala inglês.",
-          "We live in São Paulo. — Nós moramos em São Paulo.",
-          "It is a book. — Isto é um livro.",
-          "They work on Monday. — Eles trabalham na segunda."
+          "Él habla inglés. — Ele fala inglês.",
+          "Nosotros vivimos en São Paulo. — Nós moramos em São Paulo.",
+          "Es es un libro. — Isto é um livro.",
+          "Ellos trabajan el lunes. — Eles trabalham na segunda."
         ]
       },
       {
@@ -36,10 +36,10 @@
         "structure": "a + consoante | an + vogal | the (definido)",
         "explanation": "a antes de som de consoante, an antes de som de vogal (an hour, a university). the aponta algo já conhecido. Sem artigo para plural genérico (I like cats) ou nomes próprios.",
         "examples": [
-          "I have a cat. — Eu tenho um gato.",
-          "She ate an orange. — Ela comeu uma laranja.",
-          "The book is on the table. — O livro está sobre a mesa.",
-          "Dogs are friendly. — Cães são amigáveis."
+          "Tengo un gato. — Eu tenho um gato.",
+          "Ella comió una naranja. — Ela comeu uma laranja.",
+          "El libro está sobre la mesa. — O livro está sobre a mesa.",
+          "Los perros son amigables. — Cães são amigáveis."
         ]
       },
       {
@@ -47,21 +47,21 @@
         "structure": "substantivo + s / es / (irregular)",
         "explanation": "Geralmente + s (cats). Terminando em s, x, ch, sh ou o consoante: + es (boxes). Terminando em consoante + y: troca y por ies. Muitos irregulares: child→children, man→men, foot→feet.",
         "examples": [
-          "one dog, two dogs. — um cão, dois cães.",
-          "one box, three boxes. — uma caixa, três caixas.",
-          "one man, many men. — um homem, muitos homens.",
-          "one child, two children. — uma criança, duas crianças."
+          "un perro, dos perros. — um cão, dois cães.",
+          "una caja, tres cajas. — uma caixa, três caixas.",
+          "un hombre, muchos hombres. — um homem, muitos homens.",
+          "un niño, dos niños. — uma criança, duas crianças."
         ]
       },
       {
         "topic": "Present Simple (afirmativo)",
-        "structure": "Subject + verb(base) / -s (he/she/it)",
+        "structure": "Sujeto + verbo(base) / -s (he/she/it)",
         "explanation": "Expressa fatos, rotinas e hábitos. He/She/It leva -s (works) ou -es (goes, watches). have vira has na 3ª pessoa. Outras pessoas usam o verbo na base.",
         "examples": [
-          "I work every day. — Eu trabalho todo dia.",
-          "He goes to school. — Ele vai à escola.",
-          "We like coffee. — Nós gostamos de café.",
-          "She has a red car. — Ela tem um carro vermelho."
+          "Yo trabajo todos los días. — Eu trabalho todo dia.",
+          "Él va a la escuela. — Ele vai à escola.",
+          "Nosotros gustan el café. — Nós gostamos de café.",
+          "Ella tiene un coche rojo. — Ela tem um carro vermelho."
         ]
       },
       {
@@ -69,10 +69,10 @@
         "structure": "my / your / his / her / its / our / their + nome",
         "explanation": "Indicam posse e concordam com o dono, não com o objeto. my, your, his, her, its, our, their. Não usam artigo junto (my car, não the my car).",
         "examples": [
-          "This is my phone. — Este é meu telefone.",
-          "His name is John. — O nome dele é John.",
-          "We love our city. — Nós amamos nossa cidade.",
-          "Their house is big. — A casa deles é grande."
+          "Este es mi teléfono. — Este é meu telefone.",
+          "Su nombre es John. — O nome dele é John.",
+          "Nos encanta nuestra ciudad. — Nós amamos nossa cidade.",
+          "Su casa es grande. — A casa deles é grande."
         ]
       },
       {
@@ -80,10 +80,10 @@
         "structure": "this/that (sing.) | these/those (pl.)",
         "explanation": "this/these = perto de quem fala; that/those = longe. this book (este livro), that car (aquele carro), these dogs (estes cães), those houses (aquelas casas).",
         "examples": [
-          "This is my chair. — Esta é minha cadeira.",
-          "That is a tall building. — Aquela é um prédio alto.",
-          "These apples are fresh. — Estas maçãs estão frescas.",
-          "Those shoes are expensive. — Aqueles sapatos são caros."
+          "Esta es mi silla. — Esta é minha cadeira.",
+          "Ese es un edificio alto. — Aquela é um prédio alto.",
+          "Estas manzanas están frescas. — Estas maçãs estão frescas.",
+          "Esos zapatos son caros. — Aqueles sapatos são caros."
         ]
       },
       {
@@ -91,100 +91,100 @@
         "structure": "in / on / under / next to / between",
         "explanation": "in (dentro), on (sobre superfície), under (embaixo), next to (ao lado de), between (entre dois). Indispensáveis para descrever posição.",
         "examples": [
-          "The cat is in the box. — O gato está na caixa.",
-          "The book is on the table. — O livro está sobre a mesa.",
-          "The ball is under the bed. — A bola está debaixo da cama.",
-          "She sits between Tom and Mary. — Ela senta entre Tom e Mary."
+          "El gato está en la caja. — O gato está na caixa.",
+          "El libro está sobre la mesa. — O livro está sobre a mesa.",
+          "La pelota está debajo de la cama. — A bola está debaixo da cama.",
+          "Ella se sienta entre Tom y Mary. — Ela senta entre Tom e Mary."
         ]
       }
     ],
     "A2": [
       {
         "topic": "Presente simple (negativo e interrogativo)",
-        "structure": "do/does + not + verbo base | Do/Does + sujeto + verbo?",
-        "explanation": "Se usa el auxiliar do/does. Negativo: don't/doesn't + verbo base (sin -s). Interrogativo: Do/Does + sujeto + verbo base. He/She/It usa does, pero el verbo principal pierde la -s.",
+        "structure": "do/does + not + verbo(base) | Do/Does + Sujeto + verbo?",
+        "explanation": "Usa-se o auxiliar do/does. Negativo: don't/doesn't + verbo base (sem -s). Interrogativo: Do/Does + sujeito + verbo base. He/She/It usa does, mas o verbo principal perde o -s.",
         "examples": [
-          "I don't like tea. — No me gusta el té.",
-          "Does she speak French? — ¿Habla francés?",
-          "They don't live here. — No viven aquí.",
-          "Don't we have class today? — ¿No tenemos clase hoy?"
+          "No me gusta el té. — Eu não gosto de chá.",
+          "¿Ella habla francés? — Ela fala francês?",
+          "Ellos no viven aquí. — Eles não moram aqui.",
+          "¿No tenemos clase hoy? — Não temos aula hoje?"
         ]
       },
       {
         "topic": "Pretérito simple",
         "structure": "verbo + ed (regular) | irregular (went, ate)",
-        "explanation": "Acciones completadas en el pasado. Regulares: + ed (played, studied). Irregulares comunes: go→went, eat→ate, see→saw, buy→bought. Negativo/interrogativo con did + base.",
+        "explanation": "Ações concluídas no passado. Regulares: + ed (played, studied). Irregulares comuns: go→went, eat→ate, see→saw, buy→bought. Negativo/interrogativo com did + base.",
         "examples": [
-          "I visited my grandmother. — Visité a mi abuela.",
-          "He went to the market. — Fue al mercado.",
-          "We didn't watch TV. — No vimos la televisión.",
-          "Did you buy the tickets? — ¿Compraste los boletos?"
+          "Visitaba a mi abuela. — Eu visitei minha avó.",
+          "Fue al mercado. — Ele foi ao mercado.",
+          "No vimos la tele. — Nós não assistimos TV.",
+          "¿Compraste las entradas? — Você comprou os ingressos?"
         ]
       },
       {
         "topic": "Preposiciones de tiempo in / on / at",
-        "structure": "in + período | on + día | at + hora",
-        "explanation": "in + meses/años/estaciones (in July, in 2020, in summer). on + días y fechas (on Monday, on July 4th). at + horas y momentos (at 7 o'clock, at night, at the weekend).",
+        "structure": "in + período | on + dia | at + hora",
+        "explanation": "in + meses/anos/estações (in July, in 2020, in summer). on + dias y fechas (on Monday, on July 4th). at + horas y momentos (at 7 o'clock, at night, at the weekend no RU).",
         "examples": [
-          "The party is in December. — La fiesta es en diciembre.",
-          "We meet on Friday. — Nos encontramos el viernes.",
-          "The bus leaves at nine. — El autobús sale a las nueve.",
-          "She was born on March 2nd. — Nació el 2 de marzo."
+          "La fiesta es en diciembre. — A festa é em dezembro.",
+          "Nos encontramos el viernes. — Nós nos encontramos na sexta.",
+          "El autobús sale a las nueve. — O ônibus sai às nove.",
+          "Nació el 2 de marzo. — Ela nasceu em 2 de março."
         ]
       },
       {
         "topic": "There is / There are",
         "structure": "There is (sing.) / There are (pl.) (+ not)",
-        "explanation": "Para indicar que algo existe o está presente. there is (singular), there are (plural). Negativo: isn't / aren't. Interrogativo: Is/Are there...?",
+        "explanation": "Para dizer que algo existe ou está presente. there is (singular/indescritível), there are (plural). Negativo: isn't / aren't. Interrogativo: Is/Are there...?",
         "examples": [
-          "There is a park near my house. — Hay un parque cerca de casa.",
-          "There are two cats. — Hay dos gatos.",
-          "There isn't any milk. — No hay leche.",
-          "Are there students in the room? — ¿Hay estudiantes en la sala?"
+          "Hay un parque cerca de mi casa. — Há um parque perto de casa.",
+          "Hay dos gatos. — Há dois gatos.",
+          "No hay leche. — Não há leite nenhum.",
+          "¿Hay estudiantes en la sala? — Há alunos na sala?"
         ]
       },
       {
         "topic": "Can / Can't (habilidad y permiso)",
-        "structure": "can + verbo base | can't + verbo base",
-        "explanation": "can indica capacidad o permiso; no varía con el sujeto y va seguido del verbo en base. Negativo: can't. Interrogativo: Can + sujeto + base. Pasado: could.",
+        "structure": "can + verbo(base) | can't + verbo(base)",
+        "explanation": "can indica capacidade ou permissão; não varia com o sujeito e é seguido do verbo na base. Negativo: can't. Interrogativo: Can + sujeito + base. Passado: could.",
         "examples": [
-          "I can swim. — Sé nadar.",
-          "She can't drive. — No sabe conducir.",
-          "Can you help me? — ¿Puedes ayudarme?",
-          "We could see the stars. — Podíamos ver las estrellas."
+          "Sé nadar. — Eu sei nadar.",
+          "Ella no puede conducir. — Ela não sabe dirigir.",
+          "¿Puedes ayudarme? — Você pode me ajudar?",
+          "Podíamos ver las estrellas. — Nós conseguíamos ver as estrelas."
         ]
       },
       {
         "topic": "Comparativos y superlativos",
         "structure": "adj + er / more + adj | the + adj + est / most",
-        "explanation": "Comparativo: -er (más alto) o more + adj largo (more beautiful), con than. Superlativo: -est (el más alto) o most + adj, con the. Irregulares: good→better→best, bad→worse→worst.",
+        "explanation": "Comparativo: -er (taller) ou more + adj longo (more beautiful), com than. Superlativo: -est (tallest) ou most + adj, com the. Irregulares: good→better→best, bad→worse→worst.",
         "examples": [
-          "He is taller than me. — Él es más alto que yo.",
-          "This book is more interesting. — Este libro es más interesante.",
-          "She is the best student. — Ella es la mejor alumna.",
-          "That was the worst day. — Ese fue el peor día."
+          "Es más alto que yo. — Ele é mais alto que eu.",
+          "Este libro es más interesante. — Este livro é mais interessante.",
+          "Ella es la mejor estudiante. — Ela é a melhor aluna.",
+          "Ese fue el peor día. — Aquele foi o pior dia."
         ]
       },
       {
         "topic": "Pronombres de objeto",
         "structure": "me / you / him / her / it / us / them",
-        "explanation": "Sustituyen el objeto de la acción (receptor). me, you, him, her, it, us, them. Van después de verbos o preposiciones (I saw him / with them).",
+        "explanation": "Substituem o objeto da ação (recebedor). me, you, him, her, it, us, them. Vêm após verbos ou preposições (I saw him / with them).",
         "examples": [
-          "She called me yesterday. — Me llamó ayer.",
-          "We invited them to the party. — Los invitamos a la fiesta.",
-          "He gave her a gift. — Le dio un regalo a ella.",
-          "Talk to us later. — Háblanos más tarde."
+          "Ella me llamó ayer. — Ela me ligou ontem.",
+          "Los invitamos a la fiesta. — Nós os convidamos para a festa.",
+          "Él le dio un regalo a ella. — Ele deu um presente a ela.",
+          "Habla con nosotros más tarde. — Converse conosco mais tarde."
         ]
       },
       {
         "topic": "Cuantificadores some / any / much / many",
         "structure": "some (afir.) | any (neg./interrog.) | much/many",
-        "explanation": "some en afirmativas y ofertas; any en negativas y preguntas. much con incontables (much water); many con contables (many friends). a lot of sirve para ambos.",
+        "explanation": "some em afirmativas e ofertas; any em negativas e perguntas. much com incontáveis (much water); many com contáveis (many friends). a lot of serve para ambos.",
         "examples": [
-          "I have some money. — Tengo algo de dinero.",
-          "Do you have any questions? — ¿Tienes alguna pregunta?",
-          "There isn't much time. — No hay mucho tiempo.",
-          "How many students are there? — ¿Cuántos estudiantes hay?"
+          "Tengo algo de dinero. — Eu tenho algum dinheiro.",
+          "¿Tienes alguna pregunta? — Você tem alguma pergunta?",
+          "No hay mucho tiempo. — Não há muito tempo.",
+          "¿Cuántos estudiantes hay? — Quantos alunos há?"
         ]
       }
     ],
@@ -224,13 +224,13 @@
       },
       {
         "topic": "Futuro: will / going to",
-        "structure": "will + base | going to + base",
-        "explanation": "will para decisiones espontáneas, predicciones y promesas. going to para planes intencionados y predicciones con evidencia presente.",
+        "structure": "will + base | am/is/are going to + base",
+        "explanation": "will para decisões no momento, ofertas e previsões sem prova. going to para planos já decididos e previsões com sinais no presente (Look at the sky!).",
         "examples": [
-          "I will call you later. — Te llamaré después.",
-          "We are going to travel next month. — Vamos a viajar el mes que viene.",
-          "It's going to rain. — Va a llover.",
-          "She will help you, I'm sure. — Te ayudará, estoy seguro."
+          "Yo te ayudaré. — Eu vou te ajudar (agora decidi).",
+          "¡Mira el cielo! Va a llover. — Olhe o céu! Vai chover.",
+          "Vamos a viajar en julio. — Vamos viajar em julho.",
+          "Creo que ella lo apreciará. — Acho que ela vai gostar."
         ]
       },
       {
@@ -336,13 +336,13 @@
       },
       {
         "topic": "Used to / Would (hábitos pasados)",
-        "structure": "used to + base | would + base",
-        "explanation": "used to describe habitual actions in the past. Would for past habits and states (no negatives). Used to can describe both repeated actions and past states.",
+        "structure": "used to + base | would + base (pasado)",
+        "explanation": "used to descreve hábitos e estados do passado que não existem mais (I used to smoke). would descreve ações repetidas no passado (narrativa), não estados.",
         "examples": [
-          "I used to live in Madrid. — Vivía en Madrid.",
-          "When we were young, we would walk to school. — Caminábamos a la escuela.",
-          "She used to smoke but quit in 2010. — Ella fumaba pero dejó en 2010.",
-          "Did he use to play tennis? → Did he use to play tennis?"
+          "Yo solía vivir en el Río. — Eu costumava morar no Rio.",
+          "Ella solía tocar el piano. — Ela tocava piano antigamente.",
+          "Cada verano visitábamos a la abuela. — Cada verão visitávamos a vovó.",
+          "No solía gustarle el café. — Ele não costumava gostar de café."
         ]
       },
       {
@@ -394,7 +394,7 @@
       {
         "topic": "Wish / If only",
         "structure": "wish + pasado simple / past perfect",
-        "explanation": "Wish para situaciones contrafactuales: presente/futuro con pasado simple, pasado con past perfect. If only es más enfático y expresivo.",
+        "explanation": "Wish para situaciones contrafactoriales: presente/futuro con pasado simple, pasado con past perfect. If only é mais enfático e expresivo.",
         "examples": [
           "I wish I spoke better English. — Ojalá hablara mejor inglés.",
           "She wishes she had accepted the job. — Deseara que hubiera aceptado el trabajo.",
@@ -438,11 +438,11 @@
       {
         "topic": "Estructuras de preferencia (would rather / it's time)",
         "structure": "would rather + base | it's (high) time + pasado simple",
-        "explanation": "Would rather expresa preferencia; seguido de sujeto + base (or + sujeto + past simple). It's time + pasado simple para sugerir que algo ya debería haber ocurrido.",
+        "explanation": "Would rather expresa preferência; seguido de sujeito + base (ou + sujeito + past simple). It's time + past simple para sugerir que algo já deveria ter acontecido.",
         "examples": [
           "I would rather stay home. — Preferiría quedarme en casa.",
           "I would rather you left earlier. — Preferiría que te fueras antes.",
-          "It's time we left. — Es hora de que nos fuéramos.",
+          "It's time we left. — É hora de que nos fuéramos.",
           "It's high time you got serious. — Ya es hora de que te pongas serio."
         ]
       }
@@ -473,7 +473,7 @@
       {
         "topic": "Conectores discursivos sofisticados",
         "structure": "nonetheless / nevertheless / whereas / furthermore / notwithstanding",
-        "explanation": "Conectores avanzados para unir ideas con matices. Whereas (oposición), nevertheless (concesión), furthermore (adición), notwithstanding (a pesar de), moreover (adición formal).",
+        "explanation": "Conectores avançados para unir ideias com matizes. Whereas (oposição), nevertheless (concessão), furthermore (adição), notwithstanding (apesar de), moreover (adição formal).",
         "examples": [
           "The proposal was expensive; nevertheless, it was approved.",
           "Some people prefer city life, whereas others favour rural areas.",
@@ -483,8 +483,8 @@
       },
       {
         "topic": "Preposiciones idiomáticas",
-        "structure": "preposição fija con sustantivos/verbos específicos",
-        "explanation": "Muchos verbos y sustantivos en inglés exigen preposiciones específicas e inesperadas. No se pueden traducir palabra por palabra; son fijas por uso.",
+        "structure": "preposición fija con sustantivos/verbos específicos",
+        "explanation": "Muitos verbos e substantivos em inglês exigem preposições específicas e inesperadas. Não se podem traduzir palavra por palavra; são fixas por uso.",
         "examples": [
           "depend on (not depend of)",
           "interested in (not interested on)",
@@ -495,7 +495,7 @@
       {
         "topic": "Registro y matices de tono",
         "structure": "formal/informal/colloquial según contexto",
-        "explanation": "El inglés varía enormemente según el registro. Formal usa would rather, shall, might bien; informal usa gonna, wanna, gotta. El registro incorrecto puede ser ofensivo o ineficaz.",
+        "explanation": "O inglês varia enormemente según o registro. Formal usa would rather, shall, might bem; informal usa gonna, wanna, gotta. O registro incorrecto pode ser ofensivo ou ineficaz.",
         "examples": [
           "Formal: Shall I assist you? → Informal: Can I help you?",
           "Formal: I would be grateful. → Informal: Thanks a lot.",
@@ -505,8 +505,8 @@
       },
       {
         "topic": "Fronting y énfasis con adverbios",
-        "structure": "Adverbio/complemento al inicio → inversión o énfasis",
-        "explanation": "Colocar información nueva o enfática al principio de la oración para énfasis. Inversión parcial con negative adverbials (Never, Rarely, Only, Little).",
+        "structure": "Adverbio/complemento al inicio → inversión o énfase",
+        "explanation": "Colocar informação nova ou enfática no início da frase para énfase. Inversão parcial con negative adverbials (Never, Rarely, Only, Little).",
         "examples": [
           "Never have I experienced such kindness.",
           "Only then did I realize the truth.",
@@ -517,11 +517,11 @@
       {
         "topic": "Elipsis y estructuras compactas",
         "structure": "omisión de elementos repetidos para concisión",
-        "explanation": "Elipsis: omitir palabras recuperables del contexto. Estructuras con so/such...that, too...to, enough...to. Notación de elipsis es común en lectura avanzada.",
+        "explanation": "Elipsis: omitir palavras recuperables do contexto. Estruturas com so/such...that, too...to, enough...to. Notação de elipsis é comum em leitura avançada.",
         "examples": [
           "I have never been so happy (as I am now). — (omisión de 'as I am now')",
           "Too tired to continue. — Demasiado cansado para continuar.",
-          "He is tall enough to reach the shelf. — Es lo suficientemente alto para alcanzar el estante.",
+          "He is tall enough to reach the shelf. — É lo suficientemente alto para alcançar o prateleira.",
           "She speaks English better (than I do). — (omisión de 'than I do')"
         ]
       }

@@ -11,24 +11,24 @@
     "A1": [
       {
         "topic": "Verbo to be (ser / estar)",
-        "structure": "Subject + am / is / are (+ not) + complement",
+        "structure": "Sujet + am / is / are (+ not) + complément",
         "explanation": "Usamos am (eu), is (ele/ela/isto), are (você/nós/eles) para identidade, idade, profissão, origem e estado. Na negativa, acrescenta-se not (isn't / aren't / 'm not). Nas perguntas, o verbo vem antes do sujeito.",
         "examples": [
-          "I am a student. — Eu sou estudante.",
-          "She is from Brazil. — Ela é do Brasil.",
-          "They are not at home. — Eles não estão em casa.",
-          "Is he your brother? — Ele é seu irmão?"
+          "Je suis étudiant. — Eu sou estudante.",
+          "Elle est du Brésil. — Ela é do Brasil.",
+          "Ils ne sont pas à la maison. — Eles não estão em casa.",
+          "Est-ce qu'il est votre frère? — Ele é seu irmão?"
         ]
       },
       {
         "topic": "Pronomes pessoais e sujeito",
-        "structure": "I / you / he / she / it / we / they + verbo",
+        "structure": "I / you / he / she / it / we / they + verbe",
         "explanation": "O pronome define a forma do verbo. he, she e it exigem -s na 3ª pessoa do singular nos tempos simples. it refere-se a coisas, animais ou ideias.",
         "examples": [
-          "He speaks English. — Ele fala inglês.",
-          "We live in São Paulo. — Nós moramos em São Paulo.",
-          "It is a book. — Isto é um livro.",
-          "They work on Monday. — Eles trabalham na segunda."
+          "Il parle anglais. — Ele fala inglês.",
+          "Nous vivons à São Paulo. — Nós moramos em São Paulo.",
+          "C'est un livre. — Isto é um livro.",
+          "Ils travaillent le lundi. — Eles trabalham na segunda."
         ]
       },
       {
@@ -36,10 +36,10 @@
         "structure": "a + consoante | an + vogal | the (definido)",
         "explanation": "a antes de som de consoante, an antes de som de vogal (an hour, a university). the aponta algo já conhecido. Sem artigo para plural genérico (I like cats) ou nomes próprios.",
         "examples": [
-          "I have a cat. — Eu tenho um gato.",
-          "She ate an orange. — Ela comeu uma laranja.",
-          "The book is on the table. — O livro está sobre a mesa.",
-          "Dogs are friendly. — Cães são amigáveis."
+          "J'ai un chat. — Eu tenho um gato.",
+          "Elle a mangé une orange. — Ela comeu uma laranja.",
+          "Le livre est sur la table. — O livro está sobre a mesa.",
+          "Les chiens sont amicaux. — Cães são amigáveis."
         ]
       },
       {
@@ -47,32 +47,32 @@
         "structure": "substantivo + s / es / (irregular)",
         "explanation": "Geralmente + s (cats). Terminando em s, x, ch, sh ou o consoante: + es (boxes). Terminando em consoante + y: troca y por ies. Muitos irregulares: child→children, man→men, foot→feet.",
         "examples": [
-          "one dog, two dogs. — um cão, dois cães.",
-          "one box, three boxes. — uma caixa, três caixas.",
-          "one man, many men. — um homem, muitos homens.",
-          "one child, two children. — uma criança, duas crianças."
+          "un chien, deux chiens. — um cão, dois cães.",
+          "une boîte, trois boîtes. — uma caixa, três caixas.",
+          "un homme, beaucoup d'hommes. — um homem, muitos homens.",
+          "un enfant, deux enfants. — uma criança, duas crianças."
         ]
       },
       {
         "topic": "Present Simple (afirmativo)",
-        "structure": "Subject + verb(base) / -s (he/she/it)",
+        "structure": "Sujet + verbe(base) / -s (he/she/it)",
         "explanation": "Expressa fatos, rotinas e hábitos. He/She/It leva -s (works) ou -es (goes, watches). have vira has na 3ª pessoa. Outras pessoas usam o verbo na base.",
         "examples": [
-          "I work every day. — Eu trabalho todo dia.",
-          "He goes to school. — Ele vai à escola.",
-          "We like coffee. — Nós gostamos de café.",
-          "She has a red car. — Ela tem um carro vermelho."
+          "Je travaille tous les jours. — Eu trabalho todo dia.",
+          "Il va à école. — Ele vai à escola.",
+          "Nous aimons le café. — Nós gostamos de café.",
+          "Elle a une voiture rouge. — Ela tem um carro vermelho."
         ]
       },
       {
         "topic": "Adjetivos possessivos",
-        "structure": "my / your / his / her / its / our / their + nome",
+        "structure": "my / your / his / her / its / our / their + nom",
         "explanation": "Indicam posse e concordam com o dono, não com o objeto. my, your, his, her, its, our, their. Não usam artigo junto (my car, não the my car).",
         "examples": [
-          "This is my phone. — Este é meu telefone.",
-          "His name is John. — O nome dele é John.",
-          "We love our city. — Nós amamos nossa cidade.",
-          "Their house is big. — A casa deles é grande."
+          "C'est mon téléphone. — Este é meu telefone.",
+          "Son nom est John. — O nome dele é John.",
+          "Nous aimons notre ville. — Nós amamos nossa cidade.",
+          "Leur maison est grande. — A casa deles é grande."
         ]
       },
       {
@@ -80,10 +80,10 @@
         "structure": "this/that (sing.) | these/those (pl.)",
         "explanation": "this/these = perto de quem fala; that/those = longe. this book (este livro), that car (aquele carro), these dogs (estes cães), those houses (aquelas casas).",
         "examples": [
-          "This is my chair. — Esta é minha cadeira.",
-          "That is a tall building. — Aquela é um prédio alto.",
-          "These apples are fresh. — Estas maçãs estão frescas.",
-          "Those shoes are expensive. — Aqueles sapatos são caros."
+          "C'est ma chaise. — Esta é minha cadeira.",
+          "C'est un immeuble haut. — Aquela é um prédio alto.",
+          "Ces pommes sont fraîches. — Estas maçãs estão frescas.",
+          "Ces chaussures sont chères. — Aqueles sapatos são caros."
         ]
       },
       {
@@ -91,10 +91,10 @@
         "structure": "in / on / under / next to / between",
         "explanation": "in (dentro), on (sobre superfície), under (embaixo), next to (ao lado de), between (entre dois). Indispensáveis para descrever posição.",
         "examples": [
-          "The cat is in the box. — O gato está na caixa.",
-          "The book is on the table. — O livro está sobre a mesa.",
-          "The ball is under the bed. — A bola está debaixo da cama.",
-          "She sits between Tom and Mary. — Ela senta entre Tom e Mary."
+          "Le chat est dans la boîte. — O gato está na caixa.",
+          "Le livre est sur la table. — O livro está sobre a mesa.",
+          "La balle est sous le lit. — A bola está debaixo da cama.",
+          "Elle s'assoit entre Tom et Mary. — Ela senta entre Tom e Mary."
         ]
       }
     ],
