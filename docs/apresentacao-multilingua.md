@@ -21,7 +21,7 @@ _Documento de concepção (design só, sem implementação)_
 
 ## Slide 2 — Situação atual (o que temos)
 
-- App **funcional e estável** (versão `v1.12.1`), com correção por LLM, TTS neural
+- App **funcional e estável** (versão `v1.12.2`), com correção por LLM, TTS neural
   (Edge) e reconhecimento de voz no navegador.
 - **Pré-requisito importante:** a interface (UI) é em **português** — a língua do aluno.
 - O "cérebro" (LLM OpenRouter) **já fala qualquer idioma**: a Conversação em espanhol
