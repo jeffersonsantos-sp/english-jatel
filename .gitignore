@@ -13,3 +13,4 @@ Thumbs.db
 data/
 backend/data/
 repo-backup/
+tmp_*.md
