@@ -124,7 +124,7 @@ docker run -d -p 8000:8000 -e OPENROUTER_API_KEY=... updateinformatica/english-j
 
 ## 6. Próximos passos
 
-### 6.1 Estado atual do conteúdo (v1.11.3)
+### 6.1 Estado atual do conteúdo (v1.12.0)
 
 | Módulo | EN | ES | FR |
 |--------|----|----|----|
