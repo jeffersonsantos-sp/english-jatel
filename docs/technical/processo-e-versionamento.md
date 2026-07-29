@@ -121,7 +121,41 @@ docker run -d -p 8000:8000 -e OPENROUTER_API_KEY=... updateinformatica/english-j
 - [ ] Imagem puxada/deployada no host alvo com `OPENROUTER_API_KEY`.
 - [ ] Login e funcionalidades validados em produção (HTTPS).
 
-## 6. Segurança
+- [ ] Login e funcionalidades validadas em produção (HTTPS).
+
+## 6. Próximos passos
+
+### 6.1 Criar novos usuários
+
+Usuários padrão criados via seed no `engine.py`:
+- `admin` / `mudar123` (admin, pode trocar senha)
+- `jatel` / `Update2026!` (não-admin, pode trocar senha)
+- `estudante` / `Estudo@2026!` (não-admin, **não pode** trocar senha)
+
+Para adicionar usuários via API (requer admin):
+```
+POST /api/auth/register  {"username":"<user>","password":"<pass>"}
+```
+
+### 6.2 Adicionar novo idioma
+
+Procedimento padronizado em `.opencode/skills/english-jatel-add-lang/SKILL.md`.
+Resumo:
+1. Crie `backend/grammar_{lang}.json` (A1–C2, copie A1 do EN, traduza A2–C2)
+2. Crie `backend/memhack_{lang}.json` (categorias + frases, chave `{lang}` nos objetos)
+3. Adicione opção ao `<select id="lang">` no frontend
+4. Recarregue via `POST /api/admin/reload-grammar` (admin)
+5. Atualize README.md e este documento
+6. Faça commit, tag `vX.Y.Z`, build e push da imagem
+
+### 6.3 Atualizar versão do K8s
+
+1. Atualize `k8s/configmap.yaml` → `IMAGE: updateinformatica/english-jatel:vX.Y.Z`
+2. Atualize `k8s/deployment-blue.yaml` e `k8s/deployment-green.yaml` → `image: ...`
+3. Valide com `kubectl apply --dry-run=client -k k8s/`
+4. Faça commit e tag
+
+## 7. Segurança
 
 - `.env` e `users.json` não são versionados (`.gitignore` / `.dockerignore`).
 - A chave do OpenRouter é injetada em **runtime**, nunca embutida na imagem.
