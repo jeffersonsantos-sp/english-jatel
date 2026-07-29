@@ -293,14 +293,16 @@ english-jatel/
 └── PROVAS_CRIACAO.md         # Authorship proof
 ```
 
-## Login de Acesso
+## Login
 
-```
-admin - J@Tel2026!! 
-jatel -Update2026!
-estudante -Estudo@2026!  
+Default credentials are set in `backend/.env` (gitignored). See `backend/.env.example` for reference.
 
-```
+| User | Role | Can change password |
+|------|------|-------------------|
+| `admin` | Admin | Yes |
+| `jatel` | Normal | Yes |
+| `estudante` | Normal | No |
+
 ---
 
 ## Author
