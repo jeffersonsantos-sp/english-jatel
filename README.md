@@ -14,6 +14,23 @@
 
 ---
 
+## Screenshots
+
+<table>
+  <tr>
+    <td align="center"><strong>🇺🇸 English</strong></td>
+    <td align="center"><strong>🇪🇸 Español</strong></td>
+    <td align="center"><strong>🇫🇷 Français</strong></td>
+  </tr>
+  <tr>
+    <td><img src="img/front-en.png" alt="JATEL-IA English UI" width="400"></td>
+    <td><img src="img/front-es.png" alt="JATEL-IA Spanish UI" width="400"></td>
+    <td><img src="img/front-fr.png" alt="JATEL-IA French UI" width="400"></td>
+  </tr>
+</table>
+
+---
+
 ## Highlights
 
 | Capability | Details |
