@@ -145,7 +145,23 @@ O Grammar para **Espanhol** e **Francês** foi traduzido. Os arquivos `grammar_e
 
 Validação: 0 exemplos em inglês nas versões ES/FR. Recarregar via `POST /api/admin/reload-grammar` e conferir no frontend (abas Grammar → ES/FR).
 
-### 6.3 Criar novos usuários
+### 6.3 Próximo passo — i18n completo da UI (internacionalização)
+
+Ao selecionar o idioma (English / Español / Français) no seletor `<select id="lang">`, **toda a página deve ser traduzida** para o idioma escolhido. Atualmente o seletor `lang` controla apenas o conteúdo (Grammar, MemHack, Listen, Read, TTS, STT, prompts da IA) — a **interface** permanece em português.
+
+Escopo da funcionalidade:
+
+| Elemento | Atual (PT-BR) | Com i18n |
+|----------|---------------|----------|
+| Título / header | "JATEL-IA" | "JATEL-IA" (mantém) |
+| Abas (Listen, Speak, Write, Read, Conversar, Grammar, MemHack) | Nomes em PT | Traduzidos (ex.: "Escuchar", "Écouter") |
+| Labels / placeholders | "Nível", "Voz da IA", "Categoria", "Persona" | Traduzidos por idioma |
+| Botões | "Ouvir frase", "Gravar", "Parar", "Verificar", "Corrigir" | Traduzidos |
+| Mensagens de feedback | "✅ Acertou", "❌ Você errou" | Traduzidos |
+| Textos de instrução | "Digite o que você ouviu" | Traduzidos |
+| Erros / alerts | "Não foi possível gravar" | Traduzidos |
+
+### 6.4 Criar novos usuários
 
 Usuários padrão criados via seed no `engine.py`:
 - `admin` / `mudar123` (admin, pode trocar senha)
@@ -157,7 +173,7 @@ Para adicionar usuários via API (requer admin):
 POST /api/auth/register  {"username":"<user>","password":"<pass>"}
 ```
 
-### 6.2 Adicionar novo idioma
+### 6.5 Adicionar novo idioma
 
 Procedimento padronizado em `.opencode/skills/english-jatel-add-lang/SKILL.md`.
 Resumo:
@@ -168,7 +184,7 @@ Resumo:
 5. Atualize README.md e este documento
 6. Faça commit, tag `vX.Y.Z`, build e push da imagem
 
-### 6.3 Atualizar versão do K8s e docs
+### 6.7 Atualizar versão do K8s e docs
 
 1. Atualize `k8s/configmap.yaml` → `IMAGE: updateinformatica/english-jatel:vX.Y.Z`
 2. Atualize `k8s/deployment-blue.yaml` e `k8s/deployment-green.yaml` → `image: ...`
