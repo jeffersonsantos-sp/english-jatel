@@ -74,6 +74,13 @@ kubectl -n english-jatel port-forward svc/english-jatel 8080:80
 - `POST /api/auth/change-password` — troca a senha do usuário logado.
 - `POST /api/auth/register` + `GET /api/auth/users` — **exigem admin** (usuário comum recebe 403).
 - Senhas armazenadas com **PBKDF2** (salt por usuário). O arquivo `users.json` **não** é versionado (`.gitignore`).
+- **Usuários padrão**:
+  | Usuário | Senha | Admin | Pode alterar senha |
+  |---------|-------|-------|-------------------|
+  | `admin` | `mudar123` | ✅ | ✅ |
+  | `jatel` | `Update2026!` | ❌ | ✅ |
+  | `estudante` | `Estudo@2026!` | ❌ | ❌ |
+- Para criar usuários adicionais: `POST /api/auth/register` (admin) ou via seed em `backend/engine.py` (variáveis `SEED_USERNAME`, `SEED_PASSWORD`).
 
 ## Conteúdo orientado a dados (Grammar e MemHack)
 
@@ -178,6 +185,7 @@ Skills disponíveis para agentes de IA operarem este projeto:
 |-------|--------|-------------|
 | [`english-jatel`](skills/english-jatel/SKILL.md) | App full-stack (módulos, auth, conteúdo, CI/CD) | — |
 | [`english-jatel-render`](.opencode/skills/english-jatel-render/SKILL.md) | Deploy e operação no **Render** (PaaS/free tier) | [`prompts/english-jatel-render/`](prompts/english-jatel-render/prompt-base.md) |
+| [`english-jatel-add-lang`](.opencode/skills/english-jatel-add-lang/SKILL.md) | Adicionar novo idioma | [`prompts/english-jatel-add-lang/`](prompts/english-jatel-add-lang/prompt-base.md) |
 | [`mcp-integration`](.opencode/skills/mcp-integration/SKILL.md) | Integração MCP | — |
 
 > Prompt de deploy Docker/Kubernetes: [`prompts/english-jatel-deploy/`](prompts/english-jatel-deploy/prompt-base.md).
