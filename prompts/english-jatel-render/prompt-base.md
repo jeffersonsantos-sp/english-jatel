@@ -23,7 +23,7 @@ partir do GitHub), respeitando os ajustes ja feitos no repositorio para o free t
   descricao do emoji); seletor **Categoria** removido da barra (redundante com Persona),
   Listen/Read usam `category: "all"`. **Multi-idioma**: seletor `lang` no topo alterna entre
   Ingles/Espanhol/Frances (arquivos `grammar_es.json`, `grammar_fr.json`, `memhack_es.json`,
-  `memhack_fr.json`). Versao atual: **v1.9.0**.
+  `memhack_fr.json`). Versao atual: **v1.11.2**.
 - **Keepalive**: `.github/workflows/keepalive.yaml` pinga `/api/health` a cada 10 min
   (secret `RENDER_URL`) para o free nao dormir.
 
