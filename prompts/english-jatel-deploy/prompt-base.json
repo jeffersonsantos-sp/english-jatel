@@ -5,7 +5,7 @@
   "context": {
     "dockerfile": "python:3.11-slim, venv em /opt/venv, copia backend/ e frontend/, usuario nao-root (uid 10001), expoe 8000, healthcheck /api/health, entrypoint uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000} (porta dinamica p/ Render, default 8000); .dockerignore exclui .env/data/node_modules/*.md",
     "app_state": "9 personas na conversacao (cafe, entrevistador, negocios, viagens, familia, filmes, musicas, futebol, devops); voz via Web Speech API no navegador (sem Whisper no servidor); respostas sem emojis e TTS remove emojis; seletor Categoria removido da barra (Listen/Read usam category 'all')",
-    "docker_compose": "service english-flow, build context '.', imagem english-flow:latest, porta 8000:8000, env EDGE_TTS_VOICE/ADMIN_USER/ADMIN_PASS/SESSION_SECRET/DATA_DIR, env_file backend/.env, volume userdata:/app/data, restart unless-stopped",
+    "docker_compose": "service english-jatel, build context '.', imagem english-jatel:latest, porta 8000:8000, env EDGE_TTS_VOICE/ADMIN_USER/ADMIN_PASS/SESSION_SECRET/DATA_DIR, env_file backend/.env, volume userdata:/app/data, restart unless-stopped",
     "kubernetes": "kustomization.yaml com namespace, configmap, pvc 1Gi (/app/data), deployment (nao-root, readOnlyRootFilesystem, probes /api/health, resources), service ClusterIP 80->8000; sem Secret comitado; LLM via kubectl set env"
   },
   "workflow": [

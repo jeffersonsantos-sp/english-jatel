@@ -19,9 +19,9 @@ e **manifestos Kubernetes**, seguindo as convencoes ja estabelecidas neste repos
   navegador (sem Whisper no servidor); respostas sem emojis e TTS remove emojis;
   seletor **Categoria** removido da barra (Listen/Read usam `category: "all"`).
   **Multi-idioma**: seletor `lang` no topo alterna entre Ingles/Espanhol/Frances;
-  grammar/memhack carregados por idioma. Versao atual: **v1.9.0**.
-- **docker-compose.yaml**: service `english-flow`, build do contexto `.`, imagem
-  `english-flow:latest`, porta `8000:8000`, env `EDGE_TTS_VOICE`/`ADMIN_USER`/
+  grammar/memhack carregados por idioma. Versao atual: **v1.11.0**.
+- **docker-compose.yaml**: service `english-jatel`, build do contexto `.`, imagem
+  `english-jatel:latest`, porta `8000:8000`, env `EDGE_TTS_VOICE`/`ADMIN_USER`/
   `ADMIN_PASS`/`SESSION_SECRET`/`DATA_DIR`, `env_file: backend/.env`, volume nomeado
   `userdata:/app/data`, healthcheck e `restart: unless-stopped`.
 - **k8s/**: `kustomization.yaml` agrupando `namespace.yaml`, `configmap.yaml`,

@@ -50,15 +50,15 @@
 
 | Imagem | Tag | Status |
 |--------|-----|--------|
-| `english-flow` | `latest` | ✅ Build local bem-sucedido |
+| `english-jatel` | `latest` | ✅ Build local bem-sucedido |
 | `updateinformatica/english-jatel` | `latest` | ✅ Publicado via CD (git tag v1.x.y) |
 | `updateinformatica/english-jatel` | `v1.11.0` | ✅ Publicado (tag atual) |
 
 ### Imagens locais disponíveis:
 
 ```bash
-$ docker images | grep english-flow
-english-flow   latest    c82e3368400e    367MB    98.8MB    U
+$ docker images | grep english-jatel
+english-jatel   latest    c82e3368400e    367MB    98.8MB    U
 ```
 
 ---
@@ -127,7 +127,7 @@ projeto-aiops/
 2. **Docker Hub**: `updateinformatica/english-jatel` — imagens publicadas via CI/CD automatizado com secrets do GitHub
 3. **Primeiro commit**: `f7c00ed` em 2026-07-14 — "Initial commit" por Jefferson Santos
 4. **Todos os commits** possuem autor "jeffersonsantos-sp" no remoto
-5. **Deploy ativo** no Docker (`english-flow:latest`) e Kubernetes manifests
+5. **Deploy ativo** no Docker (`english-jatel:latest`) e Kubernetes manifests
 6. **CD Pipeline** (`cd.yaml`) publica imagens no Docker Hub com tag automática de release
 
 ---

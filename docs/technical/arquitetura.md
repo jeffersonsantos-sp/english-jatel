@@ -19,7 +19,7 @@ frontend/
 brainstore/      # notas de ideias (markdown)
 scripts/         # convert_brainstore_to_prompt.py (brainstore -> prompts)
 prompts/         # prompts gerados por skill
-skills/          # skill/cli protótipo (english-flow/app.py, SKILL.md)
+skills/          # skill/cli protótipo (english-jatel/app.py, SKILL.md)
 docs/            # user/ e technical/
 ```
 
@@ -139,5 +139,5 @@ Veja [docs/technical/mcp.md](mcp.md) para conectar a Claude Desktop / OpenCode.
 ## Pipeline original (brainstore → skill)
 
 `brainstore/ideias-*.md` → `scripts/convert_brainstore_to_prompt.py` →
-`prompts/<skill>/` (markdown + json). `skills/english-flow/` tem o protótipo CLI
+`prompts/<skill>/` (markdown + json). `skills/english-jatel/` tem o protótipo CLI
 original (`app.py` + `SKILL.md`).
