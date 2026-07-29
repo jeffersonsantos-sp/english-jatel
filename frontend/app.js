@@ -200,6 +200,43 @@ function speakStopRecording() {
   $("speak-stop").disabled = true;
 }state.speakCorrection = "";
 
+function startBackendSTT() {
+  $("speak-rec").disabled = true;
+  $("speak-rec").textContent = "🎤 Gravando...";
+  $("speak-stop").disabled = false;
+  try {
+    startRec(async (bytes, mime) => {
+      $("speak-rec").disabled = false;
+      $("speak-rec").textContent = "🎤 Gravar";
+      $("speak-stop").disabled = true;
+      const fd = new FormData();
+      const ext = mime.includes("webm") ? "webm" : mime.includes("ogg") ? "ogg" : "wav";
+      fd.append("file", new Blob([bytes], { type: mime }), "audio." + ext);
+      fd.append("lang", state.lang);
+      try {
+        const stt = await api("/api/stt", { method: "POST", body: fd });
+        setSpeakTranscript(stt.transcript || "(audio vazio)");
+        if (stt.transcript) {
+          const corr = await api("/api/correct", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ text: stt.transcript, level: state.level, lang: state.lang }),
+          });
+          setSpeakCorrection(corr.correction);
+        }
+      } catch (e) {
+        console.error("STT error:", e);
+        $("speak-transcript").textContent = "🎤 (erro: " + (e.message || e) + ")\n(Digite abaixo para corrigir manualmente.)";
+      }
+    });
+  } catch (e) {
+    $("speak-rec").disabled = false;
+    $("speak-rec").textContent = "🎤 Gravar";
+    $("speak-stop").disabled = true;
+    $("speak-transcript").textContent = "Erro microfone: " + e.message;
+  }
+}
+
 // Reconhecimento de voz do navegador (Web Speech API). Roda no cliente, sem
 // depender do backend/ffmpeg/whisper.
 function getSpeechRecognition(lang) {
@@ -263,6 +300,11 @@ $("speak-rec").addEventListener("click", async () => {
       }
     };
     rec.onerror = (e) => {
+      if (e.error === "network") {
+        speakStopRecording();
+        startBackendSTT();
+        return;
+      }
       $("speak-transcript").textContent = "⚠️ " + (e.error === "no-speech" ? "não detectei sua fala" : "erro: " + e.error);
       speakStopRecording();
     };
@@ -293,40 +335,7 @@ $("speak-rec").addEventListener("click", async () => {
     return;
   }
   // 2) Fallback: grava e envia para o backend (/api/stt).
-  $("speak-rec").disabled = true;
-  $("speak-rec").textContent = "🎤 Gravando...";
-  $("speak-stop").disabled = false;
-  try {
-    await startRec(async (bytes, mime) => {
-      $("speak-rec").disabled = false;
-      $("speak-rec").textContent = "🎤 Gravar";
-      $("speak-stop").disabled = true;
-      const fd = new FormData();
-      const ext = mime.includes("webm") ? "webm" : mime.includes("ogg") ? "ogg" : "wav";
-      fd.append("file", new Blob([bytes], { type: mime }), "audio." + ext);
-      fd.append("lang", state.lang);
-try {
-         const stt = await api("/api/stt", { method: "POST", body: fd });
-         setSpeakTranscript(stt.transcript || "(audio vazio)");
-         if (stt.transcript) {
-           const corr = await api("/api/correct", {
-             method: "POST",
-             headers: { "Content-Type": "application/json" },
-             body: JSON.stringify({ text: stt.transcript, level: state.level, lang: state.lang }),
-           });
-           setSpeakCorrection(corr.correction);
-         }
-       } catch (e) {
-        console.error("STT error:", e);
-        $("speak-transcript").textContent = "🎤 (erro: " + (e.message || e) + ")\n(Digite abaixo para corrigir manualmente.)";
-      }
-    });
-  } catch (e) {
-    $("speak-rec").disabled = false;
-    $("speak-rec").textContent = "🎤 Gravar";
-    $("speak-stop").disabled = true;
-    $("speak-transcript").textContent = "Erro microfone: " + e.message;
-  }
+  startBackendSTT();
 });
 
 $("speak-stop").addEventListener("click", speakStopRecording);
@@ -669,6 +678,11 @@ $("conv-rec").addEventListener("click", async () => {
       }
     };
     rec.onerror = (e) => {
+      if (e.error === "network") {
+        convStopRecording();
+        startBackendSTT();
+        return;
+      }
       const map = {
         "not-allowed": "permissão do microfone negada",
         "no-speech": "não detectei sua fala, tente de novo",
@@ -697,36 +711,7 @@ $("conv-rec").addEventListener("click", async () => {
     return;
   }
   // 2) Fallback: grava e envia para o backend (/api/stt).
-  $("conv-rec").disabled = true;
-  $("conv-rec").textContent = "🎤 Gravando...";
-  $("conv-stop").disabled = false;
-try {
-       await startRec(async (bytes, mime) => {
-         $("conv-rec").disabled = false;
-         $("conv-rec").textContent = "🎤 Gravar";
-         $("conv-stop").disabled = true;
-         const fd = new FormData();
-         const ext = mime.includes("webm") ? "webm" : mime.includes("ogg") ? "ogg" : "wav";
-         fd.append("file", new Blob([bytes], { type: mime }), "audio." + ext);
-         try {
-           const stt = await api("/api/stt?lang=" + encodeURIComponent(state.lang), { method: "POST", body: fd });
-           if (stt.transcript) {
-             addMsg("user", stt.transcript);
-             await aiTurn(stt.transcript);
-           } else {
-             addMsg("user", "(STT: audio vazio ou inaudivel)");
-           }
-         } catch (e) {
-        console.error("STT error:", e);
-        addMsg("user", "🎤 (erro: " + (e.message || e) + ")");
-      }
-    });
-  } catch (e) {
-    $("conv-rec").disabled = false;
-    $("conv-rec").textContent = "🎤 Gravar";
-    $("conv-stop").disabled = true;
-    addMsg("user", "(erro microfone: " + e.message + ")");
-  }
+  startBackendSTT();
 });
 
 $("conv-stop").addEventListener("click", convStopRecording);
