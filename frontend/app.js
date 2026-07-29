@@ -504,8 +504,8 @@ async function memhackLoadNext() {
       return;
     }
     document.querySelectorAll(".memhack-rating button").forEach((b) => (b.disabled = false));
-    $("memhack-phrase").textContent = data.phrase.en;
-    $("memhack-pt").textContent = data.phrase.pt;
+     $("memhack-phrase").textContent = data.phrase[lang];
+     $("memhack-pt").textContent = data.phrase.pt;
     const studied = data.studied || 0;
     const total = data.total || 0;
     $("memhack-progress").textContent = `Progresso: ${studied}/${total} frases em treino`;
@@ -516,7 +516,7 @@ async function memhackLoadNext() {
 
 $("memhack-category").addEventListener("change", memhackLoadNext);
 $("memhack-play").addEventListener("click", () => {
-  if (memhackCurrent) playTts(memhackCurrent.en);
+  if (memhackCurrent) playTts(memhackCurrent[state.lang]);
 });
 $("memhack-reveal").addEventListener("click", () => {
   $("memhack-pt").classList.toggle("hidden");
@@ -547,13 +547,13 @@ document.querySelectorAll(".memhack-rating button").forEach((btn) => {
         $("memhack-msg").textContent = "⏱ Revisao agendada. Volte mais tarde!";
         return;
       }
-      $("memhack-pt").classList.add("hidden");
-      $("memhack-phrase").textContent = data.phrase.en;
-      $("memhack-pt").textContent = data.phrase.pt;
-      const studied = data.studied || 0;
-      const total = data.total || 0;
-      $("memhack-progress").textContent = `Progresso: ${studied}/${total} frases em treino`;
-    } catch (e) {
+       $("memhack-pt").classList.add("hidden");
+       $("memhack-phrase").textContent = data.phrase[lang];
+       $("memhack-pt").textContent = data.phrase.pt;
+       const studied = data.studied || 0;
+       const total = data.total || 0;
+       $("memhack-progress").textContent = `Progresso: ${studied}/${total} frases em treino`;
+     } catch (e) {
       showError($("memhack-msg"), e.message);
     }
   });
