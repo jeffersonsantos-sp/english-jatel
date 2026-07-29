@@ -145,21 +145,24 @@ O Grammar para **Espanhol** e **Francês** foi traduzido. Os arquivos `grammar_e
 
 Validação: 0 exemplos em inglês nas versões ES/FR. Recarregar via `POST /api/admin/reload-grammar` e conferir no frontend (abas Grammar → ES/FR).
 
-### 6.3 Próximo passo — i18n completo da UI (internacionalização)
+### 6.3 i18n completo da UI (internacionalização) — ✅ Implementado
 
-Ao selecionar o idioma (English / Español / Français) no seletor `<select id="lang">`, **toda a página deve ser traduzida** para o idioma escolhido. Atualmente o seletor `lang` controla apenas o conteúdo (Grammar, MemHack, Listen, Read, TTS, STT, prompts da IA) — a **interface** permanece em português.
+Ao selecionar o idioma (English / Español / Français) no seletor `<select id="lang">`, **toda a página é traduzida** para o idioma escolhido. Implementado com `i18n.js` (dicionário `I18N`) + atributos `data-i18n` no HTML.
 
-Escopo da funcionalidade:
+Elementos traduzidos:
 
-| Elemento | Atual (PT-BR) | Com i18n |
-|----------|---------------|----------|
-| Título / header | "JATEL-IA" | "JATEL-IA" (mantém) |
-| Abas (Listen, Speak, Write, Read, Conversar, Grammar, MemHack) | Nomes em PT | Traduzidos (ex.: "Escuchar", "Écouter") |
-| Labels / placeholders | "Nível", "Voz da IA", "Categoria", "Persona" | Traduzidos por idioma |
-| Botões | "Ouvir frase", "Gravar", "Parar", "Verificar", "Corrigir" | Traduzidos |
-| Mensagens de feedback | "✅ Acertou", "❌ Você errou" | Traduzidos |
-| Textos de instrução | "Digite o que você ouviu" | Traduzidos |
-| Erros / alerts | "Não foi possível gravar" | Traduzidos |
+| Elemento | Exemplo |
+|----------|---------|
+| Tagline / header | "Learn by listening, speaking & conversing" |
+| Abas | "Escuchar", "Écouter", "Parler" |
+| Labels / placeholders | "Niveau:", "Voz de IA:", "Categoría:" |
+| Botões | "Escuchar frase", "Gravar", "Enregistrer", "Corregir" |
+| Mensagens de feedback | "Correct!", "Correcto!", "Correct !" |
+| Textos de instrução | "Escucha la frase..." |
+| Erros / alerts | "Permission du microphone refusée" |
+| Modais (senha, usuários) | "Changer le mot de passe", "Gestionar usuarios" |
+
+Arquivos: `frontend/i18n.js` (dicionário EN/ES/FR), `frontend/index.html` (atributos `data-i18n`), `frontend/app.js` (chamadas `t()` + `applyI18n()`).
 
 ### 6.4 Criar novos usuários
 
