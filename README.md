@@ -8,7 +8,7 @@
 [![Kubernetes](https://img.shields.io/badge/Kubernetes-ready-326CE5?logo=kubernetes)](k8s/)
 [![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python)](https://python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?logo=fastapi)](https://fastapi.tiangolo.com)
-[![Version](https://img.shields.io/badge/Version-v1.12.2-green)](https://github.com/jeffersonsantos-sp/english-jatel/releases)
+[![Version](https://img.shields.io/badge/Version-v1.12.3-green)](https://github.com/jeffersonsantos-sp/english-jatel/releases)
 
 > Full-stack application that trains **English, Spanish, and French** across Listen, Pronunciation, Write, Read, Conversation (AI-powered), Grammar (CEFR A1–C2), and Spaced Repetition (MemHack) — with a complete **i18n UI** that translates the entire interface per language.
 
