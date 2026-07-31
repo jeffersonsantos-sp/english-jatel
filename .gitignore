@@ -27,3 +27,7 @@ terraform/tfplan
 
 # LinkedIn prompt (pessoal, nao versionar)
 prompts/linkedin/
+# Terraform state (SENSITIVE)
+terraform/*.tfstate
+terraform/*.tfstate.backup
+terraform/tfplan
