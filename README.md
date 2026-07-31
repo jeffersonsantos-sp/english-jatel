@@ -120,6 +120,36 @@ kubectl -n english-jatel port-forward svc/english-jatel 8080:80
 # Open http://localhost:8080
 ```
 
+### Option 4 — Azure AKS (Production)
+
+```bash
+# 1. Provision infrastructure with Terraform
+cd terraform
+terraform init
+terraform plan -out=tfplan
+terraform apply tfplan
+
+# 2. Configure kubectl
+az aks get-credentials --resource-group rg-english-jatel --name aks-english-jatel
+
+# 3. Install NGINX Ingress + cert-manager
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo add jetstack https://charts.jetstack.io
+helm repo update
+helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx \
+    --namespace ingress-nginx --create-namespace \
+    --set controller.service.type=LoadBalancer
+helm upgrade --install cert-manager jetstack/cert-manager \
+    --namespace cert-manager --create-namespace \
+    --set installCRDs=true
+
+# 4. Deploy application
+kubectl apply -k k8s/
+
+# 5. Configure DNS at registrar (Azure DNS name servers)
+# 6. Access: https://learn.jfs-devops.shop
+```
+
 
 ---
 
@@ -226,6 +256,7 @@ git tag vX.Y.Z ──▶ CD (cd.yaml)
 |----------|--------|--------|
 | **Docker Hub** | `updateinformatica/english-jatel:latest` | ✅ Published |
 | **Kubernetes** | Kustomize Blue/Green (`kubectl apply -k k8s/`) | ✅ Ready |
+| **Azure AKS** | Terraform + K8s + NGINX Ingress + TLS | ✅ Configured |
 | **Render** | Auto-deploy on push to `main` | ✅ Configured |
 | **Local** | `docker compose up` or `uvicorn` | ✅ Ready |
 
@@ -248,6 +279,7 @@ git tag vX.Y.Z ──▶ CD (cd.yaml)
 |----------|-------------|
 | [Architecture](docs/technical/arquitetura.md) | Technical deep-dive |
 | [Kubernetes Deploy](docs/technical/deploy-kubernetes.md) | k8s manifests + Blue/Green |
+| [Azure AKS Deploy](docs/technical/deploy-aks.md) | AKS + Terraform + NGINX + TLS |
 | [Blue/Green Strategy](docs/technical/blue-green.md) | Zero-downtime deployment |
 | [Render Deploy](docs/technical/deploy-render.md) | PaaS deployment guide |
 | [Versioning Process](docs/technical/processo-e-versionamento.md) | Release workflow |
@@ -262,11 +294,13 @@ git tag vX.Y.Z ──▶ CD (cd.yaml)
 | Skill | Scope |
 |-------|-------|
 | [`english-jatel`](skills/english-flow/SKILL.md) | Full-stack app (modules, auth, content, CI/CD) |
+| [`aks-deploy`](.opencode/skills/aks-deploy/SKILL.md) | Azure AKS deployment with Terraform |
 | [`mcp-integration`](.opencode/skills/mcp-integration/SKILL.md) | MCP server integration |
 
 | Prompt | Purpose |
 |--------|---------|
 | [Deploy](prompts/english-jatel-deploy/prompt-base.md) | Docker + Kubernetes deployment |
+| [AKS Deploy](prompts/english-jatel-deploy-aks/prompt-aks.md) | Azure AKS deployment |
 | [Render Deploy](prompts/english-jatel-render/prompt-base.md) | Render PaaS deployment |
 | [Role](prompts/english-jatel-role/prompt-base.md) | AI agent role definition |
 | [Brainstorm](prompts/brainstorm.md) | Feature ideation |
@@ -298,7 +332,13 @@ english-jatel/
 │   ├── app.js                # Client logic (modules, i18n integration)
 │   ├── auth.js               # Authentication logic
 │   └── i18n.js               # EN/ES/FR translation dictionary (120+ keys)
+├── terraform/                # Azure infrastructure (AKS, DNS, IP)
+│   ├── providers.tf
+│   ├── variables.tf
+│   ├── main.tf
+│   └── outputs.tf
 ├── k8s/                      # Kubernetes manifests (Blue/Green)
+├── k8s/production/           # Production add-ons (Prometheus, ArgoCD)
 ├── mcp/                      # MCP stdio server
 ├── .github/workflows/        # CI/CD pipelines
 ├── docs/                     # Technical + user documentation

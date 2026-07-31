@@ -8,3 +8,6 @@ resources:
   - deployment-blue.yaml
   - deployment-green.yaml
   - service.yaml
+  - ingress.yaml
+  - cluster-issuer.yaml
+  - secret.yaml

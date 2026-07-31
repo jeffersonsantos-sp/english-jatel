@@ -1,0 +1,42 @@
+server:
+  persistentVolume:
+    enabled: true
+    size: 5Gi
+    storageClass: default
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+alertmanager:
+  enabled: false
+
+pushgateway:
+  enabled: false
+
+nodeExporter:
+  enabled: true
+
+kubeStateMetrics:
+  enabled: true
+
+service:
+  type: ClusterIP
+  port: 9090
+
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  hosts:
+    - prometheus.jfs-devops.shop
+  tls:
+    - secretName: prometheus-tls
+      hosts:
+        - prometheus.jfs-devops.shop
