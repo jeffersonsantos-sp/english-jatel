@@ -270,6 +270,47 @@ git tag vX.Y.Z ──▶ CD (cd.yaml)
 - Session cookies: HttpOnly + HMAC-signed
 - HTTPS required in production (microphone + cookies)
 - Admin-only routes: user management, grammar reload
+- **Kubernetes secrets** — never commit `k8s/secret.yaml` to git
+
+---
+
+## Secrets Management
+
+> ⚠️ **Nunca commitar secrets** em repositórios git.
+
+### Opção A — Arquivo YAML
+
+1. Copiar o template:
+   ```bash
+   cp k8s/secret.yaml.example k8s/secret.yaml
+   ```
+
+2. Editar com valores reais:
+   ```bash
+   vim k8s/secret.yaml
+   ```
+
+3. Aplicar:
+   ```bash
+   kubectl apply -f k8s/secret.yaml
+   ```
+
+### Opção B — kubectl create secret
+
+```bash
+kubectl create secret generic english-jatel-secrets \
+  --namespace english-jatel \
+  --from-literal=OPENROUTER_API_KEY="sua_chave_aqui" \
+  --from-literal=SESSION_SECRET=$(openssl rand -hex 32) \
+  --from-literal=ADMIN_USER="admin" \
+  --from-literal=ADMIN_PASS="sua_senha"
+```
+
+### Verificar
+
+```bash
+kubectl get secret english-jatel-secrets -n english-jatel
+```
 
 ---
 

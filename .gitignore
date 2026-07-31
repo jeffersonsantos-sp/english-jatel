@@ -15,3 +15,12 @@ backend/data/
 repo-backup/
 tmp_*.md
 LINKEDIN_POST.md
+
+# Kubernetes secrets (never commit)
+k8s/secret.yaml
+
+# Terraform state
+terraform/*.tfstate
+terraform/*.tfstate.backup
+terraform/.terraform/
+terraform/tfplan
