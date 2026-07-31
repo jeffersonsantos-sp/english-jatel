@@ -527,7 +527,7 @@ Default credentials are set in `backend/.env` (gitignored).
 
 ## Author
 
-**Jefferson Santos** — Full-stack Developer
+**Jefferson Santos** — DevOps
 
 - GitHub: [jeffersonsantos-sp](https://github.com/jeffersonsantos-sp)
 - Docker Hub: [updateinformatica](https://hub.docker.com/r/updateinformatica/english-jatel)
