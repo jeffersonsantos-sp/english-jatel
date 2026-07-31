@@ -40,3 +40,16 @@ This OS Python is *externally managed* (PEP 668). Plain `pip install` fails.
 
 ## Backup procedures
 Before making any code, config, or content changes, create a backup in `repo-backup/` (gitignored).
+
+## Skills disponíveis
+
+| Skill | Caminho | Uso |
+|---|---|---|
+| `setup-https` | `.opencode/setup-https/SKILL.md` | Configurar HTTPS/TLS com Let's Encrypt no AKS |
+| `aks-deploy` | `.opencode/skills/aks-deploy/SKILL.md` | Deploy da app no AKS com Terraform |
+
+## Referências rápidas
+
+- **HTTPS/TLS**: `.opencode/setup-https/SKILL.md` e `docs/technical/setup-https.md`
+- **Deploy AKS**: `docs/technical/deploy-aks.md`
+- **Prompt setup-https**: `prompts/setup-https/prompt-setup-https.md`

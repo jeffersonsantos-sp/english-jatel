@@ -6,6 +6,9 @@
 [![CD](https://github.com/jeffersonsantos-sp/english-jatel/actions/workflows/cd.yaml/badge.svg)](https://github.com/jeffersonsantos-sp/english-jatel/actions/workflows/cd.yaml)
 [![Docker](https://img.shields.io/badge/Docker-Hub-blue?logo=docker)](https://hub.docker.com/r/updateinformatica/english-jatel)
 [![Kubernetes](https://img.shields.io/badge/Kubernetes-ready-326CE5?logo=kubernetes)](k8s/)
+[![Azure](https://img.shields.io/badge/Azure-AKS-0089D6?logo=microsoftazure)](https://azure.microsoft.com/en-us/products/kubernetes-service)
+[![Render](https://img.shields.io/badge/Render-Deployed-46E3B7?logo=render)](https://english-jatel.onrender.com)
+[![Terraform](https://img.shields.io/badge/Terraform-1.5+-7B42BC?logo=terraform)](https://www.terraform.io)
 [![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python)](https://python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?logo=fastapi)](https://fastapi.tiangolo.com)
 [![Version](https://img.shields.io/badge/Version-v1.12.3-green)](https://github.com/jeffersonsantos-sp/english-jatel/releases)
@@ -14,13 +17,44 @@
 
 ---
 
+## Production URLs
+
+A aplicacao esta rodando em **duas URLs simultaneamente**, cada uma com um proposito:
+
+| URL | Provider | Uso |
+|-----|----------|-----|
+| **https://learn.jfs-devops.shop** | Azure AKS (Kubernetes) | Producao principal + demonstracao de DevOps |
+| **https://english-jatel.onrender.com** | Render (PaaS) | Deploy automatizado no push ao `main` |
+
+### Por que duas URLs?
+
+| | Azure AKS (`learn.jfs-devops.shop`) | Render (`english-jatel.onrender.com`) |
+|---|---|---|
+| **Motivo** | Demonstracao completa de infraestrutura como codigo (Terraform + K8s + NGINX + TLS) | Deploy rapido e automatizado sem infraestrutura manual |
+| **Provisionamento** | Terraform (IaC) | Gerenciado pelo Render |
+| **Orquestramento** | Kubernetes (AKS) | Docker (gerenciado) |
+| **TLS/HTTPS** | Let's Encrypt via cert-manager | Automatizado pelo Render |
+| **DNS** | Azure DNS + Hostinger | Gerenciado pelo Render |
+| **CI/CD** | GitHub Actions + `kubectl apply` | GitHub Actions + auto-deploy |
+| **Custo** | ~$15/mes (AKS + DNS) | Free Tier (750h/mes) |
+| **Escalabilidade** | Auto-scaling 1-2 nodes | Manual (plano gratuito) |
+| **Blue/Green** | Sim (Kubernetes) | Nao |
+| **Aprendizado** | Kubernetes, Terraform, Ingress, cert-manager | Deploy simples em PaaS |
+
+### Resumo
+
+- **Azure AKS**: Demonstracao de competencias DevOps — Terraform, Kubernetes, NGINX Ingress, Let's Encrypt, Blue/Green deployment, DNS management
+- **Render**: Deploy pratico e automatico — a cada push no `main`, o Render faz build e deploy sem intervencao manual
+
+---
+
 ## Screenshots
 
 <table>
   <tr>
-    <td align="center"><strong>🇺🇸 English</strong></td>
-    <td align="center"><strong>🇪🇸 Español</strong></td>
-    <td align="center"><strong>🇫🇷 Français</strong></td>
+    <td align="center"><strong>English</strong></td>
+    <td align="center"><strong>Espanol</strong></td>
+    <td align="center"><strong>Francais</strong></td>
   </tr>
   <tr>
     <td><img src="img/front-en.png" alt="JATEL-IA English UI" width="400"></td>
@@ -28,6 +62,139 @@
     <td><img src="img/front-fr.png" alt="JATEL-IA French UI" width="400"></td>
   </tr>
 </table>
+
+---
+
+## Cloud Architecture
+
+### Azure AKS (Producao principal + DevOps demo)
+
+```
+                          ┌─────────────────────────────────────────────┐
+                          │              INTERNET                       │
+                          │  https://learn.jfs-devops.shop              │
+                          └──────────────────┬──────────────────────────┘
+                                             │
+                          ┌──────────────────▼──────────────────────────┐
+                          │         Azure DNS Zone                      │
+                          │         jfs-devops.shop                     │
+                          │         A learn -> 4.247.234.90             │
+                          └──────────────────┬──────────────────────────┘
+                                             │
+                          ┌──────────────────▼──────────────────────────┐
+                          │         Azure Public IP                     │
+                          │         pip-ingress-english-jatel           │
+                          │         4.247.234.90                        │
+                          └──────────────────┬──────────────────────────┘
+                                             │
+ ┌───────────────────────────────────────────▼───────────────────────────┐
+ │                    Azure AKS Cluster                                  │
+ │                    aks-english-jatel                                  │
+ │                    Kubernetes v1.35.6                                 │
+ │                    Standard_B2als_v2 (2 vCPU, 4GB RAM)               │
+ │                                                                      │
+ │  ┌────────────────────────────────────────────────────────────────┐   │
+ │  │  NGINX Ingress Controller (ingress-nginx namespace)           │   │
+ │  │  LoadBalancer -> TLS termination (Let's Encrypt)              │   │
+ │  └─────────────────────────────┬──────────────────────────────────┘   │
+ │                                │                                      │
+ │  ┌─────────────────────────────▼──────────────────────────────────┐   │
+ │  │  cert-manager (cert-manager namespace)                        │   │
+ │  │  ClusterIssuer: letsencrypt-prod                               │   │
+ │  │  Auto-renewal: 90 days                                        │   │
+ │  └─────────────────────────────┬──────────────────────────────────┘   │
+ │                                │                                      │
+ │  ┌─────────────────────────────▼──────────────────────────────────┐   │
+ │  │  Service: english-jatel (ClusterIP: 10.0.28.149:80)           │   │
+ │  │  Selector: app=english-jatel, slot=blue|green                 │   │
+ │  └─────────────────────────────┬──────────────────────────────────┘   │
+ │                                │                                      │
+ │  ┌─────────────────────────────▼──────────────────────────────────┐   │
+ │  │  Deployment: english-jatel-blue (active)                      │   │
+ │  │  Image: updateinformatica/english-jatel:latest                 │   │
+ │  │  Port: 8000                                                    │   │
+ │  │  Security: runAsNonRoot, readOnlyRootFilesystem               │   │
+ │  └─────────────────────────────┬──────────────────────────────────┘   │
+ │                                │                                      │
+ │  ┌─────────────────────────────▼──────────────────────────────────┐   │
+ │  │  PVC: english-jatel-data (1Gi)                                │   │
+ │  │  Mount: /app/data                                              │   │
+ │  └────────────────────────────────────────────────────────────────┘   │
+ │                                                                      │
+ └──────────────────────────────────────────────────────────────────────┘
+```
+
+### Render (Deploy automatico)
+
+```
+                    ┌──────────────────────────────────────┐
+                    │         INTERNET                     │
+                    │  https://english-jatel.onrender.com  │
+                    └──────────────┬───────────────────────┘
+                                   │
+                    ┌──────────────▼───────────────────────┐
+                    │         Render PaaS                   │
+                    │         (Free Tier, 750h/mes)        │
+                    │                                       │
+                    │  ┌─────────────────────────────────┐  │
+                    │  │  Docker Container               │  │
+                    │  │  Image: Docker Hub               │  │
+                    │  │  Port: 8000                      │  │
+                    │  │  TLS: Automatizado pelo Render   │  │
+                    │  └─────────────────────────────────┘  │
+                    │                                       │
+                    └───────────────────────────────────────┘
+```
+
+---
+
+## Azure Services
+
+| Service | Resource | Purpose |
+|---------|----------|---------|
+| **AKS** | `aks-english-jatel` | Kubernetes cluster (Free Tier) |
+| **Azure DNS** | `jfs-devops.shop` | Domain resolution |
+| **Public IP** | `pip-ingress-english-jatel` | Static IP for Ingress |
+| **Load Balancer** | Standard (managed by AKS) | Traffic distribution |
+| **NGINX Ingress** | `ingress-nginx` namespace | Reverse proxy + TLS |
+| **cert-manager** | `cert-manager` namespace | Certificate automation |
+| **Let's Encrypt** | ACME HTTP-01 | Free TLS certificates |
+| **Role Assignments** | Network + DNS Contributor | RBAC for AKS |
+
+### Infrastructure as Code (Terraform)
+
+| File | Resources |
+|------|-----------|
+| `terraform/main.tf` | AKS Cluster, DNS Zone, Public IP, Role Assignments |
+| `terraform/variables.tf` | Region, VM size, domain configuration |
+| `terraform/providers.tf` | Azure + Kubernetes + Helm providers |
+| `terraform/outputs.tf` | AKS FQDN, DNS name servers, public IP |
+
+### Terraform Commands
+
+```bash
+cd terraform
+terraform init
+terraform plan -out=tfplan
+terraform apply tfplan
+
+# Get credentials
+az aks get-credentials --resource-group rg-english-jatel --name aks-english-jatel
+```
+
+### AKS Configuration
+
+| Parameter | Value |
+|-----------|-------|
+| Region | `centralindia` |
+| Kubernetes | `v1.35.6` |
+| SKU Tier | `Free` |
+| VM Size | `Standard_B2als_v2` |
+| vCPU | 2 |
+| RAM | 4GB |
+| Auto-scaling | 1-2 nodes |
+| Network Plugin | `kubenet` |
+| Network Policy | `calico` |
 
 ---
 
@@ -44,34 +211,9 @@
 | **Spaced Repetition** | Leitner-style SRS with per-user progress persistence |
 | **CEFR Grammar** | 46+ topics per language (A1–C2), data-driven, hot-reloadable |
 | **Auth & Multi-user** | PBKDF2 passwords, admin roles, session cookies |
-| **CI/CD** | GitHub Actions — CI on push, CD on git tag → Docker Hub |
-| **Deploy Ready** | Docker, Docker Compose, Kubernetes (Blue/Green), Render (PaaS) |
-
----
-
-## Architecture
-
-```
-                    ┌──────────────────────────────────┐
-                    │         FastAPI Backend           │
-                    │   main.py (routes + auth)         │
-                    │   engine.py (logic + LLM + TTS)   │
-                    ├──────────────────────────────────┤
-  Browser ────────▶ │  /api/*   (JSON endpoints)        │
-  localhost:8000    │  /         (static SPA frontend)   │
-                    └──────────┬───────────────────────┘
-                               │
-              ┌────────────────┼────────────────┐
-              ▼                ▼                ▼
-        ┌──────────┐   ┌──────────┐   ┌──────────────┐
-        │ OpenRouter│   │ Edge TTS │   │ Web Speech   │
-        │ (LLM)    │   │ (neural) │   │ API (STT)    │
-        └──────────┘   └──────────┘   └──────────────┘
-```
-
-- **Single server** serves both API and static frontend (no separate build step)
-- **Data-driven content**: edit JSON files to add lessons — no code changes needed
-- **Multi-tenant SRS**: progress per user + language combination
+| **CI/CD** | GitHub Actions — CI on push, CD on git tag to Docker Hub |
+| **Cloud Deploy** | Azure AKS with Terraform, NGINX Ingress, TLS |
+| **Blue/Green** | Zero-downtime deployment on Kubernetes |
 
 ---
 
@@ -82,14 +224,17 @@
 | **Backend** | Python 3.11, FastAPI, Uvicorn |
 | **Frontend** | Vanilla HTML/CSS/JS (SPA, no framework, no build) |
 | **LLM** | OpenRouter (OpenAI-compatible API) |
-| **TTS** | Edge TTS (neural voices, free) → OpenAI tts-1 → pyttsx3 fallback |
-| **STT** | Web Speech API (browser) → SpeechRecognition + ffmpeg (backend fallback) |
+| **TTS** | Edge TTS (neural voices, free) |
+| **STT** | Web Speech API (browser) + SpeechRecognition fallback |
 | **Auth** | HMAC-signed HttpOnly cookies, PBKDF2 passwords |
 | **Database** | JSON files (users.json, memhack_progress.json) |
-| **Container** | Docker multi-stage (python:3.11-slim), 367MB |
-| **Orchestration** | Docker Compose, Kubernetes (Kustomize, Blue/Green) |
-| **CI/CD** | GitHub Actions (ci.yaml + cd.yaml) |
-| **Hosting** | Docker Hub, Render (PaaS), Kubernetes |
+| **Container** | Docker multi-stage (python:3.11-slim) |
+| **Orchestration** | Kubernetes (Kustomize, Blue/Green) |
+| **Ingress** | NGINX Ingress Controller + cert-manager |
+| **TLS** | Let's Encrypt (auto-renewed, 90 days) |
+| **IaC** | Terraform (AKS, DNS, RBAC) |
+| **CI/CD** | GitHub Actions |
+| **Cloud** | Azure AKS (Central India), Render (PaaS) |
 
 ---
 
@@ -120,7 +265,7 @@ kubectl -n english-jatel port-forward svc/english-jatel 8080:80
 # Open http://localhost:8080
 ```
 
-### Option 4 — Azure AKS (Production)
+### Option 4 — Azure AKS (Producao + DevOps demo)
 
 ```bash
 # 1. Provision infrastructure with Terraform
@@ -138,7 +283,8 @@ helm repo add jetstack https://charts.jetstack.io
 helm repo update
 helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx \
     --namespace ingress-nginx --create-namespace \
-    --set controller.service.type=LoadBalancer
+    --set controller.service.type=LoadBalancer \
+    --set controller.service.externalTrafficPolicy=Local
 helm upgrade --install cert-manager jetstack/cert-manager \
     --namespace cert-manager --create-namespace \
     --set installCRDs=true
@@ -146,66 +292,62 @@ helm upgrade --install cert-manager jetstack/cert-manager \
 # 4. Deploy application
 kubectl apply -k k8s/
 
-# 5. Configure DNS at registrar (Azure DNS name servers)
+# 5. Configure DNS at registrar
 # 6. Access: https://learn.jfs-devops.shop
 ```
 
+### Option 5 — Render (Deploy automatico)
+
+```bash
+# 1. Conectar repositorio ao Render
+# 2. Configurar Environment Variables:
+#    - OPENROUTER_API_KEY
+#    - OPENAI_MODEL
+#    - OPENROUTER_TITLE
+#    - SESSION_SECRET
+#    - ADMIN_USER
+#    - ADMIN_PASS
+# 3. Deploy automatico a cada push no main
+# 4. Acessar: https://english-jatel.onrender.com
+```
 
 ---
 
 ## Modules
 
 ### Listen (Dictation)
-AI speaks a sentence → you type what you heard → check for accuracy. Text stays hidden until verification.
+AI speaks a sentence, you type what you heard, check for accuracy.
 
 ### Pronunciation (Speech)
-Record your voice (or type) → get transcript + AI correction → listen to corrected version. Uses Web Speech API with backend fallback.
+Record your voice (or type), get transcript + AI correction, listen to corrected version.
 
 ### Write (Writing)
-Write a paragraph → receive detailed correction: error → fix → rule → suggestion.
+Write a paragraph, receive detailed correction: error, fix, rule, suggestion.
 
 ### Read (Comprehension)
-Read a leveled text with glossary → answer a comprehension question → get corrected.
+Read a leveled text with glossary, answer a comprehension question, get corrected.
 
 ### Conversation (AI Chat)
-Chat with an AI persona (Café, Interviewer, Business, Travel, Family, Movies, Music, Football, DevOps) — in the selected language. AI speaks first option, voice recording support.
+Chat with an AI persona (Cafe, Interviewer, Business, Travel, Family, Movies, Music, Football, DevOps) in the selected language.
 
 ### Grammar (CEFR)
-Lessons from A1 to C2: topic, structure formula, explanation, and example sentences with TTS. 46+ topics per language, data-driven from JSON.
+Lessons from A1 to C2: topic, structure formula, explanation, and example sentences with TTS. 46+ topics per language.
 
 ### MemHack (Spaced Repetition)
-Memorize phrases with Leitner-style SRS (boxes 1–5, intervals from 1min to 7days). Rate difficulty → system schedules next review. Progress persists per user.
+Memorize phrases with Leitner-style SRS (boxes 1-5, intervals from 1min to 7days).
 
 ---
 
 ## i18n — Full UI Internationalization
 
-When switching language (English / Español / Français), **every UI element** translates:
+When switching language, every UI element translates:
 
 | Element | EN | ES | FR |
 |---------|----|----|-----|
-| Tabs | Listen, Pronunciation, Write, Read, Conversation, Grammar, MemHack | Escuchar, Pronunciación, Escribir, Leer, Conversar, Gramática, MemHack | Écouter, Prononciation, Écrire, Lire, Conversation, Grammaire, MemHack |
-| Buttons | Check, Record, Stop, Load | Comprobar, Grabar, Parar, Cargar | Vérifier, Enregistrer, Arrêter, Charger |
-| Labels | Level, AI Voice, Language, Persona | Nivel, Voz de IA, Idioma, Persona | Niveau, Voix de l'IA, Langue, Persona |
-| Feedback | Correct! | ¡Correcto! | Correct ! |
-| Errors | Microphone permission denied | Permiso de micrófono denegado | Permission du microphone refusée |
+| Tabs | Listen, Pronunciation, Write, Read, Conversation, Grammar, MemHack | Escuchar, Pronunciacion, Escribir, Leer, Conversar, Gramatica, MemHack | Ecouter, Prononciation, Ecrire, Lire, Conversation, Grammaire, MemHack |
+| Buttons | Check, Record, Stop, Load | Comprobar, Grabar, Parar, Cargar | Verifier, Enregistrer, Arreter, Charger |
 
 Implementation: `frontend/i18n.js` (translation dictionary) + `data-i18n` attributes in HTML.
-
----
-
-## Content Management
-
-No code changes needed to add lessons. Each language has its own JSON files:
-
-| Content | EN | ES | FR |
-|---------|----|----|-----|
-| Grammar | `backend/grammar.json` | `backend/grammar_es.json` | `backend/grammar_fr.json` |
-| MemHack | `backend/memhack.json` | `backend/memhack_es.json` | `backend/memhack_fr.json` |
-| Listen | `LISTEN` dict in `engine.py` | `backend/listen_es.json` | `backend/listen_fr.json` |
-| Read | `READ` dict in `engine.py` | `backend/read_es.json` | `backend/read_fr.json` |
-
-Hot-reload Grammar without rebuild: `POST /api/admin/reload-grammar` (admin only).
 
 ---
 
@@ -217,48 +359,43 @@ Hot-reload Grammar without rebuild: `POST /api/admin/reload-grammar` (admin only
 | GET | `/api/languages` | — | Supported languages |
 | GET | `/api/levels` | — | Difficulty levels |
 | GET | `/api/voices?lang=` | — | TTS voices per language |
-| GET | `/api/grammar-levels?lang=` | — | CEFR levels (A1–C2) |
-| GET | `/api/memhack/categories?lang=` | — | MemHack categories |
-| POST | `/api/content` | ✓ | Get Listen/Read content |
-| POST | `/api/correct` | ✓ | AI text correction |
-| POST | `/api/tts` | ✓ | Text-to-speech (MP3) |
-| POST | `/api/stt` | ✓ | Speech-to-text |
-| POST | `/api/converse` | ✓ | AI conversation |
-| POST | `/api/grammar` | ✓ | Grammar topic |
-| POST | `/api/memhack/next` | ✓ | Next SRS phrase |
-| POST | `/api/memhack/review` | ✓ | Record difficulty |
+| POST | `/api/content` | Yes | Get Listen/Read content |
+| POST | `/api/correct` | Yes | AI text correction |
+| POST | `/api/tts` | Yes | Text-to-speech (MP3) |
+| POST | `/api/stt` | Yes | Speech-to-text |
+| POST | `/api/converse` | Yes | AI conversation |
+| POST | `/api/grammar` | Yes | Grammar topic |
+| POST | `/api/memhack/next` | Yes | Next SRS phrase |
+| POST | `/api/memhack/review` | Yes | Record difficulty |
 | POST | `/api/auth/login` | — | Login |
 | POST | `/api/auth/register` | Admin | Create user |
-| POST | `/api/admin/reload-grammar` | Admin | Reload grammar |
 
 ---
 
 ## CI/CD Pipeline
 
 ```
-git push main ──▶ CI (ci.yaml)
-                   ├─ backend: TestClient /api/health
-                   └─ frontend: node --check
+git push main --> CI (ci.yaml)
+                   +-- backend: TestClient /api/health
+                   +-- frontend: node --check
 
-git tag vX.Y.Z ──▶ CD (cd.yaml)
-                   ├─ build Docker image
-                   ├─ push → Docker Hub (latest + vX.Y.Z)
-                   └─ smoke test (health check with API key)
+git tag vX.Y.Z --> CD (cd.yaml)
+                   +-- build Docker image
+                   +-- push -> Docker Hub (latest + vX.Y.Z)
+                   +-- smoke test
 ```
-
-**Secrets**: `DOCKERHUB_USERNAME`, `DOCKERHUB_TOKEN`, `OPENROUTER_API_KEY`
 
 ---
 
 ## Deploy Options
 
-| Platform | Method | Status |
-|----------|--------|--------|
-| **Docker Hub** | `updateinformatica/english-jatel:latest` | ✅ Published |
-| **Kubernetes** | Kustomize Blue/Green (`kubectl apply -k k8s/`) | ✅ Ready |
-| **Azure AKS** | Terraform + K8s + NGINX Ingress + TLS | ✅ Configured |
-| **Render** | Auto-deploy on push to `main` | ✅ Configured |
-| **Local** | `docker compose up` or `uvicorn` | ✅ Ready |
+| Platform | Method | URL | Status |
+|----------|--------|-----|--------|
+| **Azure AKS** | Terraform + K8s + NGINX + TLS | https://learn.jfs-devops.shop | Production (DevOps demo) |
+| **Render** | Auto-deploy on push to `main` | https://english-jatel.onrender.com | Production (PaaS) |
+| **Docker Hub** | `updateinformatica/english-jatel:latest` | — | Published |
+| **Kubernetes** | Kustomize Blue/Green | — | Ready |
+| **Local** | `docker compose up` or `uvicorn` | localhost:8000 | Ready |
 
 ---
 
@@ -270,47 +407,8 @@ git tag vX.Y.Z ──▶ CD (cd.yaml)
 - Session cookies: HttpOnly + HMAC-signed
 - HTTPS required in production (microphone + cookies)
 - Admin-only routes: user management, grammar reload
-- **Kubernetes secrets** — never commit `k8s/secret.yaml` to git
-
----
-
-## Secrets Management
-
-> ⚠️ **Nunca commitar secrets** em repositórios git.
-
-### Opção A — Arquivo YAML
-
-1. Copiar o template:
-   ```bash
-   cp k8s/secret.yaml.example k8s/secret.yaml
-   ```
-
-2. Editar com valores reais:
-   ```bash
-   vim k8s/secret.yaml
-   ```
-
-3. Aplicar:
-   ```bash
-   kubectl apply -f k8s/secret.yaml
-   ```
-
-### Opção B — kubectl create secret
-
-```bash
-kubectl create secret generic english-jatel-secrets \
-  --namespace english-jatel \
-  --from-literal=OPENROUTER_API_KEY="sua_chave_aqui" \
-  --from-literal=SESSION_SECRET=$(openssl rand -hex 32) \
-  --from-literal=ADMIN_USER="admin" \
-  --from-literal=ADMIN_PASS="sua_senha"
-```
-
-### Verificar
-
-```bash
-kubectl get secret english-jatel-secrets -n english-jatel
-```
+- Kubernetes secrets — never commit `k8s/secret.yaml`
+- TLS certificates auto-renewed by cert-manager
 
 ---
 
@@ -319,31 +417,32 @@ kubectl get secret english-jatel-secrets -n english-jatel
 | Document | Description |
 |----------|-------------|
 | [Architecture](docs/technical/arquitetura.md) | Technical deep-dive |
-| [Kubernetes Deploy](docs/technical/deploy-kubernetes.md) | k8s manifests + Blue/Green |
 | [Azure AKS Deploy](docs/technical/deploy-aks.md) | AKS + Terraform + NGINX + TLS |
+| [Setup HTTPS](docs/technical/setup-https.md) | NGINX + Let's Encrypt guide |
+| [Kubernetes Deploy](docs/technical/deploy-kubernetes.md) | k8s manifests + Blue/Green |
 | [Blue/Green Strategy](docs/technical/blue-green.md) | Zero-downtime deployment |
 | [Render Deploy](docs/technical/deploy-render.md) | PaaS deployment guide |
+| [Setup HTTPS](docs/technical/setup-https.md) | NGINX + Let's Encrypt guide |
 | [Versioning Process](docs/technical/processo-e-versionamento.md) | Release workflow |
-| [User Guide](docs/user/guia.md) | End-user manual |
-| [Multilingual Presentation](docs/apresentacao-multilingua.md) | Business case deck |
 | [MCP Integration](docs/technical/mcp.md) | AI agent tooling |
 
 ---
 
-## Skills & Prompts (AI Agent Integration)
+## Skills & Prompts
 
 | Skill | Scope |
 |-------|-------|
 | [`english-jatel`](skills/english-flow/SKILL.md) | Full-stack app (modules, auth, content, CI/CD) |
 | [`aks-deploy`](.opencode/skills/aks-deploy/SKILL.md) | Azure AKS deployment with Terraform |
+| [`setup-https`](.opencode/setup-https/SKILL.md) | HTTPS/TLS with Let's Encrypt |
 | [`mcp-integration`](.opencode/skills/mcp-integration/SKILL.md) | MCP server integration |
 
 | Prompt | Purpose |
 |--------|---------|
 | [Deploy](prompts/english-jatel-deploy/prompt-base.md) | Docker + Kubernetes deployment |
 | [AKS Deploy](prompts/english-jatel-deploy-aks/prompt-aks.md) | Azure AKS deployment |
+| [Setup HTTPS](prompts/setup-https/prompt-setup-https.md) | HTTPS/TLS configuration |
 | [Render Deploy](prompts/english-jatel-render/prompt-base.md) | Render PaaS deployment |
-| [Role](prompts/english-jatel-role/prompt-base.md) | AI agent role definition |
 | [Brainstorm](prompts/brainstorm.md) | Feature ideation |
 
 ---
@@ -354,52 +453,75 @@ kubectl get secret english-jatel-secrets -n english-jatel
 english-jatel/
 ├── backend/
 │   ├── main.py              # FastAPI app, routes, auth middleware
-│   ├── engine.py             # All business logic (LLM, TTS, STT, content)
-│   ├── grammar.json          # EN grammar (CEFR A1–C2)
-│   ├── grammar_es.json       # ES grammar
-│   ├── grammar_fr.json       # FR grammar
-│   ├── memhack.json          # EN phrases (SRS)
-│   ├── memhack_es.json       # ES phrases
-│   ├── memhack_fr.json       # FR phrases
-│   ├── listen_es.json        # ES dictation sentences
-│   ├── listen_fr.json        # FR dictation sentences
-│   ├── read_es.json          # ES reading texts
-│   ├── read_fr.json          # FR reading texts
+│   ├── engine.py            # All business logic (LLM, TTS, STT, content)
+│   ├── grammar.json         # EN grammar (CEFR A1-C2)
+│   ├── grammar_es.json      # ES grammar
+│   ├── grammar_fr.json      # FR grammar
+│   ├── memhack.json         # EN phrases (SRS)
+│   ├── memhack_es.json      # ES phrases
+│   ├── memhack_fr.json      # FR phrases
+│   ├── listen_es.json       # ES dictation sentences
+│   ├── listen_fr.json       # FR dictation sentences
+│   ├── read_es.json         # ES reading texts
+│   ├── read_fr.json         # FR reading texts
 │   └── requirements.txt
 ├── frontend/
-│   ├── index.html            # SPA main page
-│   ├── login.html            # Login page
-│   ├── style.css             # Dark theme UI
-│   ├── app.js                # Client logic (modules, i18n integration)
-│   ├── auth.js               # Authentication logic
-│   └── i18n.js               # EN/ES/FR translation dictionary (120+ keys)
-├── terraform/                # Azure infrastructure (AKS, DNS, IP)
+│   ├── index.html           # SPA main page
+│   ├── login.html           # Login page
+│   ├── style.css            # Dark theme UI
+│   ├── app.js               # Client logic
+│   ├── auth.js              # Authentication logic
+│   └── i18n.js              # EN/ES/FR translation dictionary
+├── terraform/               # Azure infrastructure (AKS, DNS, RBAC)
 │   ├── providers.tf
 │   ├── variables.tf
 │   ├── main.tf
 │   └── outputs.tf
-├── k8s/                      # Kubernetes manifests (Blue/Green)
-├── k8s/production/           # Production add-ons (Prometheus, ArgoCD)
-├── mcp/                      # MCP stdio server
-├── .github/workflows/        # CI/CD pipelines
-├── docs/                     # Technical + user documentation
-├── prompts/                  # AI agent prompt templates
-├── skills/                   # AI agent skills
-├── brainstore/               # Feature ideation notes
-├── Dockerfile                # Multi-stage build
-├── docker-compose.yaml       # Local development
-└── PROVAS_CRIACAO.md         # Authorship proof
+├── k8s/                     # Kubernetes manifests (Blue/Green)
+│   ├── deployment-blue.yaml
+│   ├── deployment-green.yaml
+│   ├── service.yaml
+│   ├── ingress.yaml
+│   ├── cluster-issuer.yaml
+│   ├── configmap.yaml
+│   ├── secret.yaml          # gitignored
+│   └── kustomization.yaml
+├── k8s/production/          # Production add-ons
+│   ├── prometheus/
+│   └── argocd/
+├── .github/workflows/       # CI/CD pipelines
+├── docs/                    # Technical + user documentation
+├── prompts/                 # AI agent prompt templates
+├── skills/                  # AI agent skills
+├── Dockerfile               # Multi-stage build
+├── docker-compose.yaml      # Local development
+└── AGENTS.md                # Agent configuration
 ```
+
+---
 
 ## Login
 
-Default credentials are set in `backend/.env` (gitignored). See `backend/.env.example` for reference.
+Default credentials are set in `backend/.env` (gitignored).
 
-| User | Role | Can change password |
-|------|------|-------------------|
-| `admin` | Admin | Yes |
-| `jatel` | Normal | Yes |
-| `estudante` | Normal | No |
+| User | Role |
+|------|------|
+| `admin` | Admin |
+| `jatel` | Normal |
+| `estudante` | Normal |
+
+---
+
+## Estimated Costs
+
+| Platform | Resource | Monthly |
+|----------|----------|---------|
+| **Azure AKS** | AKS Free Tier | $0 |
+| | Standard_B2als_v2 | ~$15 |
+| | Azure DNS Zone | $0.50 |
+| | Let's Encrypt + NGINX + cert-manager | $0 |
+| **Render** | Free Tier (750h/mes) | $0 |
+| **Total** | | **~$15.50** |
 
 ---
 
@@ -418,6 +540,4 @@ Default credentials are set in `backend/.env` (gitignored). See `backend/.env.ex
 
 © 2026 Jefferson Santos. Unauthorized copying, reproduction, distribution, or modification of this software, in whole or in part, is strictly prohibited.
 
-This repository and its contents (source code, documentation, images, prompts, skills) are the intellectual property of the author. Forking, cloning for redistribution, or deriving derivative works without explicit written permission is not permitted.
-
-For inquiries, contact: [jeffersonsantos-sp](https://github.com/jeffersonsantos-sp)
+This repository and its contents (source code, documentation, images, prompts, skills) are the intellectual property of the author.

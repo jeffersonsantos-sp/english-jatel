@@ -23,7 +23,7 @@ Guia completo para deploy do English JATEL no AKS com Terraform, NGINX Ingress e
 │  │                                                   │  │
 │  │  ┌─────────────────────────────────────────────┐  │  │
 │  │  │  NGINX Ingress Controller                   │  │  │
-│  │  │  IP: 4.247.210.38                           │  │  │
+│  │  │  IP: 4.247.234.90                           │  │  │
 │  │  └─────────────────┬───────────────────────────┘  │  │
 │  │                    │                              │  │
 │  │  ┌─────────────────▼───────────────────────────┐  │  │
@@ -199,6 +199,14 @@ curl http://localhost:8000/api/health
 
 ## Troubleshooting
 
+### HTTPS/TLS não funciona
+Consulte a skill `setup-https` (`.opencode/setup-https/SKILL.md`) e a documentação completa em `docs/technical/setup-https.md`.
+
+Problemas comuns:
+- **Backend pool vazio**: Reinstall NGINX Ingress
+- **DNS conflitante**: Atualizar Hostinger
+- **Challenge invalid**: Verificar NSG + DNS + LB probe
+
 ### Pod não inicia
 ```bash
 kubectl describe pod -l app=english-jatel -n english-jatel
@@ -233,7 +241,7 @@ ns4-05.azure-dns.info.
 ### Records necessários
 | Tipo | Nome | Valor |
 |---|---|---|
-| A | `learn` | `4.247.210.38` |
+| A | `learn` | `4.247.234.90` |
 | CNAME | `www` | `learn.jfs-devops.shop` |
 
 ## Produção (futuro)
