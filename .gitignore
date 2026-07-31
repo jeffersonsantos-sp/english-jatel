@@ -24,3 +24,6 @@ terraform/*.tfstate
 terraform/*.tfstate.backup
 terraform/.terraform/
 terraform/tfplan
+
+# LinkedIn prompt (pessoal, nao versionar)
+prompts/linkedin/
