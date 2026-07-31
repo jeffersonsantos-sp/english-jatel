@@ -15,11 +15,10 @@ backend/data/
 repo-backup/
 tmp_*.md
 
-
 # Kubernetes secrets (never commit)
 k8s/secret.yaml
 
-# Terraform state
+# Terraform (SENSITIVE - never commit)
 terraform/*.tfstate
 terraform/*.tfstate.backup
 terraform/.terraform/
@@ -27,7 +26,3 @@ terraform/tfplan
 
 # LinkedIn prompt (pessoal, nao versionar)
 prompts/linkedin/
-# Terraform state (SENSITIVE)
-terraform/*.tfstate
-terraform/*.tfstate.backup
-terraform/tfplan
