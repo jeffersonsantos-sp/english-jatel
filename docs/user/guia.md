@@ -1,9 +1,10 @@
 # Guia do Usuário — JATEL-IA
 
-Aplicativo web para treinar **inglês, espanhol e francês** nas habilidades
+Aplicativo web para treinar **inglês, espanhol, francês, italiano e alemão** nas habilidades
 **Listen, Pronunciation, Write, Read** e **Conversar**, mais **Grammar** (gramática por
-nível CEFR) e **MemHack** (memorização com repetição espaçada), com correção
-automática e conversação por IA. Selecione o idioma no topo da página — toda a interface é traduzida.
+nível CEFR), **MemHack** (memorização com repetição espaçada) e **Numbers** (números,
+ordinais, meses, dias da semana), com correção automática e conversação por IA.
+Selecione o idioma na sidebar — toda a interface é traduzida.
 
 ## Acesso
 
@@ -17,11 +18,11 @@ automática e conversação por IA. Selecione o idioma no topo da página — to
 
 > O backend serve tanto a API quanto a interface, num único endereço.
 
-## Controles do topo
+## Controles da sidebar
 
 - **Nível**: Iniciante / Intermediário / Avançado — ajusta a dificuldade das frases e textos.
 - **Voz da IA**: escolhe a voz neural do Edge TTS (ex.: Jenny feminina, Guy masculina).
-- **Idioma**: 🇺🇸 Inglês / 🇪🇸 Espanhol / 🇫🇷 Francês — troca todo o conteúdo E a interface.
+- **Idioma**: 🇺🇸 Inglês / 🇪🇸 Espanhol / 🇫🇷 Francês / 🇮🇹 Italiano / 🇩🇪 Alemão — troca todo o conteúdo E a interface.
 
 ## Módulos
 
@@ -67,6 +68,12 @@ automática e conversação por IA. Selecione o idioma no topo da página — to
    - **Difícil** → revisa em intervalo curto (1–10 min).
 4. O progresso é salvo por usuário e idioma.
 
+### Numbers (números, ordinais, meses, dias)
+1. Clique na aba **Numbers** na sidebar.
+2. Escolha uma sub-aba: **Números** (1-100 + centenas), **Ordinais** (1-100), **Meses** ou **Dias da Semana**.
+3. Veja a lista no idioma selecionado com TTS para cada item.
+4. Troque o idioma para ver os números, ordinais, meses e dias em inglês, espanhol, francês, italiano ou alemão.
+
 ## Modo demo vs. com IA
 
 - **Com `OPENROUTER_API_KEY`**: correção e conversa usam o LLM; voz usa Edge TTS.
@@ -75,6 +82,6 @@ automática e conversação por IA. Selecione o idioma no topo da página — to
 ## Dicas
 
 - Use fones de ouvido para o ditado (Listen) e fale sem ruído para Pronunciation.
-- Troque a voz pela seleção no topo se a padrão não agradar.
+- Troque a voz pela seleção na sidebar se a padrão não agradar.
 - O botão "Próxima" garante treino variado sem repetição.
-- Troque o idioma para praticar inglês, espanhol ou francês — toda a UI acompanha.
+- Troque o idioma para praticar inglês, espanhol, francês, italiano ou alemão — toda a UI acompanha.

@@ -2,7 +2,7 @@
 
 ## Contexto
 
-O English JATEL é um app de aprendizado de inglês multilíngue (EN/ES/FR) construído com FastAPI + frontend vanilla. O app precisa ser deployado no Azure Kubernetes Service (AKS) usando Terraform para provisionamento de infraestrutura e manifests K8s para o app.
+O English JATEL é um app de aprendizado de idiomas multilíngue (EN/ES/FR/IT/DE) construído com FastAPI + frontend vanilla. O app precisa ser deployado no Azure Kubernetes Service (AKS) usando Terraform para provisionamento de infraestrutura e manifests K8s para o app.
 
 ## Arquitetura
 

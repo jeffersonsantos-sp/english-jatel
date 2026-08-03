@@ -1,8 +1,8 @@
 # Documentação Técnica — JATEL-IA (multi-idioma)
 
-App de ensino de **inglês, espanhol e francês**: backend FastAPI que serve a API
-**e** o frontend SPA num único servidor. Seletor `lang` no topo alterna entre
-**en** (Inglês), **es** (Espanhol), **fr** (Francês).
+App de ensino de **inglês, espanhol, francês, italiano e alemão**: backend FastAPI que serve a API
+**e** o frontend SPA num único servidor. Seletor `lang` alterna entre
+**en** (Inglês), **es** (Espanhol), **fr** (Francês), **it** (Italiano), **de** (Alemão).
 
 ## Estrutura
 
@@ -17,7 +17,7 @@ frontend/
   style.css
   app.js         # lógica do cliente (fetch /api/*, gravação de voz, TTS)
   auth.js        # autenticação (login, logout, troca de senha, gerência de usuários)
-  i18n.js        # dicionário de tradução EN/ES/FR (120+ chaves) + applyI18n()
+  i18n.js        # dicionário de tradução EN/ES/FR/IT/DE (120+ chaves) + applyI18n()
   login.html     # página de login
 brainstore/      # notas de ideias (markdown)
 prompts/         # prompts base para agentes de IA
@@ -39,17 +39,20 @@ então a API tem prioridade sobre os arquivos estáticos. `GET /` retorna `front
 
 ## Multi-idioma
 
-- **Seletor `lang`** no topo da UI: `Inglês | Espanhol | Francês`.
+- **Seletor `lang`** na UI: 5 idiomas — Inglês, Espanhol, Francês, Italiano, Alemão.
 - **Prompts da IA**: `correct()` e `converse()` usam `LANG_META` para ajustar
-  o prompt (ex.: "professor de espanhol", "professor de frances") e mensagens
+  o prompt (ex.: "professor de espanhol", "professor de frances", "professor de italiano") e mensagens
   de fallback.
 - **TTS por idioma**: `LANG_VOICES` mapeia `en`→`en-US-JennyNeural`,
-  `es`→`es-ES-ElviraNeural`, `fr`→`fr-FR-DeniseNeural` (Edge TTS).
+  `es`→`es-ES-ElviraNeural`, `fr`→`fr-FR-DeniseNeural`, `it`→`it-IT-ElsaNeural`,
+  `de`→`de-DE-KatjaNeural` (Edge TTS).
 - **STT** (Web Speech API): `r.lang` ajustado conforme `lang` selecionado.
 - **Grammar**: arquivos `grammar.json` (EN), `grammar_es.json` (ES),
-  `grammar_fr.json` (FR) — cada um com 6 níveis CEFR (A1-C2).
+  `grammar_fr.json` (FR), `grammar_it.json` (IT), `grammar_de.json` (DE) — cada um com 6 níveis CEFR (A1-C2).
 - **MemHack**: arquivos `memhack.json` (EN), `memhack_es.json` (ES),
-  `memhack_fr.json` (FR) — progresso SRS chaveado por `{user}::{lang}`.
+  `memhack_fr.json` (FR), `memhack_it.json` (IT), `memhack_de.json` (DE) — progresso SRS chaveado por `{user}::{lang}`.
+- **Numbers**: arquivos `calendar_numbers.json` (EN), `calendar_numbers_es.json` (ES),
+  `calendar_numbers_fr.json` (FR), `calendar_numbers_it.json` (IT), `calendar_numbers_de.json` (DE).
 
 ## LLM e TTS
 
@@ -73,6 +76,7 @@ então a API tem prioridade sobre os arquivos estáticos. `GET /` retorna `front
 | GET | `/api/personas` | — | personas de conversa |
 | GET | `/api/voices` | — | vozes em inglês (Edge TTS) |
 | GET | `/api/categories` | — | categorias de conteúdo |
+| GET | `/api/calendar-numbers` | — | números, ordinais, meses, dias da semana |
 | POST | `/api/content` | `{level, module, category?}` | `{text, glossary?}` (frase/texto aleatória sem repetir) |
 | POST | `/api/correct` | `{text, level}` | `{correction}` (erro→correção→regra→sugestão) |
 | POST | `/api/tts` | `{text, voice?}` | `{audio_b64, format:"mp3"}` |
@@ -89,14 +93,20 @@ então a API tem prioridade sobre os arquivos estáticos. `GET /` retorna `front
 
 ## Conteúdo orientado a dados
 
-- **Listen/Read**: dicionários `LISTEN` e `READ` em `engine.py`, chaveados por
+- **Listen/Read**: arquivos `listen_es.json`, `listen_fr.json`, `listen_it.json`, `listen_de.json`
+  e `read_es.json`, `read_fr.json`, `read_it.json`, `read_de.json`, chaveados por
   `nível -> categoria -> lista`. `get_content` mantém uma **fila embaralhada** por
   `(nível, módulo, categoria)` (sem repetição até esgotar). `CATEGORIES` alimenta a UI.
-- **Grammar**: `backend/grammar.json` — `{"levels": [...], "grammar": {<nível>: [{topic, structure, explanation, examples}]}}`.
+- **Grammar**: `backend/grammar.json` (EN), `grammar_es.json` (ES), `grammar_fr.json` (FR),
+  `grammar_it.json` (IT), `grammar_de.json` (DE) — `{"levels": [...], "grammar": {<nível>: [{topic, structure, explanation, examples}]}}`.
   Carregado em `GRAMMAR_FILE` no startup (fallback ao embutido). `reload_grammar()` + endpoint
   `POST /api/admin/reload-grammar` recarregam em runtime sem rebuild.
-- **MemHack**: `backend/memhack.json` — `{"categories": [...], "phrases": {<categoria>: [{id, en, pt}]}}`.
+- **MemHack**: `backend/memhack.json` (EN), `memhack_es.json` (ES), `memhack_fr.json` (FR),
+  `memhack_it.json` (IT), `memhack_de.json` (DE) — `{"categories": [...], "phrases": {<categoria>: [{id, en, pt}]}}`.
   Progresso de repetição espaçada por usuário em `DATA_DIR/memhack_progress.json`.
+- **Numbers**: `backend/calendar_numbers.json` (EN), `calendar_numbers_es.json` (ES),
+  `calendar_numbers_fr.json` (FR), `calendar_numbers_it.json` (IT), `calendar_numbers_de.json` (DE).
+  Números 1-1000, ordinais, meses, dias da semana.
 
 ## MemHack — repetição espaçada (SRS)
 
@@ -118,8 +128,8 @@ persistido por usuário (multi-tenant).
 
 - Sem framework/build: HTML/CSS/JS puro. `auth.js`, `i18n.js`.
 - `app.js` usa URLs relativas (`/api/...`), então funciona no mesmo servidor.
-- **i18n completo**: `i18n.js` contém dicionário EN/ES/FR (120+ chaves). Elementos HTML usam atributos `data-i18n`. `applyI18n()` é chamado no load e a cada troca de idioma.
-- **Abas**: Listen, **Pronunciation** (renomeado de Speak no v1.12.2), Write, Read, Conversation, Grammar, MemHack.
+- **i18n completo**: `i18n.js` contém dicionário EN/ES/FR/IT/DE (120+ chaves). Elementos HTML usam atributos `data-i18n`. `applyI18n()` é chamado no load e a cada troca de idioma.
+- **Abas**: Listen, **Pronunciation** (renomeado de Speak no v1.12.2), Write, Read, Conversation, Grammar, MemHack, Numbers.
 - **Persona**: seletor dentro do header da aba Conversation (movido do topbar no v1.12.1).
 - Gravação de voz (Conversar/Pronunciation): usa a **Web Speech API** do navegador
   (`window.SpeechRecognition`) no cliente — transcreve sem depender do backend; há
@@ -127,6 +137,7 @@ persistido por usuário (multi-tenant).
 - Reprodução de TTS: `new Audio(data:...)`.
 - Listen é ditado: o texto da frase fica oculto (`classList.add("hidden")`) até o
   "Verificar", quando é revelado (`classList.remove("hidden")`).
+- **Numbers**: sub-abas para Números (1-100 + centenas), Ordinais (1-100), Meses, Dias.
 
 ## Validação
 

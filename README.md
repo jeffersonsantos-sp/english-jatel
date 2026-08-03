@@ -11,9 +11,9 @@
 [![Terraform](https://img.shields.io/badge/Terraform-1.5+-7B42BC?logo=terraform)](https://www.terraform.io)
 [![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python)](https://python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?logo=fastapi)](https://fastapi.tiangolo.com)
-[![Version](https://img.shields.io/badge/Version-v1.12.3-green)](https://github.com/jeffersonsantos-sp/english-jatel/releases)
+[![Version](https://img.shields.io/badge/Version-v1.13.0-green)](https://github.com/jeffersonsantos-sp/english-jatel/releases)
 
-> Full-stack application that trains **English, Spanish, and French** across Listen, Pronunciation, Write, Read, Conversation (AI-powered), Grammar (CEFR A1–C2), and Spaced Repetition (MemHack) — with a complete **i18n UI** that translates the entire interface per language.
+> Full-stack application that trains **English, Spanish, French, Italian, and German** across Listen, Pronunciation, Write, Read, Conversation (AI-powered), Grammar (CEFR A1–C2), Numbers, and Spaced Repetition (MemHack) — with a complete **i18n UI** that translates the entire interface per language.
 
 ---
 
@@ -202,14 +202,15 @@ az aks get-credentials --resource-group rg-english-jatel --name aks-english-jate
 
 | Capability | Details |
 |-----------|---------|
-| **3 Languages** | English, Spanish, French — full UI + content + TTS + STT |
-| **7 Learning Modules** | Listen, Pronunciation, Write, Read, Conversation, Grammar, MemHack |
+| **5 Languages** | English, Spanish, French, Italian, German — full UI + content + TTS + STT |
+| **8 Learning Modules** | Listen, Pronunciation, Write, Read, Conversation, Grammar, MemHack, Numbers |
 | **Full i18n** | Every label, button, tab, placeholder, and message translates when switching language |
 | **AI Correction** | LLM-powered grammar/fluency correction via OpenRouter |
 | **Neural TTS** | Edge TTS voices per language (zero cost, no API key) |
 | **Speech-to-Text** | Web Speech API (browser) + backend fallback |
 | **Spaced Repetition** | Leitner-style SRS with per-user progress persistence |
-| **CEFR Grammar** | 46+ topics per language (A1–C2), data-driven, hot-reloadable |
+| **CEFR Grammar** | 50+ topics per language (A1–C2), data-driven, hot-reloadable |
+| **Numbers & Calendar** | Numbers 1-1000, ordinals, months, days — all 5 languages |
 | **Auth & Multi-user** | PBKDF2 passwords, admin roles, session cookies |
 | **CI/CD** | GitHub Actions — CI on push, CD on git tag to Docker Hub |
 | **Cloud Deploy** | Azure AKS with Terraform, NGINX Ingress, TLS |
@@ -342,10 +343,10 @@ Memorize phrases with Leitner-style SRS (boxes 1-5, intervals from 1min to 7days
 
 When switching language, every UI element translates:
 
-| Element | EN | ES | FR |
-|---------|----|----|-----|
-| Tabs | Listen, Pronunciation, Write, Read, Conversation, Grammar, MemHack | Escuchar, Pronunciacion, Escribir, Leer, Conversar, Gramatica, MemHack | Ecouter, Prononciation, Ecrire, Lire, Conversation, Grammaire, MemHack |
-| Buttons | Check, Record, Stop, Load | Comprobar, Grabar, Parar, Cargar | Verifier, Enregistrer, Arreter, Charger |
+| Element | EN | ES | FR | IT | DE |
+|---------|----|----|-----|-----|-----|
+| Tabs | Listen, Pronunciation, Write, Read, Conversation, Grammar, MemHack, Numbers | Escuchar, Pronunciacion, Escribir, Leer, Conversar, Gramatica, MemHack, Numeros | Ecouter, Prononciation, Ecrire, Lire, Conversation, Grammaire, MemHack, Nombres | Ascolta, Pronuncia, Scrivi, Leggi, Conversazione, Grammatica, MemHack, Numeri | Hören, Aussprache, Schreiben, Lesen, Unterhaltung, Grammatik, MemHack, Zahlen |
+| Buttons | Check, Record, Stop, Load | Comprobar, Grabar, Parar, Cargar | Verifier, Enregistrer, Arreter, Charger | Verifica, Registra, Ferma, Carica | Überprüfen, Aufnehmen, Stopp, Laden |
 
 Implementation: `frontend/i18n.js` (translation dictionary) + `data-i18n` attributes in HTML.
 
@@ -457,13 +458,26 @@ english-jatel/
 │   ├── grammar.json         # EN grammar (CEFR A1-C2)
 │   ├── grammar_es.json      # ES grammar
 │   ├── grammar_fr.json      # FR grammar
+│   ├── grammar_it.json      # IT grammar
+│   ├── grammar_de.json      # DE grammar
 │   ├── memhack.json         # EN phrases (SRS)
 │   ├── memhack_es.json      # ES phrases
 │   ├── memhack_fr.json      # FR phrases
+│   ├── memhack_it.json      # IT phrases
+│   ├── memhack_de.json      # DE phrases
 │   ├── listen_es.json       # ES dictation sentences
 │   ├── listen_fr.json       # FR dictation sentences
+│   ├── listen_it.json       # IT dictation sentences
+│   ├── listen_de.json       # DE dictation sentences
 │   ├── read_es.json         # ES reading texts
 │   ├── read_fr.json         # FR reading texts
+│   ├── read_it.json         # IT reading texts
+│   ├── read_de.json         # DE reading texts
+│   ├── calendar_numbers_en.json  # EN numbers, ordinals, months, days
+│   ├── calendar_numbers_es.json  # ES numbers, ordinals, months, days
+│   ├── calendar_numbers_fr.json  # FR numbers, ordinals, months, days
+│   ├── calendar_numbers_it.json  # IT numbers, ordinals, months, days
+│   ├── calendar_numbers_de.json  # DE numbers, ordinals, months, days
 │   └── requirements.txt
 ├── frontend/
 │   ├── index.html           # SPA main page
@@ -471,7 +485,7 @@ english-jatel/
 │   ├── style.css            # Dark theme UI
 │   ├── app.js               # Client logic
 │   ├── auth.js              # Authentication logic
-│   └── i18n.js              # EN/ES/FR translation dictionary
+│   └── i18n.js              # EN/ES/FR/IT/DE translation dictionary
 ├── terraform/               # Azure infrastructure (AKS, DNS, RBAC)
 │   ├── providers.tf
 │   ├── variables.tf

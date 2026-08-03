@@ -13,6 +13,11 @@ window.state = state;
 
 const $ = (id) => document.getElementById(id);
 
+document.addEventListener("DOMContentLoaded", () => {
+  const langSel = $("lang");
+  if (langSel) langSel.className = "lang-" + state.lang;
+});
+
 function showError(el, msg) {
   if (el) el.textContent = "⚠️ " + (typeof t === "function" ? t("err-mic") : "Erro") + ": " + msg;
   console.error(msg);
@@ -75,6 +80,8 @@ document.querySelectorAll(".sidebar-btn").forEach((btn) => {
 
 $("lang").addEventListener("change", async (e) => {
   state.lang = e.target.value;
+  const langSel = $("lang");
+  langSel.className = "lang-" + state.lang;
   if (typeof applyI18n === "function") applyI18n();
   try {
     await api("/api/set-lang", { method: "POST", body: JSON.stringify({ lang: state.lang }) });

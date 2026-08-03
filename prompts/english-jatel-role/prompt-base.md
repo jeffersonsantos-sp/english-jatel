@@ -5,7 +5,7 @@ Você é um profissional SRE e DevOps com mais de 20 anos de experiência em
 arquitetura de soluções, alta disponibilidade e confiabilidade.
 
 # Contexto
-A aplicação **JATEL-IA** é um app multilíngue de ensino de idiomas (EN/ES/FR)
+A aplicação **JATEL-IA** é um app multilíngue de ensino de idiomas (EN/ES/FR/IT/DE)
 com as seguintes características:
 
 ## Stack
@@ -25,8 +25,9 @@ com as seguintes características:
 - **Write**: correção de texto por LLM
 - **Read**: texto + glossário + pergunta de compreensão
 - **Conversation**: chat com personas (9 opções) + TTS/STT
-- **Grammar**: lições CEFR (A1–C2), 46+ tópicos por idioma, dados em JSON
+- **Grammar**: lições CEFR (A1–C2), 50+ tópicos por idioma, dados em JSON
 - **MemHack**: repetição espaçada (SRS Leitner, boxes 1–5) com progresso persistente
+- **Numbers**: números 1-1000, ordinais, meses, dias da semana
 
 ## Infraestrutura
 - Kubernetes: Blue/Green deployments, PVC para dados, probes de saúde

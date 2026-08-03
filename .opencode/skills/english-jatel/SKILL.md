@@ -3,9 +3,11 @@ name: english-jatel
 description: >
   App de ensino de ingles "English JATEL" (FastAPI + frontend estatico num so
   servidor) com auth de administrador e multi-usuario, TTS/STT/LLM, modulos de
-  Grammar (niveis CEFR A1-C2) e MemHack (repeticao espacada/SRS), conteudo
-  orientado a dados (grammar.json, memhack.json), deploy via Docker/Docker Compose
-  e Kubernetes, e pipeline CI/CD no GitHub Actions versionado por git tags.
+  Grammar (niveis CEFR A1-C2), MemHack (repeticao espacada/SRS) e Numbers
+  (numeros/categorias), conteudo orientado a dados (grammar.json, memhack.json,
+  calendar_numbers.json), deploy via Docker/Docker Compose e Kubernetes, e
+  pipeline CI/CD no GitHub Actions versionado por git tags. Suporta 5 idiomas:
+  ingles, espanhol, frances, italiano e alemao.
   Use para rodar, explicar, estender, versionar (git tag vX.Y.Z), buildar a
   imagem Docker, publicar no Docker Hub, implantar no Kubernetes ou operar o
   processo de release deste repositorio.
@@ -13,11 +15,11 @@ description: >
 
 # SKILL: english-jatel
 
-Tutor de **ingles, espanhol e frances** full-stack com login e multi-usuario.
-Seletor de idioma no topo alterna entre **en** (Ingles), **es** (Espanhol),
-**fr** (Frances). Um unico servidor FastAPI serve a API `/api/*` e o frontend SPA
+Tutor de **ingles, espanhol, frances, italiano e alemao** full-stack com login e multi-usuario.
+Seletor de idioma alterna entre **en** (Ingles), **es** (Espanhol), **fr** (Frances),
+**it** (Italiano) e **de** (Alemao). Um unico servidor FastAPI serve a API `/api/*` e o frontend SPA
 (`index.html`, `style.css`, `app.js`, `auth.js`, `login.html`). Modulos: **Listen,
-Speak, Write, Read, Conversar, Grammar, MemHack**. CI/CD via GitHub Actions:
+Pronunciation, Write, Read, Conversar, Grammar, MemHack, Numbers**. CI/CD via GitHub Actions:
 testes no `ci.yaml`, build/push da imagem no Docker Hub no `cd.yaml` disparado por
 **git tag `v*`**. Deploy tambem via `docker compose` e manifestos Kubernetes em `k8s/`.
 
@@ -44,7 +46,7 @@ testes no `ci.yaml`, build/push da imagem no Docker Hub no `cd.yaml` disparado p
 
 ## Modulos
 - **Listen**: ditado (TTS da frase, texto oculto ate "Verificar").
-- **Speak**: STT (gravacao) ou texto -> correcao + TTS da correcao.
+- **Pronunciation**: STT (gravacao) ou texto -> correcao + TTS da correcao.
 - **Write**: correcao de texto (ERRO -> CORRECAO -> REGRA -> SUGESTAO).
 - **Read**: texto + glossario + pergunta de compreensao.
 - **Conversar**: chat com IA. **9 personas** (cafe, entrevistador, negocios,
@@ -55,15 +57,19 @@ testes no `ci.yaml`, build/push da imagem no Docker Hub no `cd.yaml` disparado p
     antes da sintese, para o TTS nao "ler" a descricao do emoji em voz alta.
   - O seletor **Categoria** da barra foi removido (redundante com Persona); Listen/Read
     usam `category: "all"`. O MemHack mantem seu proprio seletor de categoria.
-- **Multi-idioma**: seletor `lang` no topo alterna entre Ingles/Espanhol/Frances.
-  TTS, STT, prompts da IA e conteudo (gramatica + MemHack) se adaptam ao idioma.
+- **Multi-idioma**: seletor `lang` alterna entre 5 idiomas: Ingles, Espanhol, Frances,
+  Italiano e Alemao. TTS, STT, prompts da IA e conteudo (gramatica, MemHack, Numbers)
+  se adaptam ao idioma.
 - **Grammar**: topicos por nivel CEFR (A1-C2), com `structure`/`explanation`/
-  `examples`; arquivos `grammar.json` (EN), `grammar_es.json` (ES), `grammar_fr.json` (FR).
-  Recarregavel via `POST /api/admin/reload-grammar`.
+  `examples`; arquivos `grammar.json` (EN), `grammar_es.json` (ES), `grammar_fr.json` (FR),
+  `grammar_it.json` (IT), `grammar_de.json` (DE). Recarregavel via `POST /api/admin/reload-grammar`.
 - **MemHack**: frases por categoria (rotina, trabalho, escola, familia, diversao,
   esportes) com SRS estilo Leitner (box 1-5; facil sobe, medio mantem, dificil
-  desce). Arquivos `memhack.json` (EN), `memhack_es.json` (ES), `memhack_fr.json` (FR);
-  progresso por usuario+idioma persistido.
+  desce). Arquivos `memhack.json` (EN), `memhack_es.json` (ES), `memhack_fr.json` (FR),
+  `memhack_it.json` (IT), `memhack_de.json` (DE); progresso por usuario+idioma persistido.
+- **Numbers**: numeros 1-1000, ordinais, meses, dias da semana. Arquivos
+  `calendar_numbers.json` (EN), `calendar_numbers_es.json` (ES), `calendar_numbers_fr.json` (FR),
+  `calendar_numbers_it.json` (IT), `calendar_numbers_de.json` (DE).
 
 ## Como rodar
 ```bash
@@ -94,10 +100,15 @@ kubectl -n english-jatel port-forward svc/english-jatel 8080:80
   vivem em volume/PVC (`/app/data`) e **nao** sao versionados.
 
 ## Conteudo orientado a dados
-- **Grammar**: `backend/grammar.json` — `{"levels":[...],"grammar":{<nivel>:[{topic,structure,explanation,examples}]}}`.
+- **Grammar**: `backend/grammar.json` (EN), `grammar_es.json` (ES), `grammar_fr.json` (FR),
+  `grammar_it.json` (IT), `grammar_de.json` (DE) — `{"levels":[...],"grammar":{<nivel>:[{topic,structure,explanation,examples}]}}`.
   Carregado em `GRAMMAR_FILE` no startup (fallback ao embutido). Recarrega sem rebuild via endpoint admin.
-- **MemHack**: `backend/memhack.json` — `{"categories":[...],"phrases":{<cat>:[{id,en,pt}]}}`.
-- **Listen/Read**: dicionarios `LISTEN`/`READ` em `engine.py` (fila embaralhada por nivel/modulo/categoria).
+- **MemHack**: `backend/memhack.json` (EN), `memhack_es.json` (ES), `memhack_fr.json` (FR),
+  `memhack_it.json` (IT), `memhack_de.json` (DE) — `{"categories":[...],"phrases":{<cat>:[{id,en,pt}]}}`.
+- **Listen**: `backend/listen_es.json` (ES), `listen_fr.json` (FR), `listen_it.json` (IT), `listen_de.json` (DE).
+- **Read**: `backend/read_es.json` (ES), `read_fr.json` (FR), `read_it.json` (IT), `read_de.json` (DE).
+- **Numbers**: `backend/calendar_numbers.json` (EN), `calendar_numbers_es.json` (ES),
+  `calendar_numbers_fr.json` (FR), `calendar_numbers_it.json` (IT), `calendar_numbers_de.json` (DE).
 
 ## Endpoints (resumo)
 | Rota | Auth | Descricao |
@@ -105,6 +116,7 @@ kubectl -n english-jatel port-forward svc/english-jatel 8080:80
 | `/api/health` | — | status/llm/provider |
 | `/api/grammar-levels` | — | niveis CEFR |
 | `/api/memhack/categories` | — | categorias MemHack |
+| `/api/calendar-numbers` | — | numeros, ordinais, meses, dias |
 | `/api/content` | sim | frase/texto Listen/Read |
 | `/api/correct`,`/api/tts`,`/api/stt`,`/api/converse` | sim | core |
 | `/api/grammar` | sim | topico de gramatica |
@@ -144,10 +156,21 @@ git push origin v1.4.0      # aciona cd.yaml -> build + push Docker Hub
 - Cuidado: ambos os slots montam o mesmo PVC (`/app/data`); mantenha um slot ativo
   por vez para evitar dupla escrita em `users.json`/`memhack_progress.json`.
 
+## URLs de Producao
+- **Azure AKS**: `https://learn.jfs-devops.shop` (NGINX Ingress + cert-manager + Let's Encrypt)
+- **Render PaaS**: `https://english-jatel.onrender.com` (auto-deploy on push to `main`)
+- **Cluster**: `aks-english-jatel` (Free Tier, `centralindia`, `Standard_B2als_v2`, K8s v1.35.6)
+- **Ingress IP**: `4.247.234.90`
+
 ## Como estender
-- **Grammar**: edite `backend/grammar.json` e chame `POST /api/admin/reload-grammar`.
-- **MemHack**: edite `backend/memhack.json` (categorias/frases).
-- **Frases Listen/Read**: edite `LISTEN`/`READ` em `engine.py`.
+- **Grammar**: edite `backend/grammar.json` (EN), `grammar_es.json` (ES), `grammar_fr.json` (FR),
+  `grammar_it.json` (IT), `grammar_de.json` (DE) e chame `POST /api/admin/reload-grammar`.
+- **MemHack**: edite `backend/memhack.json` (EN), `memhack_es.json` (ES), `memhack_fr.json` (FR),
+  `memhack_it.json` (IT), `memhack_de.json` (DE) (categorias/frases).
+- **Numbers**: edite `backend/calendar_numbers.json` (EN), `calendar_numbers_es.json` (ES),
+  `calendar_numbers_fr.json` (FR), `calendar_numbers_it.json` (IT), `calendar_numbers_de.json` (DE).
+- **Listen**: edite `backend/listen_es.json` (ES), `listen_fr.json` (FR), `listen_it.json` (IT), `listen_de.json` (DE).
+- **Read**: edite `backend/read_es.json` (ES), `read_fr.json` (FR), `read_it.json` (IT), `read_de.json` (DE).
 - **Modulo/aba**: rota em `main.py` + handler em `engine.py` + aba em
   `frontend/index.html` + listener em `app.js`.
 
@@ -162,8 +185,14 @@ kubectl apply --dry-run=client -k k8s/
 ```
 
 ## Arquivos principais
-- `backend/main.py`, `backend/engine.py`, `backend/grammar.json`, `backend/memhack.json`, `backend/.env.example`, `backend/requirements.txt`
+- `backend/main.py`, `backend/engine.py`, `backend/.env.example`, `backend/requirements.txt`
+- `backend/grammar.json`, `backend/grammar_es.json`, `backend/grammar_fr.json`, `backend/grammar_it.json`, `backend/grammar_de.json`
+- `backend/memhack.json`, `backend/memhack_es.json`, `backend/memhack_fr.json`, `backend/memhack_it.json`, `backend/memhack_de.json`
+- `backend/calendar_numbers.json`, `backend/calendar_numbers_es.json`, `backend/calendar_numbers_fr.json`, `backend/calendar_numbers_it.json`, `backend/calendar_numbers_de.json`
+- `backend/listen_es.json`, `backend/listen_fr.json`, `backend/listen_it.json`, `backend/listen_de.json`
+- `backend/read_es.json`, `backend/read_fr.json`, `backend/read_it.json`, `backend/read_de.json`
 - `frontend/index.html`, `frontend/style.css`, `frontend/app.js`, `frontend/auth.js`, `frontend/login.html`
+- `frontend/i18n.js` (dicionario EN/ES/FR/IT/DE)
 - `Dockerfile`, `docker-compose.yaml`, `k8s/`
 - `.github/workflows/ci.yaml`, `.github/workflows/cd.yaml`
 - `docs/technical/arquitetura.md`, `docs/technical/deploy-kubernetes.md`, `docs/user/guia.md`, `AGENTS.md`

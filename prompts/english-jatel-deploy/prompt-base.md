@@ -18,10 +18,10 @@ e **manifestos Kubernetes**, seguindo as convencoes ja estabelecidas neste repos
   viagens, familia, filmes, musicas, futebol, devops); voz via **Web Speech API** no
   navegador (sem Whisper no servidor); respostas sem emojis e TTS remove emojis;
   seletor **Categoria** removido da barra (Listen/Read usam `category: "all"`).
-  **Multi-idioma**: seletor `lang` no topo alterna entre Ingles/Espanhol/Frances;
-  grammar/memhack carregados por idioma. **i18n completo**: toda a UI traduzida (120+ chaves EN/ES/FR).
+  **Multi-idioma**: seletor `lang` alterna entre 5 idiomas: Ingles, Espanhol, Frances,
+  Italiano e Alemao; grammar/memhack/numbers carregados por idioma. **i18n completo**: toda a UI traduzida (120+ chaves EN/ES/FR/IT/DE).
   **Persona** movida para header da aba Conversation. Aba **Pronunciation** (renomeada de Speak).
-  Versao atual: **v1.12.2**.
+  Versao atual: **v1.13.0**.
 - **docker-compose.yaml**: service `english-jatel`, build do contexto `.`, imagem
   `english-jatel:latest`, porta `8000:8000`, env `EDGE_TTS_VOICE`/`ADMIN_USER`/
   `ADMIN_PASS`/`SESSION_SECRET`/`DATA_DIR`, `env_file: backend/.env`, volume nomeado

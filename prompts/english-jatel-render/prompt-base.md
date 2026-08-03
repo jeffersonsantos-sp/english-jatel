@@ -21,9 +21,12 @@ partir do GitHub), respeitando os ajustes ja feitos no repositorio para o free t
 - **Estado atual do app**: 9 personas na conversacao; respostas **sem emojis** (system
   prompt proibe e `tts_bytes` remove emojis do texto, evitando que o TTS "leia" a
   descricao do emoji); seletor **Categoria** removido da barra (redundante com Persona),
-  Listen/Read usam `category: "all"`. **Multi-idioma**: seletor `lang` no topo alterna entre
-  Ingles/Espanhol/Frances (arquivos `grammar_es.json`, `grammar_fr.json`, `memhack_es.json`,
-  `memhack_fr.json`). Versao atual: **v1.11.2**.
+  Listen/Read usam `category: "all"`. **Multi-idioma**: seletor `lang` alterna entre
+  5 idiomas: Ingles, Espanhol, Frances, Italiano e Alemao (arquivos `grammar_es.json`,
+  `grammar_fr.json`, `grammar_it.json`, `grammar_de.json`, `memhack_es.json`,
+  `memhack_fr.json`, `memhack_it.json`, `memhack_de.json`, `calendar_numbers_es.json`,
+  `calendar_numbers_fr.json`, `calendar_numbers_it.json`, `calendar_numbers_de.json`).
+  Versao atual: **v1.13.0**.
 - **Keepalive**: `.github/workflows/keepalive.yaml` pinga `/api/health` a cada 10 min
   (secret `RENDER_URL`) para o free nao dormir.
 
