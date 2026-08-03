@@ -70,6 +70,7 @@
           <button class="tab" data-tab="converse" data-i18n="tab-converse">Conversation</button>
           <button class="tab" data-tab="grammar" data-i18n="tab-grammar">Grammar</button>
           <button class="tab" data-tab="memhack" data-i18n="tab-memhack">MemHack</button>
+          <button class="tab" data-tab="calendar-numbers" data-i18n="tab-calendar-numbers">Calendar & Numbers</button>
         </nav>
     </header>
 
@@ -213,6 +214,34 @@
             <button class="btn memhack-hard" data-diff="dificil" data-i18n="memhack-hard">🔴 Difícil</button>
           </div>
           <div id="memhack-msg" class="result"></div>
+        </div>
+      </section>
+
+      <section id="calendar-numbers" class="panel card">
+        <h2 data-i18n="calendar-numbers-title">Calendar & Numbers</h2>
+        <p class="subtitle" data-i18n="calendar-numbers-sub">Learn numbers, ordinal numbers, months, and days of the week.</p>
+        
+        <div class="sub-tabs">
+          <button class="sub-tab active" data-subtab="numbers" data-i18n="subtab-numbers">Numbers</button>
+          <button class="sub-tab" data-subtab="ordinals" data-i18n="subtab-ordinals">Ordinal Numbers</button>
+          <button class="sub-tab" data-subtab="months" data-i18n="subtab-months">Months</button>
+          <button class="sub-tab" data-subtab="days" data-i18n="subtab-days">Days of the Week</button>
+        </div>
+
+        <div id="subtab-numbers" class="subtab-content active">
+          <div id="numbers-grid" class="calendar-grid"></div>
+        </div>
+
+        <div id="subtab-ordinals" class="subtab-content">
+          <div id="ordinals-grid" class="calendar-grid"></div>
+        </div>
+
+        <div id="subtab-months" class="subtab-content">
+          <div id="months-grid" class="calendar-grid"></div>
+        </div>
+
+        <div id="subtab-days" class="subtab-content">
+          <div id="days-grid" class="calendar-grid"></div>
         </div>
       </section>
     </main>

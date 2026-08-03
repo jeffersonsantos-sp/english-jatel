@@ -310,6 +310,16 @@ def converse(req: ConverseReq):
     return {"reply": reply}
 
 
+class CalendarNumbersReq(BaseModel):
+    lang: str = "en"
+    section: str = "all"
+
+
+@app.post("/api/calendar-numbers")
+def calendar_numbers(req: CalendarNumbersReq):
+    return engine.get_calendar_numbers(req.lang, req.section)
+
+
 class SetLangReq(BaseModel):
     lang: str = "en"
 

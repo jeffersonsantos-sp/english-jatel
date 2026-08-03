@@ -709,3 +709,68 @@ $("conv-stop").addEventListener("click", convStopRecording);
 
 /* ---------- Apply i18n on load ---------- */
 if (typeof applyI18n === "function") applyI18n();
+
+/* ---------- Calendar & Numbers ---------- */
+let calendarData = {};
+
+async function loadCalendarNumbers() {
+  try {
+    const data = await api("/api/calendar-numbers", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ lang: state.lang, section: "all" }),
+    });
+    calendarData = data;
+    renderCalendarSection("numbers");
+    renderCalendarSection("ordinals");
+    renderCalendarSection("months");
+    renderCalendarSection("days");
+  } catch (e) {
+    console.warn("Calendar & Numbers load error:", e.message);
+  }
+}
+
+function renderCalendarSection(section) {
+  const container = $(section + "-grid");
+  if (!container || !calendarData[section]) return;
+  const items = calendarData[section].items || [];
+  container.innerHTML = "";
+  items.forEach((item) => {
+    const card = document.createElement("div");
+    card.className = "calendar-card";
+    let word = item.word;
+    let extra = "";
+    if (section === "numbers") {
+      extra = `<span class="calendar-value">${item.value}</span>`;
+    } else if (section === "ordinals") {
+      extra = `<span class="calendar-value">${item.ordinal}</span>`;
+    } else if (section === "months") {
+      extra = `<span class="calendar-value">${item.abbreviation || ""}</span>`;
+    } else if (section === "days") {
+      extra = `<span class="calendar-value">${item.abbreviation || ""}</span>`;
+    }
+    card.innerHTML = `
+      <div class="calendar-word">${word}</div>
+      <div class="calendar-pronunciation">${item[" pronunciation"] || ""}</div>
+      ${extra}
+      <button class="btn ghost calendar-speak" data-text="${word}">🔊</button>
+    `;
+    container.appendChild(card);
+  });
+  container.querySelectorAll(".calendar-speak").forEach((btn) => {
+    btn.addEventListener("click", () => playTts(btn.dataset.text));
+  });
+}
+
+document.querySelectorAll(".sub-tab").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".sub-tab").forEach((b) => b.classList.remove("active"));
+    document.querySelectorAll(".subtab-content").forEach((p) => p.classList.remove("active"));
+    btn.classList.add("active");
+    $("subtab-" + btn.dataset.subtab).classList.add("active");
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadCalendarNumbers();
+});

@@ -26,6 +26,7 @@ const I18N = {
     "tab-converse": "Conversation",
     "tab-grammar": "Grammar",
     "tab-memhack": "MemHack",
+    "tab-calendar-numbers": "Calendar & Numbers",
 
     // listen
     "listen-title": "Listen",
@@ -141,6 +142,14 @@ const I18N = {
     "memhack-scheduled": "Review scheduled. Come back later!",
     "status-active": "LLM active",
     "status-demo": "Demo mode (no LLM)",
+
+    // calendar & numbers
+    "calendar-numbers-title": "Calendar & Numbers",
+    "calendar-numbers-sub": "Learn numbers, ordinal numbers, months, and days of the week.",
+    "subtab-numbers": "Numbers",
+    "subtab-ordinals": "Ordinal Numbers",
+    "subtab-months": "Months",
+    "subtab-days": "Days of the Week",
   },
 
   es: {
@@ -168,6 +177,7 @@ const I18N = {
     "tab-converse": "Conversar",
     "tab-grammar": "Gramática",
     "tab-memhack": "MemHack",
+    "tab-calendar-numbers": "Calendario y Números",
 
     // listen
     "listen-title": "Escuchar",
@@ -282,6 +292,14 @@ const I18N = {
     "memhack-scheduled": "Revisión programada. ¡Vuelve más tarde!",
     "status-active": "LLM activo",
     "status-demo": "Modo demo (sin LLM)",
+
+    // calendar & numbers
+    "calendar-numbers-title": "Calendario y Números",
+    "calendar-numbers-sub": "Aprende números, ordinales, meses y días de la semana.",
+    "subtab-numbers": "Números",
+    "subtab-ordinals": "Números Ordinales",
+    "subtab-months": "Meses",
+    "subtab-days": "Días de la Semana",
   },
 
   fr: {
@@ -309,6 +327,7 @@ const I18N = {
     "tab-converse": "Conversation",
     "tab-grammar": "Grammaire",
     "tab-memhack": "MemHack",
+    "tab-calendar-numbers": "Calendrier et Nombres",
 
     // listen
     "listen-title": "Écouter",
@@ -423,6 +442,14 @@ const I18N = {
     "memhack-scheduled": "Révision programmée. Revenez plus tard !",
     "status-active": "LLM actif",
     "status-demo": "Mode démo (sans LLM)",
+
+    // calendar & numbers
+    "calendar-numbers-title": "Calendrier et Nombres",
+    "calendar-numbers-sub": "Apprenez les nombres, les ordinaux, les mois et les jours de la semaine.",
+    "subtab-numbers": "Nombres",
+    "subtab-ordinals": "Nombres Ordinaux",
+    "subtab-months": "Mois",
+    "subtab-days": "Jours de la Semaine",
   },
 };
 

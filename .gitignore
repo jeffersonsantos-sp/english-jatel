@@ -24,5 +24,13 @@ terraform/*.tfstate.backup
 terraform/.terraform/
 terraform/tfplan
 
-# LinkedIn prompt (pessoal, nao versionar)
+# LinkedIn (pessoal, nao versionar)
 prompts/linkedin/
+docs/LinkedIn-Optimization-Pessoal.html
+docs/LinkedIn-Templates-Posts-JATEL.html
+docs/LinkedIn-Recruiter-Aparecer-Sempre.html
+docs/LinkedIn-Aumentar-Nota-Completo.html
+docs/LinkedIn-Imagens-HTML.html
+docs/LinkedIn-Imagens-Canva-Figma.html
+docs/Mercado-Trabalho-Oculto-LinkedIn.html
+docs/JATEL-IA-Apresentacao.html

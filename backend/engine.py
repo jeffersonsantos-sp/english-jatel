@@ -1470,3 +1470,37 @@ def converse(level: str, persona: str, history: list, user_message: str, lang: s
         except Exception as e:
             return f"[LLM indisponivel: {e}] Hello! Tell me more about that."
     return "Hello! That's interesting. Can you tell me more?"
+
+
+# --- Calendar & Numbers ---
+CALENDAR_NUMBERS_CACHE = {}
+
+def _calendar_numbers_file_for_lang(lang: str) -> str:
+    if lang == DEFAULT_LANG:
+        return os.path.join(os.path.dirname(__file__), "calendar_numbers_en.json")
+    alt = os.path.join(os.path.dirname(__file__), f"calendar_numbers_{lang}.json")
+    if os.path.exists(alt):
+        return alt
+    return os.path.join(os.path.dirname(__file__), "calendar_numbers_en.json")
+
+def _load_calendar_numbers(lang: str = DEFAULT_LANG) -> dict:
+    if lang in CALENDAR_NUMBERS_CACHE and CALENDAR_NUMBERS_CACHE[lang] is not None:
+        return CALENDAR_NUMBERS_CACHE[lang]
+    filepath = _calendar_numbers_file_for_lang(lang)
+    try:
+        with open(filepath, encoding="utf-8") as f:
+            data = json.load(f)
+    except Exception as e:
+        print(f"[calendar_numbers] falha ao ler {filepath}: {e}")
+        data = {"sections": {}}
+    CALENDAR_NUMBERS_CACHE[lang] = data
+    return data
+
+def get_calendar_numbers(lang: str = DEFAULT_LANG, section: str = "all") -> dict:
+    data = _load_calendar_numbers(lang)
+    sections = data.get("sections", {})
+    if section == "all":
+        return sections
+    if section in sections:
+        return {section: sections[section]}
+    return {"sections": list(sections.keys())}
