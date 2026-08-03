@@ -94,6 +94,7 @@ $("lang").addEventListener("change", async (e) => {
     state.voice = sel.value;
   } catch (_) {}
   await loadMemhackCategories();
+  await loadCalendarNumbers();
 });
 
 /* ---------- Vozes da IA ---------- */
