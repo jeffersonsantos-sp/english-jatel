@@ -35,19 +35,23 @@ EDGE_VOICE = os.getenv("EDGE_TTS_VOICE", "en-US-JennyNeural")
 IS_OPENROUTER = "openrouter" in BASE_URL
 
 # --- Multi-idioma ---
-SUPPORTED_LANGS = ("en", "es", "fr")
+SUPPORTED_LANGS = ("en", "es", "fr", "it", "de")
 DEFAULT_LANG = "en"
 
 LANG_META = {
     "en": {"label": "Inglês", "prompt_prefix": "professor de inglês", "stt_lang": "en-US"},
     "es": {"label": "Espanhol", "prompt_prefix": "profesor de español", "stt_lang": "es-ES"},
     "fr": {"label": "Francês", "prompt_prefix": "professeur de français", "stt_lang": "fr-FR"},
+    "it": {"label": "Italiano", "prompt_prefix": "professore di italiano", "stt_lang": "it-IT"},
+    "de": {"label": "Alemão", "prompt_prefix": "Deutschlehrer", "stt_lang": "de-DE"},
 }
 
 LANG_VOICES = {
     "en": os.getenv("EDGE_TTS_VOICE", "en-US-JennyNeural"),
     "es": os.getenv("EDGE_TTS_VOICE_ES", "es-ES-ElviraNeural"),
     "fr": os.getenv("EDGE_TTS_VOICE_FR", "fr-FR-DeniseNeural"),
+    "it": os.getenv("EDGE_TTS_VOICE_IT", "it-IT-ElsaNeural"),
+    "de": os.getenv("EDGE_TTS_VOICE_DE", "de-DE-KatjaNeural"),
 }
 
 def get_lang() -> str:
@@ -1389,6 +1393,10 @@ def list_voices(lang: str = DEFAULT_LANG) -> list:
                 voices.append({"id": v["ShortName"], "name": v.get("FriendlyName", v["ShortName"])})
             elif lang == "fr" and v["ShortName"].startswith("fr-"):
                 voices.append({"id": v["ShortName"], "name": v.get("FriendlyName", v["ShortName"])})
+            elif lang == "it" and v["ShortName"].startswith("it-"):
+                voices.append({"id": v["ShortName"], "name": v.get("FriendlyName", v["ShortName"])})
+            elif lang == "de" and v["ShortName"].startswith("de-"):
+                voices.append({"id": v["ShortName"], "name": v.get("FriendlyName", v["ShortName"])})
     except Exception:
         if lang == "en":
             voices = [{"id": "en-US-JennyNeural", "name": "Jenny (US, female)"},
@@ -1401,6 +1409,12 @@ def list_voices(lang: str = DEFAULT_LANG) -> list:
         elif lang == "fr":
             voices = [{"id": "fr-FR-DeniseNeural", "name": "Denise (FR, female)"},
                       {"id": "fr-FR-HenriNeural", "name": "Henri (FR, male)"}]
+        elif lang == "it":
+            voices = [{"id": "it-IT-ElsaNeural", "name": "Elsa (IT, female)"},
+                      {"id": "it-IT-DiegoNeural", "name": "Diego (IT, male)"}]
+        elif lang == "de":
+            voices = [{"id": "de-DE-KatjaNeural", "name": "Katja (DE, female)"},
+                      {"id": "de-DE-ConradNeural", "name": "Conrad (DE, male)"}]
         else:
             voices = [{"id": LANG_VOICES.get(lang, LANG_VOICES[DEFAULT_LANG]), "name": "Default"}]
     _VOICES_CACHE[lang] = voices

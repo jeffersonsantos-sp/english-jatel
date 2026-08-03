@@ -451,6 +451,310 @@ const I18N = {
     "subtab-months": "Mois",
     "subtab-days": "Jours de la Semaine",
   },
+
+  it: {
+    // topbar
+    tagline: "Impara ascoltando, parlando e conversando",
+    "label-level": "Livello:",
+    "opt-iniciante": "Principiante",
+    "opt-intermediario": "Intermedio",
+    "opt-avancado": "Avanzato",
+    "label-voice": "Voce IA:",
+    "label-lang": "Lingua:",
+    "opt-en": "Inglese",
+    "opt-es": "Spagnolo",
+    "opt-fr": "Francese",
+    "opt-it": "Italiano",
+    "opt-de": "Tedesco",
+    "label-persona": "Persona (chat):",
+    "btn-logout": "Esci",
+    "btn-pass": "Password",
+    "btn-users": "Utenti",
+
+    // tabs
+    "tab-listen": "Ascolta",
+    "tab-speak": "Pronuncia",
+    "tab-write": "Scrivi",
+    "tab-read": "Leggi",
+    "tab-converse": "Conversazione",
+    "tab-grammar": "Grammatica",
+    "tab-memhack": "MemHack",
+    "tab-numbers": "Numeri",
+
+    // listen
+    "listen-title": "Ascolta",
+    "listen-sub": "Ascolta la frase, scrivi ciò che senti e poi verifica.",
+    "listen-play": "Ascolta frase",
+    "listen-repeat": "Ripeti",
+    "listen-next": "Successivo",
+    "listen-label": "Dettato (quello che hai sentito):",
+    "listen-placeholder": "Scrivi la frase sentita",
+    "listen-check": "Verifica",
+    "listen-correct": "Corretto!",
+    "listen-wrong": "Atteso:\n{expected}\n\nLa tua risposta:\n{got}",
+
+    // speak
+    "speak-title": "Pronuncia",
+    "speak-sub": "Esercita la pronuncia: registra una frase e ascolta la correzione.",
+    "speak-hint": "Rispondi in inglese: \"Tell me about your last weekend.\"",
+    "speak-rec": "Registra",
+    "speak-recording": "Registrazione...",
+    "speak-stop": "Ferma",
+    "speak-play-transcript": "Ascolta trascrizione",
+    "speak-play-correction": "Ascolta correzione",
+    "speak-label": "Oppure scrivi la tua risposta da correggere:",
+    "speak-placeholder": "Scrivi in inglese...",
+    "speak-correct-text": "Correggi testo",
+
+    // write
+    "write-title": "Scrivi",
+    "write-sub": "Scrivi un paragrafo e ricevi una correzione dettagliata.",
+    "write-label": "Il tuo testo:",
+    "write-placeholder": "Scrivi un paragrafo in inglese...",
+    "write-check": "Correggi",
+
+    // read
+    "read-title": "Leggi",
+    "read-sub": "Leggi il testo, consulta il glossario e rispondi alla domanda.",
+    "read-load": "Carica testo",
+    "read-next": "Successivo",
+    "read-label": "Domanda di comprensione (in inglese):",
+    "read-placeholder": "La tua risposta",
+    "read-check": "Correggi",
+
+    // converse
+    "converse-title": "Chatta con l'IA",
+    "converse-sub": "Conversa in inglese con la persona scelta.",
+    "converse-ai-start": "L'IA parla prima",
+    "converse-rec": "Registra",
+    "converse-recording": "Registrazione...",
+    "converse-stop": "Ferma",
+    "converse-placeholder": "Oppure scrivi il tuo messaggio...",
+    "converse-send": "Invia",
+
+    // grammar
+    "grammar-title": "Grammatica",
+    "grammar-sub": "Impara la grammatica inglese per livello (Quadro CEFR).",
+    "grammar-level": "Livello CEFR:",
+    "grammar-load": "Carica argomento",
+    "grammar-next": "Successivo",
+
+    // memhack
+    "memhack-title": "MemHack",
+    "memhack-sub": "Memorizza frasi con ripetizione dilazionata. Ascolta, esercita e valuta la difficoltà.",
+    "memhack-category": "Categoria:",
+    "memhack-play": "Ascolta frase",
+    "memhack-reveal": "Traduzione",
+    "memhack-easy": "Facile",
+    "memhack-medium": "Medio",
+    "memhack-hard": "Difficile",
+
+    // change password modal
+    "cp-title": "Cambia password",
+    "cp-current": "Password attuale",
+    "cp-new": "Nuova password",
+    "cp-confirm": "Conferma nuova password",
+    "cp-save": "Salva",
+    "cp-cancel": "Annulla",
+
+    // users modal
+    "users-title": "Gestisci utenti",
+    "users-username": "Nuovo utente",
+    "users-password": "Password",
+    "users-confirm": "Conferma password",
+    "users-add": "Crea utente",
+    "users-existing": "Utenti esistenti",
+    "users-close": "Chiudi",
+
+    // login
+    "login-subtitle": "Accesso riservato — accedi per continuare",
+    "login-user-label": "Nome utente",
+    "login-pass-label": "Password",
+    "login-btn": "Accedi",
+    "login-error-invalid": "Nome utente o password non validi",
+    "login-error-connect": "Errore di connessione",
+
+    // errors
+    "err-mic": "Errore microfono: {msg}",
+    "err-recording": "Impossibile avviare la registrazione: {msg}",
+    "err-mic-not-allowed": "Permesso microfono negato",
+    "err-no-speech": "Nessun parlato rilevato, riprova",
+    "err-audio-capture": "Microfono non trovato",
+    "err-recording-cancelled": "Registrazione annullata (limite 30s). Riprova.",
+    "err-recording-timeout": "Registrazione annullata (limite 30s).",
+    "err-stt-empty": "(audio vuoto)",
+    "err-stt-network": "Impossibile trascrivere l'audio",
+
+    // misc
+    "transcript-label": "Trascrizione: ",
+    "correction-label": "Correzione:\n",
+    "glossary-label": "Glossario: ",
+    "progress-label": "Progresso: {studied}/{total} frasi in allenamento",
+    "memhack-done": "Finito per ora.",
+    "memhack-scheduled": "Revisione programmata. Torna più tardi!",
+    "status-active": "LLM attivo",
+    "status-demo": "Modalità demo (senza LLM)",
+
+    // numbers
+    "calendar-numbers-title": "Numeri",
+    "calendar-numbers-sub": "Impara numeri, ordinali, mesi e giorni della settimana.",
+    "subtab-numbers": "Numeri",
+    "subtab-ordinals": "Numeri Ordinali",
+    "subtab-months": "Mesi",
+    "subtab-days": "Giorni della Settimana",
+  },
+
+  de: {
+    // topbar
+    tagline: "Lernen durch Zuhören, Sprechen und Konversation",
+    "label-level": "Niveau:",
+    "opt-iniciante": "Anfänger",
+    "opt-intermediario": "Mittelstufe",
+    "opt-avancado": "Fortgeschritten",
+    "label-voice": "KI-Stimme:",
+    "label-lang": "Sprache:",
+    "opt-en": "Englisch",
+    "opt-es": "Spanisch",
+    "opt-fr": "Französisch",
+    "opt-it": "Italienisch",
+    "opt-de": "Deutsch",
+    "label-persona": "Persona (Chat):",
+    "btn-logout": "Abmelden",
+    "btn-pass": "Passwort",
+    "btn-users": "Benutzer",
+
+    // tabs
+    "tab-listen": "Hören",
+    "tab-speak": "Aussprache",
+    "tab-write": "Schreiben",
+    "tab-read": "Lesen",
+    "tab-converse": "Unterhaltung",
+    "tab-grammar": "Grammatik",
+    "tab-memhack": "MemHack",
+    "tab-numbers": "Zahlen",
+
+    // listen
+    "listen-title": "Hören",
+    "listen-sub": "Höre den Satz, schreibe auf, was du hörst, und überprüfe dann.",
+    "listen-play": "Satz anhören",
+    "listen-repeat": "Wiederholen",
+    "listen-next": "Weiter",
+    "listen-label": "Diktat (was du gehört hast):",
+    "listen-placeholder": "Schreibe den gehörten Satz",
+    "listen-check": "Überprüfen",
+    "listen-correct": "Richtig!",
+    "listen-wrong": "Erwartet:\n{expected}\n\nDeine Antwort:\n{got}",
+
+    // speak
+    "speak-title": "Aussprache",
+    "speak-sub": "Übe die Aussprache: zeichne einen Satz auf und höre die Korrektur.",
+    "speak-hint": "Antworte auf Englisch: \"Tell me about your last weekend.\"",
+    "speak-rec": "Aufnehmen",
+    "speak-recording": "Aufnahme...",
+    "speak-stop": "Stopp",
+    "speak-play-transcript": "Transkript anhören",
+    "speak-play-correction": "Korrektur anhören",
+    "speak-label": "Oder schreibe deine Antwort zur Korrektur:",
+    "speak-placeholder": "Schreibe auf Englisch...",
+    "speak-correct-text": "Text korrigieren",
+
+    // write
+    "write-title": "Schreiben",
+    "write-sub": "Schreibe einen Absatz und erhalte eine detaillierte Korrektur.",
+    "write-label": "Dein Text:",
+    "write-placeholder": "Schreibe einen Absatz auf Englisch...",
+    "write-check": "Korrigieren",
+
+    // read
+    "read-title": "Lesen",
+    "read-sub": "Lies den Text, konsultiere das Glossar und beantworte die Frage.",
+    "read-load": "Text laden",
+    "read-next": "Weiter",
+    "read-label": "Verstehensfrage (auf Englisch):",
+    "read-placeholder": "Deine Antwort",
+    "read-check": "Korrigieren",
+
+    // converse
+    "converse-title": "Mit KI chatten",
+    "converse-sub": "Unterhalte dich auf Englisch mit der gewählten Persona.",
+    "converse-ai-start": "KI spricht zuerst",
+    "converse-rec": "Aufnehmen",
+    "converse-recording": "Aufnahme...",
+    "converse-stop": "Stopp",
+    "converse-placeholder": "Oder schreibe deine Nachricht...",
+    "converse-send": "Senden",
+
+    // grammar
+    "grammar-title": "Grammatik",
+    "grammar-sub": "Lerne Englisch-Grammatik nach Niveau (CEFR-Rahmen).",
+    "grammar-level": "CEFR-Niveau:",
+    "grammar-load": "Thema laden",
+    "grammar-next": "Weiter",
+
+    // memhack
+    "memhack-title": "MemHack",
+    "memhack-sub": "Merke dir Sätze mit verteiltem Wiederholen. Höre übe und bewerte den Schwierigkeitsgrad.",
+    "memhack-category": "Kategorie:",
+    "memhack-play": "Satz anhören",
+    "memhack-reveal": "Übersetzung",
+    "memhack-easy": "Leicht",
+    "memhack-medium": "Mittel",
+    "memhack-hard": "Schwer",
+
+    // change password modal
+    "cp-title": "Passwort ändern",
+    "cp-current": "Aktuelles Passwort",
+    "cp-new": "Neues Passwort",
+    "cp-confirm": "Neues Passwort bestätigen",
+    "cp-save": "Speichern",
+    "cp-cancel": "Abbrechen",
+
+    // users modal
+    "users-title": "Benutzer verwalten",
+    "users-username": "Neuer Benutzer",
+    "users-password": "Passwort",
+    "users-confirm": "Passwort bestätigen",
+    "users-add": "Benutzer erstellen",
+    "users-existing": "Bestehende Benutzer",
+    "users-close": "Schließen",
+
+    // login
+    "login-subtitle": "Zugang beschränkt — melde dich an, um fortzufahren",
+    "login-user-label": "Benutzername",
+    "login-pass-label": "Passwort",
+    "login-btn": "Anmelden",
+    "login-error-invalid": "Ungültiger Benutzername oder Passwort",
+    "login-error-connect": "Verbindungsfehler",
+
+    // errors
+    "err-mic": "Mikrofonfehler: {msg}",
+    "err-recording": "Aufnahme konnte nicht gestartet werden: {msg}",
+    "err-mic-not-allowed": "Mikrofonzugriff verweigert",
+    "err-no-speech": "Keine Sprache erkannt, versuche es erneut",
+    "err-audio-capture": "Mikrofon nicht gefunden",
+    "err-recording-cancelled": "Aufnahme abgebrochen (30s Limit). Versuche es erneut.",
+    "err-recording-timeout": "Aufnahme abgebrochen (30s Limit).",
+    "err-stt-empty": "(leere Audiodatei)",
+    "err-stt-network": "Audio konnte nicht transkribiert werden",
+
+    // misc
+    "transcript-label": "Transkript: ",
+    "correction-label": "Korrektur:\n",
+    "glossary-label": "Glossar: ",
+    "progress-label": "Fortschritt: {studied}/{total} Sätze im Training",
+    "memhack-done": "Fertig für jetzt.",
+    "memhack-scheduled": "Überprüfung geplant. Komm später zurück!",
+    "status-active": "LLM aktiv",
+    "status-demo": "Demo-Modus (ohne LLM)",
+
+    // numbers
+    "calendar-numbers-title": "Zahlen",
+    "calendar-numbers-sub": "Lerne Zahlen, Ordnungszahlen, Monate und Wochentage.",
+    "subtab-numbers": "Zahlen",
+    "subtab-ordinals": "Ordnungszahlen",
+    "subtab-months": "Monate",
+    "subtab-days": "Wochentage",
+  },
 };
 
 function t(key, replacements) {
@@ -467,7 +771,7 @@ function t(key, replacements) {
 function applyI18n() {
   const lang = (window.state && window.state.lang) || "en";
 
-  document.documentElement.lang = lang === "en" ? "en" : lang === "es" ? "es" : "fr";
+  document.documentElement.lang = lang;
 
   document.querySelectorAll("[data-i18n]").forEach((el) => {
     const key = el.getAttribute("data-i18n");

@@ -1,0 +1,71 @@
+{
+  "iniciante": {
+    "quotidianità": [
+      "Mi chiamo Anna e sono italiana.",
+      "Lavoro in un'ufficio in centro.",
+      "Ogni giorno mi alzo alle sette.",
+      "Vado al lavoro in autobus.",
+      "La sera guardo la televisione."
+    ],
+    "cibo": [
+      "Mi piace la pasta al pomodoro.",
+      "Voglio un caffè, per favore.",
+      "Il ristorante è molto buono.",
+      "La pizza margherita è la mia preferita.",
+      "A colazione mangio Pane e marmellata."
+    ],
+    "famiglia": [
+      "Ho due fratelli e una sorella.",
+      "I miei genitori abitano a Milano.",
+      "La mia famiglia è grande eunita.",
+      " Mia nonna fa una torta deliziosa.",
+      "La domenica pranziamo tutti insieme."
+    ]
+  },
+  "intermediario": {
+    "lavoro": [
+      "Dovrei delegare questo compito al nuovo collega.",
+      "Abbiamo concordato di posticipare la consegna di una settimana.",
+      "Il cliente ha richiesto una relazione aggiornata.",
+      "Ho terminato la presentazione prima della riunione.",
+      "L'ufficio ha adottato un orario flessibile quest'anno."
+    ],
+    "viaggi": [
+      "Ho prenotato una guida turistica per il centro storico.",
+      "Il treno è arrivato con un ritardo di mezz'ora.",
+      "Ho cambiato valuta alla banca dell'aeroporto.",
+      "Abbiamo camminato per ore nel mercato locale.",
+      "Il volo è stato cancellato a causa del maltempo."
+    ],
+    "cultura": [
+      "Il museo è aperto tutti i giorni tranne il lunedì.",
+      "Abbiamo visitato una mostra d'arte contemporanea.",
+      "La biblioteca ha un'ottima collezione di romanzi.",
+      "Ho partecipato a un concerto all'aperto.",
+      "Il film ha vinto il premio come miglior opera."
+    ]
+  },
+  "avancado": {
+    "attualità": [
+      "La riforma della pubblica amministrazione richiederà anni di attuazione.",
+      "Il fenomeno dell'urbanizzazione sta trasformando le aree rurali.",
+      "Gli economisti prevedono una crescita moderata nel prossimo trimestre.",
+      "Il dibattito pubblico si è acceso sulla questione ambientale.",
+      "Le istituzioni europee stanno valutando nuove misure di sicurezza."
+    ],
+    "tecnologia": [
+      "L'intelligenza artificiale sta rivoluzionando il settore sanitario.",
+      "La cybersicurezza è diventata una priorità per le aziende.",
+      "Il progresso tecnologico ha superato le previsioni degli esperti.",
+      "La trasformazione digitale richiede competenze sempre più specializzate.",
+      "Le piattaforme online hanno modificato le abitudini di consumo."
+    ],
+    "filosofia": [
+      "La condizione umana è intrisa di ambiguità e contraddizioni.",
+      "L'esistenzialismo pone l'individuo al centro della riflessione.",
+      "Il pensiero critico è fondamentale nella società contemporanea.",
+      "La dialettica tra ragione e passione attraversa la storia del pensiero.",
+      "L'etica applicata diventa urgente nell'era della biotecnologia."
+    ]
+  }
+}

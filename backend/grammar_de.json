@@ -1,0 +1,563 @@
+{
+  "levels": [
+    "A1",
+    "A2",
+    "B1",
+    "B2",
+    "C1",
+    "C2"
+  ],
+  "grammar": {
+    "A1": [
+      {
+        "topic": "Verbo ser (sein)",
+        "structure": "Ich bin / Du bist / Er sie es ist / Wir sind / Ihr seid / Sie sind",
+        "explanation": "O verbo 'sein' (ser/estar) é o verbo mais importante do alemão. Não segue padrões regulares. Usado para identidade, profissão, nacionalidade, características e estado. Exige concordância com o sujeito.",
+        "examples": [
+          "Ich bin Student. — Eu sou estudante.",
+          "Er ist Arzt. — Ele é médico.",
+          "Wir sind aus Brasilien. — Nós somos do Brasil.",
+          "Bist du müde? — Você está cansado?"
+        ]
+      },
+      {
+        "topic": "Artigos definidos e indefinidos",
+        "structure": "der (masc.) / die (fem.) / das (neut.) — ein / eine",
+        "explanation": "O alemão tem três gêneros gramaticais: masculino (der), feminino (die) e neutro (das). O gênero deve ser memorizado com o substantivo. Artigo indefinido: ein (masc./neut.), eine (fem.). Sem artigo para profissões (Ich bin Lehrer).",
+        "examples": [
+          "Der Mann ist groß. — O homem é grande.",
+          "Die Frau liest ein Buch. — A mulher lê um livro.",
+          "Das Kind spielt im Garten. — A criança brinca no jardim.",
+          "Ich habe einen Hund. — Eu tenho um cachorro."
+        ]
+      },
+      {
+        "topic": "Declinação do Akkusativ",
+        "structure": "der → den, die → die, das → das, ein → einen/eine/ein",
+        "explanation": "O Akkusativ indica o objeto direto da ação (quem/what receba a ação). Na prática, só muda o artigo masculino: der vira den. Feminino e neutro permanecem iguais.",
+        "examples": [
+          "Ich sehe den Mann. — Eu vejo o homem.",
+          "Er kauft das Brot. — Ele compra o pão.",
+          "Wir trinken eine Cola. — Nós bebemos um refrigerante.",
+          "Hast du einen Bruder? — Você tem um irmão?"
+        ]
+      },
+      {
+        "topic": "Pronomes pessoais e verbos regulares no Presente",
+        "structure": "Ich/du/er-sie-es/wir/ihr/Sie + Verb-Endung (-e/-st/-t/-en/-t/-en)",
+        "explanation": "Os verbos regulares seguem padrões de conjugação no presente. A maioria dos verbos termina em -en no infinitivo. As terminações são: -e (eu), -st (você), -t (ele/ela), -en (nós), -t (vocês), -en (vocês formal).",
+        "examples": [
+          "Ich lerne Deutsch. — Eu aprendo alemão.",
+          "Du sprichst gut. — Você fala bem.",
+          "Er wohnt in Berlin. — Ele mora em Berlim.",
+          "Wir spielen Fußball. — Nós jogamos futebol."
+        ]
+      },
+      {
+        "topic": "Sentença negativa",
+        "structure": "nein / nicht / kein (para substantivos)",
+        "explanation": "'Nein' responde a perguntas. 'Nicht' nega verbos, adjetivos e advérbios. 'Kein' nega substantivos (equivale a 'nenhum'). Coloca-se 'nicht' no final da frase ou antes do que se quer negar.",
+        "examples": [
+          "Ich komme nicht aus Deutschland. — Eu não vim da Alemanha.",
+          "Er trinkt keinen Kaffee. — Ele não bebe café.",
+          "Das ist nicht mein Buch. — Isso não é meu livro.",
+          "Nein, ich bin nicht müde. — Não, eu não estou cansado."
+        ]
+      },
+      {
+        "topic": "Números cardinais e contagem",
+        "structure": "eins, zwei, drei, vier, fünf, sechs, sieben, acht, neun, zehn, ...",
+        "explanation": "Os números 1-10 devem ser memorizados. 11-12 são irregulares (elf, zwölf). A partir de 13, forma-se com o número +zehn. A partir de 20, a unidade vem antes +und+dezena (einundzwanzig = 21).",
+        "examples": [
+          "Ich habe drei Katzen. — Eu tenho três gatos.",
+          "Er ist vierundzwanzig Jahre alt. — Ele tem vinte e quatro anos.",
+          "Es gibt zwölf Monate im Jahr. — Há doze meses no ano.",
+          "Wir brauchen fünf Stühle. — Precisamos de cinco cadeiras."
+        ]
+      },
+      {
+        "topic": "Präpositionen com Akkusativ (durch, für, gegen, ohne, um)",
+        "structure": "durch / für / gegen / ohne / um + Akkusativ",
+        "explanation": "Essas preposições sempre regem o caso Akkusativ, independentemente da situação. 'Durch' = através de, 'für' = para, 'gegen' = contra, 'ohne' = sem, 'um' = em torno de/para (horário).",
+        "examples": [
+          "Wir gehen durch den Park. — Nós vamos pelo parque.",
+          "Das Geschenk ist für dich. — O presente é para você.",
+          "Er läuft gegen die Wand. — Ele corre contra a parede.",
+          "Sie geht ohne Regenschirm. — Ela vai sem guarda-chuva."
+        ]
+      },
+      {
+        "topic": "Ordnungszahlen (Números ordinais)",
+        "structure": "1. erste, 2. zweite, 3. dritte — formados com -te ou -ste",
+        "explanation": "Os ordinais são usados para datas e posições. Terminam em -te (1.-19.) ou -ste (20., 30., etc.). Para datas: 'am dritten März' (no terceiro de março). Para andares: 'im ersten Stock' (no primeiro andar).",
+        "examples": [
+          "Januar ist der erste Monat. — Janeiro é o primeiro mês.",
+          "Ich wohne im dritten Stock. — Eu moro no terceiro andar.",
+          "Heute ist der siebzehnte Mai. — Hoje é 17 de maio.",
+          "Er kam als Zweiter im Wettbewerb. — Ele chegou em segundo lugar na competição."
+        ]
+      },
+      {
+        "topic": "Fragewörter (Palavras de pergunta)",
+        "structure": "Wer / Was / Wo / Woher / Wohin / Wann / Wie / Warum",
+        "explanation": "'Wer' = quem, 'was' = o quê, 'wo' = onde, 'woher' = de onde, 'wohin' = para onde, 'wann' = quando, 'wie' = como, 'warum' = por quê. Nas perguntas com verbo, o verbo vem em segunda posição.",
+        "examples": [
+          "Wer ist das? — Quem é isso?",
+          "Was machstVocê? — O que você faz?",
+          "Wo wohnst du? — Onde você mora?",
+          "Wohin fährst du? — Para onde você vai?"
+        ]
+      }
+    ],
+    "A2": [
+      {
+        "topic": "Perfekt (Passado com haben/sein)",
+        "structure": "haben/sein + Partizip II (ge- + Verbstamm + -t / -en)",
+        "explanation": "O Perfekt é o tempo passado mais usado no alemão falado. A maioria dos verbos usa 'haben'. Verbos de movimento (gehen, fahren, fliegen) e状态 (sein, bleiben, werden) usam 'sein'.",
+        "examples": [
+          "Ich habe ein Buch gelesen. — Eu li um livro.",
+          "Er ist nach Berlin gefahren. — Ele foi para Berlim.",
+          "Wir haben zusammen gearbeitet. — Nós trabalhamos juntos.",
+          "Bist du gestern angekommen? — Você chegou ontem?"
+        ]
+      },
+      {
+        "topic": "Declinação do Dativ",
+        "structure": "der → dem, die → der, das → dem, ein → einem/einer/einem",
+        "explanation": "O Dativ indica o objeto indireto (a quem/para quem). Usado com muitas preposições (mit, aus, bei, nach, zu, von). Muda todos os artigos. Muitos substantivos ganham -n no Dativ (dem Mann, dem Kind).",
+        "examples": [
+          "Ich gebe dem Mann das Buch. — Eu dou o livro ao homem.",
+          "Sie spricht mit der Lehrerin. — Ela fala com a professora.",
+          "Er fährt mit dem Zug. — Ele vai de trem.",
+          "Wir wohnen bei unseren Großeltern. — Moramos com nossos avós."
+        ]
+      },
+      {
+        "topic": "Possessivartikel (Artigos possessivos)",
+        "structure": "mein / dein / sein / ihr / unser / euer / Ihr",
+        "explanation": "Os possessivos declinam como artigos indefinidos (ein). Concordam em gênero e caso com o substantivo possessuído, não com o dono.",
+        "examples": [
+          "Das ist mein Auto. — Isso é meu carro.",
+          "Er liest seine Zeitung. — Ele lê seu jornal.",
+          "Wir lieben unsere Kinder. — Amamos nossos filhos.",
+          "Ist das ihr Hund? — É o cachorro dela?"
+        ]
+      },
+      {
+        "topic": "Verbos separáveis (Trennbare Verben)",
+        "structure": "Partícula + ... + verb (partícula vai ao final na frase)",
+        "explanation": "Verbos compostos com partículas (anfangen, aufstehen, einkaufen) se separam na frase. A partícula vai ao final. No Perfekt: partícula + ge + Stamm.",
+        "examples": [
+          "Ich stehe um sechs Uhr auf. — Eu me levanto às seis.",
+          "Er fängt morgen an. — Ele começa amanhã.",
+          "Wir gehen einkaufen. — Nós vamos às compras.",
+          "Hast du angerufen? — Você ligou?"
+        ]
+      },
+      {
+        "topic": "Präpositionsarten (Tweilho preposições: an, auf, in, über, unter, vor, hinter, neben, zwischen)",
+        "structure": "Preposição + Akkusativ (movimento) / Dativ (localização)",
+        "explanation": "Essas preposições mudam de significado dependendo do caso. Akkusativ = movimento para onde. Dativ = localização onde. Essencial para expressar posição e movimento.",
+        "examples": [
+          "Ich gehe in die Schule. — Vou para a escola. (Akk.)",
+          "Ich bin in der Schule. — Estou na escola. (Dat.)",
+          "Er legt das Buch auf den Tisch. — Coloca o livro na mesa. (Akk.)",
+          "Das Buch liegt auf dem Tisch. — O livro está sobre a mesa. (Dat.)"
+        ]
+      },
+      {
+        "topic": "Komparativ und Superlativ (Comparativo e superlativo)",
+        "structure": "Komparativ: adj + -er / Superlativ: am + adj + -sten",
+        "explanation": "Comparativo: adj + er (größer = maior). Irregulares: groß→größer→größte, gut→besser→besten. Superlativo: am größten (o maior). Sem 'am' quando funciona como adjetivo atributivo (das größte Haus).",
+        "examples": [
+          "Berlin ist größer als München. — Berlim é maior que Munique.",
+          "Er ist der beste Schüler. — Ele é o melhor aluno.",
+          "Das ist am interessantesten. — Isso é o mais interessante.",
+          "Mein Bruder ist schneller als ich. — Meu irmão é mais rápido que eu."
+        ]
+      },
+      {
+        "topic": "Modalverben (Verbos modais: können, müssen, wollen, dürfen, sollen, mögen)",
+        "structure": "Modal + Verb (final, sem -en)",
+        "explanation": "Modais expressam habilidade (können), obrigatoriedade (müssen), desejo (wollen), permissão (dürfen), conselho (sollen) e preferência (mögen/möchten). O verbo principal vai ao final no infinitivo.",
+        "examples": [
+          "Ich kann schwimmen. — Eu sei nadar.",
+          "Er muss arbeiten. — Ele precisa trabalhar.",
+          "Wir wollen ins Kino gehen. — Queremos ir ao cinema.",
+          "Darf ich rauchen? — Posso fumar?"
+        ]
+      },
+      {
+        "topic": "Reflexivverben (Verbos reflexivos)",
+        "structure": "sich + Akkusativ/Dativ (mich, dich, sich, uns, euch, sich)",
+        "explanation": "Verbos reflexivos usam 'sich' (ou pronome pessoal) quando o sujeito faz a ação consigo mesmo. Muitos verbos alemães são reflexivos: sich freuen (se alegrar), sich duschen (se banhar), sich fühlen (se sentir).",
+        "examples": [
+          "Ich dusche mich. — Eu me banho.",
+          "Er freut sich auf den Urlaub. — Ele se alegra com as férias.",
+          "Wir fühlen uns gut. — Nós nos sentimos bem.",
+          "Haben Sie sich verletzt? — O senhor se machucou?"
+        ]
+      }
+    ],
+    "B1": [
+      {
+        "topic": "Konjunktiv II (Condicionais e hipóteses)",
+        "structure": "würde + Verb (final) / hätte/wäre + Partizip II",
+        "explanation": "Expressa situações hipotéticas, desejos e pedidos educados. 'Würde' + infinitivo é a forma mais comum no alemão moderno. Formas irregulares: hätte (tivesse), wäre (fosse), könnte (pudesse), müsse (devesse).",
+        "examples": [
+          "Ich würde gern nach Japan reisen. — Eu gostaria de viajar ao Japão.",
+          "Wenn ich Zeit hätte, würde ich kommen. — Se eu tivesse tempo, eu viria.",
+          "Könnten Sie mir helfen? — O senhor poderia me ajudar?",
+          "Er wäre gern Lehrer. — Ele gostaria de ser professor."
+        ]
+      },
+      {
+        "topic": "Nebensätze (Orações subordinadas: weil, dass, wenn, obwohl, als)",
+        "structure": "Hauptsatz + ..., + Nebensatz (Konjunktion + Subject + ... + Verb (final))",
+        "explanation": "Nas orações subordinadas, o verbo conjugado vai ao final. 'Weil' = porque, 'dass' = que, 'wenn' = se/quando, 'obwohl' = embora, 'als' = quando (passado único).",
+        "examples": [
+          "Ich bleibe zu Hause, weil es regnet. — Fico em casa porque está chovendo.",
+          "Ich weiß, dass du recht hast. — Sei que você tem razão.",
+          "Wenn es regnet, nehme ich einen Schirm. — Se chover, pego um guarda-chuva.",
+          "Obwohl er müde war, hat er weitergearbeitet. — Embora estivesse cansado, continuou trabalhando."
+        ]
+      },
+      {
+        "topic": "Passiv (Voz passiva: werden + Partizip II)",
+        "structure": "Subjekt + wird/wurde + Partizip II (+ von + Dativ)",
+        "explanation": "A voz passiva é muito usada no alemão, especialmente em textos formais. Presente: Das Buch wird gelesen. Passado: Das Buch wurde gelesen. Agente: von dem Lehrer.",
+        "examples": [
+          "Das Auto wird repariert. — O carro está sendo consertado.",
+          "Die Hausaufgaben wurden gemacht. — Os deveres foram feitos.",
+          "Das Gebäude ist von einem Architekten entworfen. — O edifício foi projetado por um arquiteto.",
+          "Hier wird Deutsch gesprochen. — Aqui se fala alemão."
+        ]
+      },
+      {
+        "topic": "Relativsätze (Orações relativas: der, die, das, welcher, welche, welches)",
+        "structure": "Substantiv + der/die/das + ... + Verb (final)",
+        "explanation": "As orações relativas em alemão usam artigos como pronome relativo. O verbo vai ao final. Der/die/das concordam em gênero e caso com o antecedente.",
+        "examples": [
+          "Der Mann, der dort steht, ist mein Vater. — O homem que está ali é meu pai.",
+          "Die Frau, die ich kenne, kommt aus Österreich. — A mulher que eu conheço vem da Áustria.",
+          "Das Buch, das ich lese, ist spannend. — O livro que estou lendo é empolgante.",
+          "Der Schüler, dem ich helfe, ist nett. — O aluno que eu ajudo é legal."
+        ]
+      },
+      {
+        "topic": "Direkte und indirekte Rede (Discurso direto e indireto)",
+        "structure": "Er sagt: '...' → Er sagt, dass ... / Er fragt, ob ...",
+        "explanation": "No discurso direto, usa-se aspas e manutenção de tempos. No indireto: 'dass' + oração subordinada (verbo ao final). Para perguntas: 'ob' (se) ou palavra interrogativa + oração subordinada.",
+        "examples": [
+          "Er sagt: 'Ich komme morgen.' → Er sagt, dass er morgen kommt.",
+          "Sie fragt: 'Kannst du mir helfen?' → Sie fragt, ob ich ihr helfen kann.",
+          "Er sagt: 'Ich habe Hunger.' → Er sagt, dass er Hunger hat.",
+          "Sie fragt: 'Wo ist der Bahnhof?' → Sie fragt, wo der Bahnhof ist."
+        ]
+      },
+      {
+        "topic": "Futur I e II (Futuro simples e composto)",
+        "structure": "Futur I: werden + Infinitiv / Futur II: werden + Partizip II + haben/sein",
+        "explanation": "Futur I: ação futura (Er wird kommen). Futur II: ação futura concluída antes de outra (Er wird angekommen sein). Também usado para suposições no presente (Er wird wohl zu Hause sein).",
+        "examples": [
+          "Ich werde nächstes Jahr nach Deutschland fahren. — Viajarei à Alemanha no ano que vem.",
+          "Er wird seine Prüfung bestanden haben. — Ele terá passado no exame.",
+          "Sie wird wohl krank sein. — Ela deve estar doente.",
+          "Wir werden uns morgen treffen. — Nos encontraremos amanhã."
+        ]
+      },
+      {
+        "topic": "Verben mit Präpositionen (Verbos com preposições)",
+        "structure": "Verb + Akkusativ/Dativ (depende do verbo)",
+        "explanation": "Muitos verbos alemães exigem uma preposição específica. Alguns mudam de significado com a preposição. Warten auf (+Akk.), sich freuen auf (+Akk.), sich freuen über (+Akk.), denken an (+Akk.).",
+        "examples": [
+          "Ich warte auf den Bus. — Espero o ônibus.",
+          "Er denkt an seine Freundin. — Ele pensa na namorada.",
+          "Wir freuen uns auf den Urlaub. — Estamos animados com as férias.",
+          "Sie interessiert sich für Musik. — Ela se interessa por música."
+        ]
+      },
+      {
+        "topic": "Partizipialattribute (Atributos participais)",
+        "structure": "Partizip I / Partizip II + Substantiv",
+        "explanation": "O Partizip I (lemmend = lendo) descreve ação ativa. O Partizip II (gelesen = lido) descreve ação passiva. Usados como adjetivos antes do substantivo. Muito comum em alemão.",
+        "examples": [
+          "Das lachende Kind ist glücklich. — A criança risonha é feliz.",
+          "Der gelesene Artikel war interessante. — O artigo lido era interessante.",
+          "Die singende Vögel sind schön. — Os pássaros cantando são bonitos.",
+          "Das gebrochene Fenster muss repariert werden. — A janela quebrada precisa ser consertada."
+        ]
+      }
+    ],
+    "B2": [
+      {
+        "topic": "Konjunktiv I (Reportagem indireta)",
+        "structure": "er/sie/es habe/sei/könne/werde + ... (verb ao final)",
+        "explanation": "O Konjunktiv I é usado para reportar palavras de terceiros (jornalismo, discurso indireto). É mais formal que o Konjunktiv II. Forma: Stem + -e, -est, -e, -en, -et, -en.",
+        "examples": [
+          "Er sagt, er habe keine Zeit. — Ele diz que não tem tempo.",
+          "Sie berichtet, das Wetter sei schön. — Ela relata que o tempo está bom.",
+          "Man sagt, die Stadt sei alt. — Dizem que a cidade é antiga.",
+          "Er meint, er könne das nicht machen. — Ele diz que não pode fazer isso."
+        ]
+      },
+      {
+        "topic": "Konjunktiv II indirekt (Indirekter Konjunktiv II)",
+        "structure": "würde + Infinitiv (para hipóteses) / hätte/wäre + Partizip II (irregulares)",
+        "explanation": "O Konjunktiv II indireto é usado para relatos indiretos quando o verbo não tem forma distinta de Konjunktiv I. Também para pedidos educados e situações hipotéticas.",
+        "examples": [
+          "Er sagte, er würde morgen kommen. — Ele disse que viria amanhã.",
+          "Sie fragte, ob ich Zeit hätte. — Ela perguntou se eu teria tempo.",
+          "Er behauptete, dass er uns kennen würde. — Ele alegou que nos conheceria.",
+          "Ich würde gern eine Frage stellen. — Gostaria de fazer uma pergunta."
+        ]
+      },
+      {
+        "topic": "E-Teilchen (Partícula E no final da frase)",
+        "structure": "Verb + ... + Partikel (doch, mal, ja, denn, eben)",
+        "explanation": "As partículas E (doch, mal, ja, denn, eben) adicionam nuances emocionais. Não têm tradução direta. Tornam a frase mais educada, enfática ou casual.",
+        "examples": [
+          "Komm mal her! — Venha cá! (casual)",
+          "Das ist doch nicht wahr! — Isso não é verdade! (ênfase)",
+          "Wo ist denn der Schlüssel? — Onde está a chave? (curiosidade)",
+          "Er ist ja immer pünktlich. — Ele é sempre pontual. (confirmação)"
+        ]
+      },
+      {
+        "topic": "Nominalisierung (Nominalização de verbos)",
+        "structure": "Verb → Substantiv (-ung, -keit, -heit, -schaft, -tion, -nis)",
+        "explanation": "A nominalização transforma verbos em substantivos, muito comum em textos formais. 'Arbeiten' → 'die Arbeit' (trabalho), 'entscheiden' → 'die Entscheidung' (decisão). Permite construções compactas.",
+        "examples": [
+          "Die Entscheidung war richtig. — A decisão estava correta.",
+          "Die Verbesserung der Situation dauerte lange. — A melhoria da situação demorou muito.",
+          "Nach seiner Ankunft ging er ins Hotel. — Após sua chegada, foi ao hotel.",
+          "Die Entwicklung des Projekts ist wichtig. — O desenvolvimento do projeto é importante."
+        ]
+      },
+      {
+        "topic": "Adverbialbestimmungen (Advérbios de tempo, lugar, modo e causa)",
+        "structure": "Adjektiv + -erweise / Adv-Form",
+        "explanation": "Advérbios modificam verbos, adjetivos ou frases inteiras. Formação: adjetivo + -erweise (glücklicherweise = felizmente). Posição: geralmente na primeira ou segunda posição da frase.",
+        "examples": [
+          "Er kommt leider nicht. — Infelizmente ele não vem.",
+          "Glücklicherweise hat es nicht geregnet. — Felizmente não choveu.",
+          "Er spricht fließend Deutsch. — Ele fala alemão fluentemente.",
+          "Sie arbeitet oft von zu Hause. — Ela frequentemente trabalha de casa."
+        ]
+      },
+      {
+        "topic": "Inversion nach Adverbialen (Inversão após advérbios)",
+        "structure": "Adverb + Verb + Subject (inversão sujeito-verbo)",
+        "explanation": "Quando a frase começa com um advérbio ou outro elemento, o verbo vem antes do sujeito (inversão). Essencial para manter a regra do verbo em segunda posição.",
+        "examples": [
+          "Heute gehe ich ins Kino. — Hoje vou ao cinema.",
+          "Gestern hat es geregnet. — Ontem choveu.",
+          "Dort steht mein Auto. — Lá está meu carro.",
+          "Trotzdem kommen wir nicht. — Apesar disso, não vamos."
+        ]
+      },
+      {
+        "topic": "Subjunktionen (Conjunções subordinantes avanzadas: als ob, anstatt dass, ohne dass, damit, sodass)",
+        "structure": "Konjunktion + ... + Verb (final)",
+        "explanation": "Conjunções mais complexas. 'Als ob' = como se, 'anstatt dass' = em vez de, 'ohne dass' = sem que, 'damit' = para que, 'sodass' = de modo que. Todas levam verbo ao final.",
+        "examples": [
+          "Er tut, als ob er alles wüsste. — Ele age como soubesse tudo.",
+          "Er arbeitet, anstatt dass er spielt. — Ele trabalha em vez de brincar.",
+          "Wir gehen, ohne dass wir zahlen. — Saímos sem pagar.",
+          "Er lernt viel, damit er die Prüfung besteht. — Estuda muito para passar no exame."
+        ]
+      },
+      {
+        "topic": "Werturteile und Meinungen (Expressão de opiniões e julgamentos)",
+        "structure": "Ich finde, dass ... / Meiner Meinung nach ... / Es scheint, als ob ...",
+        "explanation": "Formas de expressar opinião: 'Ich finde' (acho), 'Meiner Meinung nach' (na minha opinião), 'Es scheint' (parece), 'Ich glaube' (acredo), 'Ich bin der Meinung' (sou da opinião).",
+        "examples": [
+          "Ich finde, das war gut gemacht. — Acho que isso foi bem feito.",
+          "Meiner Meinung nach sollten wir warten. — Na minha opinião, deveríamos esperar.",
+          "Es scheint, als ob das Problem gelöst ist. — Parece que o problema foi resolvido.",
+          "Ich bin der Meinung, dass das richtig ist. — Sou da opinião de que isso está correto."
+        ]
+      }
+    ],
+    "C1": [
+      {
+        "topic": "Konjunktiv III (Hipótese irrealis passado)",
+        "structure": "hätte/wäre + ... + Partizip II / Infinitiv",
+        "explanation": "O Konjunktiv III expressa hipóteses sobre o passado (coisas que não aconteceram). É equivalente ao 'teria feito' do português. Muito usado com 'wenn' (se).",
+        "examples": [
+          "Wenn ich gelernt hätte, hätte ich die Prüfung bestanden. — Se eu tivesse estudado, teria passado no exame.",
+          "Er wäre gern Arzt geworden. — Ele teria gostado de ser médico.",
+          "Hätte ich das gewusst, hätte ich anders gehandelt. — Se eu soubesse, teria agido diferente.",
+          "Wir wären gekommen, wenn ihr uns eingeladen hättet. — Teríamos vindo se vocês nos tivessem convidado."
+        ]
+      },
+      {
+        "topic": "Erweitertes Partizip (Particípio expandido)",
+        "structure": "Partizip I/II + ... + Substantiv (complexo)",
+        "explanation": "O particípio expandido é uma construção compacta que substitui orações subordinadas. Muito comum em alemão escrito e formal. Pode incluir objetos e advérbios.",
+        "examples": [
+          "Das von ihm geschriebene Buch war ein Bestseller. — O livro escrito por ele foi um sucesso.",
+          "Der am Montag stattfindende Meeting ist abgesagt. — A reunião de segunda foi cancelada.",
+          "Die ihre Hausaufgaben machenden Kinder sind fleißig. — As crianças fazendo seus deveres são trabalhadoras.",
+          "Von vielen gelesene Artikel sind meistens interessant. — Artigos lidos por muitos geralmente são interessantes."
+        ]
+      },
+      {
+        "topic": "Passiv-Ersatzformen (Substitutos da voz passiva)",
+        "structure": "man + Verb / sich lassen + Infinitiv / sein + zu + Infinitiv",
+        "explanation": "Alternativas à voz passiva: 'man' (sujeito indeterminado), 'sich lassen' (pode ser feito), 'sein + zu + Infinitiv' (deve ser feito). Essenciais para estilo formal.",
+        "examples": [
+          "Man spricht hier Deutsch. — Aqui se fala alemão.",
+          "Das lässt sich easily lösen. — Isso pode ser facilmente resolvido.",
+          "Das muss sofort gemacht werden. — Isso deve ser feito imediatamente.",
+          "Hier darf nicht geraucht werden. — Aqui não se pode fumar."
+        ]
+      },
+      {
+        "topic": "Nominalstil (Estilo nominal)",
+        "structure": "Substantivierung von Verben und Adjektiven",
+        "explanation": "O estilo nominal transforma verbos e adjetivos em substantivos, criando frases compactas e formais. Essencial para textos acadêmicos e documentos oficiais.",
+        "examples": [
+          "Die Verantwortung für das Projekt liegt bei ihm. — A responsabilidade pelo projeto é dele.",
+          "Die Durchführung des Plans erfordert Geduld. — A execução do plano exige paciência.",
+          "Seine Ankunft wurde erwartado. — Sua chegada foi aguardada.",
+          "Die Zusammenarbeit beider Firmen ist erfolgreich. — A cooperação de ambas as empresas é bem-sucedida."
+        ]
+      },
+      {
+        "topic": "Präpositionen mit Genitiv (Preposições com genitivo)",
+        "structure": "wegen / trotz / wegen / während / statt + Genitiv",
+        "explanation": "Essas preposições regem o genitivo (possessivo). Em alemão falado, muitas vezes substituem por 'von' + Dativ. Formal: wegen des Regens (por causa da chuva).",
+        "examples": [
+          "Wegen des Wetters bleiben wir zu Hause. — Por causa do tempo, ficamos em casa.",
+          "Trotz seines Alters ist er fit. — Apesar da idade, ele está em forma.",
+          "Während des Sommers fahren wir ans Meer. — Durante o verão, vamos ao mar.",
+          "Statt des Kaffees trinke ich Tee. — Em vez de café, bebo chá."
+        ]
+      },
+      {
+        "topic": "Eingebettete Nebensätze (Orações subordinadas incorporadas)",
+        "structure": "Hauptsatz + ..., + Nebensatz (Konjunktion + ... + Verb (final))",
+        "explanation": "Orções subordinadas podem ser incorporadas umas às outras, criando frases complexas. Essencial para expressar relações de causa, consequência, condição e tempo em textos formais.",
+        "examples": [
+          "Er sagt, dass er kommt, obwohl er müde ist. — Ele diz que vem, embora esteja cansado.",
+          "Ich weiß, dass das stimmt, was du gesagt hast. — Sei que isso é verdade, o que você disse.",
+          "Wir wissen, dass die Chancen gut sind, obwohl die Konkurrenz stark ist. — Sabemos que as chances são boas, apesar da concorrência forte.",
+          "Er glaubt, dass die Stadt, die er kennt, sich verändert hat. — Ele acredita que a cidade que conhece mudou."
+        ]
+      },
+      {
+        "topic": "Modale Nuancen (Expressão de possibilidade, obrigação, probabilidade)",
+        "structure": "müssen / sollen / dürfen / können / mögen + Infinitiv",
+        "explanation": "Os modais expressam diferentes nuances: obrigatoriedade (müssen), recomendação (sollen), permissão/proibição (dürfen), possibilidade/能力 (können), preferência (mögen/möchten).",
+        "examples": [
+          "Du sollst mehr schlafen. — Você deveria dormir mais.",
+          "Er darf hier nicht parken. — Ele não pode estacionar aqui.",
+          "Das könnte stimmen. — Isso pode ser verdade.",
+          "Wir möchten uns beschweren. — Queremos fazer uma reclamação."
+        ]
+      },
+      {
+        "topic": "Textkohärenz (Coerência textual)",
+        "structure": "Connectoren (deshalb, trotzdem, außerdem, jedoch, folglich)",
+        "explanation": "Conectores garantem a fluidez e coerência do texto. 'Deshalb' = por isso, 'trotzdem' = apesar disso, 'außerdem' = além disso, 'jedoch' = porém, 'folglich' = consequentemente.",
+        "examples": [
+          "Es regnet, deshalb bleibe ich zu Hause. — Está chovendo, por isso fico em casa.",
+          "Er war krank, trotzdem ging er zur Arbeit. — Estava doente, apesar disso foi trabalhar.",
+          "Das Projekt ist fertig, außerdem müssen wir noch prüfen. — O projeto está pronto, além disso precisamos verificar.",
+          "Er arbeitet hart, jedoch erreicht er seine Ziele. — Ele trabalha duro, porém alcança seus objetivos."
+        ]
+      }
+    ],
+    "C2": [
+      {
+        "topic": "E-Teilchen im Detail (Partículas E avançadas)",
+        "structure": "doch, mal, ja, denn, eben, halt, nur, schon, etwa, wohl",
+        "explanation": "As partículas E adicionam nuances expressivas sutis. 'Doch' = contradição/confirmação, 'mal' = casualidade, 'ja' = evidência, 'denn' = pergunta curiosa, 'eben' = exatamente. Domínio essencial para fluência natural.",
+        "examples": [
+          "Das ist doch nicht wahr! — Isso não é verdade! (ênfase)",
+          "Komm mal her! — Venha cá! (casual)",
+          "Er ist ja immer pünktlich. — Ele é sempre pontual. (confirmação)",
+          "Wo ist denn der Schlüssel? — Onde está a chave? (curiosidade)"
+        ]
+      },
+      {
+        "topic": "Verbalstil vs. Nominalstil (Estilo verbal vs. nominal)",
+        "structure": "Verbale Konstruktion vs. Nominalphrase",
+        "explanation": "O estilo verbal usa mais verbos (dinâmico). O estilo nominal usa mais substantivos (formal, compacto). A alternância é essencial para variar o registro e o estilo em textos.",
+        "examples": [
+          "Wir müssen das Projekt durchführen. → Die Durchführung des Projekts ist notwendig.",
+          "Er hat das Problem gelöst. → Die Lösung des Problems war erfolgreich.",
+          "Wir haben die Ergebnisse analysiert. → Die Analyse der Ergebnisse ergab neue Erkenntnisse.",
+          "Er entscheidet schnell. → Seine Entscheidungen sind zügig."
+        ]
+      },
+      {
+        "topic": "Inversion nach Konjunktionen (Inversão após conjunções)",
+        "structure": "Nicht nur ..., sondern auch / Weder ... noch / Sowohl ... als auch",
+        "explanation": "Estruturas correlatas exigem inversão ou ordem específica. 'Nicht nur ..., sondern auch' (não só...mas também), 'weder ... noch' (nem...nem), 'sowohl ... als auch' (tanto...quanto).",
+        "examples": [
+          "Nicht nur er, sondern auch sie kommt. — Não só ele, mas também ela vem.",
+          "Weder Er noch sie war dort. — Nem ele nem ela estava lá.",
+          "Sowohl der Chef als auch die Mitarbeiter sind zufrieden. — Tanto o chefe quanto os funcionários estão satisfeitos.",
+          "Nicht nur das Wetter, sondern auch die Stimmung war gut. — Não só o tempo, mas também o clima estava bom."
+        ]
+      },
+      {
+        "topic": "Genitivattribut (Atributo genitivo avançado)",
+        "structure": "Substantiv Genitiv + Substantiv (possessivo)",
+        "explanation": "O genitivo avançado é usado para expressar posse e relação. Em textos formais, é mais comum que 'von'. 'Der Wagen des Lehrers' = 'O carro do professor'. Substantivos regulares ganham -s ou -es.",
+        "examples": [
+          "Die Farbe des Himmels ist blau. — A cor do céu é azul.",
+          "Die Geschichte der Stadt ist interessant. — A história da cidade é interessante.",
+          "Die Bedeutung der Sprache ist groß. — A importância da língua é grande.",
+          "Die Zukunft des Projekts steht auf der Kippe. — O futuro do projeto está em risco."
+        ]
+      },
+      {
+        "topic": "Stilistische Mittel (Recursos estilísticos)",
+        "structure": "Metapher, Vergleich, rhetorische Fragen, Epanalepsis",
+        "explanation": "Recursos estilísticos enriquecem o texto: metáfora (die Zeit heilt alle Wunden), comparação (so grün wie Gras), pergunta retórica (Wer weiß das nicht?), epanalepsis (repetição).",
+        "examples": [
+          "Die Zeit heilt alle Wunden. — O tempo cura todas as feridas.",
+          "Er ist so grün wie Gras. — Ele é tão verde quanto a grama.",
+          "Wer weiß das nicht? — Quem não sabe disso?",
+          "Er arbeitet und arbeitet und wird nicht fertig. — Ele trabalha e trabalha e não termina."
+        ]
+      },
+      {
+        "topic": "Komplexe Satzstrukturen (Estruturas de frases complexas)",
+        "structure": "Mehrere Nebensätze, Schachtelsätze, Partizipialkonstruktionen",
+        "explanation": "Frases complexas com múltiplas orações subordinadas, orações incorporadas e construções participais são típicas de alemão avançado. Essencial para textos acadêmicos e literários.",
+        "examples": [
+          "Er sagte, dass er, obwohl er müde sei, weiterarbeiten werde, weil das Projekt wichtig sei.",
+          "Das von ihm verfasste, im letzten Monat veröffentlichte Buch wurde ein Bestseller.",
+          "Die Entscheidung, obwohl sie von vielen kritisiert wurde, war am Ende richtig.",
+          "Er glaubt, dass die Stadt, die er kennt und liebt, sich grundlegend verändert hat."
+        ]
+      },
+      {
+        "topic": "Registerunterschiede (Variações de registro)",
+        "structure": "Umgangssprache / Standardsprache / Schriftsprache",
+        "explanation": "O alemão tem registros distintos: coloquial (Umgangssprache), padrão (Standardsprache) e formal/escrito (Schriftsprache). Escolher o registro certo é essencial para a fluência.",
+        "examples": [
+          "Umgangssprache: Mir geht's gut. / Standardsprache: Es geht mir gut. / Schriftsprache: Ich befinde mich in guter Verfassung.",
+          "Umgangssprache: Ich bin müde. / Standardsprache: Ich fühle mich müde. / Schriftsprache: Ich bin einer tiefen Ermüdung ausgesetzt.",
+          "Umgangssprache: Das ist cool! / Standardsprache: Das ist toll! / Schriftsprache: Das ist bemerkenswert!",
+          "Umgangssprache: Was machst du? / Standardsprache: Was machen Sie? / Schriftsprache: Womit befassen Sie sich?"
+        ]
+      },
+      {
+        "topic": "Idiomatische Ausdrücke (Expressões idiomáticas)",
+        "structure": "Feste Wendungen mit übertragenem Sinn",
+        "explanation": "Expressões idiomáticas são combinações fixas com sentido figurado. Não são traduzíveis literalmente. Essenciais para so naturalidade e compreensão cultural.",
+        "examples": [
+          "Ich verstehe nur Bahnhof. — Eu não entendo nada.",
+          "Da steppt der Bär. — Está animado lá.",
+          "Tomaten auf den Augen haben. — Estar cego para algo.",
+          "Die Daumen drücken. — Torcer por alguém."
+        ]
+      }
+    ]
+  }
+}

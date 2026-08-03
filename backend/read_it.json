@@ -1,0 +1,272 @@
+{
+  "iniciante": {
+    "quotidianità": [
+      {
+        "text": "Mi chiamo Luca. Ho ventotto anni e vivo a Roma. Lavoro come ingegnere in un'azienda grande. Ogni mattina mi alzo alle sei e mezza. Dopo la colazione prendo la metro per andare al lavoro.",
+        "glossary": {
+          "ventotto": "28",
+          "vivo": "moro",
+          "ingegnere": "engenheiro",
+          "azienda": "empresa",
+          "metro": "metrô"
+        }
+      },
+      {
+        "text": "La mia giornata inizia con una tazza di caffè nero. Poi leggo il giornale per dieci minuti. A pranzo mangio una insalata con il pane. La sera mi rilasso guardando un film.",
+        "glossary": {
+          "tazza": "xicara",
+          "giornale": "jornal",
+          "insalata": "salada",
+          "rilasso": "relaxo"
+        }
+      },
+      {
+        "text": "Il sabato vado al mercato con mia madre. Compriamo frutta fresca e verdure. Poi torniamo a casa e cuciniamo insieme. È il mio momento preferito della settimana.",
+        "glossary": {
+          "mercato": "mercado",
+          "frutta": "frutas",
+          "verdure": "legumes",
+          "cuciniamo": "cozinhamos",
+          "preferito": "favorito"
+        }
+      }
+    ],
+    "lavoro": [
+      {
+        "text": "Marco è dottore. Lavora in un ospedale grande. Ogni giorno aiuta le persone ammalate. Il suo turno comizia alle otto del mattino. Dopo il lavoro torna a casa e cena con la famiglia.",
+        "glossary": {
+          "dottore": "doutor",
+          "ospedale": "hospital",
+          "ammalate": "doentes",
+          "turno": "turno",
+          "cena": "janta"
+        }
+      },
+      {
+        "text": "La nostra azienda ha cinquanta dipendenti. L'ufficio è aperto dalle nove alle sei. I colleghi sono simpatici e lavorano bene insieme. Una volta al mese abbiamo una riunione importante.",
+        "glossary": {
+          "dipendenti": "funcionários",
+          "colleghi": "colegas",
+          "simpatici": "simpáticos",
+          "riunione": "reunião"
+        }
+      },
+      {
+        "text": "Sono impiegato in banca. Mi occupo dei conti dei clienti. Rispondo al telefono e risolvo i problemi. Il lavoro è interessante ma a volte stressante.",
+        "glossary": {
+          "impiegato": "empregado",
+          "banca": "banco",
+          "conti": "contas",
+          "stressante": "estressante"
+        }
+      }
+    ],
+    "viaggi": [
+      {
+        "text": "L'anno scorso ho viaggiato in Toscana. Ho visitato Firenze e Siena. Le città erano bellissime e il cibo era delizioso. Ho fatto molte foto dei paesaggi.",
+        "glossary": {
+          "Toscana": "Toscana",
+          "Firenze": "Florença",
+          "bellissime": "muito bonitas",
+          "paesaggi": "paisagens"
+        }
+      },
+      {
+        "text": "Ho prenotato un albergo vicino al mare. La camera è pulita e spaziosa. La colazione è inclusa e ci sono molte scelte. Il personale è gentile e disponibile.",
+        "glossary": {
+          "albergo": "hotel",
+          "camera": "quarto",
+          "colazione": "café da manhã",
+          "personale": "pessoal"
+        }
+      },
+      {
+        "text": "Al aeroporto ho comprato un libro in italiano. Il volo è durato due ore. Dall'aeroporto ho preso un taxi per l'hotel. La città era animata e piena di turisti.",
+        "glossary": {
+          "aeroporto": "aeroporto",
+          "volo": "voo",
+          "taxi": "táxi",
+          "turisti": "turistas"
+        }
+      }
+    ]
+  },
+  "intermediario": {
+    "lavoro": [
+      {
+        "text": "Il team ha condotto un'analisi retrospettiva per identificare le criticità del progetto. Hanno riscontrato alcune lacune nella comunicazione interna e hanno proposto soluzioni concrete per migliorare i processi.",
+        "glossary": {
+          "retrospettiva": "retrospectiva",
+          "criticità": "pontos críticos",
+          "lacune": "lacunas",
+          "concrete": "concretas"
+        }
+      },
+      {
+        "text": "La direttrice ha presentato i risultati trimestrali al consiglio di amministrazione. Sebbene fosse emozionata, ha risposto a ogni domanda con chiarezza e sicurezza. I numeri hanno superato le aspettative.",
+        "glossary": {
+          "direttrice": "diretora",
+          "trimestrali": "trimestrais",
+          "consiglio": "conselho",
+          "chiarezza": "clareza"
+        }
+      },
+      {
+        "text": "Il nostro dipartimento ha introdotto l'orario flessibile. Gli impiegati possono scegliere gli orari pur partecipando alla riunione mattutina. La produttività è aumentata notevolmente dal cambiamento.",
+        "glossary": {
+          "dipartimento": "departamento",
+          "impiegati": "funcionários",
+          "partecipando": "participando",
+          "produttività": "produtividade"
+        }
+      }
+    ],
+    "cultura": [
+      {
+        "text": "Il museo ha organizzato una mostra temporanea sull'arte rinascimentale. Le opere provengono da collezioni private di tutta Europa. I curatori hanno scelto ogni pezzo con grande attenzione per raccontare un'epoca.",
+        "glossary": {
+          "temporanea": "temporária",
+          "rinascimentale": "renascentista",
+          "collezioni": "coleções",
+          "curatori": "curadores"
+        }
+      },
+      {
+        "text": "Ho partecipato a un festival di cinema indipendente. I registi italiani hanno presentato opere innovativi e coraggiosi. Il pubblico ha applaudito ogni film con entusiasmo. La critica ha lodato la qualità della selezione.",
+        "glossary": {
+          "indipendente": "independente",
+          "registi": "diretores",
+          "innovativi": "inovadores",
+          "entusiasmo": "entusiasmo"
+        }
+      },
+      {
+        "text": "La biblioteca comunale ha lanciato un programma di lettura per bambini. Ogni sabato pomeriggio si leggono fiabe in lingua originale. I genitori sono entusiasti dell'iniziativa che promuove la creatività.",
+        "glossary": {
+          "comunale": "municipal",
+          "fiabe": "contos de fadas",
+          "genitori": "pais",
+          "creatività": "criatividade"
+        }
+      }
+    ],
+    "viaggi": [
+      {
+        "text": "Dopo aver perso il treno, abbiamo prenotato un autobus di ultim'ora. Il ritardo era noioso, tuttavia il paesaggio lungo la strada era spettacolare. Abbiamo attraversato valli verdeggianti e piccoli borghi medievali.",
+        "glossary": {
+          "ultim'ora": "última hora",
+          "ritardo": "atraso",
+          "paesaggio": "paisagem",
+          "borghi": "vilas"
+        }
+      },
+      {
+        "text": "Ci siamo affidati a un'app di traduzione durante il viaggio. Ci ha aiutato a leggere i menù e chiedere indicazioni in una lingua straniera. La tecnologia ha reso il viaggio molto più semplice.",
+        "glossary": {
+          "affidati": "dependemos",
+          "menù": "cardápios",
+          "indicazioni": "direções",
+          "straniera": "estrangeira"
+        }
+      },
+      {
+        "text": "L'ostello era semplice ma pulito. Abbiamo incontrato viaggiatori di cinque paesi diversi. Abbiamo condiviso consigli sui posti da visitare. L'atmosfera era accogliente e internazionale.",
+        "glossary": {
+          "ostello": "albergue",
+          "viaggiatori": "viajantes",
+          "consigli": "dicas",
+          "accogliente": "acolhedor"
+        }
+      }
+    ]
+  },
+  "avancado": {
+    "attualità": [
+      {
+        "text": "Il paradigma attuale della governance istituzionale sta venendo progressivamente smantellato a favore di modelli partecipativi. Le comunità locali reclamano maggiore autonomia decisionale nelle politiche che le riguardano direttamente.",
+        "glossary": {
+          "governance": "governança",
+          "smantellado": "desmantelado",
+          "partecipativi": "participativos",
+          "autonomia": "autonomia"
+        }
+      },
+      {
+        "text": "La demarcazione lucida dei rischi latenti ha galvanizzato gli stakeholder per prevenire una possibile escalation. Le premesse apparentemente innocue della proposta nascondono criticità strutturali che richiedono un'analisi approfondita.",
+        "glossary": {
+          "demarcação": "delineamento",
+          "galvanizzato": "galvanizou",
+          "escalation": "escalada",
+          "approfondita": "aprofundada"
+        }
+      },
+      {
+        "text": "Dobbiamo conciliare gli incentivi divergenti per evitare l'attrito operativo. La frammentazione della proprietà decisionale ha generato un collo di bottiglia che rallenta l'intero processo produttivo dell'organizzazione.",
+        "glossary": {
+          "conciliare": "reconciliar",
+          "divergenti": "divergentes",
+          "attrito": "fricção",
+          "collo di bottiglia": "gargalo"
+        }
+      }
+    ],
+    "tecnologia": [
+      {
+        "text": "L'intelligenza artificiale generativa ha rivoluzionato il panorama tecnologico in modo senza precedenti. Le aziende che non adottano queste innovazioni rischiano di diventare obsolete nel giro di pochi anni.",
+        "glossary": {
+          "generativa": "generativa",
+          "panorama": "panorama",
+          "innovazioni": "inovações",
+          "obsolete": "obsoletas"
+        }
+      },
+      {
+        "text": "La sicurezza informatica è diventata una priorità strategica per le organizzazioni globali. Le minacce cibernetiche si moltiplicano e richiedono competenze sempre più specializzate e aggiornate.",
+        "glossary": {
+          "informatica": "informática",
+          "strategica": "estratégica",
+          "minacce": "ameaças",
+          "cibernetiche": "cibernéticas"
+        }
+      },
+      {
+        "text": "La trasformazione digitale ha modificato radicalmente le abitudini di consumo. Le piattaforme online hanno ridisegnato il mercato tradizionale con modelli di business completamente innovativi.",
+        "glossary": {
+          "digital": "digital",
+          "radicalmente": "radicalmente",
+          "ridisegnato": "redesenhado",
+          "innovativi": "inovadores"
+        }
+      }
+    ],
+    "filosofia": [
+      {
+        "text": "La condizione umana è intrisa di ambiguità e contraddizioni che il razionalismo illuminista ha cercato di risolvere. L'esistenzialismo pone l'individuo al centro della riflessione filosofica contemporanea.",
+        "glossary": {
+          "intrisa": "impregnada",
+          "ambiguità": "ambiguidade",
+          "razionalismo": "racionalismo",
+          "esistenzialismo": "existencialismo"
+        }
+      },
+      {
+        "text": "Il pensiero critico è fondamentale nella società contemporanea per distinguere la verità dalla menzogna. La dialettica tra ragione e passione attraversa tutta la storia del pensiero occidentale.",
+        "glossary": {
+          "critico": "crítico",
+          "menzogna": "mentira",
+          "dialettica": "dialética",
+          "passione": "paixão"
+        }
+      },
+      {
+        "text": "L'etica applicata diventa urgente nell'era della biotecnologia e dell'intelligenza artificiale. Le questioni morali che emergono da queste tecnologie richiedono un dibattito pubblico trasparente e multidisciplinare.",
+        "glossary": {
+          "applicata": "aplicada",
+          "biotecnologia": "biotecnologia",
+          "morali": "morais",
+          "trasparente": "transparente"
+        }
+      }
+    ]
+  }
+}

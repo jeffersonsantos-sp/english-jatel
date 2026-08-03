@@ -1,0 +1,265 @@
+{
+  "iniciante": {
+    "alltag": [
+      {
+        "text": "Anna steht um sieben Uhr auf. Sie duscht und frühstückt. Dann fährt sie mit dem Bus zur Arbeit. Am Abend kocht sie das Abendessen für ihre Familie.",
+        "glossary": {
+          "steht auf": "levanta",
+          "duscht": "toma banho",
+          "frühstückt": "café da manhã",
+          "fährt": "vai/pegar",
+          "Abendessen": "jantar"
+        }
+      },
+      {
+        "text": "Meine Schwester lernt Deutsch in einem Sprachkurs. Sie übt jeden Tag Vokabeln. Sie möchte nächstes Jahr nach Berlin reisen.",
+        "glossary": {
+          "Schwester": "irmã",
+          "Sprachkurs": "curso de idiomas",
+          "übt": "pratica",
+          "Vokabeln": "vocabulário",
+          "reisen": "viajar"
+        }
+      },
+      {
+        "text": "Wir essen Pizza zum Mittagessen. Mein Bruder trinkt eine Cola. Nach dem Essen gehen wir spazieren.",
+        "glossary": {
+          "Mittagessen": "almoço",
+          "trinkt": "bebe",
+          "Cola": "refrigerante",
+          "spazieren": "passear"
+        }
+      }
+    ],
+    "gruesse": [
+      {
+        "text": "Hallo, wie geht es Ihnen? Mir geht es gut, danke! Und Ihnen? Auch gut, danke der Nachfrage!",
+        "glossary": {
+          "wie geht es": "como vai",
+          "gut": "bom/bem",
+          "danke": "obrigado",
+          "Nachfrage": "pergunta"
+        }
+      },
+      {
+        "text": "Guten Morgen, Herr Müller! Schön, Sie wiederzusehen! Guten Morgen, Frau Schmidt! Wie war Ihr Wochenende?",
+        "glossary": {
+          "wiederzusehen": "ver de novo",
+          "Wochenende": "fim de semana"
+        }
+      },
+      {
+        "text": "Auf Wiedersehen! Bis bald! Tschüss! Ich rufe Sie morgen an.",
+        "glossary": {
+          "Auf Wiedersehen": "até logo",
+          "Bis bald": "até breve",
+          "Tschüss": "tchau",
+          "anrufen": "ligar"
+        }
+      }
+    ],
+    "reisen": [
+      {
+        "text": "Wir fahren mit dem Zug nach München. Die Reise dauert drei Stunden. Im Zug gibt es ein Restaurant.",
+        "glossary": {
+          "Zug": "trem",
+          "Reise": "viagem",
+          "dauert": "dura",
+          "Restaurant": "restaurante"
+        }
+      },
+      {
+        "text": "Das Hotel ist sehr schön. Das Frühstück ist inklusive. Das Zimmer hat einen Balkon mit Aussicht.",
+        "glossary": {
+          "Frühstück": "café da manhã",
+          "inklususive": "incluso",
+          "Balkon": "varanda",
+          "Aussicht": "vista"
+        }
+      },
+      {
+        "text": "Ich möchte eine Fahrkarte nach Berlin kaufen. Einfach oder hin und zurück? Hin und zurück, bitte!",
+        "glossary": {
+          "Fahrkarte": "passagem",
+          "einfach": "somente ida",
+          "hin und terug": "ida e volta",
+          "kaufen": "comprar"
+        }
+      }
+    ]
+  },
+  "intermediario": {
+    "alltag": [
+      {
+        "text": "Obwohl der Morgen stressig war, hat sie es geschafft, rechtzeitig zur Arbeit zu kommen. Sie trinkt ihren Kaffee während des Meetings.",
+        "glossary": {
+          "stressig": "estressante",
+          "geschafft": "conseguiu",
+          "rechtzeitig": "a tempo",
+          "während": "durante"
+        }
+      },
+      {
+        "text": "Wir haben uns daran gewöhnt, jeden Samstag den Markt zu besuchen. Das Gemüse ist dort viel frischer als im Supermarkt.",
+        "glossary": {
+          "gewöhnt": "acostumado",
+          "besuchen": "visitar",
+          "Gemüse": "legumes",
+          "frischer": "mais fresco"
+        }
+      },
+      {
+        "text": "Er hat eine neue Gewohnheit entwickelt: Jeden Abend liest er vor dem Schlafengehen ein Buch.",
+        "glossary": {
+          "Gewohnheit": "hábito",
+          "entwickelt": "desenvolveu",
+          "Schlafengehen": "dormir",
+          "liest": "lê"
+        }
+      }
+    ],
+    "gruesse": [
+      {
+        "text": "Ich freue mich sehr, Sie kennenzulernen. Ihr Projekt klingt wirklich spannend. Können Sie mir mehr darüber erzählen?",
+        "glossary": {
+          "freue mich": "estou feliz",
+          "spannend": "interessante",
+          "erzählen": "contar"
+        }
+      },
+      {
+        "text": "Herzlichen Glückwunsch zum Geburtstag! Ich wünsche Ihnen Gesundheit und Glück für das kommende Jahr!",
+        "glossary": {
+          "Glückwunsch": "parabéns",
+          "Geburtstag": "aniversário",
+          "Gesundheit": "saúde",
+          "Glück": "felicidade"
+        }
+      },
+      {
+        "text": "Es war sehr angenehm, mit Ihnen zu plaudern. Ich hoffe, wir sehen uns bald wieder. Gute Reise!",
+        "glossary": {
+          "plaudern": "conversar",
+          "bald": "em breve",
+          "Gute Reise": "boa viagem"
+        }
+      }
+    ],
+    "reisen": [
+      {
+        "text": "Nachdem wir den Flug verpasst hatten, mussten wir einen anderen Weg finden. Zum Glück gab es noch einen Zug.",
+        "glossary": {
+          "verpasst": "perdido",
+          "Glück": "sorte",
+          "anderen Weg": "outro caminho"
+        }
+      },
+      {
+        "text": "Die Führung durch die Altstadt war sehr informativ. Der Guide kannte sich mit der Geschichte aus.",
+        "glossary": {
+          "Führung": "visita guiada",
+          "informativ": "informativa",
+          "Guide": "guia",
+          "Geschichte": "história"
+        }
+      },
+      {
+        "text": "Wir haben ein gemütliches Restaurant gefunden. Das Essen war köstlich und der Service hervorragend.",
+        "glossary": {
+          "gemütliches": "acolhedor",
+          "köstlich": "delicioso",
+          "Service": "atendimento",
+          "hervorragend": "excelente"
+        }
+      }
+    ]
+  },
+  "avancado": {
+    "alltag": [
+      {
+        "text": "Die systematische Optimierung ihres Tagesablaufs hat dazu geführt, dass sie deutlich produktiver geworden ist. Sie priorisiert Aufgaben nach Dringlichkeit und Wichtigkeit.",
+        "glossary": {
+          "systematische": "sistemática",
+          "Optimierung": "otimização",
+          "produktiver": "mais produtiva",
+          "priorisiert": "prioriza"
+        }
+      },
+      {
+        "text": "Trotz ihrer vollen Agenda findet sie immer Zeit, sich weiterzubilden. Die kontinuierliche persönliche Weiterentwicklung ist ihr ein wichtiges Anliegen.",
+        "glossary": {
+          "vollen": "lotada",
+          "weiterzubilden": "se capacitar",
+          "kontinuierliche": "contínua",
+          "Anliegen": "preocupação"
+        }
+      },
+      {
+        "text": "Die bewusste Entscheidung, weniger Zeit am Smartphone zu verbringen, hat ihre Aufmerksamkeitsspanne erheblich verbessert.",
+        "glossary": {
+          "bewusste": "consciente",
+          "verbringen": "passar",
+          "Aufmerksamkeitsspanne": "span de atenção",
+          "erheblich": "significativamente"
+        }
+      }
+    ],
+    "gruesse": [
+      {
+        "text": "Ich erlaube mir, Sie auf dieses dringende Thema aufmerksam zu machen. Die Angelegenheit erfordert umgehendes Handeln.",
+        "glossary": {
+          "erlaube mir": "permito-me",
+          "dringende": "urgente",
+          "aufmerksam": "atenção",
+          "umgehendes": "imediato"
+        }
+      },
+      {
+        "text": "Bitte entschuldigen Sie meine unangekündigte Kontaktaufnahme. Ich benötige Ihren fachlichen Rat zu einer wichtigen Frage.",
+        "glossary": {
+          "unangekündigte": "não anunciada",
+          "Kontaktaufnahme": "contato",
+          "fachlichen": "técnico",
+          "Rat": "conselho"
+        }
+      },
+      {
+        "text": "Ich möchte Ihnen meinen aufrichtigen Dank aussprechen. Ihre Unterstützung war für uns von unschätzbarem Wert.",
+        "glossary": {
+          "aufrichtigen": "sincero",
+          "aussprechen": "expressar",
+          "Unterstützung": "apoio",
+          "unschätzbarem": "incalculável"
+        }
+      }
+    ],
+    "reisen": [
+      {
+        "text": "Die komplexe Logistik der Expedition erforderte eine sorgfältige Planung. Jeder einzelne Aspekt wurde im Detail analysiert.",
+        "glossary": {
+          "komplexe": "complexa",
+          "Logistik": "logística",
+          "sorgfältige": "cuidadosa",
+          "analisiert": "analisado"
+        }
+      },
+      {
+        "text": "Obwohl die Wetterbedingungen ungünstig waren, haben sie ihr Ziel erreicht. Die Entschlossenheit der Gruppe war bemerkenswert.",
+        "glossary": {
+          "Wetterbedingungen": "condições climáticas",
+          "ungünstig": "desfavoráveis",
+          "Entschlossenheit": "determinação",
+          "bemerkenswert": "notável"
+        }
+      },
+      {
+        "text": "Die kulturelle Bereicherung, die eine solche Reise mit sich bringt, ist kaum zu überschätzen. Man lernt nicht nur Sprachen, sondern auch Denkweisen kennen.",
+        "glossary": {
+          "Bereicherung": "enriquecimento",
+          "überschätzen": "superestimar",
+          "Denkweisen": "formas de pensar"
+        }
+      }
+    ]
+  }
+}

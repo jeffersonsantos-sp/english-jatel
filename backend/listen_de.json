@@ -1,0 +1,116 @@
+{
+  "iniciante": {
+    "gruesse": [
+      "Guten Tag! Wie geht es Ihnen?",
+      "Ich heiße Maria. Und Sie?",
+      "Freut mich! Woher kommen Sie?",
+      "Danke schön! Auf Wiedersehen!",
+      "Guten Abend! Schön, Sie zu sehen.",
+      "Bitte, wie lautet Ihr Name?",
+      "Ich komme aus Brasilien.",
+      "Entschuldigung, ich verstehe nicht.",
+      "Sprechen Sie Englisch?",
+      "Ja, natürlich! Das ist kein Problem."
+    ],
+    "reisen": [
+      "Wo ist der Bahnhof, bitte?",
+      "Ich möchte einen Kaffee bestellen.",
+      "Wie viel kostet das?",
+      "Ist das Hotel weit entfernt?",
+      "Ich suche eineTankstelle.",
+      "Können Sie mir helfen?",
+      "Der Zug fährt um acht Uhr.",
+      "Wo ist mein Gepäck?",
+      "Ich brauche ein Taxi.",
+      "Gibt es hier ein Restaurant?"
+    ],
+    "alltag": [
+      "Ich wohne in einer kleinen Wohnung.",
+      "Mein Bruder heißt Thomas.",
+      "Wir gehen heute Abend ins Kino.",
+      "Die Kinder spielen im Park.",
+      "Ich trinke jeden Morgen Tee.",
+      "Wo ist die nächste Apotheke?",
+      "Ich habe Hunger.",
+      "Das Buch ist sehr interessant.",
+      "Können Sie das bitte wiederholen?",
+      "Ich lerne seit drei Monaten Deutsch."
+    ]
+  },
+  "intermediario": {
+    "gruesse": [
+      "Es freut mich sehr, Sie persönlich kennenzulernen.",
+      "Wie war Ihre Reise nach Hamburg?",
+      "Ich habe von Ihrem Projekt gehört.",
+      "Darf ich Ihnen meine Kollegin vorstellen?",
+      "Vielen Dank für Ihre Einladung.",
+      "Ich wünsche Ihnen alles Gute für die Zukunft.",
+      "Es war sehr angenehm, mit Ihnen zu sprechen.",
+      "Ich hoffe, wir sehen uns bald wieder.",
+      "Gibt es eine Möglichkeit, uns zu treffen?",
+      "Bitte geben Sie mir Bescheid, wenn Sie Zeit haben."
+    ],
+    "reisen": [
+      "Ich hätte gerne eine Bahncard First.",
+      "Gibt es einen Direktflug nach Frankfurt?",
+      "Kann ich mein Zimmer umbuchen?",
+      "Wir möchten eine Stadtführung machen.",
+      "Die Reservierung steht auf den Namen Müller.",
+      "Können wir den Tisch für zwei Personen reservieren?",
+      "Wo kann ich mein Gepäck aufbewahren?",
+      "Ich habe eine Beschwerde wegen des verlorenen Koffers.",
+      "Gibt es hier in der Nähe einen Geldautomaten?",
+      "Können Sie mir eine Empfehlung für ein gutes Restaurant geben?"
+    ],
+    "alltag": [
+      "Ich muss morgen früh aufstehen.",
+      "Haben Sie gestern den Film gesehen?",
+      "Wir sollten öfter Sport treiben.",
+      "Die Nachbarn sind sehr freundlich.",
+      "Ich habe vergessen, den Wecker zu stellen.",
+      "Können Sie mir mit diesem Problem helfen?",
+      "Ich habe einen Termin beim Zahnarzt.",
+      "Die Stadt ist im Herbst besonders schön.",
+      "Möchten Sie mitkommen oder zu Hause bleiben?",
+      "Ich habe heute keine Zeit."
+    ]
+  },
+  "avancado": {
+    "gruesse": [
+      "Es ist mir ein Vergnügen, Sie heute hier zu begrüßen.",
+      "Ich möchte Ihnen herzlich für Ihre Geduld danken.",
+      "Darf ich auf Ihre Gesundheit anstoßen?",
+      "Ich freue mich auf eine fruchtbare Zusammenarbeit.",
+      "Bitte entschuldigen Sie meine verspätete Ankunft.",
+      "Ich wünsche Ihnen einen angenehmen Aufenthalt.",
+      "Es wäre mir ein Anliegen, mit Ihnen diese Angelegenheit zu besprechen.",
+      "Ich erlaube mir, Sie auf dieses Thema anzusprechen.",
+      "Vielen Dank für Ihre Bemühungen in dieser Sache.",
+      "Ich stehe Ihnen jederzeit zur Verfügung."
+    ],
+    "reisen": [
+      "Ich hätte gerne eine Suite mit Meerblick.",
+      "Können Sie mir die Reiseroute vorlegen?",
+      "Wir möchten den Ausflug auf morgen umlegen.",
+      "Ich benötige eine Bestätigung der Reservierung.",
+      "Gibt es eine Entschädigung für die Flugverspätung?",
+      "Ich würde gerne eine Upgrade-Anfrage stellen.",
+      "Können Sie den Transfer zum Flughafen organisieren?",
+      "Ich habe bemerkt, dass die Rechnung nicht stimmt.",
+      "Können Sie mir eine Quittung für die Geschäftsausgaben ausstellen?",
+      "Ich plane eine Geschäftsreise nach Zürich."
+    ],
+    "alltag": [
+      "Ich habe vor, nächstes Jahr ein Sabbatjahr zu machen.",
+      "Können Sie mir das Prinzip der relativen Kompensation erklären?",
+      "Die Verhandlungen verliefen komplizierter als erwartet.",
+      "Ich befürchte, dass die Maßnahmen nicht ausreichen.",
+      "Er hat seine Bedenken hinsichtlich des Projekts geäußert.",
+      "Wir müssen die Prioritäten neu definieren.",
+      "Es lohnt sich, die langfristigen Konsequenzen zu bedenken.",
+      "Ich halte es für ratsam, eine zweite Meinung einzuholen.",
+      "Die Ergebnisse übertrafen unsere Erwartungen.",
+      "Ich werde die Angelegenheit umgehend prüfen."
+    ]
+  }
+}
