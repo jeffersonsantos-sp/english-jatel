@@ -63,10 +63,10 @@ async function playTts(text) {
   }
 }
 
-/* ---------- Tabs ---------- */
-document.querySelectorAll(".tab").forEach((btn) => {
+/* ---------- Sidebar Navigation ---------- */
+document.querySelectorAll(".sidebar-btn").forEach((btn) => {
   btn.addEventListener("click", () => {
-    document.querySelectorAll(".tab").forEach((b) => b.classList.remove("active"));
+    document.querySelectorAll(".sidebar-btn").forEach((b) => b.classList.remove("active"));
     document.querySelectorAll(".panel").forEach((p) => p.classList.remove("active"));
     btn.classList.add("active");
     $(btn.dataset.tab).classList.add("active");

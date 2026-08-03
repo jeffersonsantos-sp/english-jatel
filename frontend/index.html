@@ -61,20 +61,22 @@
         <button id="change-pass-btn" class="btn ghost" title="Trocar senha" data-i18n="btn-pass" data-i18n-title="cp-title">⚙️ Senha</button>
         <button id="users-btn" class="btn ghost" title="Gerenciar usuários" data-i18n="btn-users" data-i18n-title="users-title">👥 Usuários</button>
       </div>
-
-      <nav class="tabs">
-        <button class="tab active" data-tab="listen" data-i18n="tab-listen">Listen</button>
-        <button class="tab" data-tab="speak" data-i18n="tab-speak">Pronunciation</button>
-        <button class="tab" data-tab="write" data-i18n="tab-write">Write</button>
-        <button class="tab" data-tab="read" data-i18n="tab-read">Read</button>
-          <button class="tab" data-tab="converse" data-i18n="tab-converse">Conversation</button>
-          <button class="tab" data-tab="grammar" data-i18n="tab-grammar">Grammar</button>
-          <button class="tab" data-tab="memhack" data-i18n="tab-memhack">MemHack</button>
-          <button class="tab" data-tab="calendar-numbers" data-i18n="tab-numbers">Numbers</button>
-        </nav>
     </header>
 
-    <main>
+    <div class="layout">
+      <nav class="sidebar">
+        <button class="sidebar-btn active" data-tab="listen" data-i18n="tab-listen">🔊 Listen</button>
+        <button class="sidebar-btn" data-tab="speak" data-i18n="tab-speak">🎤 Pronunciation</button>
+        <button class="sidebar-btn" data-tab="write" data-i18n="tab-write">✏️ Write</button>
+        <button class="sidebar-btn" data-tab="read" data-i18n="tab-read">📖 Read</button>
+        <button class="sidebar-btn" data-tab="converse" data-i18n="tab-converse">💬 Conversation</button>
+        <div class="sidebar-divider"></div>
+        <button class="sidebar-btn" data-tab="grammar" data-i18n="tab-grammar">📘 Grammar</button>
+        <button class="sidebar-btn" data-tab="memhack" data-i18n="tab-memhack">🧠 MemHack</button>
+        <button class="sidebar-btn" data-tab="calendar-numbers" data-i18n="tab-numbers">🔢 Numbers</button>
+      </nav>
+
+      <main>
       <section id="listen" class="panel active card">
         <h2 data-i18n="listen-title">Listen</h2>
         <p class="subtitle" data-i18n="listen-sub">Escute a frase, faça o ditado e confira depois.</p>
@@ -245,6 +247,7 @@
         </div>
       </section>
     </main>
+    </div>
 
     <footer class="footer">
       Copyright © 2026 JATEL-IA  Developed by Jefferson Santos
