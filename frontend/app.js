@@ -710,7 +710,7 @@ $("conv-stop").addEventListener("click", convStopRecording);
 /* ---------- Apply i18n on load ---------- */
 if (typeof applyI18n === "function") applyI18n();
 
-/* ---------- Calendar & Numbers ---------- */
+/* ---------- Numbers (Calendar & Numbers) ---------- */
 let calendarData = {};
 
 async function loadCalendarNumbers() {
@@ -726,7 +726,7 @@ async function loadCalendarNumbers() {
     renderCalendarSection("months");
     renderCalendarSection("days");
   } catch (e) {
-    console.warn("Calendar & Numbers load error:", e.message);
+    console.warn("Numbers load error:", e.message);
   }
 }
 
@@ -771,6 +771,4 @@ document.querySelectorAll(".sub-tab").forEach((btn) => {
   });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  loadCalendarNumbers();
-});
+loadCalendarNumbers();
