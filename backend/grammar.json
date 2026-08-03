@@ -96,6 +96,61 @@
           "The ball is under the bed. — A bola está debaixo da cama.",
           "She sits between Tom and Mary. — Ela senta entre Tom e Mary."
         ]
+      },
+      {
+        "topic": "Days of the Week",
+        "structure": "Monday / Tuesday / Wednesday / Thursday / Friday / Saturday / Sunday",
+        "explanation": "The seven days of the week are always capitalized in English. 'On' is used before days: on Monday, on Friday. For weekly routines, use the plural: I work on Mondays (every Monday). Abbreviations: Mon, Tue, Wed, Thu, Fri, Sat, Sun.",
+        "examples": [
+          "I work on Monday. — Eu trabalho na segunda-feira.",
+          "The meeting is on Wednesday. — A reunião é na quarta-feira.",
+          "We play football on Saturdays. — Nós jogamos futebol aos sábados.",
+          "Sunday is a rest day. — Domingo é dia de descanso."
+        ]
+      },
+      {
+        "topic": "Months of the Year",
+        "structure": "January / February / March / April / May / June / July / August / September / October / November / December",
+        "explanation": "The twelve months are always capitalized. Use 'in' before months: in January, in December. For birthdays: in March (month) vs on March 15th (specific date). Abbreviations: Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec.",
+        "examples": [
+          "My birthday is in March. — Meu aniversário é em março.",
+          "Christmas is in December. — O Natal é em dezembro.",
+          "School starts in September. — A escola começa em setembro.",
+          "It's hot in July. — É quente em julho."
+        ]
+      },
+      {
+        "topic": "Dates and Numbers",
+        "structure": "基数词: one, two, three, four, five... (1, 2, 3, 4, 5...)",
+        "explanation": "Cardinal numbers are used for counting: one apple, two books. For dates, use ordinal numbers (see next topic). Numbers 1-10 must be memorized. 11-19 are irregular (eleven, twelve, thirteen...). 20-90 end in -ty (twenty, thirty, forty...).",
+        "examples": [
+          "I have three cats. — Eu tenho três gatos.",
+          "She is twenty-five years old. — Ela tem vinte e cinco anos.",
+          "There are twelve months in a year. — Há doze meses no ano.",
+          "He bought twenty books. — Ele comprou vinte livros."
+        ]
+      },
+      {
+        "topic": "Ordinal Numbers",
+        "structure": "1st first / 2nd second / 3rd third / 4th fourth / 5th fifth...",
+        "explanation": "Ordinal numbers show position or order: first, second, third, fourth, fifth... Most are formed by adding -th to the cardinal number (fourth, fifth, sixth). Exceptions: first (1st), second (2nd), third (3rd). For dates: January 1st (first), March 2nd (second).",
+        "examples": [
+          "This is my first day. — Este é meu primeiro dia.",
+          "She won second place. — Ela ganhou segundo lugar.",
+          "January is the first month. — Janeiro é o primeiro mês.",
+          "He lives on the third floor. — Ele mora no terceiro andar."
+        ]
+      },
+      {
+        "topic": "How to Say Dates",
+        "structure": "On + month + ordinal: On January 1st / On March 2nd",
+        "explanation": "In English, dates use ordinal numbers: January 1st (first), March 2nd (second), April 3rd (third). The format is: month + ordinal. Use 'on' before the date: on July 4th. For years, say the number: 2026 = twenty twenty-six.",
+        "examples": [
+          "My birthday is on March 15th. — Meu aniversário é no dia 15 de março.",
+          "Christmas is on December 25th. — O Natal é no dia 25 de dezembro.",
+          "The project starts on January 1st. — O projeto começa no dia 1º de janeiro.",
+          "We met on June 3rd. — Nós nos conhecemos no dia 3 de junho."
+        ]
       }
     ],
     "A2": [

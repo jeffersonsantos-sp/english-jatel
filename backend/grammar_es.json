@@ -96,6 +96,61 @@
           "La pelota está debajo de la cama. — A bola está debaixo da cama.",
           "Ella se sienta entre Tom y Mary. — Ela senta entre Tom e Mary."
         ]
+      },
+      {
+        "topic": "Días de la Semana",
+        "structure": "lunes / martes / miércoles / jueves / viernes / sábado / domingo",
+        "explanation": "Los días de la semana no se capitalizan en español. Se usan con 'los' para habitual: los lunes (every Monday). Para días específicos, se usa 'el': el lunes (this Monday). Abreviaturas: lun, mar, mié, jue, vie, sáb, dom.",
+        "examples": [
+          "Trabajo el lunes. — Eu trabalho na segunda-feira.",
+          "La reunión es el miércoles. — A reunião é na quarta-feira.",
+          "Jugamos fútbol los sábados. — Nós jogamos futebol aos sábados.",
+          "El domingo es día de descanso. — Domingo é dia de descanso."
+        ]
+      },
+      {
+        "topic": "Meses del Año",
+        "structure": "enero / febrero / marzo / abril / mayo / junio / julio / agosto / septiembre / octubre / noviembre / diciembre",
+        "explanation": "Los meses no se capitalizan en español. Se usan con 'en': en enero, en diciembre. Para cumpleaños: en marzo (mes) vs el 15 de marzo (fecha específica). Abreviaturas: ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic.",
+        "examples": [
+          "Mi cumpleaños es en marzo. — Meu aniversário é em março.",
+          "La Navidad es en diciembre. — O Natal é em dezembro.",
+          "La escuela empieza en septiembre. — A escola começa em setembro.",
+          "Hace calor en julho. — É quente em julho."
+        ]
+      },
+      {
+        "topic": "Números Cardinales",
+        "structure": "uno, dos, tres, cuatro, cinco... (1, 2, 3, 4, 5...)",
+        "explanation": "Los números cardinales se usan para contar: una manzana, dos libros. Para fechas, se usan números ordinales (ver siguiente tema). Los números 1-10 deben memorizarse. 11-19 son irregulares (once, doce, trece...). 20-90 terminan en -enta (veinte, treinta, cuarenta...).",
+        "examples": [
+          "Tengo tres gatos. — Eu tenho três gatos.",
+          "Ella tiene veinticinco años. — Ela tem vinte e cinco anos.",
+          "Hay doce meses en un año. — Há doze meses no ano.",
+          "Él compró veinte libros. — Ele comprou vinte livros."
+        ]
+      },
+      {
+        "topic": "Números Ordinales",
+        "structure": "1º primero / 2º segundo / 3º tercero / 4º cuarto / 5º quinto...",
+        "explanation": "Los números ordinales muestran posición u orden: primero, segundo, tercero, cuarto, quinto... La mayoría se forman añadiendo -o al cardinal (cuarto, quinto, sexto). Excepciones: primero (1º), segundo (2º), tercero (3º). Para fechas: 1 de enero (primero), 2 de marzo (segundo).",
+        "examples": [
+          "Este es mi primer día. — Este é meu primeiro dia.",
+          "Ella ganó el segundo lugar. — Ela ganhou segundo lugar.",
+          "Enero es el primer mes. — Janeiro é o primeiro mês.",
+          "Él vive en el tercer piso. — Ele mora no terceiro andar."
+        ]
+      },
+      {
+        "topic": "Cómo Decir Fechas",
+        "structure": "el + ordinal + de + mes: el 1º de enero / el 2 de marzo",
+        "explanation": "En español, las fechas usan números ordinales: 1º de enero (primero), 2 de marzo (segundo), 3 de abril (tercero). El formato es: el + ordinal + de + mes. Para años, se dice el número: 2026 = dos mil veintiséis.",
+        "examples": [
+          "Mi cumpleaños es el 15 de marzo. — Meu aniversário é no dia 15 de março.",
+          "La Navidad es el 25 de diciembre. — O Natal é no dia 25 de dezembro.",
+          "El proyecto empieza el 1º de enero. — O projeto começa no dia 1º de janeiro.",
+          "Nos conocimos el 3 de junho. — Nós nos conhecemos no dia 3 de junho."
+        ]
       }
     ],
     "A2": [

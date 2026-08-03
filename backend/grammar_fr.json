@@ -96,6 +96,61 @@
           "La balle est sous le lit. — A bola está debaixo da cama.",
           "Elle s'assoit entre Tom et Mary. — Ela senta entre Tom e Mary."
         ]
+      },
+      {
+        "topic": "Jours de la Semaine",
+        "structure": "lundi / mardi / mercredi / jeudi / vendredi / samedi / dimanche",
+        "explanation": "Les jours de la semaine ne s'écrivent pas avec une majuscule en français. On utilise 'les' pour l'habitude: les lundis (every Monday). Pour un jour spécifique, on utilise 'le': le lundi (this Monday). Abréviations: lun., mar., mer., jeu., ven., sam., dim.",
+        "examples": [
+          "Je travaille le lundi. — Eu trabalho na segunda-feira.",
+          "La réunion est le mercredi. — A reunião é na quarta-feira.",
+          "Nous jouons au football le samedi. — Nós jogamos futebol aos sábados.",
+          "Le dimanche est un jour de repos. — Domingo é dia de descanso."
+        ]
+      },
+      {
+        "topic": "Mois de l'Année",
+        "structure": "janvier / février / mars / avril / mai / juin / juillet / août / septembre / octobre / novembre / décembre",
+        "explanation": "Les mois ne s'écrivent pas avec une majuscule en français. On utilise 'en' devant les mois: en janvier, en décembre. Pour les anniversaires: en mars (mois) vs le 15 mars (date spécifique). Abréviations: janv., févr., mars, avr., mai, juin, juil., août, sept., oct., nov., déc.",
+        "examples": [
+          "Mon anniversaire est en mars. — Meu aniversário é em março.",
+          "Noël est en décembre. — O Natal é em dezembro.",
+          "L'école commence en septembre. — A escola começa em setembro.",
+          "Il fait chaud en juillet. — É quente em julho."
+        ]
+      },
+      {
+        "topic": "Nombres Cardinaux",
+        "structure": "un, deux, trois, quatre, cinq... (1, 2, 3, 4, 5...)",
+        "explanation": "Les nombres cardinaux s'utilisent pour compter: une pomme, deux livres. Pour les dates, on utilise les nombres ordinaux (voir sujet suivant). Les nombres 1-10 doivent être mémorisés. 11-19 sont irréguliers (onze, douze, treize...). 20-90 finissent par -vingt ou -dix (vingt, trente, quarante...).",
+        "examples": [
+          "J'ai trois chats. — Eu tenho três gatos.",
+          "Elle a vingt-cinq ans. — Ela tem vinte e cinco anos.",
+          "Il y a douze mois dans une année. — Há doze meses no ano.",
+          "Il a acheté vingt livres. — Ele comprou vinte livros."
+        ]
+      },
+      {
+        "topic": "Nombres Ordinaux",
+        "structure": "1er premier / 2e deuxième / 3e troisième / 4e quatrième / 5e cinquième...",
+        "explanation": "Les nombres ordinaux indiquent la position ou l'ordre: premier, deuxième, troisième, quatrième, cinquième... La plupart sont formés en ajoutant -ème au cardinal (quatrième, cinquième, sixième). Exceptions: premier (1er), deuxième (2e), troisième (3e). Pour les dates: 1er janvier (premier), 2 mars (deuxième).",
+        "examples": [
+          "C'est mon premier jour. — Este é meu primeiro dia.",
+          "Elle a gagné la deuxième place. — Ela ganhou segundo lugar.",
+          "Janvier est le premier mois. — Janeiro é o primeiro mês.",
+          "Il habite au troisième étage. — Ele mora no terceiro andar."
+        ]
+      },
+      {
+        "topic": "Comment Dire les Dates",
+        "structure": "le + ordinal + mois: le 1er janvier / le 2 mars",
+        "explanation": "En français, les dates utilisent les nombres ordinaux: le 1er janvier (premier), le 2 mars (deuxième), le 3 avril (troisième). Le format est: le + ordinal + mois. Pour les années, on dit le nombre: 2026 = deux mille vingt-six.",
+        "examples": [
+          "Mon anniversaire est le 15 mars. — Meu aniversário é no dia 15 de março.",
+          "Noël est le 25 décembre. — O Natal é no dia 25 de dezembro.",
+          "Le projet commence le 1er janvier. — O projeto começa no dia 1º de janeiro.",
+          "Nous nous sommes rencontrés le 3 juin. — Nós nos conhecemos no dia 3 de junho."
+        ]
       }
     ],
     "A2": [
