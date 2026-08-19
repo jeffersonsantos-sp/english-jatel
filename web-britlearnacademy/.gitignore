@@ -1,0 +1,7 @@
+# Secrets - NUNCA committar
+secret.yaml
+*.env
+.env
+
+# Kubernetes secrets with real values
+**/secret.yaml

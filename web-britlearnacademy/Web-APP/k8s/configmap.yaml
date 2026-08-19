@@ -8,5 +8,5 @@ data:
   EDGE_TTS_VOICE: "en-US-GuyNeural"
   DATA_DIR: "/app/data"
   SEED_USERNAME: "britlearn"
-  SEED_PASSWORD: "britlearn2026"
+  SEED_PASSWORD: "CHANGE_ME"
   IMAGE: "updateinformatica/britlearn-app:latest"
