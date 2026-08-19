@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: britlearn-site-config
+  namespace: britlearn-academy-site
+data:
+  SITE_NAME: "Britlearn Academy"
+  SITE_URL: "https://britlearnacademy.online"

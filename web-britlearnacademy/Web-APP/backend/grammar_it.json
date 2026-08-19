@@ -1,0 +1,486 @@
+{
+  "levels": [
+    "A1",
+    "A2",
+    "B1",
+    "B2",
+    "C1",
+    "C2"
+  ],
+  "grammar": {
+    "A1": [
+      {
+        "topic": "Verbo essere (ser / estar)",
+        "structure": "Soggetto + sono / sei / è (+ non) + complemento",
+        "explanation": "Usiamo essere per identità, nazionalità, professione, stato d'animo e localizzazione. Essere ha un'unica forma per ser e estar (è = ele é / ele está). Na negativa, acrescenta-se non (non sono / non è). Nas perguntas, o verbo vem antes do sujeito.",
+        "examples": [
+          "Io sono studente. — Eu sou estudante.",
+          "Lei è brasiliana. — Ela é brasileira.",
+          "Loro non sono a casa. — Eles não estão em casa.",
+          "È il tuo fratello? — É seu irmão?"
+        ]
+      },
+      {
+        "topic": "Pronomi personali soggetto",
+        "structure": "io / tu / lui / lei / noi / voi / loro + verbo",
+        "explanation": "O pronome define a forma do verbo. Lui e lei exigem a terceira pessoa do singular. Lui = ele, lei = ela. No formal, si usa Lei (senhor/a). Noi e voi usam as formas correspondentes.",
+        "examples": [
+          "Lui parla italiano. — Ele fala italiano.",
+          "Noi abitiamo a Milano. — Nós moramos em Milão.",
+          "Questo è un libro. — Isto é um libro.",
+          "Loro lavorano il lunedì. — Eles trabalham na segunda."
+        ]
+      },
+      {
+        "topic": "Articoli determinativi il / lo / la / i / gli / le",
+        "structure": "il (m. sing.) | lo (m. sing.) | la (f. sing.) | i (m. pl.) | gli (m. pl.) | le (f. pl.)",
+        "explanation": "Il antes de consoante, lo antes de s+consoante, z, gn, ps. La antes de vogal. I e gli no plural masculino, le no plural feminino. Aponta algo já conhecido.",
+        "examples": [
+          "Ho un gatto. — Tenho um gato.",
+          "Lei ha mangiato un'arancia. — Ela comeu uma laranja.",
+          "Il libro è sul tavolo. — O livro está sobre a mesa.",
+          "I cani sono fedeli. — Cães são fiéis."
+        ]
+      },
+      {
+        "topic": "Plural dei sostantivi",
+        "structure": "sostantivo + i / e / (irregolare)",
+        "explanation": "Geralmente + i (masc.) ou + e (fem.). Terminando em -a: troca por -e (ragazzo→ragazzi). Terminando em -e: troca por -i (pensiero→pensieri). Irregulares: uomo→uomini, bambino→bambini.",
+        "examples": [
+          "un ragazzo, due ragazzi. — um garoto, dois garotos.",
+          "una ragazza, due ragazze. — uma garota, duas garotas.",
+          "un gatto, due gatti. — um gato, dois gatos.",
+          "una mano, due mani. — uma mão, duas mãos."
+        ]
+      },
+      {
+        "topic": "Presente indicativo (affermativo)",
+        "structure": "Soggetto + verbo (conjugação) / -a -i -e -iamo -ite -ano",
+        "explanation": "Expressa fatos, rotinas e hábitos. Os verbos são conjugados por pessoa: -o (io), -i (tu), -a (lui/lei), -iamo (noi), -ite (voi), -ano (loro). Irregulares: essere, avere, andare.",
+        "examples": [
+          "Io lavoro ogni giorno. — Eu trabalho todo dia.",
+          "Lui va a scuola. — Ele vai à escola.",
+          "Noi amiamo il caffè. — Nós gostamos de café.",
+          "Lei ha una macchina rossa. — Ela tem um carro vermelho."
+        ]
+      },
+      {
+        "topic": "Aggettivi possessivi",
+        "structure": "mio / tuo / suo / nostro / vostro / loro + nome",
+        "explanation": "Indicam posse e concordam com o gênero do objeto, não do dono. mio/mia/miei/mie. Não usam artigo junto (my car, não the my car). Di solito precedem o sustantivo.",
+        "examples": [
+          "Questo è il mio telefono. — Este é meu telefone.",
+          "Il suo nome è Marco. — O nome dele é Marco.",
+          "Amiamo la nostra città. — Nós amamos nossa cidade.",
+          "La loro casa è grande. — A casa deles é grande."
+        ]
+      },
+      {
+        "topic": "Dimostrativi questo / quello",
+        "structure": "questo/questa (sing.) | questi/queste (pl.) | quello/quella (sing.) | quelli/quelle (pl.)",
+        "explanation": "Questo/questa = perto de quem fala; quello/quella = longe. Concordam em gênero e número. questo libro (este livro), quella macchina (aquele carro).",
+        "examples": [
+          "Questa è la mia silla. — Esta é minha cadeira.",
+          "Quello è un edificio alto. — Aquele é um prédio alto.",
+          "Queste mele sono fresche. — Estas maçãs estão frescas.",
+          "Quei vestiti sono costosi. — Aqueles trajes são caros."
+        ]
+      },
+      {
+        "topic": "Preposizioni di luogo",
+        "structure": "in / su / sotto / accanto a / tra / fra",
+        "explanation": "in (dentro), su (sobre superfície), sotto (embaixo), accanto a (ao lado de), tra/fra (entre dois). Indispensáveis para descrever posição.",
+        "examples": [
+          "Il gatto è nella scatola. — O gato está na caixa.",
+          "Il libro è sul tavolo. — O livro está sobre a mesa.",
+          "La palla è sotto il letto. — A bola está debaixo da cama.",
+          "Lei siede tra Tom e Maria. — Ela senta entre Tom e Maria."
+        ]
+      },
+      {
+        "topic": "Giorni della settimana e mesi",
+        "structure": "lunedì / martedì / mercoledì / giovedì / venerdì / sabato / domenica",
+        "explanation": "Os sete dias da semana são sempre minúsculos em italiano (exceto lunedì). Não usam artigo. Para rotinas, usa-se il + nome plural: il lunedì (toda segunda).",
+        "examples": [
+          "Lavoro il lunedì. — Eu trabalho na segunda-feira.",
+          "La riunione è il mercoledì. — A reunião é na quarta-feira.",
+          "Giocamo a calcio il sabato. — Nós jogamos futebol aos sábados.",
+          "La domenica è un giorno di riposo. — Domingo é dia de descanso."
+        ]
+      }
+    ],
+    "A2": [
+      {
+        "topic": "Presente indicativo (negativo e interrogativo)",
+        "structure": "non + verbo (negativo) | verbo + ? (interrogativo)",
+        "explanation": "Negativo: non antes do verbo (non parlo). Interrogativo: basta acrescentar ? (Parli?). Também com intonazione (parli tu?) ou con inversione (Parli italiano?).",
+        "examples": [
+          "Non mi piace il tè. — Eu não gosto de chá.",
+          "Parla francese? — Ela fala francês?",
+          "Non abitiamo qui. — Nós não moramos aqui.",
+          "Non hai fame? — Você não tem fome?"
+        ]
+      },
+      {
+        "topic": "Passato prossimo",
+        "structure": "essere/avere + participio passato",
+        "explanation": "Ações concluídas no passado. Auxiliar essere para movimento e mudança de estado (sono andato), avere para ações em geral (ho mangiato). O participio concorda com o sujeito quando com essere.",
+        "examples": [
+          "Ho visitato mia nonna. — Eu visitei minha avó.",
+          "Lui è andato al mercato. — Ele foi ao mercado.",
+          "Non abbiamo guardato la TV. — Nós não assistimos TV.",
+          "Hai comprato i biglietti? — Você comprou os ingressos?"
+        ]
+      },
+      {
+        "topic": "Preposizioni di tempo in / il / a",
+        "structure": "il + giorno | a + ora | in + mese/anno/stagione",
+        "explanation": "il + dia da semana e data (il lunedì, il 15 marzo). a + hora (a le cinque). in + meses, anos, estações (in luglio, nel 2026, in estate).",
+        "examples": [
+          "La festa è in dicembre. — A festa é em dezembro.",
+          "Ci vediamo il venerdì. — Nós nos encontramos na sexta.",
+          "Il bus parte alle nove. — O ônibus sai às nove.",
+          "È nata il 2 marzo. — Ela nasceu em 2 de março."
+        ]
+      },
+      {
+        "topic": "C'è / Ci sono",
+        "structure": "c'è (sing.) / ci sono (pl.) (+ non)",
+        "explanation": "Para dizer que algo existe ou está presente. c'è (singular/indescritível), ci sono (plural). Negativo: non c'è / non ci sono. Interrogativo: C'è...? / Ci sono...?",
+        "examples": [
+          "C'è un parco vicino a casa mia. — Há um parque perto de casa.",
+          "Ci sono due gatti. — Há dois gatos.",
+          "Non c'è latte. — Não há leite nenhum.",
+          "Ci sono studenti in classe? — Há alunos na sala?"
+        ]
+      },
+      {
+        "topic": "Potere / Dovere / Volere",
+        "structure": "posso / devi / voglio + verbo",
+        "explanation": "Modais de habilidade (potere), obrigação (dovere) e desejo (volere). Conjugam-se por pessoa. posso=eu posso, devi=você deve, voglio=eu quero.",
+        "examples": [
+          "Posso nuotare. — Eu sei nadar.",
+          "Lei non sa guidare. — Ela não sabe dirigir.",
+          "Puoi aiutarmi? — Você pode me ajudar?",
+          "Dobbiamo studiare di più. — Precisamos estudar mais."
+        ]
+      },
+      {
+        "topic": "Comparativi e superlativi",
+        "structure": "più + adj + di | il più + adj",
+        "explanation": "Comparativo: più + adj + di (più alto di me). Superlativo: il più + adj (il più alto). Irregulares: buono→il migliore, cattivo→il peggiore.",
+        "examples": [
+          "Lui è più alto di me. — Ele é mais alto que eu.",
+          "Questo libro è più interessante. — Este livro é mais interessante.",
+          "Lei è la migliore studentessa. — Ela é a melhor aluna.",
+          "Quella è la peggiore giornata. — Aquele foi o pior dia."
+        ]
+      },
+      {
+        "topic": "Pronomi oggetto",
+        "structure": "mi / ti / lo / la / ci / vi / li / le",
+        "explanation": "Substituem o objeto da ação. Vêm após o verbo (lo vedo) ou antes (lo vedo). lo = ele (masc.), la = ela (fem.), li = eles (masc.), le = elas (fem.).",
+        "examples": [
+          "Lei mi ha chiamato ieri. — Ela me ligou ontem.",
+          "Noi li abbiamo invitati alla festa. — Nós os convidamos para a festa.",
+          "Lui le ha dato un regalo. — Ele deu um presente a ela.",
+          "Parlateci dopo. — Converse conosco mais tarde."
+        ]
+      },
+      {
+        "topic": "Quantificatori un po' / molto / troppo",
+        "structure": "un po' di / molto / troppo / abbastanza + nome",
+        "explanation": "un po' di (um pouco de), molto (muito), troppo (demais), abbastanza (bastante). Concordanza em gênero: molta acqua (muita água), molti amici (muitos amigos).",
+        "examples": [
+          "Ho un po' di denaro. — Eu tenho algum dinheiro.",
+          "Hai delle domande? — Você tem alguma pergunta?",
+          "Non c'è molto tempo. — Não há muito tempo.",
+          "Quanti studenti ci sono? — Quantos alunos há?"
+        ]
+      }
+    ],
+    "B1": [
+      {
+        "topic": "Presente progressivo",
+        "structure": "stare + gerundio (-ando / -endo)",
+        "explanation": "Ações em progresso no momento ou temporárias. Frequentemente com adesso, in questo momento. Tambem para hábitos irritantes (Lui è sempre lamentandosi).",
+        "examples": [
+          "Sto leggendo un libro adesso. — Estou lendo um livro agora.",
+          "Lei sta lavorando oggi. — Ela está trabalhando hoje.",
+          "Non stanno dormendo. — Eles não estão dormindo.",
+          "Cosa stai facendo? — O que você está fazendo?"
+        ]
+      },
+      {
+        "topic": "Imperfetto",
+        "structure": "verbo (-avo / -ivo / -avo / -evamo / -evate / -avano)",
+        "explanation": "Ações habituais ou em progresso no passado. Usado para descrições, cenários de fundo e rotinas passadas. Forma-se do radical + -avo, -avi, -ava, -avamo, -avate, -avano.",
+        "examples": [
+          "Quando ero piccolo giocavo nel parque. — Quando era brincava no parque.",
+          "Lui leggeva sempre prima di dormire. — Ele sempre lia antes de dormir.",
+          "Pioveva quando sono uscito. — Chovia quando eu saí.",
+          "Studiavamo italiano insieme. — Estudamos italiano juntos."
+        ]
+      },
+      {
+        "topic": "Passato prossimo vs Imperfetto",
+        "structure": "Passato prossimo (azione conclusa) vs Imperfetto (azione abituale/in corso)",
+        "explanation": "Passato prossimo para ações únicas e concluídas (ho mangiato). Imperfetto para ações habituais e descritivs (mangiavo sempre). Na mesma frase: Mentre mangiavo (imperfetto), il telefono ha squillato (prossimo).",
+        "examples": [
+          "Quando ero piccolo, giocavo sempre a pallone. — Quando era brincava sempre de bola.",
+          "Ieri ho mangiato la pizza. — Ontem eu comi pizza.",
+          "Mentre studiavo, ha suonato il campanello. — Enquanto eu estudava, o sino tocou.",
+          "Da bambino visitavo i nonni ogni estate. — Quando criança visitava meus avós todo verão."
+        ]
+      },
+      {
+        "topic": "Futuro: andare a + infinitivo",
+        "structure": "andare a + infinitivo",
+        "explanation": "Para planos e intenções no futuro próximo. Semelhante ao 'going to' do inglês. also para decisões no momento: Vado a mangiare (Vou comer).",
+        "examples": [
+          "Vado a mangiare una pizza. — Vou comer uma pizza.",
+          "Andiamo a vedere un film? — Vamos ver um filme?",
+          "Lei va a partire domani. — Ela vai partir amanhã.",
+          "Non vado a comprare nulla. — Não vou comprar nada."
+        ]
+      },
+      {
+        "topic": "Condizionale presente",
+        "structure": "verbo (-ebbi / -esti / -ebbe / -emmo / -este / -ebbero)",
+        "explanation": "Desejos, pedidos educados e hipóteses. Forma-se do radical + -ebbi, -esti, -ebbe, -emmo, -este, -ebbero. Volere→vorrei (eu gostaria).",
+        "examples": [
+          "Vorrei un caffè, per favore. — Eu gostaria de um café, por favor.",
+          "Potresti aiutarmi? — Você poderia me ajudar?",
+          "Dovresti studiare di più. — Você deveria estudar mais.",
+          "Andrei volentieri in Italia. — Eu iria de bom grado à Itália."
+        ]
+      },
+      {
+        "topic": "Pronomi relativi che / cui",
+        "structure": "che / cui + verbo",
+        "explanation": "che para sujeito e objeto direto (L'uomo che ho visto). cui para complemento com preposição (la città in cui vivo). Não declina por gênero.",
+        "examples": [
+          "L'uomo che ha chiamato è mio zio. — O homem que te ligou é meu tio.",
+          "Questo è il libro che ho comprato. — Este é o livro que comprei.",
+          "La città in cui vivo è bella. — A cidade em que moro é bonita.",
+          "La persona con cui parlo è simpatica. — A pessoa com quem converso é simpática."
+        ]
+      },
+      {
+        "topic": "Imperativo",
+        "structure": "verbo (tu) / (Lei) / (noi) / (voi) / (loro)",
+        "explanation": "Ordens e conselhos. Tu: parla! (fala!). Lei: parli! (fale!). Noi: parliam! (falemos!). Voi: parlate! (falem!). Irregulares: essere→sii, avere→abbi, andare→vai.",
+        "examples": [
+          "Parla più lentamente! — Fale mais devagar!",
+          "Ascolta la musica! — Ouça a música!",
+          "Andiamo a mangiare! — Vamos comer!",
+          "Scrivete una lettera! — Escrevam uma carta!"
+        ]
+      }
+    ],
+    "B2": [
+      {
+        "topic": "Trapassato prossimo",
+        "structure": "aveva/era + participio passato",
+        "explanation": "Ação concluída antes de outra no passado. Usado com quando, dopo che, prima che. Avevo già mangiato quando sei arrivato (Eu já tinha comido quando você chegou).",
+        "examples": [
+          "Avevo già finito quando lei è arrivata. — Eu já tinha terminado quando ela chegou.",
+          "Era piovuto prima che uscissimo. — Tinha chovido antes de sairmos.",
+          "Dopo che ebbe mangiato, uscì. — Depois de comer, saiu.",
+          "Non avevo visto quel film prima. — Eu não tinha visto aquele filme antes."
+        ]
+      },
+      {
+        "topic": "Condizionale passato",
+        "structure": "avrei / saresti / avrebbe + participio passato",
+        "explanation": "Desejos irrealis no passado e hipóteses. Avrei voluto (Eu teria gostado). Used com se + passato prossimo: Se avessi studiato, avrei passato (Se eu tivesse estudado, teria passado).",
+        "examples": [
+          "Avrei voluto venire con voi. — Eu teria gostado de ir com vocês.",
+          "Saresti andato al cinema? — Você teria ido ao cinema?",
+          "Se avessi più tempo, viaggerei di più. — Se eu tivesse mais tempo, viajaria mais.",
+          "Dovresti aver finito ieri. — Você deveria ter terminado ontem."
+        ]
+      },
+      {
+        "topic": "Congiuntivo presente",
+        "structure": "che + io parli / tu parli / lui parli / noi parliamo",
+        "explanation": "Usado em orações subordinadas after pensare, credere, sperare, volere, essere sicuro, temere. Expressa dúvida, desejo, opinião subjetiva.",
+        "examples": [
+          "Penso che sia una buona idea. — Penso que é uma boa ideia.",
+          "Spero che venga alla festa. — Espero que venha à festa.",
+          "Credo che sia importante. — Acredito que é importante.",
+          "Non sono sicuro che sia vero. — Não tenho certeza de que seja verdade."
+        ]
+      },
+      {
+        "topic": "Congiuntivo imperfetto",
+        "structure": "che + io parlassi / tu parlassi / lui parlasse",
+        "explanation": "Used em contextos hipotéticos e no passado subordinado. Se + imperfetto congiuntivo: Se parlassi meglio, capirei (Se eu falasse melhor, entenderia). Também após no passado: Credevo che fosse vero.",
+        "examples": [
+          "Se parlassi italiano, vivrei in Italia. — Se eu falasse italiano, viveria na Itália.",
+          "Credevo che fosse giusto. — Acreditava que era certo.",
+          "Se avessi più soldi, comprerei una casa. — Se eu tivesse mais dinheiro, compraria uma casa.",
+          "Vorrei che tu studiassi di più. — Queria que você estudasse mais."
+        ]
+      },
+      {
+        "topic": "Discorso indiretto",
+        "structure": "dire/che + congiuntivo o indicativo",
+        "explanation": "Repete o que foi dito com recuo de tempo: presente→passato, will→would, am/is→was. Perguntas viram se (se + verbo). Mantém a perspectiva do locutor.",
+        "examples": [
+          "Ha detto che era stanco. — Ele disse que estava cansado.",
+          "Mi ha chiesto se fossi pronto. — Ele perguntou se eu estava pronto.",
+          "Ha spiegato che sarebbe venuto. — Ele explicou que viria.",
+          "Hanno detto che piaceva loro. — Eles disseram que gostaram."
+        ]
+      },
+      {
+        "topic": "Essere / Avere idiomatici",
+        "structure": "essere (stato) + adj | avere + nome",
+        "explanation": "Essere para estados e identidade (sono contento). Avere para necessidade e expressões fixas (ho fame, ho sonno, ho fretta, ho paura).",
+        "examples": [
+          "Ho fame. — Eu tenho fome.",
+          "Sono stanco. — Eu estou cansado.",
+          "Ha sonno. — Ele tem sono.",
+          "Sono contento di vederti. — Estou feliz em te ver."
+        ]
+      }
+    ],
+    "C1": [
+      {
+        "topic": "Congiuntivo passato",
+        "structure": "che + avessi/avessi/avesse + participio passato",
+        "explanation": "Ações hipotéticas no passado. Se avessi studiato, avrei passato (Se eu tivesse estudado, teria passado). Após pensare, credere no passato: Pensavo che avessi finito.",
+        "examples": [
+          "Se avessi studiato, avrei passato l'esame. — Se eu tivesse estudado, teria passado no exame.",
+          "Pensavo che avessi già mangiato. — Acreditava que já tinha comido.",
+          "Se non avessi avuto aiuto, non ce l'avrei fatta. — Se não tivesse tido ajuda, não teria conseguido.",
+          "Avrei voluto che tu venissi prima. — Teria gostado que você viesse antes."
+        ]
+      },
+      {
+        "topic": "Condizionale composto",
+        "structure": "avrei / saresti / avrebbe + participio passato",
+        "explanation": "Situações hipotéticas sobre o passado. Se + trapassato prossimo, condizionale passato. Se avessi potuto, sarei andato (Se eu pudesse, teria ido).",
+        "examples": [
+          "Se avessi potuto, sarei andato. — Se eu pudesse, teria ido.",
+          "Dovresti aver finito entro oggi. — Você deveria ter terminado até hoje.",
+          "Avresti dovuto dirmelo prima. — Você deveria ter me dito antes.",
+          "Senza di te, non sarei riuscito. — Sem você, eu não teria conseguido."
+        ]
+      },
+      {
+        "topic": "Frasi relative complesse",
+        "structure": "il quale / la quale / i quali / le quali",
+        "explanation": "Pronomi relativos formais. Declinam por gênero e número. Usados em registro formal ou para clareza. il quale (m. sing.), la quale (f. sing.), i quali (m. pl.), le quali (f. pl.).",
+        "examples": [
+          "Il professore, il quale è molto gentile, ci ha aiutato. — O professor, o qual é muito gentil, nos ajudou.",
+          "La casa, la quale è vecchia, è molto accogliente. — A casa, a qual é velha, é muito acolhedora.",
+          "I libri, i quali ho comprato, sono interessanti. — Os livros, os quais comprei, são interessanti.",
+          "Le persone con le quali lavoro sono simpatiche. — As pessoas com as quais trabalho são simpáticas."
+        ]
+      },
+      {
+        "topic": "Strutture causali",
+        "structure": "perché / siccome / dato che / poiché",
+        "explanation": "perché (porque), siccome (uma vez que), dato che (dado que), poiché (já que). Expressam causa e razão. siccome e poiché antecipam a causa.",
+        "examples": [
+          "Siccome piove, restiamo a casa. — Uma vez que chove, ficamos em casa.",
+          "Sono felice perché hai vinto. — Estou feliz porque você venceu.",
+          "Dato che non c'è tempo, andiamo via. — Dado que não há tempo, vamos embora.",
+          "Poiché è tardi, chiudiamo l'ufficio. — Já que é tarde, fechamos o escritório."
+        ]
+      },
+      {
+        "topic": "Strutture concessive",
+        "structure": "anche se / sebbene / nonostante / benché",
+        "explanation": "anche se (mesmo que), sebbene/benché (embora), nonostante (apesar de). Expressam concessão. nonostante + nome ou gerundio; sebbene + verbo.",
+        "examples": [
+          "Anche se fa freddo, esco a correre. — Mesmo que faça frio, saio para correr.",
+          "Sebbene sia stanco, continuo a lavorare. — Embora esteja cansado, continuo trabalhando.",
+          "Nonostante la pioggia, siamo usciti. — Apesar da chuva, saímos.",
+          "Benché sia difficile, ce la farò. — Embora seja difícil, vou conseguir."
+        ]
+      },
+      {
+        "topic": "Gerundio e participio",
+        "structure": "gerundio (-ando / -endo) | participio passato (-ato / -ito / -uto)",
+        "explanation": "Gerundio: ação simultânea (Mangiando, ho messo su peso). Participio: tempos compostos (ho mangiato) e adjetivo (il pane è bruciato).",
+        "examples": [
+          "Mangiando troppo, ho messo su peso. — Comendo demais, engordei.",
+          "Il pane è bruciato. — O pão está queimado.",
+          "Studiando, ho migliorato il mio italiano. — Estudando, melhorei meu italiano.",
+          "Dopo aver mangiato, siamo usciti. — Depois de comer, saímos."
+        ]
+      }
+    ],
+    "C2": [
+      {
+        "topic": "Periodi ipotetici",
+        "structure": "Se + congiuntivo imperfetto/trapassato, condizionale presente/passato",
+        "explanation": "Tipi: I (irreale presente: se fossi ricco, comprerei), II (ipotetico: se avessi più tempo, viaggerei), III (irreale passato: se avessi studiato, avrei passato).",
+        "examples": [
+          "Se fossi ricco, comprerei una villa. — Se eu fosse rico, compraria uma vila.",
+          "Se avessi più tempo, leggerei di più. — Se eu tivesse mais tempo, leria mais.",
+          "Se avessi studiato, avrei passato l'esame. — Se eu tivesse estudado, teria passado no exame.",
+          "Se non fosse per te, non sarei qui. — Se não fosse por você, eu não estaria aqui."
+        ]
+      },
+      {
+        "topic": "Costruzioni passive e impersonali",
+        "structure": "si + passivo / essere + participio",
+        "explanation": "Si passivante: Si parla italiano (Fala-se italiano). Essere + participio: Il libro è stato scritto da lui (O livro foi escrito por ele). Impessoale: Si dice che... (Diz-se que...).",
+        "examples": [
+          "Si parla italiano in Svizzera. — Fala-se italiano na Suíça.",
+          "Il libro è stato scritto da lui. — O livro foi escrito por ele.",
+          "Si dice che sia bravissimo. — Diz-se que ele é muito bom.",
+          "Non si deve fumare qui. — Não se deve fumar aqui."
+        ]
+      },
+      {
+        "topic": "Frasi nominali ed ellissi",
+        "structure": "Omissione del verbo / soggetto recuperabile",
+        "explanation": "Omitir termos subentendidos para concisão: Io sì, tu no (Eu sim, você não). Parallelismo: Lui legge, lei scrive (Ele lê, ela escreve). Típico de registro formal.",
+        "examples": [
+          "Io sì, tu no. — Eu sim, você não.",
+          "Lui legge, lei scrive. — Ele lê, ela escreve.",
+          "Se vuoi, vieni. — Se quiser, venha.",
+          "Chi ha visto, ha capito. — Quem viu, entendeu."
+        ]
+      },
+      {
+        "topic": "Inversione e enfasi",
+        "structure": "Avverbio + verbo + soggetto",
+        "explanation": "Antecipar complemento para dar ênfase: Non solo ha vinto, ma ha battuto il record (Não só venceu, como bateu o recorde). Solo allora ho capito (Só então entendi).",
+        "examples": [
+          "Non solo ha vinto, ma ha battuto il record. — Não só venceu, como bateu o recorde.",
+          "Solo allora ho capito. — Só então eu entendi.",
+          "Mai avrei pensato una cosa del genere. — Nunca teria pensado em algo assim.",
+          "Così stanco che ho dormito subito. — Tão cansado que dormi na hora."
+        ]
+      },
+      {
+        "topic": "Connessioni discorsive avanzate",
+        "structure": "Tuttavia / inoltre / pertanto / nonché / sebbene",
+        "explanation": "Coesão em texto formal. tuttavia (todavia), inoltre (além disso), pertanto (portanto), nonché (bem como), sebbene (embora). Elevam o registro.",
+        "examples": [
+          "Era stanco; tuttavia ha continuato. — Estava cansado; todavia, continuou.",
+          "Ha vinto il premio, inoltre ha ricevuto una medaglia. — Venceu o prêmio, além disso recebeu uma medalha.",
+          "Pertanto, dobbiamo agire subito. — Portanto, precisamos agir imediatamente.",
+          "Il progetto è ambizioso nonché attuabile. — O projeto é ambicioso e realizável."
+        ]
+      },
+      {
+        "topic": "Registri e sfumature di tono",
+        "structure": "Formale vs. informale / attenuanti",
+        "explanation": "Escolha de tom: sarei grato se... (formal) vs. Puoi... (direto). Attenuanti: mi chiedevo se, se non ti dispiacesse, non è necessario dire. Distingue registro elevato e cotidiano.",
+        "examples": [
+          "Sarei grato se potesse aiutarmi. — Agradeceria se pudesse me ajudar.",
+          "Mi chiedevo se potessimo parlarne. — Gostaria de saber se poderíamos falar sobre isso.",
+          "Non è necessario dire che concordiamo. — Escusado será dizer que concordamos.",
+          "Se non ti dispiacesse di chiudere la porta. — Se não se importasse de fechar a porta."
+        ]
+      }
+    ]
+  }
+}

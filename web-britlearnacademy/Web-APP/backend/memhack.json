@@ -1,0 +1,73 @@
+{
+  "categories": ["rotina", "trabalho", "escola", "familia", "diversao", "esportes"],
+  "labels": {
+    "rotina": "Rotina",
+    "trabalho": "Trabalho",
+    "escola": "Escola",
+    "familia": "Família",
+    "diversao": "Diversão",
+    "esportes": "Esportes"
+  },
+  "phrases": {
+    "rotina": [
+      {"id": "rotina-1", "en": "I wake up early every morning.", "pt": "Eu acordo cedo todas as manhãs."},
+      {"id": "rotina-2", "en": "I brush my teeth after breakfast.", "pt": "Escovo os dentes após o café da manhã."},
+      {"id": "rotina-3", "en": "I drink a cup of coffee before work.", "pt": "Bebo uma xícara de café antes do trabalho."},
+      {"id": "rotina-4", "en": "I walk the dog in the evening.", "pt": "Levo o cachorro passear à noite."},
+      {"id": "rotina-5", "en": "I cook dinner for my family.", "pt": "Faço o jantar para minha família."},
+      {"id": "rotina-6", "en": "I go to bed at ten o'clock.", "pt": "Vou para a cama às dez horas."},
+      {"id": "rotina-7", "en": "I check my phone as soon as I wake up.", "pt": "Olho o celular assim que acordo."},
+      {"id": "rotina-8", "en": "I do the laundry on weekends.", "pt": "Lavo a roupa nos fins de semana."}
+    ],
+    "trabalho": [
+      {"id": "trabalho-1", "en": "I attend a meeting every Monday.", "pt": "Participo de uma reunião toda segunda."},
+      {"id": "trabalho-2", "en": "I answer emails in the morning.", "pt": "Respondo e-mails de manhã."},
+      {"id": "trabalho-3", "en": "I work from home on Fridays.", "pt": "Trabalho de casa às sextas."},
+      {"id": "trabalho-4", "en": "I finish the report before the deadline.", "pt": "Termino o relatório antes do prazo."},
+      {"id": "trabalho-5", "en": "I talk to clients on the phone.", "pt": "Converso com clientes por telefone."},
+      {"id": "trabalho-6", "en": "I use a computer all day.", "pt": "Uso o computador o dia todo."},
+      {"id": "trabalho-7", "en": "I take a short break at noon.", "pt": "Faço uma pausa curta ao meio-dia."},
+      {"id": "trabalho-8", "en": "I send the invoice to the company.", "pt": "Envio a nota fiscal para a empresa."}
+    ],
+    "escola": [
+      {"id": "escola-1", "en": "I study math and science.", "pt": "Estudo matemática e ciências."},
+      {"id": "escola-2", "en": "The teacher explains the lesson clearly.", "pt": "O professor explica a lição claramente."},
+      {"id": "escola-3", "en": "I do my homework after school.", "pt": "Faço o dever de casa após a escola."},
+      {"id": "escola-4", "en": "I read a book in the library.", "pt": "Leio um livro na biblioteca."},
+      {"id": "escola-5", "en": "I take notes during the class.", "pt": "Anoto durante a aula."},
+      {"id": "escola-6", "en": "I pass the exam with good grades.", "pt": "Passo no exame com boas notas."},
+      {"id": "escola-7", "en": "I meet my classmates at the cafeteria.", "pt": "Encontro meus colegas na lanchonete."},
+      {"id": "escola-8", "en": "I learn a new word every day.", "pt": "Aprendo uma palavra nova todo dia."}
+    ],
+    "familia": [
+      {"id": "familia-1", "en": "We have dinner together every night.", "pt": "Jantamos juntos todas as noites."},
+      {"id": "familia-2", "en": "My mother cooks delicious food.", "pt": "Minha mãe cozinha comida deliciosa."},
+      {"id": "familia-3", "en": "I help my father in the garden.", "pt": "Ajudo meu pai no jardim."},
+      {"id": "familia-4", "en": "My brother plays the guitar.", "pt": "Meu irmão toca violão."},
+      {"id": "familia-5", "en": "We visit my grandparents on Sunday.", "pt": "Visitamos meus avós no domingo."},
+      {"id": "familia-6", "en": "My sister takes care of the baby.", "pt": "Minha irmã cuida do bebê."},
+      {"id": "familia-7", "en": "We watch a movie on family night.", "pt": "Assistimos a um filme na noite de família."},
+      {"id": "familia-8", "en": "I love my family very much.", "pt": "Amo muito minha família."}
+    ],
+    "diversao": [
+      {"id": "diversao-1", "en": "I listen to music when I relax.", "pt": "Ouço música quando relaxo."},
+      {"id": "diversao-2", "en": "We go to the cinema on Saturdays.", "pt": "Vamos ao cinema aos sábados."},
+      {"id": "diversao-3", "en": "I play video games with my friends.", "pt": "Jogo videogame com meus amigos."},
+      {"id": "diversao-4", "en": "She sings and dances at parties.", "pt": "Ela canta e dança em festas."},
+      {"id": "diversao-5", "en": "We travel to the beach in summer.", "pt": "Viajamos à praia no verão."},
+      {"id": "diversao-6", "en": "I take photos of beautiful places.", "pt": "Tiro fotos de lugares bonitos."},
+      {"id": "diversao-7", "en": "They laugh at the funny joke.", "pt": "Eles riem da piada engraçada."},
+      {"id": "diversao-8", "en": "I enjoy a walk in the park.", "pt": "Gosto de caminhar no parque."}
+    ],
+    "esportes": [
+      {"id": "esportes-1", "en": "I play soccer with my friends.", "pt": "Jogo futebol com meus amigos."},
+      {"id": "esportes-2", "en": "She runs five kilometers every day.", "pt": "Ela corre cinco quilômetros todo dia."},
+      {"id": "esportes-3", "en": "We swim at the pool on weekends.", "pt": "Nadamos na piscina nos fins de semana."},
+      {"id": "esportes-4", "en": "He lifts weights at the gym.", "pt": "Ele levanta pesos na academia."},
+      {"id": "esportes-5", "en": "They ride bicycles in the park.", "pt": "Eles andam de bicicleta no parque."},
+      {"id": "esportes-6", "en": "I watch the match on TV.", "pt": "Assisto à partida na TV."},
+      {"id": "esportes-7", "en": "The team wins the championship.", "pt": "O time vence o campeonato."},
+      {"id": "esportes-8", "en": "I stretch before exercising.", "pt": "Eu alongo antes de me exercitar."}
+    ]
+  }
+}

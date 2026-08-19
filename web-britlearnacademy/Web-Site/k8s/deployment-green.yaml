@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: britlearn-site-green
+  namespace: britlearn-academy-site
+  labels:
+    app: britlearn-site
+    slot: green
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: britlearn-site
+      slot: green
+  template:
+    metadata:
+      labels:
+        app: britlearn-site
+        slot: green
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        fsGroup: 10001
+      containers:
+        - name: britlearn-site
+          image: updateinformatica/britlearnacademy-web:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              name: http
+          envFrom:
+            - configMapRef:
+                name: britlearn-site-config
+          volumeMounts:
+            - name: data
+              mountPath: /var/www/html/data
+            - name: tmp
+              mountPath: /tmp
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 20
+            periodSeconds: 20
+            timeoutSeconds: 5
+            failureThreshold: 3
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: false
+            capabilities:
+              drop:
+                - ALL
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: britlearn-site-data
+        - name: tmp
+          emptyDir: {}

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: britlearn-app-proxy-headers
+  namespace: britlearn-academy-app
+data:
+  X-Forwarded-Prefix: "/app"

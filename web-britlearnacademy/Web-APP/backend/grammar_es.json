@@ -1,0 +1,585 @@
+{
+  "levels": [
+    "A1",
+    "A2",
+    "B1",
+    "B2",
+    "C1",
+    "C2"
+  ],
+  "grammar": {
+    "A1": [
+      {
+        "topic": "Verbo to be (ser / estar)",
+        "structure": "Sujeto + am / is / are (+ not) + complemento",
+        "explanation": "Usamos am (eu), is (ele/ela/isto), are (você/nós/eles) para identidade, idade, profissão, origem e estado. Na negativa, acrescenta-se not (isn't / aren't / 'm not). Nas perguntas, o verbo vem antes do sujeito.",
+        "examples": [
+          "Yo soy estudiante. — Eu sou estudante.",
+          "Ella es de Brasil. — Ela é do Brasil.",
+          "Ellos no están en casa. — Eles não estão em casa.",
+          "¿Es él tu hermano? — Ele é seu irmão?"
+        ]
+      },
+      {
+        "topic": "Pronomes pessoais e sujeito",
+        "structure": "I / you / he / she / it / we / they + verbo",
+        "explanation": "O pronome define a forma do verbo. he, she e it exigem -s na 3ª pessoa do singular nos tempos simples. it refere-se a coisas, animais ou ideias.",
+        "examples": [
+          "Él habla inglés. — Ele fala inglês.",
+          "Nosotros vivimos en São Paulo. — Nós moramos em São Paulo.",
+          "Es es un libro. — Isto é um livro.",
+          "Ellos trabajan el lunes. — Eles trabalham na segunda."
+        ]
+      },
+      {
+        "topic": "Artigos a / an / the",
+        "structure": "a + consoante | an + vogal | the (definido)",
+        "explanation": "a antes de som de consoante, an antes de som de vogal (an hour, a university). the aponta algo já conhecido. Sem artigo para plural genérico (I like cats) ou nomes próprios.",
+        "examples": [
+          "Tengo un gato. — Eu tenho um gato.",
+          "Ella comió una naranja. — Ela comeu uma laranja.",
+          "El libro está sobre la mesa. — O livro está sobre a mesa.",
+          "Los perros son amigables. — Cães são amigáveis."
+        ]
+      },
+      {
+        "topic": "Plural de substantivos",
+        "structure": "substantivo + s / es / (irregular)",
+        "explanation": "Geralmente + s (cats). Terminando em s, x, ch, sh ou o consoante: + es (boxes). Terminando em consoante + y: troca y por ies. Muitos irregulares: child→children, man→men, foot→feet.",
+        "examples": [
+          "un perro, dos perros. — um cão, dois cães.",
+          "una caja, tres cajas. — uma caixa, três caixas.",
+          "un hombre, muchos hombres. — um homem, muitos homens.",
+          "un niño, dos niños. — uma criança, duas crianças."
+        ]
+      },
+      {
+        "topic": "Present Simple (afirmativo)",
+        "structure": "Sujeto + verbo(base) / -s (he/she/it)",
+        "explanation": "Expressa fatos, rotinas e hábitos. He/She/It leva -s (works) ou -es (goes, watches). have vira has na 3ª pessoa. Outras pessoas usam o verbo na base.",
+        "examples": [
+          "Yo trabajo todos los días. — Eu trabalho todo dia.",
+          "Él va a la escuela. — Ele vai à escola.",
+          "Nosotros gustan el café. — Nós gostamos de café.",
+          "Ella tiene un coche rojo. — Ela tem um carro vermelho."
+        ]
+      },
+      {
+        "topic": "Adjetivos possessivos",
+        "structure": "my / your / his / her / its / our / their + nome",
+        "explanation": "Indicam posse e concordam com o dono, não com o objeto. my, your, his, her, its, our, their. Não usam artigo junto (my car, não the my car).",
+        "examples": [
+          "Este es mi teléfono. — Este é meu telefone.",
+          "Su nombre es John. — O nome dele é John.",
+          "Nos encanta nuestra ciudad. — Nós amamos nossa cidade.",
+          "Su casa es grande. — A casa deles é grande."
+        ]
+      },
+      {
+        "topic": "Demonstrativos this / that / these / those",
+        "structure": "this/that (sing.) | these/those (pl.)",
+        "explanation": "this/these = perto de quem fala; that/those = longe. this book (este livro), that car (aquele carro), these dogs (estes cães), those houses (aquelas casas).",
+        "examples": [
+          "Esta es mi silla. — Esta é minha cadeira.",
+          "Ese es un edificio alto. — Aquela é um prédio alto.",
+          "Estas manzanas están frescas. — Estas maçãs estão frescas.",
+          "Esos zapatos son caros. — Aqueles sapatos são caros."
+        ]
+      },
+      {
+        "topic": "Preposições de lugar",
+        "structure": "in / on / under / next to / between",
+        "explanation": "in (dentro), on (sobre superfície), under (embaixo), next to (ao lado de), between (entre dois). Indispensáveis para descrever posição.",
+        "examples": [
+          "El gato está en la caja. — O gato está na caixa.",
+          "El libro está sobre la mesa. — O livro está sobre a mesa.",
+          "La pelota está debajo de la cama. — A bola está debaixo da cama.",
+          "Ella se sienta entre Tom y Mary. — Ela senta entre Tom e Mary."
+        ]
+      },
+      {
+        "topic": "Días de la Semana",
+        "structure": "lunes / martes / miércoles / jueves / viernes / sábado / domingo",
+        "explanation": "Los días de la semana no se capitalizan en español. Se usan con 'los' para habitual: los lunes (every Monday). Para días específicos, se usa 'el': el lunes (this Monday). Abreviaturas: lun, mar, mié, jue, vie, sáb, dom.",
+        "examples": [
+          "Trabajo el lunes. — Eu trabalho na segunda-feira.",
+          "La reunión es el miércoles. — A reunião é na quarta-feira.",
+          "Jugamos fútbol los sábados. — Nós jogamos futebol aos sábados.",
+          "El domingo es día de descanso. — Domingo é dia de descanso."
+        ]
+      },
+      {
+        "topic": "Meses del Año",
+        "structure": "enero / febrero / marzo / abril / mayo / junio / julio / agosto / septiembre / octubre / noviembre / diciembre",
+        "explanation": "Los meses no se capitalizan en español. Se usan con 'en': en enero, en diciembre. Para cumpleaños: en marzo (mes) vs el 15 de marzo (fecha específica). Abreviaturas: ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic.",
+        "examples": [
+          "Mi cumpleaños es en marzo. — Meu aniversário é em março.",
+          "La Navidad es en diciembre. — O Natal é em dezembro.",
+          "La escuela empieza en septiembre. — A escola começa em setembro.",
+          "Hace calor en julho. — É quente em julho."
+        ]
+      },
+      {
+        "topic": "Números Cardinales",
+        "structure": "uno, dos, tres, cuatro, cinco... (1, 2, 3, 4, 5...)",
+        "explanation": "Los números cardinales se usan para contar: una manzana, dos libros. Para fechas, se usan números ordinales (ver siguiente tema). Los números 1-10 deben memorizarse. 11-19 son irregulares (once, doce, trece...). 20-90 terminan en -enta (veinte, treinta, cuarenta...).",
+        "examples": [
+          "Tengo tres gatos. — Eu tenho três gatos.",
+          "Ella tiene veinticinco años. — Ela tem vinte e cinco anos.",
+          "Hay doce meses en un año. — Há doze meses no ano.",
+          "Él compró veinte libros. — Ele comprou vinte livros."
+        ]
+      },
+      {
+        "topic": "Números Ordinales",
+        "structure": "1º primero / 2º segundo / 3º tercero / 4º cuarto / 5º quinto...",
+        "explanation": "Los números ordinales muestran posición u orden: primero, segundo, tercero, cuarto, quinto... La mayoría se forman añadiendo -o al cardinal (cuarto, quinto, sexto). Excepciones: primero (1º), segundo (2º), tercero (3º). Para fechas: 1 de enero (primero), 2 de marzo (segundo).",
+        "examples": [
+          "Este es mi primer día. — Este é meu primeiro dia.",
+          "Ella ganó el segundo lugar. — Ela ganhou segundo lugar.",
+          "Enero es el primer mes. — Janeiro é o primeiro mês.",
+          "Él vive en el tercer piso. — Ele mora no terceiro andar."
+        ]
+      },
+      {
+        "topic": "Cómo Decir Fechas",
+        "structure": "el + ordinal + de + mes: el 1º de enero / el 2 de marzo",
+        "explanation": "En español, las fechas usan números ordinales: 1º de enero (primero), 2 de marzo (segundo), 3 de abril (tercero). El formato es: el + ordinal + de + mes. Para años, se dice el número: 2026 = dos mil veintiséis.",
+        "examples": [
+          "Mi cumpleaños es el 15 de marzo. — Meu aniversário é no dia 15 de março.",
+          "La Navidad es el 25 de diciembre. — O Natal é no dia 25 de dezembro.",
+          "El proyecto empieza el 1º de enero. — O projeto começa no dia 1º de janeiro.",
+          "Nos conocimos el 3 de junho. — Nós nos conhecemos no dia 3 de junho."
+        ]
+      }
+    ],
+    "A2": [
+      {
+        "topic": "Presente simple (negativo e interrogativo)",
+        "structure": "do/does + not + verbo(base) | Do/Does + Sujeto + verbo?",
+        "explanation": "Usa-se o auxiliar do/does. Negativo: don't/doesn't + verbo base (sem -s). Interrogativo: Do/Does + sujeito + verbo base. He/She/It usa does, mas o verbo principal perde o -s.",
+        "examples": [
+          "No me gusta el té. — Eu não gosto de chá.",
+          "¿Ella habla francés? — Ela fala francês?",
+          "Ellos no viven aquí. — Eles não moram aqui.",
+          "¿No tenemos clase hoy? — Não temos aula hoje?"
+        ]
+      },
+      {
+        "topic": "Pretérito simple",
+        "structure": "verbo + ed (regular) | irregular (went, ate)",
+        "explanation": "Ações concluídas no passado. Regulares: + ed (played, studied). Irregulares comuns: go→went, eat→ate, see→saw, buy→bought. Negativo/interrogativo com did + base.",
+        "examples": [
+          "Visitaba a mi abuela. — Eu visitei minha avó.",
+          "Fue al mercado. — Ele foi ao mercado.",
+          "No vimos la tele. — Nós não assistimos TV.",
+          "¿Compraste las entradas? — Você comprou os ingressos?"
+        ]
+      },
+      {
+        "topic": "Preposiciones de tiempo in / on / at",
+        "structure": "in + período | on + dia | at + hora",
+        "explanation": "in + meses/anos/estações (in July, in 2020, in summer). on + dias y fechas (on Monday, on July 4th). at + horas y momentos (at 7 o'clock, at night, at the weekend no RU).",
+        "examples": [
+          "La fiesta es en diciembre. — A festa é em dezembro.",
+          "Nos encontramos el viernes. — Nós nos encontramos na sexta.",
+          "El autobús sale a las nueve. — O ônibus sai às nove.",
+          "Nació el 2 de marzo. — Ela nasceu em 2 de março."
+        ]
+      },
+      {
+        "topic": "There is / There are",
+        "structure": "There is (sing.) / There are (pl.) (+ not)",
+        "explanation": "Para dizer que algo existe ou está presente. there is (singular/indescritível), there are (plural). Negativo: isn't / aren't. Interrogativo: Is/Are there...?",
+        "examples": [
+          "Hay un parque cerca de mi casa. — Há um parque perto de casa.",
+          "Hay dos gatos. — Há dois gatos.",
+          "No hay leche. — Não há leite nenhum.",
+          "¿Hay estudiantes en la sala? — Há alunos na sala?"
+        ]
+      },
+      {
+        "topic": "Can / Can't (habilidad y permiso)",
+        "structure": "can + verbo(base) | can't + verbo(base)",
+        "explanation": "can indica capacidade ou permissão; não varia com o sujeito e é seguido do verbo na base. Negativo: can't. Interrogativo: Can + sujeito + base. Passado: could.",
+        "examples": [
+          "Sé nadar. — Eu sei nadar.",
+          "Ella no puede conducir. — Ela não sabe dirigir.",
+          "¿Puedes ayudarme? — Você pode me ajudar?",
+          "Podíamos ver las estrellas. — Nós conseguíamos ver as estrelas."
+        ]
+      },
+      {
+        "topic": "Comparativos y superlativos",
+        "structure": "adj + er / more + adj | the + adj + est / most",
+        "explanation": "Comparativo: -er (taller) ou more + adj longo (more beautiful), com than. Superlativo: -est (tallest) ou most + adj, com the. Irregulares: good→better→best, bad→worse→worst.",
+        "examples": [
+          "Es más alto que yo. — Ele é mais alto que eu.",
+          "Este libro es más interesante. — Este livro é mais interessante.",
+          "Ella es la mejor estudiante. — Ela é a melhor aluna.",
+          "Ese fue el peor día. — Aquele foi o pior dia."
+        ]
+      },
+      {
+        "topic": "Pronombres de objeto",
+        "structure": "me / you / him / her / it / us / them",
+        "explanation": "Substituem o objeto da ação (recebedor). me, you, him, her, it, us, them. Vêm após verbos ou preposições (I saw him / with them).",
+        "examples": [
+          "Ella me llamó ayer. — Ela me ligou ontem.",
+          "Los invitamos a la fiesta. — Nós os convidamos para a festa.",
+          "Él le dio un regalo a ella. — Ele deu um presente a ela.",
+          "Habla con nosotros más tarde. — Converse conosco mais tarde."
+        ]
+      },
+      {
+        "topic": "Cuantificadores some / any / much / many",
+        "structure": "some (afir.) | any (neg./interrog.) | much/many",
+        "explanation": "some em afirmativas e ofertas; any em negativas e perguntas. much com incontáveis (much water); many com contáveis (many friends). a lot of serve para ambos.",
+        "examples": [
+          "Tengo algo de dinero. — Eu tenho algum dinheiro.",
+          "¿Tienes alguna pregunta? — Você tem alguma pergunta?",
+          "No hay mucho tiempo. — Não há muito tempo.",
+          "¿Cuántos estudiantes hay? — Quantos alunos há?"
+        ]
+      }
+    ],
+    "B1": [
+      {
+        "topic": "Presente continuo",
+        "structure": "am/is/are + verbo-ing",
+        "explanation": "Acciones en progreso en el momento o temporales. Frecuentemente con now, at the moment, today. También para hábitos irritantes (He is always complaining).",
+        "examples": [
+          "I am reading a book now. — Estoy leyendo un libro ahora.",
+          "She is working today. — Ella está trabajando hoy.",
+          "They are not sleeping. — Ellos no están durmiendo.",
+          "What are you doing? — ¿Qué estás haciendo?"
+        ]
+      },
+      {
+        "topic": "Pasado continuo",
+        "structure": "was/were + verbo-ing",
+        "explanation": "Acción en progreso en el pasado, a menudo interrumpida por otra (when + Past Simple). También para fondos narrativos (It was raining).",
+        "examples": [
+          "I was taking a shower when you called. — Estaba duchándome cuando llamaste.",
+          "They were playing football. — Estaban jugando al fútbol.",
+          "It was raining all day. — Llovía todo el día.",
+          "While I was cooking, he set the table. — Mientras cocinaba, él puso la mesa."
+        ]
+      },
+      {
+        "topic": "Presente perfecto",
+        "structure": "have/has + participio pasado",
+        "explanation": "Conexión entre pasado y presente. Acciones recientes con yet/already, experiencias de vida, acciones que continúan. For/since indican duración.",
+        "examples": [
+          "I have just eaten. — Acabo de comer.",
+          "She has lived here for five years. — Vive aquí desde hace cinco años.",
+          "Have you ever been to Spain? — ¿Has estado alguna vez en España?",
+          "We haven't finished yet. — Todavía no hemos terminado."
+        ]
+      },
+      {
+        "topic": "Futuro: will / going to",
+        "structure": "will + base | am/is/are going to + base",
+        "explanation": "will para decisões no momento, ofertas e previsões sem prova. going to para planos já decididos e previsões com sinais no presente (Look at the sky!).",
+        "examples": [
+          "Yo te ayudaré. — Eu vou te ajudar (agora decidi).",
+          "¡Mira el cielo! Va a llover. — Olhe o céu! Vai chover.",
+          "Vamos a viajar en julio. — Vamos viajar em julho.",
+          "Creo que ella lo apreciará. — Acho que ela vai gostar."
+        ]
+      },
+      {
+        "topic": "Primer condicional",
+        "structure": "If + presente, will + base",
+        "explanation": "Para situaciones reales y posibles en el futuro. If + presente simple, resultado con will/can/may.",
+        "examples": [
+          "If it rains, we will stay home. — Si llueve, nos quedaremos en casa.",
+          "I will help you if you need me. — Te ayudaré si me necesitas.",
+          "She will call if she arrives late. — Llamará si llega tarde.",
+          "If you study, you will pass. — Si estudias, aprobarás."
+        ]
+      },
+      {
+        "topic": "Pronombres relativos who / which / that",
+        "structure": "sustantivo + who/which/that + sujeto + verbo",
+        "explanation": "who para personas, which para cosas, that para ambos. Introducen cláusulas descriptivas. En habla informal, who/which pueden omitirse.",
+        "examples": [
+          "The man who called is my friend. — El hombre que llamó es mi amigo.",
+          "The book which I bought is great. — El libro que compré es genial.",
+          "The place that we visited was beautiful. — El lugar que visitamos era hermoso.",
+          "She is someone who works hard. — Es alguien que trabaja duro."
+        ]
+      },
+      {
+        "topic": "Pasado de modales could / would / should",
+        "structure": "could / would / should + base",
+        "explanation": "could = posibilidad/pasado de can. would = acción habitual en el pasado o condicional. should = consejo o debería. Would you like...? para ofertas cortesas.",
+        "examples": [
+          "I could swim when I was five. — Podía nadar cuando tenía cinco años.",
+          "He would walk to school every day. — Caminaba a la escuela todos los días.",
+          "You should see a doctor. — Deberías ver a un médico.",
+          "Would you like some coffee? — ¿Te gustaría un poco de café?"
+        ]
+      },
+      {
+        "topic": "Tag questions (preguntas etiqueta)",
+        "structure": "afirmativo + , + auxiliar + sujeto negativo?",
+        "explanation": "Se añaden para buscar confirmación. Afirmativo + tag negativo (She is, isn't she?). Negativo + tag afirmativo (They don't, do they?).",
+        "examples": [
+          "You are a teacher, aren't you? — Eres profesor, ¿no?",
+          "She works here, doesn't she? — Ella trabaja aquí, ¿no?",
+          "They haven't arrived yet, have they? — Aún no han llegado, ¿verdad?",
+          "Nobody came, did they? — No vino nadie, ¿verdad?"
+        ]
+      }
+    ],
+    "B2": [
+      {
+        "topic": "Presente perfecto continuo",
+        "structure": "have/has been + verbo-ing",
+        "explanation": "Acciones que empezaron en el pasado y continúan hasta ahora. For/since indican duración. Enfatiza la duración o la actividad reciente.",
+        "examples": [
+          "I have been studying for three hours. — He estado estudiando por tres horas.",
+          "She has been working here since 2020. — Lleva trabajando aquí desde 2020.",
+          "We have been waiting for an hour. — Llevamos esperando una hora.",
+          "It has been raining all day. — Ha estado lloviendo todo el día."
+        ]
+      },
+      {
+        "topic": "Segundo condicional",
+        "structure": "If + pasado simple, would + base",
+        "explanation": "Para situaciones hipotéticas o irreales en el presente/futuro. If + pasado simple (were para all), resultado con would/could/might.",
+        "examples": [
+          "If I had more time, I would travel more. — Si tuviera más tiempo, viajaría más.",
+          "If she were the boss, she would change things. — Si fuera la jefa, cambiaría las cosas.",
+          "I would help you if I could. — Te ayudaría si pudiera.",
+          "If I won the lottery, I would buy a house. — Si ganara la lotería, compraría una casa."
+        ]
+      },
+      {
+        "topic": "Voz pasiva",
+        "structure": "be + participio pasado (por agente)",
+        "explanation": "El objeto de la acción se convierte en sujeto. Se usa cuando el actor es desconocido, irrelevante o se quiere enfatizar el objeto. Por agente con by (opcional).",
+        "examples": [
+          "The房子 was built in 1990. — La casa fue construida en 1990.",
+          "English is spoken here. — Se habla inglés aquí.",
+          "The letter was written by her. — La carta fue escrita por ella.",
+          "Mistakes were made. — Se cometieron errores."
+        ]
+      },
+      {
+        "topic": "Estilo indirecto",
+        "structure": "comillas → que + sujeto + verbo (ajuste de tiempos)",
+        "explanation": "Se reporta lo dicho sin comillas directas. Los tiempos verbales retroceden: presente→pasado, will→would, can→could. Los pronombres y tiempos cambian según contexto.",
+        "examples": [
+          "She said, I am tired. → She said (that) she was tired. — Dijo que estaba cansada.",
+          "He told me, I will come. → He told me he would come. — Me dijo que vendría.",
+          "They asked, Are you ready? → They asked if I was ready. — Preguntaron si estaba listo/a.",
+          "She said she had already eaten. — Dijo que ya había comido."
+        ]
+      },
+      {
+        "topic": "Verbos modales de deducción",
+        "structure": "must / might / could / can't + verbo base",
+        "explanation": "must for certeza fuerte, mustn't para prohibición. might/could para probabilidad. can't para deducción negativa (imposibilidad). La forma mustn't ≠ must not (prohibición vs deducción negativa).",
+        "examples": [
+          "He must be tired; he worked all day. — Debe estar cansado; trabajó todo el día.",
+          "She might have missed the bus. — Pudo haber perdido el autobús.",
+          "They can't know the truth. — No pueden saber la verdad.",
+          "You mustn't tell anyone. — No debes decírselo a nadie."
+        ]
+      },
+      {
+        "topic": "Used to / Would (hábitos pasados)",
+        "structure": "used to + base | would + base (pasado)",
+        "explanation": "used to descreve hábitos e estados do passado que não existem mais (I used to smoke). would descreve ações repetidas no passado (narrativa), não estados.",
+        "examples": [
+          "Yo solía vivir en el Río. — Eu costumava morar no Rio.",
+          "Ella solía tocar el piano. — Ela tocava piano antigamente.",
+          "Cada verano visitábamos a la abuela. — Cada verão visitávamos a vovó.",
+          "No solía gustarle el café. — Ele não costumava gostar de café."
+        ]
+      },
+      {
+        "topic": "Verbos frasales comunes",
+        "structure": "verbo + partícula/preposición = nuevo significado",
+        "explanation": "Combinaciones verbo + partícula (look up, give up) o verbo + preposición (look after, run into). Muchos son idiomatic — el significado no se deduce del componente individual.",
+        "examples": [
+          "She gave up smoking. — Dejó de fumar.",
+          "Can you look up this word? — ¿Puedes buscar esta palabra?",
+          "He is looking after the children. — Cuida de los niños.",
+          "They ran into an old friend. — Se encontraron con un viejo amigo."
+        ]
+      },
+      {
+        "topic": "Artículo zero con genéricos",
+        "structure": "sin artículo para plurales genéricos y sustantivos incontables abstractos",
+        "explanation": "En inglés se omite el artículo al hablar en general de plurales o incontables. En español se traduce con el sustantivo solo o 'de lo + adj'.",
+        "examples": [
+          "Dogs are loyal animals. — Los perros son animales leales.",
+          "Knowledge is power. — El conocimiento es poder.",
+          "I love music. — Me encanta la música.",
+          "Honesty is important. — La honestidad es importante."
+        ]
+      }
+    ],
+    "C1": [
+      {
+        "topic": "Tercer condicional",
+        "structure": "If + pasado perfecto, would have + participio pasado",
+        "explanation": "Para situaciones hipotéticas irrealizadas del pasado. If + past perfect, resultado con would have + participio. Expresa arrepentimiento o consecuencias imaginadas.",
+        "examples": [
+          "If I had studied harder, I would have passed. — Si hubiera estudiado más, habría aprobado.",
+          "She would have called if she had known. — Habría llamado si hubiera sabido.",
+          "If they had left earlier, they would have arrived on time. — Si hubieran salido antes, habrían llegado a tiempo.",
+          "I would never have believed it if I hadn't seen it. — No me lo habría creído si no lo hubiera visto."
+        ]
+      },
+      {
+        "topic": "Inversión tras negaciones y condicionales",
+        "structure": "Had/Sold/Were + sujeto + resto (sin 'if')",
+        "explanation": "Para énfasis formal. Had I known, were I to be, should you need. También en frases con Never/Rarely/Only al inicio (inversión total).",
+        "examples": [
+          "Had I known, I would have helped. — Si lo hubiera sabido, habría ayudado.",
+          "Never have I seen such beauty. — Nunca he visto tanta belleza.",
+          "Were it not for you, I would have failed. — Si no fuera por ti, habría fracasado.",
+          "Only then did I understand. — Solo entonces entendí."
+        ]
+      },
+      {
+        "topic": "Wish / If only",
+        "structure": "wish + pasado simple / past perfect",
+        "explanation": "Wish para situaciones contrafactoriales: presente/futuro con pasado simple, pasado con past perfect. If only é mais enfático e expresivo.",
+        "examples": [
+          "I wish I spoke better English. — Ojalá hablara mejor inglés.",
+          "She wishes she had accepted the job. — Deseara que hubiera aceptado el trabajo.",
+          "If only we had more time! — ¡Si tuviéramos más tiempo!",
+          "I wish it were not so cold. — Ojalá no hiciera tanto frío."
+        ]
+      },
+      {
+        "topic": "Pasiva con modales y causativo",
+        "structure": "modal + be + participio pasado | have/get + algo + participio pasado",
+        "explanation": "Modal + be + past participle para obligación o deducción en voz pasiva. Have/get + object + past participle para causar que algo se haga por otro (servicios).",
+        "examples": [
+          "The car must be checked every year. — El coche debe ser revisado cada año.",
+          "You should be more careful. — Deberías ser más cuidadoso.",
+          "I had my car repaired. — Hice reparar mi coche.",
+          "They are getting the house painted. — Están pintando la casa."
+        ]
+      },
+      {
+        "topic": "Colocaciones avanzadas",
+        "structure": "sustantivo + adecuado (strong collocation)",
+        "explanation": "Pares de palabras frecuentemente combinados que suenan natural en inglés. Hacer las combinaciones correctas es clave para sonar fluido y natural.",
+        "examples": [
+          "make a decision / do research",
+          "take a risk / break a record",
+          "heavy rain / strong wind / deep sleep",
+          "meet a deadline / keep a promise / raise awareness"
+        ]
+      },
+      {
+        "topic": "Estilo indirecto con tiempos perfectos",
+        "structure": "reported speech con tense shifts a perfectos",
+        "explanation": "Cuando el verbo reportado está en present perfect o future, el reported speech puede usar past perfect. The tense shift reflects the distance from the moment of speaking.",
+        "examples": [
+          "She said, I have finished. → She said that she had finished.",
+          "He told me, I will leave tomorrow. → He told me he would leave the next day.",
+          "We asked, Have you ever been? → We asked if they had ever been.",
+          "He said he had never seen such a thing."
+        ]
+      },
+      {
+        "topic": "Estructuras de preferencia (would rather / it's time)",
+        "structure": "would rather + base | it's (high) time + pasado simple",
+        "explanation": "Would rather expresa preferência; seguido de sujeito + base (ou + sujeito + past simple). It's time + past simple para sugerir que algo já deveria ter acontecido.",
+        "examples": [
+          "I would rather stay home. — Preferiría quedarme en casa.",
+          "I would rather you left earlier. — Preferiría que te fueras antes.",
+          "It's time we left. — É hora de que nos fuéramos.",
+          "It's high time you got serious. — Ya es hora de que te pongas serio."
+        ]
+      }
+    ],
+    "C2": [
+      {
+        "topic": "Oraciones cleft (ênfasis)",
+        "structure": "It is/was + elemento enfatizado + who/that + resto",
+        "explanation": "Para enfatizar un elemento específico de la oración. It-cleft divide la información en dos cláusulas sujetas. También: what-clause cleft y negative cleft.",
+        "examples": [
+          "It was John who called. — Fue Juan quien llamó.",
+          "It is important that we finish on time. — Es importante que terminemos a tiempo.",
+          "What I need is more time. — Lo que necesito es más tiempo.",
+          "It was not until midnight that I finished. — No fue hasta medianoche que terminé."
+        ]
+      },
+      {
+        "topic": "Estilo indirecto complejo",
+        "structure": "embedded questions / reported commands / mixed conditionals",
+        "explanation": "Preguntas embedidas (I asked if/whether...), órdenes reportadas (He told me to...), estructuras mixtas (condicionales con tiempos de referencia distintos).",
+        "examples": [
+          "She asked me where I had been. — Me preguntó dónde había estado.",
+          "The teacher told the students to be quiet. — La profesora les dijo a los estudiantes que se callaran.",
+          "If I had known, I would be richer now. — Si hubiera sabido, ahora sería más rico.",
+          "He wishes he had studied harder, but it is too late now."
+        ]
+      },
+      {
+        "topic": "Conectores discursivos sofisticados",
+        "structure": "nonetheless / nevertheless / whereas / furthermore / notwithstanding",
+        "explanation": "Conectores avançados para unir ideias com matizes. Whereas (oposição), nevertheless (concessão), furthermore (adição), notwithstanding (apesar de), moreover (adição formal).",
+        "examples": [
+          "The proposal was expensive; nevertheless, it was approved.",
+          "Some people prefer city life, whereas others favour rural areas.",
+          "Notwithstanding the difficulties, we succeeded.",
+          "Furthermore, recent studies support this conclusion."
+        ]
+      },
+      {
+        "topic": "Preposiciones idiomáticas",
+        "structure": "preposición fija con sustantivos/verbos específicos",
+        "explanation": "Muitos verbos e substantivos em inglês exigem preposições específicas e inesperadas. Não se podem traduzir palavra por palavra; são fixas por uso.",
+        "examples": [
+          "depend on (not depend of)",
+          "interested in (not interested on)",
+          "responsible for (not responsible of)",
+          "apologize for (not apologize about)"
+        ]
+      },
+      {
+        "topic": "Registro y matices de tono",
+        "structure": "formal/informal/colloquial según contexto",
+        "explanation": "O inglês varia enormemente según o registro. Formal usa would rather, shall, might bem; informal usa gonna, wanna, gotta. O registro incorrecto pode ser ofensivo ou ineficaz.",
+        "examples": [
+          "Formal: Shall I assist you? → Informal: Can I help you?",
+          "Formal: I would be grateful. → Informal: Thanks a lot.",
+          "Formal: It is imperative that we act now. → Coloquial: We need to do something ASAP.",
+          "I ain't gonna do that (muy informal/coloquial) vs I will not do that (formal)"
+        ]
+      },
+      {
+        "topic": "Fronting y énfasis con adverbios",
+        "structure": "Adverbio/complemento al inicio → inversión o énfase",
+        "explanation": "Colocar informação nova ou enfática no início da frase para énfase. Inversão parcial con negative adverbials (Never, Rarely, Only, Little).",
+        "examples": [
+          "Never have I experienced such kindness.",
+          "Only then did I realize the truth.",
+          "In the corner of the room sat a small cat.",
+          "Little did he know what was to come."
+        ]
+      },
+      {
+        "topic": "Elipsis y estructuras compactas",
+        "structure": "omisión de elementos repetidos para concisión",
+        "explanation": "Elipsis: omitir palavras recuperables do contexto. Estruturas com so/such...that, too...to, enough...to. Notação de elipsis é comum em leitura avançada.",
+        "examples": [
+          "I have never been so happy (as I am now). — (omisión de 'as I am now')",
+          "Too tired to continue. — Demasiado cansado para continuar.",
+          "He is tall enough to reach the shelf. — É lo suficientemente alto para alcançar o prateleira.",
+          "She speaks English better (than I do). — (omisión de 'than I do')"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,148 @@
+<section class="hero">
+<div class="container hero-grid">
+<div class="hero-content">
+<div class="hero-badge">🇬🇧 Established in London · Since 2001</div>
+<h1>Learn English.<span> Live Without Limits.</span></h1>
+<p>Britlearn Academy helps learners around the world speak English with confidence through practical lessons, experienced teachers and modern technology.</p>
+<div class="hero-buttons">
+<a href="#courses" class="btn btn-primary">Explore Courses →</a>
+<a href="index.php?page=story" class="btn btn-outline">Discover Our Story</a>
+</div>
+<div class="hero-stats">
+<div><strong>25+</strong><span>Years of Experience</span></div>
+<div><strong>50K+</strong><span>Students Worldwide</span></div>
+<div><strong>120+</strong><span>Expert Teachers</span></div>
+</div>
+</div>
+<div class="hero-visual">
+<div class="london-card">
+<span class="london-label">LONDON · UNITED KINGDOM</span>
+<h3>Your English journey starts here.</h3>
+<p>Inspired by the language, culture and energy of London.</p>
+</div>
+<div class="floating-card card-one">🎧 <span><strong>Listening</strong>Practice real English</span></div>
+<div class="floating-card card-two">💬 <span><strong>Speaking</strong>Build confidence</span></div>
+</div>
+</div>
+</section>
+
+<section class="trust-section">
+<div class="container trust-content">
+<p>TRUSTED BY ENGLISH LEARNERS AROUND THE WORLD</p>
+<div class="trust-items">
+<span>🇬🇧 London</span>
+<span>🌎 Global Learning</span>
+<span>🎓 Expert Teachers</span>
+<span>📱 Modern Technology</span>
+</div>
+</div>
+</section>
+
+<section class="courses section" id="courses">
+<div class="container">
+<div class="section-heading">
+<span class="eyebrow">OUR PROGRAMMES</span>
+<h2>English designed for <span>your future.</span></h2>
+<p>From your first English conversation to professional communication, we have a learning path for you.</p>
+</div>
+<div class="course-grid">
+<article class="course-card">
+<div class="course-icon">🌱</div>
+<h3>Beginner English</h3>
+<p>Build a strong foundation with essential vocabulary, pronunciation and everyday conversations.</p>
+<ul><li>✓ A1–A2 Level</li><li>✓ Everyday English</li><li>✓ Speaking Practice</li></ul>
+<a href="index.php?page=contact">Learn more →</a>
+</article>
+<article class="course-card featured">
+<div class="popular-badge">MOST POPULAR</div>
+<div class="course-icon">🚀</div>
+<h3>English for Professionals</h3>
+<p>Communicate confidently in meetings, interviews, presentations and international workplaces.</p>
+<ul><li>✓ Business English</li><li>✓ Job Interviews</li><li>✓ Professional Communication</li></ul>
+<a href="index.php?page=contact">Learn more →</a>
+</article>
+<article class="course-card">
+<div class="course-icon">🎓</div>
+<h3>Advanced English</h3>
+<p>Refine your fluency, pronunciation and communication skills for academic and professional environments.</p>
+<ul><li>✓ C1–C2 Level</li><li>✓ Advanced Speaking</li><li>✓ Cultural Fluency</li></ul>
+<a href="index.php?page=contact">Learn more →</a>
+</article>
+</div>
+</div>
+</section>
+
+<section class="app-section section" id="app">
+<div class="container app-grid">
+<div class="app-content">
+<span class="eyebrow">NOW AVAILABLE</span>
+<h2>Start your English journey <span>with Britlearn App.</span></h2>
+<p>The Britlearn App brings your English learning experience wherever you go.</p>
+<p>Practice speaking, improve your vocabulary, receive intelligent feedback and create a personalised learning routine.</p>
+<div class="app-features">
+<div><span>🗣️</span><div><h4>Speak & Practise</h4><p>Improve your confidence through interactive speaking exercises.</p></div></div>
+<div><span>🧠</span><div><h4>Smart Learning</h4><p>Personalised lessons designed around your progress.</p></div></div>
+<div><span>📊</span><div><h4>Track Progress</h4><p>Follow your evolution and stay motivated every day.</p></div></div>
+</div>
+<a href="/app" class="btn btn-primary btn-large">Acessar APP →</a>
+</div>
+<div class="phone-wrapper">
+<div class="phone">
+<div class="phone-top"></div>
+<div class="phone-screen">
+<div class="app-logo">🇬🇧 <span>Britlearn</span></div>
+<h3>Good evening,<br><span>Alex 👋</span></h3>
+<p>Continue your learning journey.</p>
+<div class="progress-card">
+<div class="progress-header"><span>Weekly Progress</span><strong>78%</strong></div>
+<div class="progress-bar"><div></div></div>
+<small>🔥 5 day streak</small>
+</div>
+<div class="lesson-card">
+<span class="lesson-icon">🎧</span>
+<div><strong>Daily Conversation</strong><small>15 minutes · Intermediate</small></div>
+<button>▶</button>
+</div>
+</div>
+</div>
+<div class="launch-badge"><span>🚀</span><div><strong>Start Learning</strong><small>Britlearn App</small></div></div>
+</div>
+</div>
+</section>
+
+<section class="story-preview section">
+<div class="container story-grid">
+<div class="story-year"><span>Since</span><strong>2001</strong><small>London, UK</small></div>
+<div class="story-content">
+<span class="eyebrow">OUR STORY</span>
+<h2>From one small classroom in London <span>to a global community.</span></h2>
+<p>Britlearn Academy began with a simple idea: learning English should feel practical, inspiring and human.</p>
+<p>More than two decades later, our mission remains the same — helping people unlock opportunities through communication.</p>
+<a href="index.php?page=story" class="text-link">Read our story →</a>
+</div>
+</div>
+</section>
+
+<section class="testimonials section">
+<div class="container">
+<div class="section-heading center">
+<span class="eyebrow">STUDENT STORIES</span>
+<h2>More confidence. <span>More opportunities.</span></h2>
+</div>
+<div class="testimonial-grid">
+<article><div class="stars">★★★★★</div><p>"Britlearn completely changed the way I learn English. I stopped being afraid of speaking."</p><strong>Maria S.</strong><span>Brazil</span></article>
+<article><div class="stars">★★★★★</div><p>"The practical approach helped me prepare for an international job interview."</p><strong>Daniel R.</strong><span>Spain</span></article>
+<article><div class="stars">★★★★★</div><p>"It feels like learning English for real life, not just memorising grammar rules."</p><strong>Anna K.</strong><span>Poland</span></article>
+</div>
+</div>
+</section>
+
+<section class="cta-section">
+<div class="container">
+<div>
+<span>YOUR JOURNEY STARTS TODAY</span>
+<h2>Ready to speak English <em>with confidence?</em></h2>
+</div>
+<a href="index.php?page=contact" class="btn btn-light">Start Your Journey →</a>
+</div>
+</section>

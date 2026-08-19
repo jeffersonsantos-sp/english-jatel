@@ -1,0 +1,297 @@
+{
+  "iniciante": {
+    "rotina": [
+      {
+        "text": "Ana se despierta a las siete. Se cepilla los dientes y desayuna. Luego va a la escuela en autobús. Por la noche hace la tarea.",
+        "glossary": {
+          "despierta": "acorda",
+          "cepilla": "escova",
+          "desayuna": "café da manhã",
+          "tarea": "lição de casa",
+          "noche": "noite"
+        }
+      },
+      {
+        "text": "Mi familia cena a las siete. Hablamos sobre nuestro día. Después de cenar, mi padre lava los platos y mi madre lee un libro.",
+        "glossary": {
+          "cena": "jantar",
+          "platos": "pratos/loiça",
+          "lava": "lava",
+          "lee": "lê",
+          "después": "depois"
+        }
+      },
+      {
+        "text": "Los sábados limpio mi habitación y juego con mi perro. Vamos al parque y corremos cerca del lago.",
+        "glossary": {
+          "limpio": "limpar",
+          "habitación": "quarto",
+          "parque": "parque",
+          "lago": "lago",
+          "cerca": "perto"
+        }
+      }
+    ],
+    "trabajo": [
+      {
+        "text": "Pedro trabaja en un hospital. Es enfermero. Ayuda a las personas enfermas cada día. Su turno comienza a las ocho de la mañana.",
+        "glossary": {
+          "hospital": "hospital",
+          "enfermero": "enfermeiro",
+          "enfermas": "doente",
+          "turno": "turno",
+          "mañana": "manhã"
+        }
+      },
+      {
+        "text": "María es profesora. Enseña matemáticas a los niños. A los estudiantes les gustan sus clases porque son divertidas y claras.",
+        "glossary": {
+          "profesora": "professora",
+          "matemáticas": "matemática",
+          "estudiantes": "alunos",
+          "clases": "aulas",
+          "claras": "claras"
+        }
+      },
+      {
+        "text": "La oficina está abierta de nueve a seis. Los empleados toman café y responden al teléfono. Usan computadoras todo el día.",
+        "glossary": {
+          "oficina": "escritório",
+          "empleados": "funcionários",
+          "teléfono": "telefone",
+          "computadoras": "computadores",
+          "abierta": "aberto"
+        }
+      }
+    ],
+    "viagem": [
+      {
+        "text": "Viajamos a Río de Janeiro el verano pasado. Visitamos la playa y comimos comida local. El viaje fue increíble y barato.",
+        "glossary": {
+          "viajamos": "viajou",
+          "verano": "verão",
+          "comida": "comida",
+          "viaje": "viagem",
+          "barato": "barato"
+        }
+      },
+      {
+        "text": "Mi amiga reservó un vuelo a Europa. Empacó dos maletas y tomó muchas fotos. El clima estaba frío allí.",
+        "glossary": {
+          "reservó": "reservou",
+          "vuelo": "voo",
+          "maletas": "malas",
+          "fotos": "fotos",
+          "frío": "frio"
+        }
+      },
+      {
+        "text": "En el hotel, dejamos nuestras maletas y salimos a caminar. La ciudad estaba animada y las personas eran amigables.",
+        "glossary": {
+          "hotel": "hotel",
+          "maletas": "malas",
+          "caminar": "caminhada",
+          "animada": "movimentada",
+          "amigables": "amigáveis"
+        }
+      }
+    ]
+  },
+  "intermediario": {
+    "rotina": [
+      {
+        "text": "Aunque a María no le gustan las mañanas, se despierta temprano para hacer ejercicio. Cree que una rutina saludable mejora su concentración en el trabajo.",
+        "glossary": {
+          "despierta": "acorda",
+          "ejercicio": "exercita",
+          "saludable": "saudável",
+          "rutina": "rotina",
+          "concentración": "foco"
+        }
+      },
+      {
+        "text": "Hemos reemplazado gradualmente el tiempo de pantalla con la lectura. Este pequeño cambio ha mejorado notablemente la calidad de nuestro sueño.",
+        "glossary": {
+          "gradualmente": "gradativamente",
+          "reemplazado": "substituiu",
+          "pantalla": "tela",
+          "calidad": "qualidade",
+          "sueño": "sono"
+        }
+      },
+      {
+        "text": "Él programa sus tareas la noche anterior. Al planificar con anticipación, evita el estrés de una mañana caótica.",
+        "glossary": {
+          "programa": "agenda",
+          "tareas": "tarefas",
+          "planificar": "planejando",
+          "evita": "evita",
+          "caótica": "caótico"
+        }
+      }
+    ],
+    "trabajo": [
+      {
+        "text": "El equipo realizó una retrospectiva para analizar lo que salió mal. Identificaron brechas de comunicación y propusieron soluciones concretas.",
+        "glossary": {
+          "retrospectiva": "retrospectiva",
+          "analizar": "analisar",
+          "brechas": "lacunas",
+          "propusieron": "propôs",
+          "concretas": "concretas"
+        }
+      },
+      {
+        "text": "Ella presentó los resultados trimestrales ante la junta. Aunque estaba nerviosa, respondió cada pregunta con claridad y confianza.",
+        "glossary": {
+          "presentó": "apresentou",
+          "trimestrales": "trimestral",
+          "junta": "conselho",
+          "claridad": "clareza",
+          "confianza": "confiança"
+        }
+      },
+      {
+        "text": "Nuestro departamento adoptó un horario flexible. Los empleados pueden elegir sus horas siempre que asistan a la reunión diaria de pie.",
+        "glossary": {
+          "departamento": "departamento",
+          "flexible": "flexível",
+          "horario": "horário",
+          "asistan": "participam",
+          "reunión diaria": "reunião diária"
+        }
+      }
+    ],
+    "viagem": [
+      {
+        "text": "Después de perder nuestro tren, reservamos un autobús de última hora. El retraso era molesto, sin embargo el paisaje por la carretera era impresionante.",
+        "glossary": {
+          "perder": "perdendo",
+          "última hora": "última hora",
+          "retraso": "atraso",
+          "paisaje": "paisagem",
+          "impresionante": "deslumbrante"
+        }
+      },
+      {
+        "text": "Nos apoyamos en una aplicación de traducción durante el viaje. Nos ayudó a leer los menús y pedir direcciones en un idioma extranjero.",
+        "glossary": {
+          "apoyamos": "dependemos",
+          "traducción": "tradução",
+          "menús": "cardápios",
+          "direcciones": "direções",
+          "extranjero": "estrangeira"
+        }
+      },
+      {
+        "text": "El albergue era básico pero limpio. Conocimos viajantes de cinco países e intercambiamos consejos sobre lugares accesibles para visitar.",
+        "glossary": {
+          "albergue": "albergue",
+          "básico": "básico",
+          "viajantes": "viajantes",
+          "accesibles": "acessível",
+          "lugares": "lugares"
+        }
+      }
+    ]
+  },
+  "avancado": {
+    "rotina": [
+      {
+        "text": "A pesar de un horario exigente, ella preserva un ritual matutino disciplinado anclado en la soledad y la reflexión.",
+        "glossary": {
+          "exigente": "exigente",
+          "preserva": "preserva",
+          "ritual": "ritual",
+          "soledad": "solidão",
+          "reflexión": "reflexão"
+        }
+      },
+      {
+        "text": "La selección deliberada de hábitos diarios, por modestos que sean, se acumula en resultados transformadores a largo plazo.",
+        "glossary": {
+          "selección": "curadoria",
+          "modestos": "modestas",
+          "acumula": "acumula",
+          "transformadores": "transformadoras",
+          "resultados": "resultados"
+        }
+      },
+      {
+        "text": "Él examina sus rutinas meticulosamente, podando las actividades que restan de su restauración cognitiva.",
+        "glossary": {
+          "examina": "analisa",
+          "podando": "poda",
+          "restan": "detraem",
+          "cognitiva": "cognitiva",
+          "restauración": "restauração"
+        }
+      }
+    ],
+    "trabajo": [
+      {
+        "text": "El paradigma actual de supervisión jerárquica está siendo desmantelado gradualmente en favor de la autonomía distribuida.",
+        "glossary": {
+          "actual": "incumbente",
+          "supervisión": "supervisão",
+          "desmantelado": "desmantelado",
+          "distribuida": "distribuída",
+          "autonomía": "autonomia"
+        }
+      },
+      {
+        "text": "Su delimitación perspicaz de los riesgos latentes galvanizó a las partes interesadas para prevenir una posible escalada ruin.",
+        "glossary": {
+          "perspicaz": "incisiva",
+          "delimitación": "delineamento",
+          "galvanizó": "galvanizou",
+          "prevenir": "prevenir",
+          "escalada": "escalada"
+        }
+      },
+      {
+        "text": "Debemos conciliar los incentivos divergentes, de lo contrario la fricción operacional se metamorfoseará en fragilidad sistémica.",
+        "glossary": {
+          "conciliar": "reconciliar",
+          "divergentes": "divergentes",
+          "incentivos": "incentivos",
+          "fricción": "fricção",
+          "sistémica": "sistêmica"
+        }
+      }
+    ],
+    "viagem": [
+      {
+        "text": "El itinerario fue meticulosamente calibrado para evitar fricciones logísticas, sin embargo la serendipia proporcionó los momentos más memorables.",
+        "glossary": {
+          "itinerario": "itinerário",
+          "calibrado": "calibrado",
+          "evitar": "evitar",
+          "serendipia": "serendipidade",
+          "memorables": "memoráveis"
+        }
+      },
+      {
+        "text": "Ella navegó el laberinto burocrático con aplomo, aprovechando el conocimiento local para evitar retrasos procedimentales.",
+        "glossary": {
+          "navegó": "navegou",
+          "laberinto": "labirinto",
+          "aplomo": "segurança",
+          "aprovechando": "usando",
+          "evitar": "contornar",
+          "retrasos": "atrasos"
+        }
+      },
+      {
+        "text": "El aparentemente austero lugar escondía una corriente subterránea de cultura vibrante que solo se reveló al observador paciente.",
+        "glossary": {
+          "aparentemente": "aparentemente",
+          "austero": "austero",
+          "lugar": "local",
+          "vibrante": "vibrante",
+          "observador": "observador"
+        }
+      }
+    ]
+  }
+}

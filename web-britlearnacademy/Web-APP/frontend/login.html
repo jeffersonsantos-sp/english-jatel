@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Britlearn App — Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/app/style.css" />
+</head>
+<body>
+  <div class="login-wrap">
+    <form id="login-form" class="login-card">
+      <div class="logo">🇬🇧</div>
+      <h1>Britlearn App</h1>
+      <p class="subtitle">Acesso restrito — faça login para continuar</p>
+      <label class="field-label" for="login-user">Usuário</label>
+      <input id="login-user" type="text" autocomplete="username" placeholder="admin" />
+      <label class="field-label" for="login-pass">Senha</label>
+      <input id="login-pass" type="password" autocomplete="current-password" placeholder="••••••••" />
+      <button id="login-btn" class="btn" type="submit">Entrar</button>
+      <div id="login-error" class="login-error"></div>
+    </form>
+  </div>
+
+  <script>
+    // Se já estiver autenticado, vai direto para o app
+    (async () => {
+      try {
+        const r = await fetch("/app/api/auth/me");
+        if (r.ok) window.location.href = "/app";
+      } catch (_) {}
+    })();
+
+    document.getElementById("login-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const user = document.getElementById("login-user").value;
+      const password = document.getElementById("login-pass").value;
+      const err = document.getElementById("login-error");
+      err.textContent = "";
+      try {
+        const r = await fetch("/app/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ user, password }),
+        });
+        if (r.ok) { window.location.href = "/app"; }
+        else { err.textContent = "Usuário ou senha inválidos"; }
+      } catch {
+        err.textContent = "Erro ao conectar";
+      }
+    });
+  </script>
+</body>
+</html>

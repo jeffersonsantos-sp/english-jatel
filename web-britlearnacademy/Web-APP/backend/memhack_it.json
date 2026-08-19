@@ -1,0 +1,39 @@
+{
+  "categories": ["saluti", "viaggi", "lavoro", "quotidianità"],
+  "labels": {
+    "saluti": "Saluti",
+    "viaggi": "Viaggi",
+    "lavoro": "Lavoro",
+    "quotidianità": "Quotidianità"
+  },
+  "phrases": {
+    "saluti": [
+      {"id": "saluti-1", "it": "Buongiorno, come sta?", "pt": "Bom dia, como vai?"},
+      {"id": "saluti-2", "it": "Mi chiamo Marco. E tu?", "pt": "Meu nome é Marco. E você?"},
+      {"id": "saluti-3", "it": "Piacere di conoscerti!", "pt": "Prazer em conhecê-lo!"},
+      {"id": "saluti-4", "it": "Arrivederci e buona giornata!", "pt": "Adeus e bom dia!"},
+      {"id": "saluti-5", "it": "Come va oggi?", "pt": "Como vai hoje?"}
+    ],
+    "viaggi": [
+      {"id": "viaggi-1", "it": "Dov'è la stazione dei treni?", "pt": "Onde fica a estação de trem?"},
+      {"id": "viaggi-2", "it": "Vorrei prenotare una camera doppia.", "pt": "Eu gostaria de reservar um quarto duplo."},
+      {"id": "viaggi-3", "it": "A che ora parte il prossimo autobus?", "pt": "A que horas parte o próximo ônibus?"},
+      {"id": "viaggi-4", "it": "Quanto costa un biglietto per Roma?", "pt": "Quanto custa uma passagem para Roma?"},
+      {"id": "viaggi-5", "it": "Potrebbe indicarmi la strada per il centro?", "pt": "Poderia me indicar o caminho para o centro?"}
+    ],
+    "lavoro": [
+      {"id": "lavoro-1", "it": "Lavoro in un'azienda di tecnologia.", "pt": "Trabalho em uma empresa de tecnologia."},
+      {"id": "lavoro-2", "it": "Ho una riunione alle tre del pomeriggio.", "pt": "Tenho uma reunião às três da tarde."},
+      {"id": "lavoro-3", "it": "Devo finire il report per domani.", "pt": "Preciso terminar o relatório para amanhã."},
+      {"id": "lavoro-4", "it": "Il collega è molto simpatico.", "pt": "O colega é muito simpático."},
+      {"id": "lavoro-5", "it": "Faccio una pausa caffè a metà mattina.", "pt": "Faço uma pausa para café no meio da manhã."}
+    ],
+    "quotidianità": [
+      {"id": "quotidianità-1", "it": "Mi alzo presto ogni mattina.", "pt": "Acordo cedo toda manhã."},
+      {"id": "quotidianità-2", "it": "Compro la frutta al mercato.", "pt": "Compro frutas no mercado."},
+      {"id": "quotidianità-3", "it": "Mi piace leggere prima di dormire.", "pt": "Gosto de ler antes de dormir."},
+      {"id": "quotidianità-4", "it": "Ammetto l'autobus per andare al lavoro.", "pt": "Pego o ônibus para ir ao trabalho."},
+      {"id": "quotidianità-5", "it": "Stasera cucino la pasta.", "pt": "Hoje à noite eu cozinho massas."}
+    ]
+  }
+}

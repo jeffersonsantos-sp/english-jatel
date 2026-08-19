@@ -1,0 +1,598 @@
+{
+  "levels": [
+    "A1",
+    "A2",
+    "B1",
+    "B2",
+    "C1",
+    "C2"
+  ],
+  "grammar": {
+    "A1": [
+      {
+        "topic": "Verbo to be (ser / estar)",
+        "structure": "Sujet + am / is / are (+ not) + complément",
+        "explanation": "Usamos am (eu), is (ele/ela/isto), are (você/nós/eles) para identidade, idade, profissão, origem e estado. Na negativa, acrescenta-se not (isn't / aren't / 'm not). Nas perguntas, o verbo vem antes do sujeito.",
+        "examples": [
+          "Je suis étudiant. — Eu sou estudante.",
+          "Elle est du Brésil. — Ela é do Brasil.",
+          "Ils ne sont pas à la maison. — Eles não estão em casa.",
+          "Est-ce qu'il est votre frère? — Ele é seu irmão?"
+        ]
+      },
+      {
+        "topic": "Pronomes pessoais e sujeito",
+        "structure": "I / you / he / she / it / we / they + verbe",
+        "explanation": "O pronome define a forma do verbo. he, she e it exigem -s na 3ª pessoa do singular nos tempos simples. it refere-se a coisas, animais ou ideias.",
+        "examples": [
+          "Il parle anglais. — Ele fala inglês.",
+          "Nous vivons à São Paulo. — Nós moramos em São Paulo.",
+          "C'est un livre. — Isto é um livro.",
+          "Ils travaillent le lundi. — Eles trabalham na segunda."
+        ]
+      },
+      {
+        "topic": "Artigos a / an / the",
+        "structure": "a + consoante | an + vogal | the (definido)",
+        "explanation": "a antes de som de consoante, an antes de som de vogal (an hour, a university). the aponta algo já conhecido. Sem artigo para plural genérico (I like cats) ou nomes próprios.",
+        "examples": [
+          "J'ai un chat. — Eu tenho um gato.",
+          "Elle a mangé une orange. — Ela comeu uma laranja.",
+          "Le livre est sur la table. — O livro está sobre a mesa.",
+          "Les chiens sont amicaux. — Cães são amigáveis."
+        ]
+      },
+      {
+        "topic": "Plural de substantivos",
+        "structure": "substantivo + s / es / (irregular)",
+        "explanation": "Geralmente + s (cats). Terminando em s, x, ch, sh ou o consoante: + es (boxes). Terminando em consoante + y: troca y por ies. Muitos irregulares: child→children, man→men, foot→feet.",
+        "examples": [
+          "un chien, deux chiens. — um cão, dois cães.",
+          "une boîte, trois boîtes. — uma caixa, três caixas.",
+          "un homme, beaucoup d'hommes. — um homem, muitos homens.",
+          "un enfant, deux enfants. — uma criança, duas crianças."
+        ]
+      },
+      {
+        "topic": "Present Simple (afirmativo)",
+        "structure": "Sujet + verbe(base) / -s (he/she/it)",
+        "explanation": "Expressa fatos, rotinas e hábitos. He/She/It leva -s (works) ou -es (goes, watches). have vira has na 3ª pessoa. Outras pessoas usam o verbo na base.",
+        "examples": [
+          "Je travaille tous les jours. — Eu trabalho todo dia.",
+          "Il va à école. — Ele vai à escola.",
+          "Nous aimons le café. — Nós gostamos de café.",
+          "Elle a une voiture rouge. — Ela tem um carro vermelho."
+        ]
+      },
+      {
+        "topic": "Adjetivos possessivos",
+        "structure": "my / your / his / her / its / our / their + nom",
+        "explanation": "Indicam posse e concordam com o dono, não com o objeto. my, your, his, her, its, our, their. Não usam artigo junto (my car, não the my car).",
+        "examples": [
+          "C'est mon téléphone. — Este é meu telefone.",
+          "Son nom est John. — O nome dele é John.",
+          "Nous aimons notre ville. — Nós amamos nossa cidade.",
+          "Leur maison est grande. — A casa deles é grande."
+        ]
+      },
+      {
+        "topic": "Demonstrativos this / that / these / those",
+        "structure": "this/that (sing.) | these/those (pl.)",
+        "explanation": "this/these = perto de quem fala; that/those = longe. this book (este livro), that car (aquele carro), these dogs (estes cães), those houses (aquelas casas).",
+        "examples": [
+          "C'est ma chaise. — Esta é minha cadeira.",
+          "C'est un immeuble haut. — Aquela é um prédio alto.",
+          "Ces pommes sont fraîches. — Estas maçãs estão frescas.",
+          "Ces chaussures sont chères. — Aqueles sapatos são caros."
+        ]
+      },
+      {
+        "topic": "Preposições de lugar",
+        "structure": "in / on / under / next to / between",
+        "explanation": "in (dentro), on (sobre superfície), under (embaixo), next to (ao lado de), between (entre dois). Indispensáveis para descrever posição.",
+        "examples": [
+          "Le chat est dans la boîte. — O gato está na caixa.",
+          "Le livre est sur la table. — O livro está sobre a mesa.",
+          "La balle est sous le lit. — A bola está debaixo da cama.",
+          "Elle s'assoit entre Tom et Mary. — Ela senta entre Tom e Mary."
+        ]
+      },
+      {
+        "topic": "Jours de la Semaine",
+        "structure": "lundi / mardi / mercredi / jeudi / vendredi / samedi / dimanche",
+        "explanation": "Les jours de la semaine ne s'écrivent pas avec une majuscule en français. On utilise 'les' pour l'habitude: les lundis (every Monday). Pour un jour spécifique, on utilise 'le': le lundi (this Monday). Abréviations: lun., mar., mer., jeu., ven., sam., dim.",
+        "examples": [
+          "Je travaille le lundi. — Eu trabalho na segunda-feira.",
+          "La réunion est le mercredi. — A reunião é na quarta-feira.",
+          "Nous jouons au football le samedi. — Nós jogamos futebol aos sábados.",
+          "Le dimanche est un jour de repos. — Domingo é dia de descanso."
+        ]
+      },
+      {
+        "topic": "Mois de l'Année",
+        "structure": "janvier / février / mars / avril / mai / juin / juillet / août / septembre / octobre / novembre / décembre",
+        "explanation": "Les mois ne s'écrivent pas avec une majuscule en français. On utilise 'en' devant les mois: en janvier, en décembre. Pour les anniversaires: en mars (mois) vs le 15 mars (date spécifique). Abréviations: janv., févr., mars, avr., mai, juin, juil., août, sept., oct., nov., déc.",
+        "examples": [
+          "Mon anniversaire est en mars. — Meu aniversário é em março.",
+          "Noël est en décembre. — O Natal é em dezembro.",
+          "L'école commence en septembre. — A escola começa em setembro.",
+          "Il fait chaud en juillet. — É quente em julho."
+        ]
+      },
+      {
+        "topic": "Nombres Cardinaux",
+        "structure": "un, deux, trois, quatre, cinq... (1, 2, 3, 4, 5...)",
+        "explanation": "Les nombres cardinaux s'utilisent pour compter: une pomme, deux livres. Pour les dates, on utilise les nombres ordinaux (voir sujet suivant). Les nombres 1-10 doivent être mémorisés. 11-19 sont irréguliers (onze, douze, treize...). 20-90 finissent par -vingt ou -dix (vingt, trente, quarante...).",
+        "examples": [
+          "J'ai trois chats. — Eu tenho três gatos.",
+          "Elle a vingt-cinq ans. — Ela tem vinte e cinco anos.",
+          "Il y a douze mois dans une année. — Há doze meses no ano.",
+          "Il a acheté vingt livres. — Ele comprou vinte livros."
+        ]
+      },
+      {
+        "topic": "Nombres Ordinaux",
+        "structure": "1er premier / 2e deuxième / 3e troisième / 4e quatrième / 5e cinquième...",
+        "explanation": "Les nombres ordinaux indiquent la position ou l'ordre: premier, deuxième, troisième, quatrième, cinquième... La plupart sont formés en ajoutant -ème au cardinal (quatrième, cinquième, sixième). Exceptions: premier (1er), deuxième (2e), troisième (3e). Pour les dates: 1er janvier (premier), 2 mars (deuxième).",
+        "examples": [
+          "C'est mon premier jour. — Este é meu primeiro dia.",
+          "Elle a gagné la deuxième place. — Ela ganhou segundo lugar.",
+          "Janvier est le premier mois. — Janeiro é o primeiro mês.",
+          "Il habite au troisième étage. — Ele mora no terceiro andar."
+        ]
+      },
+      {
+        "topic": "Comment Dire les Dates",
+        "structure": "le + ordinal + mois: le 1er janvier / le 2 mars",
+        "explanation": "En français, les dates utilisent les nombres ordinaux: le 1er janvier (premier), le 2 mars (deuxième), le 3 avril (troisième). Le format est: le + ordinal + mois. Pour les années, on dit le nombre: 2026 = deux mille vingt-six.",
+        "examples": [
+          "Mon anniversaire est le 15 mars. — Meu aniversário é no dia 15 de março.",
+          "Noël est le 25 décembre. — O Natal é no dia 25 de dezembro.",
+          "Le projet commence le 1er janvier. — O projeto começa no dia 1º de janeiro.",
+          "Nous nous sommes rencontrés le 3 juin. — Nós nos conhecemos no dia 3 de junho."
+        ]
+      }
+    ],
+    "A2": [
+      {
+        "topic": "Présent simple (négatif et interrogatif)",
+        "structure": "ne...pas + verbe | est-ce que / inversion",
+        "explanation": "Négation: sujet + ne + verbe + pas. Le verbe varie: suis, es, est pour avoir; fais pour faire. Interrogation avec est-ce que (informal) ou inversion sujet-verbe (formal).",
+        "examples": [
+          "Je ne sais pas. — Je ne sais pas.",
+          "Est-ce qu'elle parle français? — Parle-t-elle français?",
+          "Tu ne manges pas de viande. — Tu ne manges pas de viande.",
+          "Venez-vous demain? — Venez-vous demain?"
+        ]
+      },
+      {
+        "topic": "Passé composé",
+        "structure": "avoir/être + participe passé",
+        "explanation": "Le passé composé est le temps du récit. Avec avoir (verbes transitifs et la plupart des verbes) ou être (verbes de mouvement/changement d'état). Accord du participe passé avec être.",
+        "examples": [
+          "J'ai visité Paris. — J'ai visité Paris.",
+          "Elle est arrivée à midi. — Elle est arrivée à midi.",
+          "Nous avons mangé au restaurant. — Nous avons mangé au restaurant.",
+          "Ils sont partis hier soir. — Ils sont partis hier soir."
+        ]
+      },
+      {
+        "topic": "Imparfait",
+        "structure": "verbe en -ais/-ais/-ait/-ions/-iez/-aient",
+        "explanation": "L'imparfait décrit des actions habituelles dans le passé, des états ou des circonstances. Racine du présent + terminaisons: -ais, -ais, -ait, -ions, -iez, -aient.",
+        "examples": [
+          "Quand j'étais enfant, je jouais dehors. — Quand j'étais enfant, je jouais dehors.",
+          "Il faisait beau tout le temps. — Il faisait beau tout le temps.",
+          "Nous mangions ensemble chaque soir. — Nous mangions ensemble chaque soir.",
+          "Elle lisait un livre quand je suis arrivé. — Elle lisait un livre quand je suis arrivé."
+        ]
+      },
+      {
+        "topic": "Futur simple",
+        "structure": "verbe + ai/as/a/ons/ezont (1ère/2e/3e pers. sing.)",
+        "explanation": "Le futur simple exprime une action ou un état futur. La plupart des verbes ajoutent les terminaisons -ai, -as, -a, -ons, -ez, -ont à l'infinitif (ou radical pour -er et -ir verbes).",
+        "examples": [
+          "Je parlerai demain. — Je parlerai demain.",
+          "Nous irons en France cet été. — Nous irons en France cet été.",
+          "Tu feras ce que tu veux. — Tu feras ce que tu veux.",
+          "Ils viendront la semaine prochaine. — Ils viendront la semaine prochaine."
+        ]
+      },
+      {
+        "topic": "Pronoms compléments (COD/COI)",
+        "structure": "me/te/le/lui/nous/vous/les/leur",
+        "explanation": "Les pronoms compléments se placent avant le verbe conjugué à l'affirmatif. À l'interrogatif, ils s'accrochent au verbe avec un trait d'union. COD vs COI distinguent le complément d'objet direct et indirect.",
+        "examples": [
+          "Je le vois. — Je le vois.",
+          "Tu me donnes le livre. — Tu me donnes le livre.",
+          "Donne-lui la clé! — Donne-lui la clé!",
+          "Nous nous en allons. — Nous nous en allons."
+        ]
+      },
+      {
+        "topic": "Comparatif et superlatif",
+        "structure": "plus/moins/aussi + adjectif + que | le/la/les + plus/moins/moins/aussi",
+        "explanation": "Comparatif avec que. Superlatif avec le/la/les + plus/moins/moins/aussi + adjectif + de. Les adjectifs de plus de deux syllabes utilisent plus/moins.",
+        "examples": [
+          "Il est plus grand que moi. — Il est plus grand que moi.",
+          "C'est la plus belle ville. — C'est la plus belle ville.",
+          "Ce film est moins intéressant que l'autre. — Ce film est moins intéressant que l'autre.",
+          "Elle est aussi intelligente que lui. — Elle est aussi intelligente que lui."
+        ]
+      },
+      {
+        "topic": "Adjectifs possessifs",
+        "structure": "mon/ma/mes | ton/ta/tes | son/sa/ses | notre/nos | votre/vos | leur/leurs",
+        "explanation": "Les adjectifs possessifs s'accordent en genre et nombre avec le nom possédé (et non avec le possesseur). Mon/ma pour moi; ton/ta pour toi; son/sa pour lui/elle/on.",
+        "examples": [
+          "C'est ma voiture. — C'est ma voiture.",
+          "Son frère est médecin. — Son frère est médecin.",
+          "Nos enfants jouent dehors. — Nos enfants jouent dehors.",
+          "Leurs parents sont contents. — Leurs parents sont contents."
+        ]
+      },
+      {
+        "topic": "Prépositions de lieu et de temps",
+        "structure": "à/de/dans/sur/sous/entre/pendant/avant/après",
+        "explanation": "à pour lieux urbains et expressions de temps. de pour l'origine et la possession. dans pour les pays (pays + dans) et les durées (dans + futur). sur pour surfaces. sous pour en dessous.",
+        "examples": [
+          "Je vais à Paris. — Je vais à Paris.",
+          "Elle habite à la campagne. — Elle habite à la campagne.",
+          "Nous partons dans deux heures. — Nous partons dans deux heures.",
+          "Le livre est sur la table. — Le livre est sur la table."
+        ]
+      }
+    ],
+    "B1": [
+      {
+        "topic": "Subjonctif présent",
+        "structure": "que + subjonctif (verb-root + -e/-es/-e/-ions/-iez/-ent)",
+        "explanation": "Le subjonctif s'emploie après certaines conjonctions (bien que, pour que, avant que, à condition que) et expressions de souhait, sentiment ou nécessité.",
+        "examples": [
+          "Bien qu'il soit fatigué, il travaille. — Bien qu'il soit fatigué, il travaille.",
+          "Je veux que tu viennes. — Je veux que tu viennes.",
+          "Il faut que nous partions maintenant. — Il faut que nous partions maintenant.",
+          "Pour qu'il pleuve, il faut des nuages. — Pour qu'il pleuve, il faut des nuages."
+        ]
+      },
+      {
+        "topic": "Plus-que-parfait",
+        "structure": "avait/avais/avait/avions/aviez/avaient + participe passé",
+        "explanation": "Le plus-que-parfait situe une action antérieure à une autre dans le passé. Racine de l'imparfait (av-) + terminaisons plus-que-parfait + participe passé.",
+        "examples": [
+          "Quand je suis arrivé, il était déjà parti. — Quand je suis arrivé, il était déjà parti.",
+          "Elle avait fini avant que je vienne. — Elle avait fini avant que je vienne.",
+          "Nous avions déjà diné quand ils sont arrivés. — Nous avions déjà diné quand ils sont arrivés.",
+          "Il avait travaillé toute la journée. — Il avait travaillé toute la journée."
+        ]
+      },
+      {
+        "topic": "Conditionnel présent",
+        "structure": "verbe + rais/rais/ait/rions/riez/aient",
+        "explanation": "Le conditionnel exprime une hypothèse, un désir ou une politesse. Racine du futur simple + terminaisons -ais, -ais, -ait, -ions, -iez, -aient.",
+        "examples": [
+          "J'aimerais un café, s'il vous plaît. — J'aimerais un café, s'il vous plaît.",
+          "Si j'avais du temps, je voyagerais. — Si j'avais du temps, je voyagerais.",
+          "Tu ferais mieux de partir tôt. — Tu ferais mieux de partir tôt.",
+          "Nous irions à la plage s'il faisait beau. — Nous irions à la plage s'il faisait beau."
+        ]
+      },
+      {
+        "topic": "Verbes pronominaux",
+        "structure": "verbe-pronominal (se/me/te/se/nous/vous/s') + conjugaison",
+        "explanation": "Les verbes pronominaux incluent un pronom réfléchi (se, me, te, nous, vous). Certains sont réflexifs (se lever = se lever), d'autres réciproques (se téléphoner = s'appeler), d'autres ont un sens spécial (s'en aller = partir).",
+        "examples": [
+          "Je me lève à sept heures. — Je me lève à sept heures.",
+          "Ils se sont rencontrés à la fête. — Ils se sont rencontrés à la fête.",
+          "On s'excuse quand on fait une erreur. — On s'excuse quand on fait une erreur.",
+          "Elle s'en va demain. — Elle part demain."
+        ]
+      },
+      {
+        "topic": "Pronoms relatifs qui, que, où, dont",
+        "structure": "qui (sujets) / que (COD) / où (lieu/temps) / dont (de + nom)",
+        "explanation": "Les pronoms relatifs introduisent des propositions relatives. Qui = sujet. Que = COD. Où = lieu ou temps. Dont = remplace 'de + nom' (le livre dont je parle).",
+        "examples": [
+          "L'homme qui parle est mon professeur. — L'homme qui parle est mon professeur.",
+          "Le livre que j'ai lu est intéressant. — Le livre que j'ai lu est intéressant.",
+          "La ville où j'habite est belle. — La ville où j'habite est belle.",
+          "C'est le film dont tu m'as parlé. — C'est le film dont tu m'as parlé."
+        ]
+      },
+      {
+        "topic": "Si + conditionnel et subjonctif",
+        "structure": "Si + présent → futur | Si + imparfait → conditionnel | Si + plus-que-parfait → conditionnel passé",
+        "explanation": "Trois conditions: réelle (présent → futur), hypothétique (imparfait → conditionnel), irréelle dans le passé (plus-que-parfait → conditionnel passé).",
+        "examples": [
+          "Si je suis fatigué, je me repose. — Si je suis fatigué, je me repose.",
+          "Si j'avais de l'argent, j'achèterais une maison. — Si j'avais de l'argent, j'achèterais une maison.",
+          "Si j'avais étudié, j'aurais réussi. — Si j'avais étudié, j'aurais réussi.",
+          "Si tu venais demain, je serais heureux. — Si tu venais demain, je serais heureux."
+        ]
+      },
+      {
+        "topic": "Voix passive",
+        "structure": "être + participe passé (+ par + agent)",
+        "explanation": "La voix passive met l'objet de l'action active en sujet sujet. Forme: être + participe passé. 'Par' introduit l'agent quand il est exprimé.",
+        "examples": [
+          "Le gâteau a été préparé par Marie. — Le gâteau a été préparé par Marie.",
+          "Le français est parlé dans le monde entier. — Le français est parlé dans le monde entier.",
+          "Ces livres ont été écrits au XIXe siècle. — Ces livres ont été écrits au XIXe siècle.",
+          "On parle français dans ce pays. — On parle français dans ce pays."
+        ]
+      },
+      {
+        "topic": "Gérondif (en + verbe présent)",
+        "structure": "en + participe présent",
+        "explanation": "Le gérondif exprime une action simultanée, un moyen ou une conséquence. En + participe présent du verbe.",
+        "examples": [
+          "En marchant, j'écoute de la musique. — En marchant, j'écoute de la musique.",
+          "Elle travaille en écoutant la radio. — Elle travaille en écoutant la radio.",
+          "En apprenant, on progresse. — En apprenant, on progresse.",
+          "Il est arrivé en courant. — Il est arrivé en courant."
+        ]
+      }
+    ],
+    "B2": [
+      {
+        "topic": "Subjonctif passé",
+        "structure": "que + ait/ait/ait/ayons/ayez/aient + participe passé",
+        "explanation": "Le subjonctif passé s'emploie pour exprimer une action accomplie ou supposée dans le passé, après des expressions de souhait, d'urgence ou de doute dans un contexte passé.",
+        "examples": [
+          "Je suis content que tu aies réussi ton examen. — Je suis content que tu aies réussi.",
+          "Bien qu'il ait plu, nous sommes sortis. — Bien qu'il ait plu, nous sommes sortis.",
+          "Il faut que tu aies fini ce travail avant demain. — Il faut que tu aies fini.",
+          "Pour que nous sachions, dis-le-nous. — Pour que nous sachions, dis-le-nous."
+        ]
+      },
+      {
+        "topic": "Conditionnel passé",
+        "structure": "verbe au conditionnel passé (aurais/aurais/aurait/aurions/auriez/auraient + participe passé)",
+        "explanation": "Le conditionnel passé exprime une hypothèse dans le passé non réalisée ou un regret 'si seulement'. Il correspond au 'would have + past participle' en anglais.",
+        "examples": [
+          "J'aurais aimé venir, mais je n'ai pas pu. — J'aurais aimé venir, mais je n'ai pas pu.",
+          "Si j'avais su, j'aurais agi différemment. — Si j'avais su, j'aurais agi différemment.",
+          "Nous serions partis plus tôt, si le temps l'avait permis. — Nous serions partis plus tôt.",
+          "Tu aurais dû me dire la vérité. — Tu aurais dû me dire la vérité."
+        ]
+      },
+      {
+        "topic": "Style indirecto complexe",
+        "structure": "discurso indirecto avec cambios de tiempos y pronombres",
+        "explanation": "En el estilo indirecto, los tiempos verbales retroceden (presente→pasado, passato compuesto→trapassato prossimo). Los pronombres y expresiones de tiempo se adaptan al contexto.",
+        "examples": [
+          "Él dijo: 'Voy a llegar tarde.' → Dijo que iba a llegar tarde.",
+          "Ella dijo que ya lo había terminado. — Ella dijo que ya lo había terminado.",
+          "Preguntaron si yo quería venir. — Preguntaron si yo quería venir.",
+          "Me contó que habían ido al cine el día anterior."
+        ]
+      },
+      {
+        "topic": "Plus-que-parfait du subjonctif",
+        "structure": "que + fusse/fusses/fût/fussions/fussiez/fussent + participe passé",
+        "explanation": "Se empleja en cláusulas subordinadas para referirse a una acción anterior a otra en el pasado. Es un tiempo literario y formal, raro en el habla cotidiana.",
+        "examples": [
+          "Je regrette que tu ne fusses pas là. — Je regrette que tu n'aies pas été là.",
+          "Si j'avais su, j'aurais informé le directeur que vous étiez malade.",
+          "Bien qu'il eût travaillé dur, il a échoué. — Bien que haya trabajado duro, fracasó.",
+          "Il fallait que vous fussiez prêts à partir. — Habiéis debido estar listos para salir."
+        ]
+      },
+      {
+        "topic": "Verbos de sensación y opinión",
+        "structure": "sembler/falloir/pouvoir/valoir/etc. + infinitif / subjonctif",
+        "explanation": "Les verbes de sensación (sembler, paraître) y opinión (falloir, valoir mieux, trouver bizarre) van seguidos del subjuntivo cuando expresan duda o subjetividad, o del infinitivo cuando son impersonales.",
+        "examples": [
+          "Il semble que nous ayons tort. — Parece que tenemos razón (negado).",
+          "Je trouve qu'il faut partir maintenant. — Encuentro que debemos irnos ya.",
+          "Il vaut mieux que je parte tôt. — Es mejor que me vaya temprano.",
+          "Elle n'a pas l'air contente aujourd'hui. — No pareces contenta hoy."
+        ]
+      },
+      {
+        "topic": "Conectores discursivos avanzados",
+        "structure": "néanmoins/cependant/en revanche/d'ailleurs/c'est pourquoi/en outre",
+        "explanation": "Néanmoins y cependant expresan concesión. En revanche expresa oposición contrastada. D'ailleurs añade información. C'est pourquoi introduce consecuencia. En outre añade un argumento adicional.",
+        "examples": [
+          "Le projet est coûteux; néanmoins, il est necessary. — El proyecto es caro; sin embargo, es necesario.",
+          "D'ailleurs, c'est ce que j'ai dit plus tôt. — Además, eso es lo que dije antes.",
+          "Il pleuvait; c'est pourquoi nous sommes restés. — Llovía; por eso nos quedamos.",
+          "En outre, cette solution présente des avantages."
+        ]
+      },
+      {
+        "topic": "Voz pasiva con se (impersonal)",
+        "structure": "se + pasivo o impersonal (se parle, se fait, se dit)",
+        "explanation": "Se como sujeto impersonal indica acciones no atribuidas a nadie (se + 3er sing.). También forma pasiva alternativa a 'être + participe passé' (ce film se joue dans ce cinéma).",
+        "examples": [
+          "Ici, parle-t-on espagnol? — ¿Se habla español aquí?",
+          "Se fait très beau aujourd'hui. — Hace muy buen tiempo hoy.",
+          "Ce film ne se passe pas bien. — Esta película no funciona bien.",
+          "On raconte qu'il a gagné le prix. — Se cuenta que ganó el premio."
+        ]
+      },
+      {
+        "topic": "Exprimir hipótesis y condicionales con inversione",
+        "structure": "Had I known (Si + sujet + avait) / Were I to (Si + sujet + était)",
+        "explanation": "Inversión condicional: Si + sujet + auxiliar → sujet + auxiliar (sin si). Had we known, were I you, should it arrive. Más formal y literario que la estructura con 'si'.",
+        "examples": [
+          "Had I known, I would have helped. — Si lo hubiera sabido, habría ayudado.",
+          "Were I to accept, what then? — Si lo aceptara, qué pasaría entonces?",
+          "Should you need anything, do not hesitate. — Si necesitas algo, no dudes.",
+          "Were it true, we should all worry. — Si fuera verdad, todos deberíamos preocuparnos."
+        ]
+      }
+    ],
+    "C1": [
+      {
+        "topic": "Subjonctif imparfait y plus-que-parfait (literario)",
+        "structure": "que + fusse/fusses/fût/fussions/fussiez/fussent (imparfait) | que + eusse/eusses/eût/eussions/eussiez/eussent (plus-que-parfait)",
+        "explanation": "Tiempos subjuntivos literarios que se encuentran en escritura formal, literatura y discursos solemnes. Raros en el habla moderna. Se usan tras expresiones de deseo, duda o emoción en el pasado.",
+        "examples": [
+          "Voulez-vous qu'il vînt demain? — ¿Quiere usted que viniera mañana?",
+          "Si j'avais pu, je serais venu plus tôt. — Si hubiera podido, habría venido antes.",
+          "Il fallait que vous fussiez plus attentifs. — Habías debido ser más atentos.",
+          "Nous sommes tristes qu'il ne vînt pas. — Nos triste que no viniera.",
+          "Plût-il que nous eussions plus de temps!"
+        ]
+      },
+      {
+        "topic": "Estilo indirecto con inversión del sujeto",
+        "structure": "sujeto auxiliar inverso (verbé subject-aux inversion) y que + subjuntivo",
+        "explanation": "En el estilo indirecto formal, se invierte el sujeto y el verbo auxiliar: 'il a dit que' → 'il dit que'. En cláusulas subordinadas, el subjuntivo sigue a ciertos verbos de emoción y duda.",
+        "examples": [
+          "Le directeur a exigé que tous les employés soient présents.",
+          "On rapporte qu'il aurait démissionné la semaine dernière.",
+          "Il est étrange qu'elle n'ait pas répondu à notre appel.",
+          "Je regrette que vous n'ayez pas pu venir."
+        ]
+      },
+      {
+        "topic": "Voz pasiva con 'on' (impersonal) y pronombres",
+        "structure": "on + passive / se + passive / pronôme + verbe actif",
+        "explanation": "On como sujeto impersonal ('people, one') combina bien con pasivas y verbos impersonales. 'On' puede sustituir al 'se' pasivo en el español hablado y escrito moderno.",
+        "examples": [
+          "On raconte cette histoire depuis des siècles.",
+          "En France, on parle français comme langue officielle.",
+          "On considère ce problème comme important.",
+          "On dit qu'il a réussi son examen avec mention."
+        ]
+      },
+      {
+        "topic": "Colocaciones avanzadas de verbos y preposiciones",
+        "structure": "verbo + preposition fixe / nom + preposition idiomatique",
+        "explanation": "Las colocaciones verbo-preposición son fijas en ambos idiomas. Insister sur, rêver de, croire en, dépendre de. Del mismo modo, sustantivos: la solution à, l'accès à, le respect pour.",
+        "examples": [
+          "insister sur un point (insistir en un punto)",
+          "rêver de partir (soñar con irse)",
+          "tenir compte de (tener en cuenta)",
+          "faire référence à (hacer referencia a)",
+          "la solution à ce problème (la solución a este problema)"
+        ]
+      },
+      {
+        "topic": "Expresiones condicionales avanzadas",
+        "structure": "à condition que / pourvu que / sauf si / dans la mesure où",
+        "explanation": "Expresiones que matizan las condiciones en francés: à condition que (siempre con subjuntivo), pourvu que (con subjuntivo, esperanza), sauf si (excepto si), dans la mesure où (en la medida en que, puede ir con indicativo).",
+        "examples": [
+          "À condition que tu viennes, nous partirons à cinq. — Con tal de que vengas, saldremos a las cinco.",
+          "Pourvu qu'il fasse beau ce week-end! — Ojalá que haga buen tiempo este fin de semana!",
+          "Nous sortirons, sauf si la pluie continue.",
+          "Dans la mesure où le budget le permet, nous accepterions."
+        ]
+      },
+      {
+        "topic": "Conectores argumentativos avanzados",
+        "structure": "néanmoins/cependant/a contrario/c'est-à-dire/encore que/force est de constater",
+        "explanation": "Conectores de alta frecuencia en la escritura académica y formal francesa: néanmoins (sin embargo), c'est-à-dire (es decir), en revanche (por el contrario), force est de constater (hay que constatar), quoi qu'il en soit (con todo y eso).",
+        "examples": [
+          "Néanmoins, le projet reste viable.",
+          "C'est-à-dire que nous devons réévaluer nos stratégies.",
+          "Force est de constater que le temps a passé trop vite.",
+          "Quoi qu'il en soit, nous devons avancer."
+        ]
+      },
+      {
+        "topic": "Enfasis y registros (surtout / surtout que / n'est-ce pas)",
+        "structure": "surtout + infinitif / surtout que + subjonctif / n'est-ce pas (¿no?)",
+        "explanation": "Surtout expresa énfasis o restricción (sobre todo, principalmente). Surtout que introduce una restricción. N'est-ce pas es la etiqueta interrogativa de confirmación francesa (equivalente a 'right?' en inglés).",
+        "examples": [
+          "Tout le monde, surtout les jeunes, est concerné. — Todo el mundo, especialmente los jóvenes, está afectado.",
+          "Fais attention, surtout quand il pleut. — Ten cuidado, especialmente cuando llueve.",
+          "Ce film est intéressant, n'est-ce pas? — Esta película es interesante, ¿no?",
+          "Nous irons demain, surtout qu'il ne faut pas attendre plus."
+        ]
+      },
+      {
+        "topic": "Expresiones idiomáticas con verbos modal-like",
+        "structure": "pouvoir/devoir/savoir/faire + infinitif y expresiones de obligación/consejo",
+        "explanation": "Las expresiones modales en francés incluyen il faut que (deber + subjuntivo), il vaut mieux que (es mejor + subjuntivo), on doit (hay que + infinitivo), il sagit de (se trata de).",
+        "examples": [
+          "Il faut que tu partes maintenant. — Tienes que irte ahora.",
+          "Il vaut mieux que nous restions ici. — Es mejor que nos quedemos aquí.",
+          "On doit respecter les règles de sécurité.",
+          "Il s'agit de comprendre les nuances culturelles."
+        ]
+      }
+    ],
+    "C2": [
+      {
+        "topic": "Oraciones cleft (cleft sentences) en francés",
+        "structure": "C'est(était) + X + qui/que + reste | Ce qui/ce que + verbe",
+        "explanation": "Las oraciones cleft en francés descomponen un mensaje en cláusulas sujetas para enfatizar información. 'C'est X que...' enfatiza el objeto/complemento. 'C'est X qui...' enfatiza el sujeto. 'Ce qui/ce que' como cleft relacional.",
+        "examples": [
+          "C'est lui qui a gagné le prix. — Fue él quien ganó el premio.",
+          "C'est le livre que j'ai préféré. — Es el libro que más me gustó.",
+          "Ce qui me surprend, c'est son calme.",
+          "C'était la première fois qu'elle venait à Paris."
+        ]
+      },
+      {
+        "topic": "Discurso indirecto complejo (estilo literario)",
+        "structure": "estilo indirecto en narrativas con tiempos de hipótesis y subjuntivo",
+        "explanation": "En la escritura literaria, el estilo indirecto se extiende más allá de la simple narrativa: incluye hipótesis contrafactuales (si yo hubiera sido, si él fuera), deseos (ojalá), y subjuntivo en cláusulas de contenido reportado.",
+        "examples": [
+          "Le personnage pensait qu'il aurait dû partir plus tôt.",
+          "Elle se disait que s'il revenait, tout pourrait changer.",
+          "Le narrateur rapporte qu'il se peut que nous ayons tort.",
+          "Le héros aurait eu intérêt à écouter son intuition."
+        ]
+      },
+      {
+        "topic": "Conectores discursivos sofisticados (avanzado)",
+        "structure": "du reste/en effet/surtout/c'est d'autant plus que/néanmoins/cependant",
+        "explanation": "Conectores del nivel C2 con matices precisos: du reste (por otro lado, adicionalmente), en effet (de hecho, en efecto), c'est d'autant plus que (tanto más cuanto), néanmoins (sin embargo pese a lo anterior), or (y, en tono formal).",
+        "examples": [
+          "Le projet est complexe; du reste, les délais sont serrés.",
+          "En effet, les études le confirment clairement.",
+          "C'est d'autant plus important que la date approche.",
+          "Néanmoins, nous devons garder notre optimisme."
+        ]
+      },
+      {
+        "topic": "Preposiciones idiomáticas avanzadas (francés)",
+        "structure": "truite avec / se ficher de / avoir besoin de / mettre en avant / s'intéresser à",
+        "explanation": "Idioms en francés son fijos: se soucier de, tenir compte de, se moquer de, avoir besoin de, mettre en avant, s'intéresser à. Las preposiciones no se traducen literalmente y su uso incorrecto es una señal de nivel intermedio.",
+        "examples": [
+          "Je tiens beaucoup à cette amitié. — Valoro mucho esta amistad.",
+          "Ne te mets pas en colère contre lui.",
+          "Nous devons tenir compte des réalités du marché.",
+          "Il se moque des conventions sociales."
+        ]
+      },
+      {
+        "topic": "Registro y matices de tono avanzados",
+        "structure": "soutenu (formal) / courant (neutral) / familier (coloquial)",
+        "explanation": "El francés distingue tres registros: soutenu (formal/alfabetizado), courant (estándar neutral) y familier (coloquial, informal). Usar el registro equivocado puede resultar impropio o irrespetuoso.",
+        "examples": [
+          "Soutenu: Je me permets de vous adresser mes salutations.",
+          "Courant: Bonjour, comment allez-vous?",
+          "Familier: Salut, ça va?",
+          "Familier: C'est trop cool! (soutenu: C'est magnifique!)"
+        ]
+      },
+      {
+        "topic": "Fronting y énfasis con pronombres tónicos y advérbios",
+        "structure": "C'est moi qui / C'est lui que / Moi, je / Lui, il + inversión",
+        "explanation": "El 'fronting' consiste en poner el elemento énfatico al inicio de la oración para llamar la atención. Los pronombres tónicos (moi, lui, elle) se enfáticas van al inicio con coma. La inversión sujeto-verbo refuerza el tono literario.",
+        "examples": [
+          "Moi, je ne suis pas d'accord avec cette idée.",
+          "Lui, il a toujours raison, c'est frustrant.",
+          "C'est elle qui a proposé cette solution.",
+          "Toi, tu sais mieux que personne ce qui s'est passé."
+        ]
+      },
+      {
+        "topic": "Elipsis y estructuras compactas (C2)",
+        "structure": "elipse de elementos repetidos + tanta...que / tellement...que / à peine...que",
+        "explanation": "La elipsis en el nivel C2 implica frases compactas donde se omite información recuperable del contexto. Estructuras como tant que (tanto...como), tellement (tan...que), à peine (apenas...cuando) requieren buena comprensión lectora.",
+        "examples": [
+          "Trop de gens viennent ici, à cause du tourisme de masse.",
+          "Tellement de bruit que je ne pouvais plus me concentrer.",
+          "À peine étais-il parti qu'elle a commencé à regretter.",
+          "Nous n'avions, hélas, plus aucune solution."
+        ]
+      }
+    ]
+  }
+}

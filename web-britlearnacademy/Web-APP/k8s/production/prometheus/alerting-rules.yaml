@@ -1,0 +1,46 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: britlearn-app-alerts
+  namespace: monitoring
+  labels:
+    app: prometheus
+spec:
+  groups:
+    - name: britlearn-app
+      rules:
+        - alert: PodCrashLooping
+          expr: rate(kube_pod_container_status_restarts_total{namespace="britlearn-academy-app"}[5m]) > 0
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Pod {{ $labels.pod }} está crashando"
+            description: "Pod {{ $labels.pod }} está reiniciando frequentemente"
+
+        - alert: PodNotReady
+          expr: kube_pod_status_ready{namespace="britlearn-academy-app"} == 0
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Pod {{ $labels.pod }} não está pronto"
+            description: "Pod {{ $labels.pod }} não está pronto há mais de 5 minutos"
+
+        - alert: HighMemoryUsage
+          expr: container_memory_usage_bytes{namespace="britlearn-academy-app"} / container_spec_memory_limit_bytes > 0.8
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Alto uso de memória em {{ $labels.pod }}"
+            description: "Uso de memória acima de 80% do limite"
+
+        - alert: HighCPUUsage
+          expr: rate(container_cpu_usage_seconds_total{namespace="britlearn-academy-app"}[5m]) / container_spec_cpu_quota * container_spec_cpu_period > 0.8
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Alto uso de CPU em {{ $labels.pod }}"
+            description: "Uso de CPU acima de 80% do limite"

@@ -1,0 +1,44 @@
+{
+  "categories": [
+    "gruesse",
+    "reisen",
+    "arbeit",
+    "alltag"
+  ],
+  "labels": {
+    "gruesse": "Grüße",
+    "reisen": "Reisen",
+    "arbeit": "Arbeit",
+    "alltag": "Alltag"
+  },
+  "phrases": {
+    "gruesse": [
+      {"id": "gruesse-1", "de": "Guten Morgen! Wie geht es Ihnen?", "pt": "Bom dia! Como vai o senhor?"},
+      {"id": "gruesse-2", "de": "Herzlich willkommen in Berlin!", "pt": "Muitas boas-vindas a Berlim!"},
+      {"id": "gruesse-3", "de": "Freut mich, Sie kennenzulernen.", "pt": "Prazer em conhecê-lo(a)."},
+      {"id": "gruesse-4", "de": "Tschüss! Bis morgen!", "pt": "Tchau! Até amanhã!"},
+      {"id": "gruesse-5", "de": "Ich wünsche Ihnen einen schönen Tag.", "pt": "Desejo ao senhor(a) um bom dia."}
+    ],
+    "reisen": [
+      {"id": "reisen-1", "de": "Wo ist der nächste Bahnhof?", "pt": "Onde fica a próxima estação de trem?"},
+      {"id": "reisen-2", "de": "Ich hätte gerne ein Einzelzimmer.", "pt": "Eu gostaria de um quarto individual."},
+      {"id": "reisen-3", "de": "Können Sie mir den Weg zeigen?", "pt": "Pode me mostrar o caminho?"},
+      {"id": "reisen-4", "de": "Der Flug hat zwei Stunden Verspätung.", "pt": "O voo tem duas horas de atraso."},
+      {"id": "reisen-5", "de": "Ich möchte eine Fahrkarte nach München kaufen.", "pt": "Eu quero comprar uma passagem para Munique."}
+    ],
+    "arbeit": [
+      {"id": "arbeit-1", "de": "Ich arbeite als Ingenieur bei Siemens.", "pt": "Eu trabalho como engenheiro na Siemens."},
+      {"id": "arbeit-2", "de": "Wann beginnt die Besprechung?", "pt": "Quando começa a reunião?"},
+      {"id": "arbeit-3", "de": "Können Sie mir bitte die Unterlagen schicken?", "pt": "Pode me enviar os documentos, por favor?"},
+      {"id": "arbeit-4", "de": "Ich habe morgen einen Termin beim Arzt.", "pt": "Eu tenho uma consulta amanhã."},
+      {"id": "arbeit-5", "de": "Die Deadline ist am Freitag.", "pt": "O prazo é na sexta-feira."}
+    ],
+    "alltag": [
+      {"id": "alltag-1", "de": "Ich gehe jeden Morgen joggen.", "pt": "Eu vou correr toda manhã."},
+      {"id": "alltag-2", "de": "Können Sie mir das Salz reichen?", "pt": "Pode me passar o sal?"},
+      {"id": "alltag-3", "de": "Ich muss einkaufen gehen.", "pt": "Eu preciso ir às compras."},
+      {"id": "alltag-4", "de": "Das Wetter ist heute wunderbar.", "pt": "O tempo está lindo hoje."},
+      {"id": "alltag-5", "de": "Wo kann ich mein Auto parken?", "pt": "Onde posso estacionar meu carro?"}
+    ]
+  }
+}

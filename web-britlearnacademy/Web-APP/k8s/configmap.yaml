@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: britlearn-app-config
+  namespace: britlearn-academy-app
+data:
+  ADMIN_USER: "admin"
+  EDGE_TTS_VOICE: "en-US-GuyNeural"
+  DATA_DIR: "/app/data"
+  SEED_USERNAME: "britlearn"
+  SEED_PASSWORD: "britlearn2026"
+  IMAGE: "updateinformatica/britlearn-app:latest"

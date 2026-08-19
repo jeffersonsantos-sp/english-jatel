@@ -1,0 +1,12 @@
+RewriteEngine On
+RewriteBase /
+
+RewriteRule ^admin/?$ admin/index.php [L,QSA]
+RewriteRule ^admin/([a-zA-Z0-9_-]+)/?$ admin/$1.php [L,QSA]
+
+RewriteRule ^api/([a-zA-Z0-9_-]+)/?$ api/$1.php [L,QSA]
+
+RewriteRule ^assets/(.*)$ - [L]
+RewriteRule ^(.*\.php)$ - [L]
+
+RewriteRule ^(.*)$ index.php?page=$1 [L,QSA]
