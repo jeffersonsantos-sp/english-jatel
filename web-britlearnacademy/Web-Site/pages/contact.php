@@ -13,6 +13,7 @@
 <h2>We would love to <span>hear from you.</span></h2>
 <p>Whether you are interested in our English courses, the Britlearn App or a partnership, our team is ready to help.</p>
 <div class="contact-item"><span>📍</span><div><strong>Our London Office</strong><p>London, United Kingdom</p></div></div>
+<div class="contact-item"><span>📞</span><div><strong>Call us</strong><p><a href="tel:+447363065270">+44 7363 065270</a><br><a href="tel:+447363065262">+44 7363 065262</a></p></div></div>
 <div class="contact-item"><span>✉️</span><div><strong>Email us</strong><p><?= CONTACT_EMAIL ?></p></div></div>
 <div class="contact-item"><span>🌎</span><div><strong>Global Learning</strong><p>Students from around the world</p></div></div>
 </div>

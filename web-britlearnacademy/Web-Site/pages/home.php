@@ -84,7 +84,7 @@
 <div><span>🧠</span><div><h4>Smart Learning</h4><p>Personalised lessons designed around your progress.</p></div></div>
 <div><span>📊</span><div><h4>Track Progress</h4><p>Follow your evolution and stay motivated every day.</p></div></div>
 </div>
-<a href="/app" class="btn btn-primary btn-large">Acessar APP →</a>
+<a href="/app" class="btn btn-primary btn-large" target="_blank">BritLearn-APP →</a>
 </div>
 <div class="phone-wrapper">
 <div class="phone">

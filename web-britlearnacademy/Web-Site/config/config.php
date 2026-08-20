@@ -1,8 +1,8 @@
 <?php
 define('SITE_NAME', 'Britlearn Academy');
-define('SITE_URL', 'http://localhost/britlearnacademy');
-define('ADMIN_EMAIL', 'hello@britlearnacademy.com');
-define('CONTACT_EMAIL', 'hello@britlearnacademy.com');
+define('SITE_URL', 'https://britlearnacademy.online');
+define('ADMIN_EMAIL', 'updateinformatica2023@gmail.com');
+define('CONTACT_EMAIL', 'updateinformatica2023@gmail.com');
 
 define('BASE_PATH', dirname(__DIR__));
 define('DATA_PATH', BASE_PATH . '/data');
