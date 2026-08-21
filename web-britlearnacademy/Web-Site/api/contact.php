@@ -47,7 +47,12 @@ $data = [
 
 $saved = saveMessage($data);
 
-EmailSender::sendContactEmail($data);
+// Email e opcional - se falhar, a mensagem ainda fica salva
+try {
+    EmailSender::sendContactEmail($data);
+} catch (Exception $e) {
+    error_log("Email send failed: " . $e->getMessage());
+}
 
 if ($saved) {
     jsonResponse([

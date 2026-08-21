@@ -23,6 +23,7 @@ A Britlearn Academy e uma escola de ingles londrina que combina tecnologia moder
 | HTML5/CSS3 | Estrutura e estilo |
 | JavaScript Vanilla | Logica do SPA |
 | CSS Variables | Tema e cores customizaveis |
+| i18n.js | Internacionalizacao (EN/ES/FR/IT/DE) |
 
 ### Backend
 | Tecnologia | Uso |
@@ -32,7 +33,7 @@ A Britlearn Academy e uma escola de ingles londrina que combina tecnologia moder
 | FastAPI | Framework web assincrono |
 | OpenRouter API | Integracao com LLM (GPT) |
 | Edge TTS | Text-to-Speech neural (Microsoft) |
-| Web Speech API | Speech-to-Try no navegador |
+| Web Speech API | Speech-to-Text no navegador |
 | ffmpeg | Conversao de audio |
 
 ### Infraestrutura
@@ -98,6 +99,7 @@ A Britlearn Academy e uma escola de ingles londrina que combina tecnologia moder
 | Site | https://britlearnacademy.online | Pagina institucional |
 | App | https://britlearnacademy.online/app | Aplicativo de aprendizado |
 | API | https://britlearnacademy.online/app/api/* | Endpoints da API |
+| Admin | https://britlearnacademy.online/admin/ | Painel administrativo |
 
 ---
 
@@ -106,13 +108,14 @@ A Britlearn Academy e uma escola de ingles londrina que combina tecnologia moder
 ### Modulos de Aprendizado
 | Modulo | Descricao |
 |--------|-----------|
-| **Grammar** | Correcao gramatical com LLM + explicacoes |
+| **Listen** | Exercicios de audicao com TTS + ditado |
+| **Pronunciation** | Reconhecimento de fala (STT) + correcao |
+| **Write** | Pratica de escrita com correcao detalhada |
+| **Read** | Leitura com glossario e perguntas |
 | **Conversation** | Chat conversacional com IA em ingles |
-| **Listen** | Exercicios de audicao com TTS |
-| **Read** | Leitura complementar com textos |
-| **Write** | Pratica de escrita com correcao |
-| **Pronunciation** | Reconhecimento de fala (STT) |
+| **Grammar** | Correcao gramatical por nivel CEFR |
 | **MemHack** | Repeticao espacada (SRS) para vocabulario |
+| **Numbers** | Numeros, ordinais, meses e dias da semana |
 
 ### Recursos da IA
 - **Correcao em tempo real**: Identifica erros e sugere correcoes
@@ -120,12 +123,19 @@ A Britlearn Academy e uma escola de ingles londrina que combina tecnologia moder
 - **Conversacao natural**: Chat como um professor nativo
 - **Multiplos niveis**: A1 ate C2 (CEFR)
 - **5 idiomas**: Ingles, Espanhol, Frances, Italiano, Alemao
+- **9 personas**: Cafe, Entrevistador, Negocios, Viagens, Familia, Filmes, Musicas, Futebol, DevOps
+
+### Internacionalizacao (i18n)
+- Interface completa em 5 idiomas
+- Sistema de traducao via `data-i18n` attributes
+- Troca de idioma em tempo real
 
 ### Sistema de Auth
 - Login com JWT (session-based)
 - Cookie HttpOnly com SameSite=Lax
 - Tokens assinados com HMAC-SHA256
 - Seed de usuario admin para setup inicial
+- Gerenciamento de usuarios (criar/novos usuarios)
 
 ---
 
@@ -164,7 +174,7 @@ web-britlearnacademy/
     │   ├── login.html           # Pagina de login
     │   ├── app.js               # Logica principal
     │   ├── auth.js              # Autenticacao
-    │   ├── i18n.js              # Internacionalizacao (EN/ES/FR)
+    │   ├── i18n.js              # Internacionalizacao (EN/ES/FR/IT/DE)
     │   └── style.css            # Estilos (tema Navy/Vermelho/Dourado)
     └── k8s/                     # Manifestos Kubernetes
         ├── namespace.yaml
@@ -175,6 +185,15 @@ web-britlearnacademy/
         ├── configmap.yaml
         ├── secret.yaml
         └── pvc.yaml
+
+docs/                            # Documentacao
+├── README.md                    # Indice da documentacao
+├── prompts/prompts.md           # Prompts de IA
+├── skills/skills.md             # Skills e workflows
+├── mcp/mcp.md                   # Model Context Protocol
+└── brainstorm/                  # Ideias e roadmap
+    ├── brainstorm.md            # Planejamento futuro
+    └── mockup-login-*.html      # Mockups de design
 ```
 
 ---
@@ -275,6 +294,7 @@ python -m uvicorn main:app --host 127.0.0.1 --port 8000
 - Headers de seguranca (XSS, CSRF, nosniff)
 - Rate limiting no formulario de contato
 - Senhas hasheadas com bcrypt
+- Git history limpa com filter-branch
 
 ---
 
@@ -282,11 +302,27 @@ python -m uvicorn main:app --host 127.0.0.1 --port 8000
 
 | Canal | Valor |
 |-------|-------|
-| **Email** | updateinformatica2023@gmail.com |
+| **Email** | contact@britlearnacademy.online |
 | **Telefone 1** | +44 7363 065270 |
 | **Telefone 2** | +44 7363 065262 |
 | **Site** | https://britlearnacademy.online |
 | **App** | https://britlearnacademy.online/app |
+
+---
+
+## Roadmap
+
+### Q1 2026
+- [x] Lancamento do site
+- [x] Lancamento do app basico
+- [x] Modulos: Listen, Pronunciation, Write, Read, Conversation, Grammar, MemHack, Numbers
+- [x] i18n em 5 idiomas
+
+### Q2 2026 (Planejado)
+- [ ] Gamificacao (XP, badges, streak)
+- [ ] PWA (Progressive Web App)
+- [ ] Analytics dashboard
+- [ ] Conteudo Business English
 
 ---
 

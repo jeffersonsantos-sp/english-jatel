@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en-US">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,12 +14,12 @@
     <form id="login-form" class="login-card">
       <div class="logo">🇬🇧</div>
       <h1>Britlearn App</h1>
-      <p class="subtitle">Acesso restrito — faça login para continuar</p>
-      <label class="field-label" for="login-user">Usuário</label>
+      <p class="subtitle">Restricted access — log in to continue</p>
+      <label class="field-label" for="login-user">Login</label>
       <input id="login-user" type="text" autocomplete="username" placeholder="admin" />
-      <label class="field-label" for="login-pass">Senha</label>
+      <label class="field-label" for="login-pass">Password</label>
       <input id="login-pass" type="password" autocomplete="current-password" placeholder="••••••••" />
-      <button id="login-btn" class="btn" type="submit">Entrar</button>
+      <button id="login-btn" class="btn" type="submit">Enter</button>
       <div id="login-error" class="login-error"></div>
     </form>
   </div>
@@ -46,9 +46,9 @@
           body: JSON.stringify({ user, password }),
         });
         if (r.ok) { window.location.href = "/app"; }
-        else { err.textContent = "Usuário ou senha inválidos"; }
+        else { err.textContent = "Invalid username or password"; }
       } catch {
-        err.textContent = "Erro ao conectar";
+        err.textContent = "Connection error";
       }
     });
   </script>

@@ -34,7 +34,14 @@ class EmailSender {
     }
 
     public function send(): bool {
-        return mail($this->to, $this->subject, $this->body, $this->headers);
+        if (!function_exists('mail')) {
+            throw new Exception('mail() function not available');
+        }
+        $result = @mail($this->to, $this->subject, $this->body, $this->headers);
+        if (!$result) {
+            throw new Exception('Failed to send email via mail()');
+        }
+        return true;
     }
 
     public static function sendContactEmail(array $data): bool {

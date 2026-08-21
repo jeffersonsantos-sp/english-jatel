@@ -1,30 +1,39 @@
-# Britlearn Academy
+# Britlearn Academy - Site Institucional
 
 Modern responsive English school website built with PHP, JavaScript and vanilla CSS.
 
 ## Requirements
 
-- PHP 7.4 or higher
+- PHP 8.2 or higher
 - Apache with mod_rewrite (or Nginx with rewrite rules)
-- `mail()` function enabled (for email sending)
+- `mail()` function enabled (for email sending - optional in Docker)
 
 ## Installation
 
-1. Copy all files to your web server's document root (e.g., `htdocs/britlearnacademy/`)
-2. Enable mod_rewrite on Apache:
-   ```bash
-   sudo a2enmod rewrite
-   sudo systemctl restart apache2
-   ```
-3. Ensure `data/` directory is writable by the web server:
-   ```bash
-   chmod 755 data/
-   ```
-4. Access the site at `http://your-server/britlearnacademy/`
+### Local Development
+
+```bash
+cd Web-Site
+docker-compose up -d
+# Access: http://localhost:8080
+```
+
+### Production (Kubernetes)
+
+```bash
+# Build image
+docker build -t updateinformatica/britlearnacademy-web:latest .
+
+# Push to registry
+docker push updateinformatica/britlearnacademy-web:latest
+
+# Restart deployment
+kubectl rollout restart deployment/britlearn-site-blue -n britlearn-academy-site
+```
 
 ## Admin Panel
 
-- URL: `http://your-server/britlearnacademy/admin/`
+- URL: https://britlearnacademy.online/admin/
 - Username: `admin`
 - Password: `britlearn2026`
 
@@ -33,7 +42,9 @@ Modern responsive English school website built with PHP, JavaScript and vanilla 
 ## Project Structure
 
 ```
-britlearnacademy/
+Web-Site/
+├── Dockerfile               # Build image PHP/Apache
+├── docker-compose.yml       # Local development
 ├── config/config.php        # Site configuration
 ├── includes/
 │   ├── functions.php        # Helper functions, CSRF, validation
@@ -43,7 +54,7 @@ britlearnacademy/
 ├── pages/
 │   ├── home.php             # Homepage content
 │   ├── story.php            # Our Story page
-│   └── contact.php          # Contact page
+│   └── contact.php          # Contact page (form + phones)
 ├── api/
 │   ├── contact.php          # Contact form API
 │   ├── waitlist.php         # Waitlist signup API
@@ -68,12 +79,57 @@ britlearnacademy/
 - CSRF protection on all forms
 - Server-side + client-side form validation
 - Rate limiting on API endpoints
-- Email notifications for contact form & waitlist
+- Email notifications for contact form & waitlist (optional - fails gracefully)
 - Admin dashboard to view messages and waitlist signups
 - Responsive design (mobile-friendly)
 - Scroll animations
 - Security headers
+- BritLearn-APP button in navigation (opens in new tab)
 
-## Email Configuration
+## Configuration
 
-By default, emails are sent using PHP's `mail()` function. For production, consider configuring SMTP in `includes/email.php` or using a service like SendGrid/Mailgun.
+### Site Settings (config/config.php)
+
+```php
+define('SITE_NAME', 'Britlearn Academy');
+define('SITE_URL', 'https://britlearnacademy.online');
+define('ADMIN_EMAIL', 'contact@britlearnacademy.online');
+define('CONTACT_EMAIL', 'contact@britlearnacademy.online');
+```
+
+### Email Configuration
+
+By default, emails are saved to `data/messages.json` and `data/waitlist.json`. The `mail()` function is optional and fails gracefully in Docker.
+
+For production email, configure SMTP in `includes/email.php` or use a service like SendGrid/Mailgun.
+
+### Environment Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `SITE_NAME` | Site name | `Britlearn Academy` |
+| `SITE_URL` | Site URL | `https://britlearnacademy.online` |
+| `ADMIN_EMAIL` | Admin email | `contact@britlearnacademy.online` |
+| `CONTACT_EMAIL` | Contact form email | `contact@britlearnacademy.online` |
+
+## Kubernetes Deployment
+
+### Namespace
+- `britlearn-academy-site`
+
+### Deployments
+- `britlearn-site-blue` (active)
+- `britlearn-site-green` (inactive)
+
+### Ingress
+- Host: `britlearnacademy.online`
+- Path: `/` (Prefix)
+- TLS: Let's Encrypt
+
+## Security
+
+- CSRF tokens on all forms
+- Rate limiting on API endpoints
+- Input validation and sanitization
+- Security headers (X-Content-Type-Options, X-Frame-Options, etc.)
+- Secrets protected via `.gitignore`

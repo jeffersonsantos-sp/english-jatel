@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       try {
         const formData = new FormData(launchForm);
-        const res = await fetch('/britlearnacademy/api/waitlist.php', {
+        const res = await fetch('/api/waitlist.php', {
           method: 'POST',
           body: formData
         });
@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       try {
         const formData = new FormData(contactForm);
-        const res = await fetch('/britlearnacademy/api/contact.php', {
+        const res = await fetch('/api/contact.php', {
           method: 'POST',
           body: formData
         });

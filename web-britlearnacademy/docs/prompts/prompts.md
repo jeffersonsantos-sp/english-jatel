@@ -32,7 +32,24 @@ Your role:
 Be encouraging and make the student feel comfortable practicing.
 ```
 
-### 3. TTS Voice Configuration
+### 3. Persona Prompts
+
+```python
+# Personas disponiveis para conversacao:
+PERSONAS = {
+    "cafe": "Imagine you are a friendly barista in a London coffee shop...",
+    "entrevistador": "You are a professional job interviewer...",
+    "negocios": "You are a business executive in a meeting...",
+    "viagens": "You are a travel guide showing someone around London...",
+    "familia": "You are a family member having a casual chat...",
+    "filmes": "You are discussing movies and TV shows...",
+    "musicas": "You are talking about music and concerts...",
+    "futebol": "You are a football fan discussing the Premier League...",
+    "devops": "You are a DevOps engineer discussing cloud infrastructure...",
+}
+```
+
+### 4. TTS Voice Configuration
 
 ```python
 # Edge TTS voices disponiveis:
@@ -46,7 +63,7 @@ VOICES = {
 }
 ```
 
-### 4. Content Generation (Geracao de Conteudo)
+### 5. Content Generation (Geracao de Conteudo)
 
 ```
 Gere conteudo educativo para o nivel {level} de ingles.
@@ -62,11 +79,26 @@ O conteudo deve ser:
 - Incluir exemplos praticos
 ```
 
+### 6. Numbers Content
+
+```
+Gere conteudo para a secao de numeros:
+- Numeros cardinais (1-1000)
+- Numeros ordinais (1st, 2nd, 3rd...)
+- Meses do ano
+- Dias da semana
+
+Para cada item inclua:
+- Palavra em ingles
+- Pronuncia (IPA)
+- Abreviacao (para ordinais, meses, dias)
+```
+
 ---
 
 ## Prompts para Deploy e Infraestrutura
 
-### 5. Docker Build
+### 7. Docker Build
 
 ```bash
 # Site
@@ -76,7 +108,7 @@ docker build -t updateinformatica/britlearnacademy-web:latest Web-Site/
 docker build -t updateinformatica/britlearn-app:latest Web-APP/
 ```
 
-### 6. Kubernetes Secret Update
+### 8. Kubernetes Secret Update
 
 ```bash
 kubectl create secret generic britlearn-app-secrets \
@@ -86,7 +118,7 @@ kubectl create secret generic britlearn-app-secrets \
   --dry-run=client -o yaml | kubectl apply -f -
 ```
 
-### 7. Ingress Configuration
+### 9. Ingress Configuration
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -113,7 +145,7 @@ spec:
 
 ## Prompts para Debug
 
-### 8. Log Analysis
+### 10. Log Analysis
 
 ```bash
 # Verificar logs do app
@@ -126,7 +158,7 @@ kubectl get pods -n britlearn-academy-app -o wide
 kubectl describe ingress britlearn-app-ingress -n britlearn-academy-app
 ```
 
-### 9. Health Check
+### 11. Health Check
 
 ```bash
 # API health
@@ -143,7 +175,7 @@ curl -sI https://britlearnacademy.online/app
 
 ## Prompts para Git
 
-### 10. Commit Messages
+### 12. Commit Messages
 
 ```
 feat: [nova funcionalidade]
@@ -152,9 +184,10 @@ docs: [atualizacao de documentacao]
 style: [mudanca de estilo/cor]
 refactor: [refatoracao de codigo]
 chore: [manutencao/tarefas]
+i18n: [internacionalizacao]
 ```
 
-### 11. Security Cleanup
+### 13. Security Cleanup
 
 ```bash
 # Remover secrets do historico
@@ -163,4 +196,44 @@ git filter-branch --force --index-filter \
   --prune-empty --tag-name-filter cat -- --all
 
 git push origin main --force
+```
+
+---
+
+## Prompts para i18n
+
+### 14. Traducao de Interface
+
+```javascript
+// Adicionar nova traducao em i18n.js:
+const I18N = {
+  en: {
+    "key": "English text",
+  },
+  es: {
+    "key": "Texto en espanol",
+  },
+  fr: {
+    "key": "Texte en francais",
+  },
+  it: {
+    "key": "Testo in italiano",
+  },
+  de: {
+    "key": "Text auf Deutsch",
+  },
+};
+```
+
+### 15. HTML com i18n
+
+```html
+<!-- Usar data-i18n para textos -->
+<h1 data-i18n="titulo">Titulo</h1>
+
+<!-- Usar data-i18n-placeholder para placeholders -->
+<input data-i18n-placeholder="placeholder-chave" placeholder="Texto padrao">
+
+<!-- Usar data-i18n-title para tooltips -->
+<button data-i18n-title="tooltip-chave">Botao</button>
 ```

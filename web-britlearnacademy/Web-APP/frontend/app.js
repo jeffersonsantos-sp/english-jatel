@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function showError(el, msg) {
-  if (el) el.textContent = "⚠️ " + (typeof t === "function" ? t("err-mic") : "Erro") + ": " + msg;
+  if (el) el.textContent = "⚠️ " + (typeof t === "function" ? t("err-mic", { msg }) : "Erro: " + msg);
   console.error(msg);
 }
 

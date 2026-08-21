@@ -26,11 +26,13 @@ A **Britlearn Academy** e uma plataforma completa de ensino de ingles que combin
 - **Web Speech API** - Speech-to-Text
 
 ### Funcionalidades
-- **7 modulos** de aprendizado (Grammar, Conversation, Listen, Read, Write, Pronunciation, MemHack)
+- **8 modulos** de aprendizado (Listen, Pronunciation, Write, Read, Conversation, Grammar, MemHack, Numbers)
 - **5 idiomas** (Ingles, Espanhol, Frances, Italiano, Alemao)
 - **6 niveis CEFR** (A1 ate C2)
+- **9 personas** para conversacao (Cafe, Entrevistador, Negocios, Viagens, Familia, Filmes, Musicas, Futebol, DevOps)
 - **IA para correcao** em tempo real
 - **TTS/STT** para pronuncia
+- **i18n** - Internacionalizacao completa
 
 ### Infraestrutura
 - **2 namespaces** no AKS (site + app)
@@ -58,9 +60,10 @@ kubectl rollout restart deployment/britlearn-app-blue -n britlearn-academy-app
 ### URLs
 - Site: https://britlearnacademy.online
 - App: https://britlearnacademy.online/app
+- Admin: https://britlearnacademy.online/admin/
 
 ### Contato
-- Email: updateinformatica2023@gmail.com
+- Email: contact@britlearnacademy.online
 - Telefone: +44 7363 065270 / +44 7363 065262
 
 ---
@@ -71,7 +74,7 @@ kubectl rollout restart deployment/britlearn-app-blue -n britlearn-academy-app
 ┌─────────────────────────────────────────────────────────┐
 │                    FRONTEIRAS                           │
 ├─────────────────────────────────────────────────────────┤
-│  HTML5 │ CSS3 │ JavaScript │ React (futuro)            │
+│  HTML5 │ CSS3 │ JavaScript │ i18n.js                   │
 ├─────────────────────────────────────────────────────────┤
 │                    APLICACAO                           │
 ├─────────────────────────────────────────────────────────┤
@@ -90,3 +93,61 @@ kubectl rollout restart deployment/britlearn-app-blue -n britlearn-academy-app
 │  Azure AKS │ Azure DNS │ Azure Monitor                 │
 └─────────────────────────────────────────────────────────┘
 ```
+
+---
+
+## Modulos do App
+
+| Modulo | Descricao | Status |
+|--------|-----------|--------|
+| **Listen** | Audicao com TTS + ditado | ✅ |
+| **Pronunciation** | STT + correcao de pronuncia | ✅ |
+| **Write** | Escrita com correcao detalhada | ✅ |
+| **Read** | Leitura com glossario e perguntas | ✅ |
+| **Conversation** | Chat com IA (9 personas) | ✅ |
+| **Grammar** | Gramatica por nivel CEFR | ✅ |
+| **MemHack** | SRS para vocabulario | ✅ |
+| **Numbers** | Numeros, ordinais, meses, dias | ✅ |
+
+---
+
+## Suporte a Idiomas
+
+| Idioma | Interface | Conteudo | TTS |
+|--------|-----------|----------|-----|
+| Ingles | ✅ | ✅ | ✅ |
+| Espanhol | ✅ | ✅ | ✅ |
+| Frances | ✅ | ✅ | ✅ |
+| Italiano | ✅ | ✅ | ✅ |
+| Alemao | ✅ | ✅ | ✅ |
+
+---
+
+## Seguranca
+
+- ✅ Secrets protegidos via `.gitignore`
+- ✅ Git history limpa (filter-branch)
+- ✅ Cookies HttpOnly + SameSite=Lax
+- ✅ Headers de seguranca (XSS, CSRF, nosniff)
+- ✅ Rate limiting em endpoints
+- ✅ Senhas hasheadas com bcrypt
+- ✅ Validacao CSRF em formularios
+
+---
+
+## Proximos Passos (Roadmap)
+
+### Curto Prazo
+- [ ] Gamificacao (XP, badges, streak)
+- [ ] PWA (Progressive Web App)
+- [ ] Analytics dashboard
+
+### Medio Prazo
+- [ ] Conteudo Business English
+- [ ] IELTS/TOEFL Prep
+- [ ] Integracao WhatsApp/Telegram
+
+### Longo Prazo
+- [ ] App nativo (iOS/Android)
+- [ ] IA avancada (speech analysis)
+- [ ] Enterprise edition
