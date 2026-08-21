@@ -1,0 +1,34 @@
+RewriteEngine On
+
+# RedirectTrailingSlashes
+RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+# Handle front controller
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [QSA,L]
+
+# Clean URLs - map /story to /index.php?page=story
+RewriteRule ^story$ /index.php?page=story [L,QSA]
+
+# Clean URLs - map /contact to /index.php?page=contact
+RewriteRule ^contact$ /index.php?page=contact [L,QSA]
+
+# Clean URLs - map /app to /app/ (for the learning app)
+RewriteRule ^app$ /app/ [L,R=301]
+
+# Security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Disable directory listing
+Options -Indexes
+
+# PHP settings (if allowed)
+<IfModule mod_php.c>
+    php_value display_errors 0
+    php_value error_reporting 0
+</IfModule>

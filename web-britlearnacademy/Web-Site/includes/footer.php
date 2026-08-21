@@ -2,18 +2,18 @@
 <footer>
 <div class="container footer-grid">
 <div>
-<a href="index.php" class="footer-logo">🇬🇧 <?= SITE_NAME ?></a>
+<a href="/" class="footer-logo">🇬🇧 <?= SITE_NAME ?></a>
 <p>Helping learners communicate confidently since 2001.</p>
 </div>
 <div>
 <h4>Academy</h4>
-<a href="index.php#courses">Courses</a>
-<a href="index.php?page=story">Our Story</a>
-<a href="index.php#app">Britlearn App</a>
+<a href="/#courses">Courses</a>
+<a href="/story">Our Story</a>
+<a href="/#app">Britlearn App</a>
 </div>
 <div>
 <h4>Contact</h4>
-<a href="index.php?page=contact">Get in touch</a>
+<a href="/contact">Get in touch</a>
 <a href="mailto:<?= CONTACT_EMAIL ?>"><?= CONTACT_EMAIL ?></a>
 </div>
 <div>

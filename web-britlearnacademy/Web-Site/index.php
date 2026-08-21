@@ -1,7 +1,24 @@
 <?php
 require_once __DIR__ . '/includes/functions.php';
 
-$page = $_GET['page'] ?? 'home';
+// Handle clean URLs
+$requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$requestUri = trim($requestUri, '/');
+
+// Map clean URLs to pages
+$pageMap = [
+    '' => 'home',
+    'story' => 'story',
+    'contact' => 'contact',
+];
+
+// Check if it's a clean URL
+if (isset($pageMap[$requestUri])) {
+    $page = $pageMap[$requestUri];
+} else {
+    // Fallback to query parameter
+    $page = $_GET['page'] ?? 'home';
+}
 
 $validPages = ['home', 'story', 'contact'];
 if (!in_array($page, $validPages)) {

@@ -19,12 +19,12 @@ if (!isset($activePage)) $activePage = 'home';
 <body>
 <header class="navbar">
 <div class="container nav-container">
-<a href="index.php" class="logo"><span>🇬🇧</span><span>Britlearn</span><small>ACADEMY</small></a>
+<a href="/" class="logo"><span>🇬🇧</span><span>Britlearn</span><small>ACADEMY</small></a>
 <nav class="nav-links" id="navLinks">
-<a href="index.php" class="<?= $activePage === 'home' ? 'active' : '' ?>">Home</a>
-<a href="index.php#courses" class="<?= $activePage === 'courses' ? 'active' : '' ?>">Courses</a>
-<a href="index.php?page=story" class="<?= $activePage === 'story' ? 'active' : '' ?>">Our Story</a>
-<a href="index.php?page=contact" class="<?= $activePage === 'contact' ? 'active' : '' ?>">Contact</a>
+<a href="/" class="<?= $activePage === 'home' ? 'active' : '' ?>">Home</a>
+<a href="/#courses" class="<?= $activePage === 'courses' ? 'active' : '' ?>">Courses</a>
+<a href="/story" class="<?= $activePage === 'story' ? 'active' : '' ?>">Our Story</a>
+<a href="/contact" class="<?= $activePage === 'contact' ? 'active' : '' ?>">Contact</a>
 </nav>
 <a href="/app" class="nav-button" target="_blank">BritLearn-APP</a>
 <button class="menu-toggle" id="menuToggle">☰</button>
