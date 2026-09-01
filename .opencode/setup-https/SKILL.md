@@ -157,7 +157,11 @@ az network dns record-set a update \
 
 Verificar propagação:
 ```bash
-dig @ns1-05.azure-dns.com learn.jfs-devops.shop +short
+# Obter nameservers do Terraform
+terraform output dns_zone_name_servers
+
+# Verificar resolução
+dig @<NAMESERVER_AZURE> learn.jfs-devops.shop +short
 dig @8.8.8.8 learn.jfs-devops.shop +short
 ```
 
@@ -237,7 +241,7 @@ az network dns record-set a update -g <RG> -z <ZONE> -n learn \
 
 ### 2. DNS conflitante (Hostinger vs Azure DNS)
 
-**Sintoma:** `dig @ns1-05.azure-dns.com` retorna IP correto, mas `dig learn.jfs-devops.shop` retorna IP antigo.
+**Sintoma:** `dig @<NAMESERVER_AZURE>` retorna IP correto, mas `dig learn.jfs-devops.shop` retorna IP antigo.
 
 **Causa:** Hostinger tem registro A apontando para IP antigo, sobrescrevendo Azure DNS.
 

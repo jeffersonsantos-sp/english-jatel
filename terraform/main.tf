@@ -1,3 +1,9 @@
+resource "random_string" "suffix" {
+  length  = 6
+  special = false
+  upper   = false
+}
+
 resource "azurerm_resource_group" "main" {
   name     = var.resource_group_name
   location = var.location
@@ -30,6 +36,8 @@ resource "azurerm_kubernetes_cluster" "aks" {
     network_policy = "calico"
   }
 
+  oidc_issuer_enabled = true
+
   tags = var.tags
 }
 
@@ -39,13 +47,19 @@ resource "azurerm_dns_zone" "main" {
   tags                = var.tags
 }
 
+resource "azurerm_dns_zone" "britlearn" {
+  name                = "britlearnacademy.online"
+  resource_group_name = azurerm_resource_group.main.name
+  tags                = var.tags
+}
+
 resource "azurerm_public_ip" "ingress" {
-  name                = "pip-ingress-english-jatel"
+  name                = "pip-ingress-jatel-${random_string.suffix.result}"
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
   allocation_method   = "Static"
   sku                 = "Standard"
-  domain_name_label   = "english-jatel"
+  domain_name_label   = "jatel-${random_string.suffix.result}"
   tags                = var.tags
 }
 
@@ -59,4 +73,10 @@ resource "azurerm_role_assignment" "aks_dns_contributor" {
   principal_id         = azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
   role_definition_name = "DNS Zone Contributor"
   scope                = azurerm_dns_zone.main.id
+}
+
+resource "azurerm_role_assignment" "aks_britlearn_dns_contributor" {
+  principal_id         = azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
+  role_definition_name = "DNS Zone Contributor"
+  scope                = azurerm_dns_zone.britlearn.id
 }

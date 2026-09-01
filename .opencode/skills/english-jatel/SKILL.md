@@ -160,7 +160,7 @@ git push origin v1.4.0      # aciona cd.yaml -> build + push Docker Hub
 - **Azure AKS**: `https://learn.jfs-devops.shop` (NGINX Ingress + cert-manager + Let's Encrypt)
 - **Render PaaS**: `https://english-jatel.onrender.com` (auto-deploy on push to `main`)
 - **Cluster**: `aks-english-jatel` (Free Tier, `centralindia`, `Standard_B2als_v2`, K8s v1.35.6)
-- **Ingress IP**: `4.247.234.90`
+- **Ingress IP**: (dynamic via Terraform)
 
 ## Como estender
 - **Grammar**: edite `backend/grammar.json` (EN), `grammar_es.json` (ES), `grammar_fr.json` (FR),

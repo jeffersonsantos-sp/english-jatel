@@ -20,7 +20,7 @@ DNS → NGINX Ingress (TLS termination) → Service ClusterIP → Pods
 ## Fluxo de uma requisição HTTPS
 
 ```
-1. Cliente resolve learn.jfs-devops.shop → 4.247.234.90 (IP Ingress)
+1. Cliente resolve learn.jfs-devops.shop → IP_DO_INGRESS (via Terraform)
 2. Conexão TCP na porta 443
 3. TLS handshake (certificate Let's Encrypt)
 4. NGINX recebe requisição HTTP interna

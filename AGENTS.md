@@ -47,9 +47,12 @@ Before making any code, config, or content changes, create a backup in `repo-bac
 |---|---|---|
 | `setup-https` | `.opencode/setup-https/SKILL.md` | Configurar HTTPS/TLS com Let's Encrypt no AKS |
 | `aks-deploy` | `.opencode/skills/aks-deploy/SKILL.md` | Deploy da app no AKS com Terraform |
+| `azure-migration` | `.opencode/skills/azure-migration/SKILL.md` | Migração automatizada para nova conta Azure |
 
 ## Referências rápidas
 
 - **HTTPS/TLS**: `.opencode/setup-https/SKILL.md` e `docs/technical/setup-https.md`
 - **Deploy AKS**: `docs/technical/deploy-aks.md`
 - **Prompt setup-https**: `prompts/setup-https/prompt-setup-https.md`
+- **Migração Azure**: `.opencode/skills/azure-migration/SKILL.md` e `docs/technical/azure-migration.md`
+- **Prompt migração**: `prompts/azure-migration/prompt-azure-migration.md`

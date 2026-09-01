@@ -19,8 +19,13 @@ output "kube_config_command" {
 }
 
 output "dns_zone_name_servers" {
-  description = "Name servers do DNS Zone (configurar no registrador)"
+  description = "Name servers do DNS Zone jfs-devops.shop (configurar no registrador)"
   value       = azurerm_dns_zone.main.name_servers
+}
+
+output "britlearn_dns_zone_name_servers" {
+  description = "Name servers do DNS Zone britlearnacademy.online (configurar no registrador)"
+  value       = azurerm_dns_zone.britlearn.name_servers
 }
 
 output "public_ip_address" {
@@ -29,6 +34,11 @@ output "public_ip_address" {
 }
 
 output "ingress_url" {
-  description = "URL do app"
+  description = "URL do app English JATEL"
   value       = "https://${var.subdomain}.${var.domain_name}"
+}
+
+output "britlearn_url" {
+  description = "URL do Britlearn Academy"
+  value       = "https://britlearnacademy.online"
 }

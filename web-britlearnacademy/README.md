@@ -260,7 +260,7 @@ kubectl create secret generic britlearn-app-secrets -n britlearn-academy-app \
 - **Site**: `path: /` (Prefix)
 - **App**: `path: /app(/|$)(.*)` (regex, rewrite para `/$2`)
 - **TLS**: Let's Encrypt via cert-manager
-- **IP**: `4.247.234.90`
+- **IP**: (dynamic via Terraform)
 
 ---
 

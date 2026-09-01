@@ -23,7 +23,7 @@ Guia completo para deploy do English JATEL no AKS com Terraform, NGINX Ingress e
 │  │                                                   │  │
 │  │  ┌─────────────────────────────────────────────┐  │  │
 │  │  │  NGINX Ingress Controller                   │  │  │
-│  │  │  IP: 4.247.234.90                           │  │  │
+│  │  │  IP: (dynamic via Terraform)                 │  │  │
 │  │  └─────────────────┬───────────────────────────┘  │  │
 │  │                    │                              │  │
 │  │  ┌─────────────────▼───────────────────────────┐  │  │
@@ -231,17 +231,16 @@ kubectl describe ingress english-jatel-ingress -n english-jatel
 ## DNS Configuration
 
 ### Name Servers (configurar no registrador)
-```
-ns1-05.azure-dns.com.
-ns2-05.azure-dns.net.
-ns3-05.azure-dns.org.
-ns4-05.azure-dns.info.
+```bash
+# Obter nameservers do Terraform
+terraform output dns_zone_name_servers
+terraform output britlearn_dns_zone_name_servers
 ```
 
 ### Records necessários
 | Tipo | Nome | Valor |
 |---|---|---|
-| A | `learn` | `4.247.234.90` |
+| A | `learn` | `IP_DO_INGRESS` (via Terraform) |
 | CNAME | `www` | `learn.jfs-devops.shop` |
 
 ## Produção (futuro)

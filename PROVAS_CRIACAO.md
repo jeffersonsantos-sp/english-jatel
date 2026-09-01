@@ -38,7 +38,7 @@
 | **NGINX Ingress** | Reverse proxy + TLS termination |
 | **cert-manager** | Let's Encrypt (auto-renovacao a cada 90 dias) |
 | **Azure DNS** | `jfs-devops.shop` (zona DNS gerenciada) |
-| **Public IP** | `4.247.234.90` (statico) |
+| **Public IP** | (dynamic via Terraform) |
 | **Custo mensal** | ~$15.50 (AKS + DNS) |
 
 ---

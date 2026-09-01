@@ -98,12 +98,10 @@ kubectl apply -k k8s/
 
 ### 7. Configure DNS
 
-Update name servers at domain registrar:
-```
-ns1-05.azure-dns.com.
-ns2-05.azure-dns.net.
-ns3-05.azure-dns.org.
-ns4-05.azure-dns.info.
+Update name servers at domain registrar (get from Terraform output):
+```bash
+terraform output dns_zone_name_servers
+terraform output britlearn_dns_zone_name_servers
 ```
 
 ### 8. Verify
